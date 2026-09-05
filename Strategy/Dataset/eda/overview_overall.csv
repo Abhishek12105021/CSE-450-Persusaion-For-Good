@@ -1,0 +1,15 @@
+,value
+turns,10600.0
+dialogues,1017.0
+turns_per_dialogue_mean,10.42
+turns_per_dialogue_min,4.0
+turns_per_dialogue_max,15.0
+mean_labels_per_turn,1.679
+median_labels_per_turn,1.0
+std_labels_per_turn,1.061
+empty_set_turns,707.0
+empty_set_pct,6.7
+max_labels_on_a_turn,6.0
+distinct_strategies_used,41.0
+distinct_categories_used,11.0
+multi_label_pct,48.9

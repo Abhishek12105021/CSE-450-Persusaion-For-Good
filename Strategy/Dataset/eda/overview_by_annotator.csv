@@ -1,0 +1,5 @@
+annotator,turns,dialogues,turns_per_dialogue_mean,turns_per_dialogue_min,turns_per_dialogue_max,mean_labels_per_turn,median_labels_per_turn,std_labels_per_turn,empty_set_turns,empty_set_pct,max_labels_on_a_turn,distinct_strategies_used,distinct_categories_used,multi_label_pct
+shimanto,2000,192,10.42,5,14,2.384,2.0,1.558,180,9.0,6,38,11,66.8
+shovon,3000,290,10.34,1,13,1.78,2.0,0.82,14,0.5,5,31,10,58.3
+unassigned,2000,191,10.47,2,15,1.614,1.0,0.77,39,2.0,5,28,11,49.6
+abhishek,3600,348,10.34,2,14,1.24,1.0,0.773,474,13.2,6,40,11,30.8

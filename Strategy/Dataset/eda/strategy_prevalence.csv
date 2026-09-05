@@ -1,0 +1,42 @@
+strategy,category,turns,pct
+rapport_building,Relational and Interactive,2860,26.98
+organization_information,Information Provision,1735,16.37
+donation_procedure_information,Information Provision,1417,13.37
+personal_related_inquiry,Relational and Interactive,1328,12.53
+personal_story,Relational and Interactive,1150,10.85
+emotion_appeal,Emotional Appeal,1023,9.65
+gratitude_and_appreciation,Reciprocity and Exchange,966,9.11
+minimization_framing,Framing and Presentation,849,8.01
+task_clarification,Information Provision,770,7.26
+hope_and_positive_impact,Emotional Appeal,628,5.92
+self_modeling,Social Influence,619,5.84
+source_related_inquiry,Relational and Interactive,615,5.8
+in_group_appeal,Social Influence,598,5.64
+impact_information,Information Provision,477,4.5
+organizational_credibility,Credibility Appeal,389,3.67
+evidence_and_statistics,Rational Appeal,378,3.57
+logical_appeal,Rational Appeal,304,2.87
+transparency_and_accountability,Credibility Appeal,274,2.58
+source_citation,Credibility Appeal,193,1.82
+persistent_repetition,Threat and Pressure,167,1.58
+urgency_appeal,Urgency and Scarcity,150,1.42
+donor_benefit,Reciprocity and Exchange,109,1.03
+anchoring,Framing and Presentation,94,0.89
+value_consistency_appeal,Commitment and Consistency,79,0.75
+obligation_pressure,Threat and Pressure,78,0.74
+personal_credibility,Credibility Appeal,78,0.74
+comparison_framing,Framing and Presentation,74,0.7
+social_proof,Social Influence,67,0.63
+empathy_and_perspective_taking,Emotional Appeal,66,0.62
+feasibility_and_ease,Rational Appeal,55,0.52
+foot_in_the_door,Commitment and Consistency,53,0.5
+incremental_ask,Commitment and Consistency,35,0.33
+guilt_induction,Emotional Appeal,31,0.29
+cost_benefit_framing,Rational Appeal,27,0.25
+loss_versus_gain_framing,Framing and Presentation,21,0.2
+reciprocity,Reciprocity and Exchange,14,0.13
+scarcity_appeal,Urgency and Scarcity,8,0.08
+negative_consequence_warning,Threat and Pressure,7,0.07
+authority_endorsement,Social Influence,5,0.05
+deadline_pressure,Urgency and Scarcity,5,0.05
+door_in_the_face,Commitment and Consistency,2,0.02
