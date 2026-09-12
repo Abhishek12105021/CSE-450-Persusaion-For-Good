@@ -1,0 +1,76 @@
+binary_label,outcome_category,archetype,product,category,binary_id,modifier_id,true,pred,prob_yes,correct
+yes,PURCHASE_COMMITTED,Ghoster,Fujifilm X-T30 II Mirrorless Camera,Audio & Visual Gear,1,0,1,1,0.9682177901268005,True
+yes,PURCHASE_COMMITTED,Standard,Garmin Forerunner 265 GPS Watch,Sports & Fitness,1,0,1,1,0.9617448449134827,True
+no,DEFERRED_CONSIDERATION,Urgent,Keychron Q1 Pro Custom Keyboard,Computing & Peripherals,0,0,0,0,0.076995849609375,True
+yes,PURCHASE_COMMITTED,Skeptic,Sony WH-1000XM5 Wireless Headphones,Audio & Visual Gear,1,0,1,1,0.9668384790420532,True
+yes,PURCHASE_COMMITTED,LowBaller,Laptop Bag,General,1,0,1,1,0.929251492023468,True
+no,INQUIRY_DROPOUT,Ghoster,Authentic Rajshahi Silk Saree,Clothing,0,0,0,0,0.11653653532266617,True
+yes,PURCHASE_COMMITTED,TechSpecsNerd,Dyson Purifier Cool TP07,Home & Kitchen Appliances,1,0,1,1,0.9685845971107483,True
+no,DEFERRED_CONSIDERATION,Ghoster,iPhone 15,General,0,0,0,0,0.06700887531042099,True
+yes,PURCHASE_COMMITTED,Urgent,Business suits,General,1,0,1,1,0.969144880771637,True
+no,EXPLICIT_REJECTION,Premium Buyer - Wrong Item Issue,iPhone 15,General,0,0,0,1,0.6148521304130554,False
+no,DEFERRED_CONSIDERATION,TechSpecsNerd,Fujifilm X-T30 II Mirrorless Camera,Audio & Visual Gear,0,0,0,0,0.046120915561914444,True
+no,DEFERRED_CONSIDERATION,Skeptic,Viofo A129 Pro Duo 4K Dash Cam,Automotive & Riding Gear,0,0,0,0,0.05509808659553528,True
+yes,PURCHASE_COMMITTED,LowBaller,Fujifilm X-T30 II Mirrorless Camera,Audio & Visual Gear,1,0,1,1,0.9663207530975342,True
+no,DEFERRED_CONSIDERATION,Ghoster,Organic Honey,General,0,0,0,0,0.030468778684735298,True
+no,DEFERRED_CONSIDERATION,TechSpecsNerd,Keychron Q1 Pro Custom Keyboard,Computing & Peripherals,0,0,0,0,0.045667730271816254,True
+yes,PURCHASE_COMMITTED,Skeptic,Viofo A129 Pro Duo 4K Dash Cam,Automotive & Riding Gear,1,0,1,1,0.9555717706680298,True
+yes,PURCHASE_COMMITTED,Standard,Viofo A129 Pro Duo 4K Dash Cam,Automotive & Riding Gear,1,0,1,1,0.9713539481163025,True
+yes,PURCHASE_COMMITTED,Skeptic,Blender,General,1,0,1,1,0.9499788880348206,True
+no,INQUIRY_DROPOUT,LowBaller,LG Inverter Refrigerator,Home Appliance,0,0,0,0,0.08476302772760391,True
+no,DEFERRED_CONSIDERATION,TrustSeeker,Samsung T7 Shield 2TB Portable SSD,Computing & Peripherals,0,0,0,0,0.07455050945281982,True
+yes,PURCHASE_COMMITTED,Skeptic,Smart Watch,General,1,0,1,1,0.9404893517494202,True
+yes,PURCHASE_COMMITTED,Urgent,Blender,General,1,0,1,1,0.9645805358886719,True
+yes,PURCHASE_COMMITTED,Skeptic,Viofo A129 Pro Duo 4K Dash Cam,Automotive & Riding Gear,1,0,1,1,0.9683236479759216,True
+yes,PURCHASE_COMMITTED,Standard,Sony WH-1000XM5 Wireless Headphones,Audio & Visual Gear,1,0,1,1,0.9710689187049866,True
+no,DEFERRED_CONSIDERATION,LowBaller,Sony WH-1000XM5 Wireless Headphones,Audio & Visual Gear,0,0,0,0,0.033089593052864075,True
+yes,PURCHASE_COMMITTED,Skeptic,Keychron Q1 Pro Custom Keyboard,Computing & Peripherals,1,0,1,1,0.9673572778701782,True
+yes,PURCHASE_COMMITTED,Skeptic,Cosmetics,General,1,0,1,1,0.4844232201576233,True
+no,DEFERRED_CONSIDERATION,TrustSeeker,Keychron Q1 Pro Custom Keyboard,Computing & Peripherals,0,0,0,0,0.03809050843119621,True
+no,DEFERRED_CONSIDERATION,Ghoster,Dyson Purifier Cool TP07,Home & Kitchen Appliances,0,0,0,0,0.033812977373600006,True
+yes,PURCHASE_COMMITTED,LowBaller,Wireless Earbuds,General,1,0,1,1,0.929010808467865,True
+no,INQUIRY_DROPOUT,TrustSeeker,Sony PS5 Console,Gaming,0,0,0,0,0.1868767887353897,True
+yes,PURCHASE_COMMITTED,LowBaller,Garmin Forerunner 265 GPS Watch,Sports & Fitness,1,0,1,1,0.9742735028266907,True
+no,DEFERRED_CONSIDERATION,Ghoster,Business suits,General,0,0,0,0,0.22820192575454712,True
+yes,PURCHASE_COMMITTED,TrustSeeker,Fujifilm X-T30 II Mirrorless Camera,Audio & Visual Gear,1,0,1,1,0.9636003971099854,True
+yes,PURCHASE_COMMITTED,Ghoster,Dyson Purifier Cool TP07,Home & Kitchen Appliances,1,0,1,1,0.9674826860427856,True
+yes,PURCHASE_COMMITTED,DeliveryObsessed,Sony WH-1000XM5 Wireless Headphones,Audio & Visual Gear,1,0,1,1,0.9699459671974182,True
+no,INQUIRY_DROPOUT,BulkBuyer,Fujifilm X-T30 II Mirrorless Camera,Audio & Visual Gear,0,0,0,0,0.02923273853957653,True
+no,INQUIRY_DROPOUT,Ghoster,Sony WH-1000XM5 Wireless Headphones,Audio & Visual Gear,0,0,0,0,0.13173574209213257,True
+no,INQUIRY_DROPOUT,Ghoster,Dyson Purifier Cool TP07,Home & Kitchen Appliances,0,0,0,0,0.03282878175377846,True
+no,EXPLICIT_REJECTION,Skeptic,Fujifilm X-T30 II Mirrorless Camera,Audio & Visual Gear,0,0,0,0,0.0668637752532959,True
+no,INQUIRY_DROPOUT,Standard,Samsung T7 Shield 2TB Portable SSD,Computing & Peripherals,0,0,0,0,0.03881692513823509,True
+no,INQUIRY_DROPOUT,Skeptic,Keychron Q1 Pro Custom Keyboard,Computing & Peripherals,0,0,0,0,0.032973676919937134,True
+yes,PURCHASE_COMMITTED,TechSpecsNerd,Garmin Forerunner 265 GPS Watch,Sports & Fitness,1,0,1,1,0.9690093398094177,True
+no,DEFERRED_CONSIDERATION,TechSpecsNerd,Garmin Forerunner 265 GPS Watch,Sports & Fitness,0,0,0,1,0.6963910460472107,False
+yes,PURCHASE_COMMITTED,Standard,Dyson Purifier Cool TP07,Home & Kitchen Appliances,1,0,1,1,0.944211483001709,True
+no,DEFERRED_CONSIDERATION,TrustSeeker,Dyson Purifier Cool TP07,Home & Kitchen Appliances,0,0,0,0,0.04635674133896828,True
+no,INQUIRY_DROPOUT,Skeptic,Keychron Q1 Pro Custom Keyboard,Computing & Peripherals,0,0,0,0,0.03369063511490822,True
+no,INQUIRY_DROPOUT,TrustSeeker,CeraVe Moisturizing Cream,Skincare,0,0,0,0,0.0562860444188118,True
+no,INQUIRY_DROPOUT,DeliveryObsessed,Garmin Forerunner 265 GPS Watch,Sports & Fitness,0,0,0,0,0.046305492520332336,True
+yes,PURCHASE_COMMITTED,Urgent,Jamdani Saree,General,1,0,1,1,0.9748668074607849,True
+no,DEFERRED_CONSIDERATION,TrustSeeker,Viofo A129 Pro Duo 4K Dash Cam,Automotive & Riding Gear,0,0,0,0,0.05654948204755783,True
+yes,PURCHASE_COMMITTED,Ghoster,Samsung T7 Shield 2TB Portable SSD,Computing & Peripherals,1,0,1,1,0.9730018377304077,True
+yes,PURCHASE_COMMITTED,Urgent,Fujifilm X-T30 II Mirrorless Camera,Audio & Visual Gear,1,0,1,1,0.9715363383293152,True
+yes,PURCHASE_COMMITTED,LowBaller,Samsung T7 Shield 2TB Portable SSD,Computing & Peripherals,1,0,1,1,0.9651361107826233,True
+yes,PURCHASE_COMMITTED,Standard,iPhone 15 Blue → Out of Stock → Black offered,General,1,0,1,1,0.8859516382217407,True
+no,INQUIRY_DROPOUT,TrustSeeker,LG Inverter Refrigerator,Home Appliance,0,0,0,0,0.09856060147285461,True
+no,DEFERRED_CONSIDERATION,LowBaller,Sony WH-1000XM5 Wireless Headphones,Audio & Visual Gear,0,0,0,0,0.04670066758990288,True
+no,INQUIRY_DROPOUT,Skeptic,Fujifilm X-T30 II Mirrorless Camera,Audio & Visual Gear,0,0,0,0,0.030409840866923332,True
+yes,PURCHASE_COMMITTED,Skeptic,Sony WH-1000XM5 Wireless Headphones,Audio & Visual Gear,1,0,1,1,0.9257379770278931,True
+no,DEFERRED_CONSIDERATION,LowBaller,Toiletries,General,0,0,0,0,0.07412239909172058,True
+no,DEFERRED_CONSIDERATION,Ghoster,Blender,General,0,0,0,0,0.029083795845508575,True
+no,INQUIRY_DROPOUT,Urgent,Keychron Q1 Pro Custom Keyboard,Computing & Peripherals,0,0,0,0,0.04822338744997978,True
+yes,PURCHASE_COMMITTED,DeliveryObsessed,Keychron Q1 Pro Custom Keyboard,Computing & Peripherals,1,0,1,1,0.9713403582572937,True
+no,DEFERRED_CONSIDERATION,Urgent,Garmin Forerunner 265 GPS Watch,Sports & Fitness,0,0,0,0,0.14827600121498108,True
+yes,PURCHASE_COMMITTED,Ghoster,Viofo A129 Pro Duo 4K Dash Cam,Automotive & Riding Gear,1,0,1,1,0.9717502593994141,True
+no,DEFERRED_CONSIDERATION,LowBaller,Keychron Q1 Pro Custom Keyboard,Computing & Peripherals,0,0,0,0,0.032133787870407104,True
+no,DEFERRED_CONSIDERATION,LowBaller,Cosmetics,General,0,0,0,0,0.04338328540325165,True
+no,INQUIRY_DROPOUT,LowBaller,Breville Barista Express Espresso Machine,Home & Kitchen Appliances,0,0,0,0,0.050842300057411194,True
+no,INQUIRY_DROPOUT,Tech Specs Nerd,Blender,General,0,0,0,0,0.1060752347111702,True
+no,DEFERRED_CONSIDERATION,Ghoster,Laptop Bag,General,0,0,0,0,0.04980938881635666,True
+yes,PURCHASE_COMMITTED,Urgent,Keychron Q1 Pro Custom Keyboard,Computing & Peripherals,1,0,1,1,0.9688143730163574,True
+yes,PURCHASE_COMMITTED,Ghoster,Fujifilm X-T30 II Mirrorless Camera,Audio & Visual Gear,1,0,1,1,0.9605833292007446,True
+yes,PURCHASE_COMMITTED,Urgent,iPhone 15,General,1,0,1,1,0.9603425860404968,True
+no,INQUIRY_DROPOUT,TechSpecsNerd,Viofo A129 Pro Duo 4K Dash Cam,Automotive & Riding Gear,0,0,0,0,0.0422748327255249,True
+yes,PURCHASE_COMMITTED,Skeptic,Dyson Purifier Cool TP07,Home & Kitchen Appliances,1,0,1,1,0.9720041751861572,True
