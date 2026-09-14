@@ -1,0 +1,125 @@
+\chapter{Conclusion}
+\label{ch:conclusion}
+
+\section{Summary of Contributions}
+
+This project set out to answer two questions about persuasive
+donation-solicitation dialogue that the public Persuasion-For-Good corpus
+could not previously answer at scale: which persuasion strategies a
+persuader actually uses, turn by turn, and which of those strategies are
+associated with a successful outcome. In addressing them it produced:
+
+\begin{enumerate}
+\item A 41-strategy / 11-category multi-label persuasion taxonomy, and an
+  exhaustive, disclosed, LLM-assisted-and-human-checkpointed annotation of
+  all 10{,}600 persuader turns (1{,}017 dialogues) of the corpus against it
+  (Section~\ref{sec:annotation}), together with a direct measurement of that
+  annotation process's own reliability (Section~\ref{sec:ceiling}) so that
+  every downstream result can be judged against an honest ceiling.
+\item A multi-label strategy classifier reaching category-level
+  \textbf{micro-F1 0.706 / macro-F1 0.564} on held-out test data -- within
+  9 points of the corpus's own measured cross-annotator agreement ceiling
+  (0.793) -- reached through seventeen documented, hypothesis-driven,
+  sentinel-verified design iterations (Chapter~\ref{ch:evaluation}), two of
+  which contribute reusable, empirically-validated ideas beyond this
+  specific project: an empirical-Bayes threshold-shrinkage decision rule
+  that out-performs the standard per-label-optimal rule under class
+  imbalance (Section~\ref{sec:decode-study}), and a demonstrated,
+  measured case where task reframing (making a coarser, better-supported
+  label set the primary training objective rather than a derived
+  by-product) outperforms further tuning of the finer-grained task directly
+  (Section~\ref{sec:category-first}).
+\item A donation-outcome analysis on gold strategy labels quantifying, with
+  cross-validated goodness-of-fit and multiple-testing-corrected
+  significance, which strategies are associated with donation
+  (reciprocity-based appeals: odds ratio 4.83; threat-and-pressure tactics:
+  odds ratio 0.40) and a controlled comparison isolating a genuine, if
+  modest, $+0.03$ pseudo-$R^2$ advantage for multi-label over single-label
+  strategy representations of the same data (Section~\ref{sec:phase4-results}).
+\item A companion donation-intent classifier (89.5\% accuracy, 0.862
+  macro-F1) built on a dual-stream cross-attention architecture that was
+  further shown to transfer, without domain-specific modification, to a
+  structurally distinct buyer--seller negotiation domain at 97.3\% accuracy
+  (Sections~\ref{sec:module-a-results}--\ref{sec:generic-results}).
+\end{enumerate}
+
+\section{Limitations}
+
+Four limitations are stated explicitly, because a result reported without
+its limitations is a result overstated.
+
+\begin{description}
+\item[The rare-category gap is unresolved, not solved.] Three categories
+  making up 3.4\% of positive labels score a mean F1 of 0.22 against 0.69
+  for the rest, and this gap accounts for essentially the entire distance
+  between the final result and the annotation ceiling
+  (Table~\ref{tab:rare-trajectory}). The strongest lever found
+  (equal-weight multi-task supervision) helps this specific gap; the
+  strongest \emph{headline}-improving lever found (the final pool expansion)
+  does not, and in fact costs a little of it back.
+\item[The annotation is a single process, once.] Reliability is measured via
+  near-duplicate agreement within the produced annotation, not via a fully
+  independent second annotation of the same turns by a different process;
+  the reported ceiling is therefore a lower bound on true reliability
+  variance, not a complete picture of it.
+\item[The outcome analysis is observational.] Table~\ref{tab:odds-ratios}'s
+  associations are not causal effects, and the project states directly
+  (Section~\ref{sec:phase4-results}) that at least one headline-looking
+  association in earlier working notes was found, on a preliminary check,
+  to shrink substantially once temporal ordering within the dialogue was
+  accounted for. This report chose not to include an under-powered causal
+  analysis rather than present a fragile result as settled.
+\item[Single-domain scope.] The strategy taxonomy and its annotated corpus
+  cover one specific solicitation context (a fixed charity, a fixed
+  crowd-worker task design). Module~D's cross-domain result shows the
+  \emph{classification architecture} generalizes; it does not by itself
+  demonstrate that the specific strategy taxonomy or the specific
+  strategy--outcome associations in Table~\ref{tab:odds-ratios} would hold
+  in a materially different solicitation context.
+\end{description}
+
+\section{Future Work}
+\label{sec:future-work}
+
+\begin{description}
+\item[Temporal causal-direction audit.] Locate each dialogue's commitment
+  turn and re-fit the outcome models (Section~\ref{sec:phase4-results}) on
+  strategies observed strictly \emph{before} that point, and fit a
+  discrete-time hazard model treating each turn as an at-risk observation.
+  This directly resolves the limitation named in
+  Section~\ref{sec:phase4-results} and was the highest-priority item
+  identified in the team's own working notes on Module~C.
+\item[Closing the rare-category gap.] Targeted approaches beyond the
+  loss-weighting and pool-composition levers already tried in this report
+  (Section~\ref{sec:ablation-summary}) -- e.g. few-shot or retrieval-augmented
+  scoring specifically for the three weakest categories, or additional
+  targeted annotation of dialogues likely to contain them.
+\item[Measurement-error-aware outcome modeling.] Re-fit Module~C's models
+  using the classifier's \emph{predicted} strategy labels with an explicit
+  attenuation correction for prediction error, now that Module~B's
+  reliability is precisely measured (Section~\ref{sec:ceiling}) -- uniquely
+  possible because this project owns both the classifier and the outcome
+  model.
+\item[Strategy-repertoire dynamics.] Model adaptivity and escalation within
+  a dialogue (does a persuader change strategy after an early refusal?) as
+  dialogue-level predictors of outcome, a question that is only answerable
+  once strategies are recovered at the multi-label, turn level this project
+  provides.
+\item[Broader domain and language coverage.] Extend the taxonomy-driven
+  annotation methodology to further solicitation domains and languages, and
+  extend Module~D's synthetic-corpus methodology to a larger, more diverse
+  set of persuasive-dialogue domains to more thoroughly test the dual-stream
+  architecture's generality.
+\end{description}
+
+\section{Closing Remark}
+
+The central engineering lesson of this project generalizes past its specific
+numbers: under a hard, externally-imposed compute budget, the value of a
+single well-motivated, properly-controlled experiment -- with a stated
+hypothesis, a reproducibility check, and an honest verdict -- consistently
+exceeded the value of broad, undirected tuning. Several of this report's
+most confident-sounding, plausible design ideas measurably failed
+(Table~\ref{tab:ablation-summary}); the fact that this is known, rather than
+silently absent from the record, is the result this project is most
+confident stands on its own.

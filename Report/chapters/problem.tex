@@ -1,0 +1,123 @@
+\chapter{Introduction and Problem Statement}
+\label{ch:problem}
+
+\section{Motivation}
+
+Persuasion is the mechanism by which a charity turns a stranger's attention
+into a donation. Every fundraising call, every solicitation script, and every
+automated donation-request chatbot is, underneath, a sequence of persuasive
+moves -- appeals to empathy, statements of credibility, offers of
+reciprocity, statements of urgency -- chosen (consciously or not) to move a
+specific person toward a specific decision. Two questions follow immediately
+from that observation, and both matter well beyond charity:
+
+\begin{enumerate}
+\item \textbf{Recognition.} Given the text of a persuasive dialogue, can a
+  system automatically identify \emph{which} persuasion strategies are being
+  used, turn by turn, at a level of granularity fine enough to be useful?
+\item \textbf{Consequence.} Once strategies can be recognized at scale, do
+  some of them actually predict a better outcome than others -- and can that
+  be established with enough rigor to be trusted, rather than merely
+  correlated with confounds like dialogue length or persuader skill?
+\end{enumerate}
+
+Answering these questions well has direct value for nonprofit fundraising
+(coaching material, script optimization, live-call feedback), for
+conversational-AI systems that must persuade responsibly (donation bots,
+negotiation agents, health-behavior nudging), and for computational social
+science, which has long theorized about persuasion \citep{cialdini1984influence}
+but rarely had a large, turn-level, multi-label-annotated corpus to test
+those theories against.
+
+\section{The Persuasion-For-Good Corpus and Its Limitation}
+
+The \emph{Persuasion-For-Good} (P4G) corpus \citep{wang2019persuasion} is the
+largest public resource of real donation-solicitation dialogues: crowd-workers
+were paired as a \emph{persuader}, who is asked to convince a
+\emph{persuadee} to donate part of a small task payment to the charity
+\emph{Save the Children}, and a \emph{persuadee}, who is free to donate any
+amount from \$0 up to the full payment. The corpus records the full dialogue
+transcript and the final binary/graded donation outcome for over a thousand
+conversations.
+
+What the public release does \emph{not} provide is fine-grained, exhaustive,
+turn-level labeling of \emph{which} persuasion strategy each persuader turn
+uses. The original paper annotates only a small demonstrative subset with a
+coarse strategy label. This is the gap the project addresses directly: without
+knowing which strategies actually occur, and how densely they co-occur within
+a single turn, it is not possible to build either an accurate automatic
+strategy recognizer or a trustworthy strategy-to-outcome model.
+
+\section{Problem Statement}
+
+This project is organized around four concrete sub-problems, each addressed
+by a distinct module of the system described in Chapter~\ref{ch:design}:
+
+\begin{description}
+\item[P1 -- Strategy taxonomy and annotation.] No public, exhaustive,
+  multi-label persuasion-strategy annotation of the P4G corpus exists.
+  A taxonomy has to be designed, and every one of the 10{,}600 persuader
+  turns across 1{,}017 dialogues has to be labeled with the \emph{set} of
+  strategies it uses (a single turn routinely uses two or three strategies
+  at once -- treating this as single-label classification would be a
+  modeling error, not a simplification).
+\item[P2 -- Automatic multi-label strategy recognition.] Given a persuader
+  turn (and its recent dialogue context), automatically predict which of the
+  41 fine-grained strategies (grouped into 11 higher-level categories) are
+  present, under severe class imbalance -- some strategies occur only a
+  handful of times in the entire corpus -- and under an annotation process
+  that is itself imperfect and must be measured, not assumed perfect.
+\item[P3 -- Donation-outcome analysis.] Given the strategy labels for a
+  dialogue (gold, to avoid contaminating the outcome model with the
+  classifier's own errors), estimate which strategies and strategy
+  combinations are statistically associated with donation, and by how much,
+  in a way that is honest about the limits of an observational,
+  non-randomized corpus of this size (1{,}017 dialogues).
+\item[P4 -- Donation-\emph{intent} classification and generalization.] As a
+  complementary and more directly deployable capability, classify whether a
+  \emph{dialogue as a whole} ends in a donation intent (and of what type --
+  outright, deferred, or conditional), and test whether an architecture built
+  for this closely related task transfers to a structurally similar but
+  distinct persuasive domain (buyer--seller price negotiation).
+\end{description}
+
+\section{Scope and Objectives}
+
+\noindent The concrete, measurable objectives set for this project were:
+
+\begin{itemize}
+\item Design an 11-category / 41-strategy multi-label persuasion taxonomy
+  covering the range of tactics observed in the P4G corpus, and apply it to
+  every persuader turn in the first 10{,}600 turns of the corpus
+  (Section~\ref{sec:annotation}).
+\item Build a multi-label classifier for this taxonomy that is evaluated
+  honestly against the corpus's own annotation-reliability ceiling, not
+  against a naive upper bound of 1.0 (Section~\ref{sec:ceiling}).
+\item Push the classifier's macro-F1 -- the metric that is dragged down by
+  the rarest strategies -- as high as is actually achievable given that
+  ceiling, using a disciplined, hypothesis-driven, reproducible experimental
+  process rather than undirected hyperparameter search
+  (Chapter~\ref{ch:evaluation}).
+\item Use the resulting (gold) strategy labels to quantify, with corrected
+  standard errors and multiple-testing control, how much of the variance in
+  donation outcome the strategy composition of a dialogue explains, and
+  compare a multi-label specification against a single-label projection of
+  the same data to isolate whether multi-labeling itself adds predictive
+  value (Section~\ref{sec:phase4-results}).
+\item Build and evaluate a companion donation-intent classifier, and test
+  whether its architecture generalizes to a different persuasive domain
+  (Section~\ref{sec:module-a-results}, Section~\ref{sec:generic-results}).
+\end{itemize}
+
+The remainder of this report is organized as follows.
+Chapter~\ref{ch:research} situates the project against prior work on
+persuasion taxonomies, the P4G corpus, multi-label classification under class
+imbalance, and outcome modeling from text. Chapter~\ref{ch:requirements}
+states the functional and non-functional requirements the system was designed
+against. Chapter~\ref{ch:design} describes the full system architecture,
+including the annotation methodology and the classifier's seventeen-iteration
+design history. Chapter~\ref{ch:evaluation} reports and interprets every
+result, with confidence intervals and significance tests throughout.
+Chapter~\ref{ch:management} covers project management, tooling, and ethical
+considerations, and Chapter~\ref{ch:conclusion} summarizes contributions,
+limitations, and future work.

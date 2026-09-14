@@ -1,0 +1,144 @@
+\chapter{Project Management, Tools, and Impact}
+\label{ch:management}
+
+\section{Team Organization}
+
+The project was organized around the four modules described in
+Chapter~\ref{ch:design}, with primary ownership assigned per module while
+the underlying annotated corpus (Section~\ref{sec:annotation}) was a shared,
+jointly-maintained resource that every module depended on.
+
+\begin{table}[H]
+\centering
+\caption{Module ownership.}
+\label{tab:roles}
+\begin{tabular}{@{}p{3.4cm}p{9.4cm}@{}}
+\toprule
+\textbf{Module} & \textbf{Scope} \\
+\midrule
+A -- Donation-intent classification & Dual-stream cross-attention architecture (v1--v14), binary intent + modifier classification. \\
+B -- Persuasion-strategy classification & Taxonomy design, corpus annotation coordination, the 17-iteration multi-label classifier (v1--v17), the decision-rule and ensembling study. \\
+C -- Donation-outcome analysis & Logistic outcome modeling, significance testing, single-label projection comparison, temporal-confound analysis. \\
+D -- Generic domain extension & Synthetic buyer--seller corpus construction, cross-domain retraining and evaluation of Module A's architecture. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Development Methodology}
+
+Module~B in particular followed the iterate-under-a-hard-compute-budget
+protocol detailed in Section~\ref{sec:design-methodology}: every one of its
+seventeen iterations was smoke-tested locally (GPU-free, against the real
+corpus, in under a minute) and then smoke-tested again on Kaggle (a small
+data subsample, a few minutes of GPU time) before a full multi-hour training
+run was committed, and every full run's results were checked against
+deterministic sentinel members before being trusted. This caught real
+defects before they cost GPU-hours on several occasions -- most notably when
+the category-first reframing (Section~\ref{sec:category-first}) was
+implemented, where the local smoke test caught an architectural incompatibility
+(a hierarchical-gating step that no longer had a well-defined coarser label
+to gate against) before any Kaggle run was attempted.
+
+\section{Tools and Infrastructure}
+
+\begin{table}[H]
+\centering
+\caption{Core tools and infrastructure.}
+\label{tab:tools}
+\begin{tabular}{@{}p{3.6cm}p{9.2cm}@{}}
+\toprule
+\textbf{Purpose} & \textbf{Tool} \\
+\midrule
+Model training & PyTorch, HuggingFace \texttt{transformers} \\
+Shallow baselines, calibration & scikit-learn \\
+Statistical / outcome modeling & statsmodels \\
+GPU compute & Kaggle (NVIDIA T4$\times$2, free tier, two accounts) \\
+Version control & Git \\
+Notebook generation & A single builder script regenerates each iteration's notebook, so every change is a reviewable source-code diff rather than a manually edited \texttt{.ipynb} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Kaggle's free tier enforces a weekly per-account GPU-hour quota, which a
+seventeen-iteration research process is not guaranteed to fit inside a single
+account. Every full training run was accordingly queued redundantly across
+two independent Kaggle accounts, which both protected the project against
+losing a run to quota exhaustion mid-iteration and, on several iterations,
+provided an independent reproducibility check by re-running the identical
+configuration twice.
+
+\section{Risk Management}
+
+\begin{table}[H]
+\centering
+\caption{Key risks and mitigations.}
+\label{tab:risks}
+\begin{tabular}{@{}p{4.3cm}p{8.5cm}@{}}
+\toprule
+\textbf{Risk} & \textbf{Mitigation} \\
+\midrule
+GPU quota exhaustion mid-experiment & Redundant training across two Kaggle accounts (Section~\ref{sec:design-methodology}). \\
+A multi-hour GPU run fails from a code defect & Mandatory local (GPU-free) and Kaggle-side (data-subsample) smoke tests before every full run. \\
+A design change looks like an improvement but is measurement noise & Deterministic sentinel ensemble members required to reproduce exactly before any comparison is trusted (Section~\ref{sec:design-methodology}); decision rules and pruning decisions fitted only on held-out validation data, never the test split. \\
+Extreme class imbalance makes the rarest labels unlearnable & Measured, rather than assumed: two strategies with zero test-split support are excluded from macro-F1 by definition (Section~\ref{ch:evaluation}) rather than silently scored as failures; the category-first reframing directly targets the imbalance that \emph{is} addressable. \\
+Overclaiming causal or comparative results & Explicit statistical significance testing on every headline comparison (Table~\ref{tab:significance}); the single-label projection control (Section~\ref{sec:phase4-results}) built specifically to avoid an uncontrolled cross-paper comparison; the temporal-confound limitation stated explicitly rather than left implicit (Section~\ref{sec:phase4-results}). \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Ethical Considerations}
+
+\textbf{LLM-assisted annotation.} A substantial portion of the strategy
+annotation was produced by an LLM agent under a human verification
+checkpoint (Section~\ref{sec:annotation}), not purely by human annotators.
+This is disclosed in the declaration, in the annotation methodology section,
+and here, and its reliability is measured directly (Section~\ref{sec:ceiling})
+rather than assumed to match human-only annotation quality; every classifier
+result in this report is explicitly evaluated against that measured ceiling.
+
+\textbf{Dual-use of persuasion research.} A system that recognizes and
+quantifies the effectiveness of persuasion strategies is, by construction,
+also a system that could be used to make persuasion more manipulative rather
+than more informative -- e.g. to identify which pressure-based tactics
+(Table~\ref{tab:odds-ratios} shows \emph{Threat and Pressure} strategies are
+associated with a \emph{lower}, not higher, donation rate, which is itself a
+finding against using such tactics) extract compliance rather than genuine
+willingness. This project's scope is limited to a single benign,
+well-studied domain (charitable solicitation for a specific, named charity)
+and the associational findings in Chapter~\ref{ch:evaluation} are reported
+with their causal limitations stated explicitly (Section~\ref{sec:phase4-results})
+specifically so they are not misapplied as a validated manipulation
+playbook.
+
+\textbf{Donor and participant privacy.} The underlying P4G corpus consists
+of crowd-worker dialogues released publicly by its original authors
+\citep{wang2019persuasion} with identifying information already removed;
+this project introduces no new personally identifying data and the generic
+extension corpus (Module~D) is entirely synthetic.
+
+\textbf{Fairness.} The classifier is deliberately rater-agnostic
+(NFR3, Chapter~\ref{ch:requirements}): it is never given the identity of the
+turn's annotator as a predictive feature, even though doing so was measured
+to increase apparent in-corpus accuracy, because that would be learning a
+shortcut specific to this annotation process rather than the underlying
+persuasive-language task, and would not transfer to a deployment setting
+where the "annotator" of a new turn does not exist.
+
+\section{Broader Impact}
+
+The strategy taxonomy, the annotated corpus, and the strategy-to-outcome
+findings (Chapter~\ref{ch:evaluation}) have direct potential use as
+fundraiser-coaching material: the odds-ratio analysis
+(Table~\ref{tab:odds-ratios}) is, in effect, evidence-based guidance that
+reciprocity-and-exchange and information-provision framing are associated
+with better outcomes than threat-and-pressure tactics in this domain, for an
+organization that wants that guidance grounded in dialogue data rather than
+intuition. More broadly, the annotated corpus and the released classifier
+give the wider research community a resource for testing persuasion-theory
+predictions (Cialdini's principles among them, Chapter~\ref{ch:research})
+against real donation-solicitation language at a scale the field has not
+previously had for this domain. The project's explicit reporting discipline
+-- ceilings, confidence intervals, significance tests, and a stated causal
+limitation rather than a suppressed one -- is offered as a template for how
+this kind of applied, corpus-driven persuasion research should be reported,
+independent of the specific numbers obtained here.

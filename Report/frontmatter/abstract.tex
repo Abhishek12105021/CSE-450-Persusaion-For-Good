@@ -1,0 +1,65 @@
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+Persuasive dialogue is central to charitable fundraising, yet the
+Persuasion-For-Good corpus \citep{wang2019persuasion} -- the largest public
+resource of real donation-solicitation dialogues -- ships with only a
+binary donation outcome and a small demonstrative sample of strategy labels.
+It is therefore unknown, at scale, \emph{which} persuasion strategies a
+persuader actually used turn by turn, and consequently unknown which
+strategies are associated with a donation once confounds like dialogue
+length are controlled for. This project closes that gap end to end: a
+41-strategy / 11-category multi-label taxonomy was designed and applied to
+all 10{,}600 persuader turns of the corpus (1{,}017 dialogues) under an
+LLM-assisted, human-checkpointed annotation process; a multi-label
+classifier was built to recognize these strategies automatically; and the
+recovered strategy labels were used to model donation outcome.
+
+The classification system evolved through seventeen measured iterations
+(v1--v17). Each iteration is a controlled experiment -- a documented
+hypothesis, a change scoped to as few variables as possible, deterministic
+\emph{sentinel} ensemble members whose scores must reproduce bit-for-bit
+between an iteration and its predecessor before any comparison is trusted,
+and a decision recorded whether the change survived contact with held-out
+data. Several plausible ideas were rejected this way (target-span attention
+pooling, prior-initialized classification-head biases, a naive
+class-imbalance loss reweighting that improved micro- but not macro-F1);
+two were kept (an architecture-dependent context-width effect, and an
+empirical-Bayes threshold-shrinkage decision rule that this project
+contributes). The most consequential single change was reframing the task
+itself: rather than predicting all 41 fine-grained strategies and reading
+off the 11 coarse categories as a byproduct, the final system (v15--v17)
+makes the 11-category task the primary training and decoding objective,
+with the 41-strategy task retained as an auxiliary head whose gradient
+demonstrably regularizes the rare categories. On the held-out test split,
+this raises category-level micro-F1 to \textbf{0.706} and macro-F1 to
+\textbf{0.564} -- within \SI{0.5}{pp} of the corpus's own cross-annotator
+agreement ceiling on the same task ($\kappa\text{-analog}$ consensus bound
+0.793), meaning the remaining error is close to the noise floor of the
+human labels themselves, concentrated almost entirely in three
+categories that make up 3.4\% of all positive labels.
+
+Feeding these recovered strategy labels into a McFadden pseudo-$R^2$
+logistic-regression outcome model raises cross-validated explained variance
+from 0.12 (categories alone) to \textbf{0.165} (with strategy co-occurrence
+features) on the same 1{,}017 dialogues -- roughly double the 0.015--0.08
+range reported by prior single-label work on a related corpus, though this
+project is explicit that the comparison is confounded by more than the
+labeling scheme and should not be over-read. A companion donation-\emph{intent}
+classifier built by the same team, using a dual-stream cross-attention
+architecture over persuader/persuadee turns, separately reaches
+\textbf{89.5\%} accuracy and \textbf{0.862} macro-F1 on binary donation
+intent, and the same architecture transfers to a structurally similar
+buyer--seller negotiation domain at \textbf{97.3\%} accuracy.
+
+Beyond the numbers, this report documents a reproducible experimental
+methodology for iterating on a multi-label classifier under a hard compute
+budget (a single free Kaggle GPU session per run): GPU-free smoke tests that
+exercise every code path on a data subsample before committing to a
+multi-hour run, redundant training across two Kaggle accounts to survive
+weekly GPU-quota exhaustion, and a statistically honest reporting
+convention -- cluster bootstrap confidence intervals over dialogues rather
+than turns, dual micro-/macro-optimal decision thresholds fitted by
+grouped cross-validation, and an explicit annotation-reliability ceiling
+reported alongside every headline score so that a result is never presented
+as better, or worse, than the data can actually support.

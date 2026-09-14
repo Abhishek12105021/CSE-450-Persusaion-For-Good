@@ -1,0 +1,123 @@
+\chapter{Background and Related Work}
+\label{ch:research}
+
+\section{Persuasion Theory and Strategy Taxonomies}
+
+The social-psychology literature on persuasion long predates NLP work on the
+topic. Cialdini's six principles of influence -- reciprocity, commitment and
+consistency, social proof, authority, liking, and scarcity
+\citep{cialdini1984influence} -- are the most widely cited organizing
+framework, and their fingerprints are visible in the taxonomy this project
+designed (Section~\ref{sec:taxonomy}): \emph{Reciprocity and Exchange},
+\emph{Commitment and Consistency}, and \emph{Urgency and Scarcity} are
+category names taken almost directly from Cialdini, while \emph{Social
+Influence} and \emph{Credibility Appeal} correspond to social proof and
+authority respectively. The taxonomy extends this classical framework with
+categories specific to charitable solicitation dialogue that do not map
+cleanly onto Cialdini's six -- \emph{Rational Appeal}, \emph{Emotional
+Appeal}, \emph{Framing and Presentation}, \emph{Threat and Pressure}, and
+\emph{Information Provision} and \emph{Relational and Interactive} moves that
+are largely conversational scaffolding rather than persuasive content per se.
+
+\section{The Persuasion-For-Good Corpus}
+
+\citet{wang2019persuasion} introduced the P4G corpus and, alongside it, an
+11-strategy annotation scheme applied to a small labeled subset, together
+with an early sequence-model strategy classifier and a persuader-side
+dialogue system trained to imitate high-donation-rate human persuaders. Their
+release established the corpus this project builds on, but three limitations
+motivated the present work: the strategy annotation covers only a fraction of
+the corpus; each turn was treated as carrying at most one dominant strategy,
+whereas manual inspection of the corpus shows a turn routinely combines two
+or three simultaneously (Section~\ref{sec:eda}); and no systematic,
+statistically corrected analysis was published of which strategies are
+actually associated with the final donation decision once dialogue-level
+confounds are accounted for.
+
+Subsequent work using P4G has largely focused on the intent-prediction side
+of the corpus (predicting whether a dialogue will end in a donation) rather
+than the fine-grained strategy side, which is the gap this project's
+Module~B (Chapter~\ref{ch:design}) is built to fill.
+
+\section{Multi-Label Text Classification Under Class Imbalance}
+
+Framing strategy recognition as multi-label rather than single-label
+classification is not a stylistic choice; the empirical labels---a
+mean of 1.68 strategies and 1.50 categories per turn, with under 7\% of
+turns carrying zero labels (Section~\ref{sec:eda})---rule out a
+single-label formulation on this corpus. Binary cross-entropy per label is
+the standard baseline but treats every label symmetrically, which is a poor
+fit when, as here, the label distribution spans nearly three orders of
+magnitude (the rarest strategy occurs twice in the corpus, the most common
+occurs 2{,}860 times). \citet{benbaruch2021asl} propose Asymmetric Loss
+(ASL), which decouples the focusing power applied to positive and negative
+predictions and adds a small negative-probability margin so that easy
+negatives contribute almost nothing to the gradient; this project adopts ASL
+as its base loss (Section~\ref{sec:design-loss}) and additionally makes the
+per-label positive weighting configurable per ensemble member, since it was
+measured to trade micro-F1 against macro-F1 rather than improving both
+(Table~\ref{tab:ablation-summary}).
+
+Resampling is the more traditional response to label imbalance, and is what
+this project's own EDA augmentation pipeline does (Section~\ref{sec:design-augmentation}).
+\citet{wu2020distribution} identify a specific failure mode of resampling in
+the \emph{multi-label} setting that a single-label class-balancing analysis
+misses entirely: oversampling an instance to help its rare label inevitably
+oversamples every \emph{other} label that instance happens to carry too, so a
+turn duplicated nine times to help a rare strategy also duplicates whatever
+common strategies co-occur on that turn. Their Distribution-Balanced (DB)
+Loss corrects for this with a per-instance, per-class reweighting term. This
+project independently measured the same failure mode on its own corpus
+(Section~\ref{sec:ablation-augmentation}) -- effective rebalancing of 6$\times$
+against an intended 9$\times$ -- before implementing a DB-style correction,
+which is reported in the ablation study as one of the project's controlled
+experiments rather than assumed to transfer from the vision literature
+unmodified.
+
+\section{Transformer Encoders for Dialogue Understanding}
+
+The classifier ensemble (Section~\ref{sec:design-ensemble}) draws on four
+pretrained encoder families: BERT-family masked language models
+\citep{devlin2019bert}, RoBERTa \citep{liu2019roberta} at both base and large
+scale, ELECTRA \citep{clark2020electra}, whose replaced-token-detection
+pretraining objective was hypothesized to transfer well to a discriminative
+turn-classification task, and TOD-BERT \citep{wu2020todbert}, which is
+pretrained specifically on task-oriented dialogue and was measured to be the
+one encoder that reliably converts additional dialogue context into
+predictive signal on this corpus (Section~\ref{sec:ablation-context}) --
+a result specific enough to the encoder's dialogue-pretraining, and not
+generalizable to the other encoders, that it had to be established
+empirically rather than assumed.
+
+\section{Statistical Rigor: Conformal Prediction and Outcome Modeling}
+
+Two further bodies of work shape the evaluation methodology
+(Chapter~\ref{ch:evaluation}). Conformal prediction
+\citep{vovk2005conformal} provides prediction \emph{sets} with a
+distribution-free coverage guarantee rather than a single point prediction;
+this project reports conformal coverage at three risk levels
+(Section~\ref{sec:conformal}) as a complementary reliability check alongside
+point-estimate F1. For the donation-outcome analysis, McFadden's pseudo-$R^2$
+\citep{mcfadden1974conditional} is the standard goodness-of-fit measure for
+logistic regression and is used throughout Section~\ref{sec:phase4-results},
+always reported as a cross-validated out-of-sample estimate rather than the
+optimistic in-sample figure, since with up to 28 features fitted on 1{,}017
+dialogues the in-sample figure alone would overstate genuine explanatory
+power.
+
+\section{Positioning of This Work}
+
+Relative to \citet{wang2019persuasion}, this project's contribution is an
+exhaustive multi-label re-annotation of the full 10{,}600-turn corpus rather
+than a sampled single-label subset, and a strategy-to-outcome analysis run on
+that exhaustive annotation with cross-validated, multiple-testing-corrected
+statistics rather than raw association tests. Relative to the multi-label
+classification literature \citep{benbaruch2021asl, wu2020distribution}, the
+contribution is empirical rather than methodological: existing techniques
+(ASL, DB-style rebalancing, empirical-Bayes threshold shrinkage) are applied
+and, critically, \emph{measured} on this specific corpus rather than assumed
+to transfer, and the report documents several cases (Chapter~\ref{ch:evaluation})
+where a technique that is well established elsewhere measurably failed to
+help, or helped one metric while hurting another, on this dataset --
+findings that are only visible because of the controlled, sentinel-verified
+experimental protocol described in Section~\ref{sec:design-methodology}.

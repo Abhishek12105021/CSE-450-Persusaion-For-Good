@@ -1,0 +1,114 @@
+\chapter{Requirements Analysis}
+\label{ch:requirements}
+
+\section{Stakeholders}
+
+The system is designed for three kinds of stakeholder. \textbf{Researchers}
+(the project team, and future students building on this corpus) need an
+annotated dataset and a classifier whose reported numbers can be trusted --
+i.e., evaluated against an honest ceiling rather than an assumed perfect
+one. \textbf{Nonprofit fundraising practitioners} are the eventual downstream
+users of the strategy-to-outcome findings: which strategies are worth
+training callers to use. \textbf{Dialogue-system builders} are the users of
+the donation-intent classifier and its generic-domain extension, who need a
+model that transfers to a related but distinct persuasive setting rather than
+one that has memorized this specific corpus.
+
+\section{Functional Requirements}
+
+\begin{description}
+\item[FR1 -- Multi-label strategy taxonomy.] The system shall define a
+  fixed, mutually-understood taxonomy of persuasion strategies, organized
+  into higher-level categories, sufficient to describe the range of tactics
+  observed in the corpus.
+\item[FR2 -- Exhaustive turn-level annotation.] The system shall label every
+  persuader turn in the annotated portion of the corpus with the
+  \emph{complete set} of strategies it uses (possibly the empty set), not a
+  single dominant strategy, using the preceding dialogue turns as context
+  where the turn's meaning depends on it.
+\item[FR3 -- Automatic strategy prediction.] The system shall, given a
+  persuader turn (and up to five preceding turns of dialogue context),
+  predict the probability of each strategy/category being present, and
+  convert these probabilities into a discrete label set via a
+  decision procedure fitted on held-out data.
+\item[FR4 -- Dual objective support.] The system shall support being
+  evaluated and operated at two distinct, independently useful operating
+  points: one that maximizes micro-F1 (overall labeling accuracy, dominated
+  by common strategies) and one that maximizes macro-F1 (equal weight per
+  strategy, sensitive to rare-strategy performance), since a fundraising
+  application interested in \emph{rare but high-value} tactics needs the
+  latter, and one interested in overall labeling throughput needs the
+  former.
+\item[FR5 -- Donation-outcome estimation.] The system shall, given the
+  (gold) strategy composition of a dialogue, estimate the strategy set's
+  association with the dialogue's binary donation outcome, report effect
+  sizes (odds ratios) with significance levels corrected for multiple
+  comparisons, and report the model's out-of-sample explanatory power.
+\item[FR6 -- Donation-intent classification.] The system shall, given a full
+  persuader--persuadee dialogue, classify whether it ends in a donation
+  intent and, if so, of what type (outright, deferred, or conditional).
+\item[FR7 -- Cross-domain transfer check.] The system's dialogue-classification
+  architecture shall be evaluated on a second, structurally similar but
+  topically distinct persuasive-dialogue domain to test whether its design
+  generalizes or has overfit to charitable solicitation specifically.
+\end{description}
+
+\section{Non-Functional Requirements}
+
+\begin{description}
+\item[NFR1 -- Evaluated against an honest ceiling.] Every classification
+  result shall be reported alongside a measured annotation-reliability
+  ceiling (Section~\ref{sec:ceiling}) -- how often independent labelings of
+  near-duplicate turns agree with each other -- rather than compared only to
+  a theoretical maximum of 1.0, which no annotation process, human or
+  automated, can be expected to reach.
+\item[NFR2 -- No leakage across the train/validation/test split.] Because
+  turns from the same dialogue share context and style, the split into
+  train/validation/test shall be performed at the \emph{dialogue} level, not
+  the turn level, and every downstream statistic (cross-fitted decision
+  thresholds, bootstrap confidence intervals, significance tests) shall
+  resample or fold by dialogue for the same reason.
+\item[NFR3 -- Rater-agnostic modeling.] The classifier shall not be given
+  the identity of the human/LLM annotator who produced a turn's label as an
+  input feature, even though doing so measurably increases apparent accuracy,
+  because a production system will not know who \emph{would have} labeled an
+  unseen turn, and training on annotator identity would be learning a
+  shortcut rather than the underlying task.
+\item[NFR4 -- Reproducibility.] All randomized procedures (data splitting,
+  weight initialization, data augmentation, cross-fitted decision thresholds,
+  bootstrap resampling) shall use fixed seeds, and a subset of ensemble
+  members (\emph{sentinels}) shall be kept byte-for-byte identical across
+  consecutive design iterations specifically so that any change in their
+  reported score signals a bug rather than a real effect
+  (Section~\ref{sec:design-methodology}).
+\item[NFR5 -- Compute budget.] The full training-and-evaluation pipeline
+  shall complete within a single free-tier Kaggle GPU session (an NVIDIA
+  T4$\times$2 instance, walltime limit on the order of hours, weekly quota
+  limits), and shall be validated on a small data subsample (a
+  \emph{smoke test}) before any full run is committed, to avoid spending
+  scarce GPU-hours on a run that fails partway through from a code defect.
+\item[NFR6 -- Statistical honesty.] Confidence intervals shall be computed
+  by cluster bootstrap over dialogues (not turns), and any comparison
+  between two models or two design choices shall be accompanied by a paired
+  significance test rather than a bare point-estimate difference.
+\end{description}
+
+\section{Data Requirements}
+
+The corpus provides 10{,}600 persuader turns across 1{,}017 dialogues; the
+taxonomy requires 41 strategy labels organized into 11 categories
+(Section~\ref{sec:taxonomy}); the annotation process is required to report
+its own inter-annotator (and, where an LLM is involved, inter-run) agreement
+so that classifier performance can be judged against it rather than in a
+vacuum (Section~\ref{sec:ceiling}).
+
+\section{Tooling and Environment Requirements}
+
+Model development targets PyTorch with the HuggingFace \texttt{transformers}
+library for encoder fine-tuning, \texttt{scikit-learn} for shallow baselines,
+thresholding, and calibration, and \texttt{statsmodels} for the logistic
+outcome models in Phase~4. Training runs on Kaggle's free GPU tier; because a
+single account's weekly GPU quota is not guaranteed to survive a full
+seventeen-iteration research process, redundant training across a second
+Kaggle account was adopted as an infrastructure requirement, not a
+convenience (Section~\ref{sec:design-methodology}).
