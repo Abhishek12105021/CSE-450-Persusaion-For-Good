@@ -1,0 +1,380 @@
+[{"stream_name":"stderr","time":6.677619251,"data":"/usr/local/lib/python3.12/dist-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.\n"}
+,{"stream_name":"stderr","time":6.677695052,"data":"  validate(nb)\n"}
+,{"stream_name":"stderr","time":7.567666014,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.567703876,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.567709662,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.567714142,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.197438184,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.197468274,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.197473993,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.197478624,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":38.038250779,"data":"Using device: cuda\n"}
+,{"stream_name":"stdout","time":38.038324382,"data":"GPU: Tesla T4\n"}
+,{"stream_name":"stdout","time":38.038329091,"data":"{\n"}
+,{"stream_name":"stdout","time":38.038332454,"data":"  \"dataset_path\": \"final.json\",\n"}
+,{"stream_name":"stdout","time":38.038336206,"data":"  \"run_tag\": \"generic-ablation-v1\",\n"}
+,{"stream_name":"stdout","time":38.038339594,"data":"  \"search_roots\": [\n"}
+,{"stream_name":"stdout","time":38.038343014,"data":"    \"/kaggle/input\",\n"}
+,{"stream_name":"stdout","time":38.038346279,"data":"    \"/kaggle/working\",\n"}
+,{"stream_name":"stdout","time":38.038350465,"data":"    \"/workspace\",\n"}
+,{"stream_name":"stdout","time":38.038365595,"data":"    \"/data\",\n"}
+,{"stream_name":"stdout","time":38.038371007,"data":"    \".\",\n"}
+,{"stream_name":"stdout","time":38.038376154,"data":"    \"..\",\n"}
+,{"stream_name":"stdout","time":38.038381569,"data":"    \"../..\",\n"}
+,{"stream_name":"stdout","time":38.038386863,"data":"    \"Generic\",\n"}
+,{"stream_name":"stdout","time":38.038392275,"data":"    \"../Generic\"\n"}
+,{"stream_name":"stdout","time":38.038397473,"data":"  ],\n"}
+,{"stream_name":"stdout","time":38.038402169,"data":"  \"out_dir\": \"/kaggle/working\",\n"}
+,{"stream_name":"stdout","time":38.038407501,"data":"  \"binary_classes\": [\n"}
+,{"stream_name":"stdout","time":38.038411715,"data":"    \"no\",\n"}
+,{"stream_name":"stdout","time":38.038416261,"data":"    \"yes\"\n"}
+,{"stream_name":"stdout","time":38.038420645,"data":"  ],\n"}
+,{"stream_name":"stdout","time":38.038425125,"data":"  \"ablation_encoder\": {\n"}
+,{"stream_name":"stdout","time":38.038429795,"data":"    \"name\": \"roberta-base\",\n"}
+,{"stream_name":"stdout","time":38.038434378,"data":"    \"hf_id\": \"roberta-base\"\n"}
+,{"stream_name":"stdout","time":38.038438956,"data":"  },\n"}
+,{"stream_name":"stdout","time":38.038444669,"data":"  \"ablation_max_len\": 64,\n"}
+,{"stream_name":"stdout","time":38.038449783,"data":"  \"ablation_max_len_full\": 512,\n"}
+,{"stream_name":"stdout","time":38.038469401,"data":"  \"ablation_epochs\": 15,\n"}
+,{"stream_name":"stdout","time":38.038474182,"data":"  \"ablation_batch_size\": 16,\n"}
+,{"stream_name":"stdout","time":38.038478072,"data":"  \"train_frac\": 0.7,\n"}
+,{"stream_name":"stdout","time":38.038482789,"data":"  \"val_frac\": 0.15,\n"}
+,{"stream_name":"stdout","time":38.03848623,"data":"  \"test_frac\": 0.15,\n"}
+,{"stream_name":"stdout","time":38.038489723,"data":"  \"lr\": 2e-05,\n"}
+,{"stream_name":"stdout","time":38.038493099,"data":"  \"weight_decay\": 0.01,\n"}
+,{"stream_name":"stdout","time":38.038496413,"data":"  \"warmup_ratio\": 0.06,\n"}
+,{"stream_name":"stdout","time":38.038499863,"data":"  \"max_grad_norm\": 1.0,\n"}
+,{"stream_name":"stdout","time":38.038503361,"data":"  \"cb_beta\": 0.999,\n"}
+,{"stream_name":"stdout","time":38.038507106,"data":"  \"focal_gamma\": 2.0,\n"}
+,{"stream_name":"stdout","time":38.03851064,"data":"  \"checkpoint_dir_name\": \"checkpoints_generic-ablation\"\n"}
+,{"stream_name":"stdout","time":38.038514415,"data":"}\n"}
+,{"stream_name":"stderr","time":38.234359818,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":38.234389972,"data":"\n"}
+,{"stream_name":"stderr","time":38.234393752,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":39.668211264,"data":"ARM generic-abl-b-strict | dataset=reversal_dataset_v3.json | truncation_side='left'\n"}
+,{"stream_name":"stdout","time":39.776884003,"data":"Loading dataset from: /kaggle/input/datasets/ahmadmuhammad26/generic-antiphony-ablation/reversal_dataset_v3.json\n"}
+,{"stream_name":"stdout","time":39.776910872,"data":"Loaded 200 dialogues.\n"}
+,{"stream_name":"stdout","time":39.776915466,"data":"\n"}
+,{"stream_name":"stdout","time":39.77691962,"data":"Loaded 200 labeled dialogues after cleaning.\n"}
+,{"stream_name":"stdout","time":39.776923428,"data":"Dialogues carrying reversal_turn_id: 130/200\n"}
+,{"stream_name":"stdout","time":39.805715153,"data":"side table built for 200 dialogues, 130 reversal-tagged\n"}
+,{"stream_name":"stdout","time":39.80576834,"data":"turn keys before: ['normalized_intent', 'original_intent', 'role', 'sentiment_tag', 'text', 'turn_id']\n"}
+,{"stream_name":"stdout","time":39.805774005,"data":"turn keys after : ['role', 'text', 'turn_id']\n"}
+,{"stream_name":"stdout","time":39.80577802,"data":"VERIFIED: modelling frame columns = ['archetype', 'binary_id', 'binary_label', 'category', 'dialogue_id', 'outcome_category', 'product', 'text', 'turns']\n"}
+,{"stream_name":"stdout","time":39.805782353,"data":"VERIFIED: no reversal_type / reversal_turn_id / sentiment_tag reachable from df\n"}
+,{"stream_name":"stdout","time":39.853633355,"data":"train: n=140 (70.0%)\n"}
+,{"stream_name":"stdout","time":39.853661543,"data":"val: n=30 (15.0%)\n"}
+,{"stream_name":"stdout","time":39.853667329,"data":"test: n=30 (15.0%)\n"}
+,{"stream_name":"stdout","time":39.853671428,"data":"\n"}
+,{"stream_name":"stdout","time":39.853675313,"data":"binary_label composition per split:\n"}
+,{"stream_name":"stdout","time":39.895012269,"data":"Majority-class baseline on THIS run's TEST split:\n"}
+,{"stream_name":"stdout","time":39.895034342,"data":"{\n"}
+,{"stream_name":"stdout","time":39.895038657,"data":"  \"model\": \"majority_baseline\",\n"}
+,{"stream_name":"stdout","time":39.895045714,"data":"  \"binary_accuracy\": 0.5,\n"}
+,{"stream_name":"stdout","time":39.895056015,"data":"  \"binary_f1\": 0.0,\n"}
+,{"stream_name":"stdout","time":39.895072859,"data":"  \"binary_macro_f1\": 0.3333333333333333\n"}
+,{"stream_name":"stdout","time":39.895076955,"data":"}\n"}
+,{"stream_name":"stdout","time":39.964703416,"data":"Class-balanced weights: {'no': 1.0, 'yes': 1.0}\n"}
+,{"stream_name":"stdout","time":40.047875045,"data":"\n"}
+,{"stream_name":"stdout","time":40.047902758,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":40.047906295,"data":"ARM: last-turn-removed  (encoder=roberta-base, max_len=512)\n"}
+,{"stream_name":"stdout","time":40.04790878,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":40.047911378,"data":"Sample inputs this arm sees:\n"}
+,{"stream_name":"stdout","time":40.047913685,"data":"  [ no] '[Buyer] hi, interested in the chicco baby stroller, lightweight foldable model, available?\\r\\n [Merchant] Yes, available, '\n"}
+,{"stream_name":"stdout","time":40.047916194,"data":"  [ no] \"[Buyer] hi, the 6pc german steel knife set, still available? i want to buy for my sister's kitchen\\r\\n [Merchant] yes avai\"\n"}
+,{"stream_name":"stdout","time":40.047918796,"data":"  [ no] '[Buyer] hey is the black and red gaming chair still up for grabs? i wanna order it today\\r\\n [Merchant] yes available, 11,'\n"}
+,{"stream_name":"stderr","time":52.046132049,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":52.046210754,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":52.046227328,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":52.046232687,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":52.046237247,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":52.04624258,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":52.046247445,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":52.046252597,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":52.046257333,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":52.046262099,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":52.046266538,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":52.046271225,"data":"\n"}
+,{"stream_name":"stderr","time":52.046276089,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":52.046280932,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":52.046286285,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":52.046291551,"data":"\n"}
+,{"stream_name":"stderr","time":52.046296611,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":52.046301202,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":52.046305599,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":52.046310559,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":52.046315199,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":52.04633331,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":52.046337405,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":52.046341397,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":52.046345055,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":52.046348679,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":52.046352435,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":52.046355995,"data":"\n"}
+,{"stream_name":"stderr","time":52.0463595,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":52.046362949,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":52.046366995,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stdout","time":293.771665386,"data":"  best val macroF1=1.0000\n"}
+,{"stream_name":"stdout","time":295.348587305,"data":"  TEST: acc=1.0000 macroF1=1.0000\n"}
+,{"stream_name":"stdout","time":295.540701472,"data":"\n"}
+,{"stream_name":"stdout","time":295.540748233,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":295.540758858,"data":"ARM: last-turn+merchant-removed  (encoder=roberta-base, max_len=512)\n"}
+,{"stream_name":"stdout","time":295.54076738,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":295.540770909,"data":"Sample inputs this arm sees:\n"}
+,{"stream_name":"stdout","time":295.540774231,"data":"  [ no] '[Buyer] hi, interested in the chicco baby stroller, lightweight foldable model, available?\\r\\n [Merchant] Yes, available, '\n"}
+,{"stream_name":"stdout","time":295.540777942,"data":"  [ no] \"[Buyer] hi, the 6pc german steel knife set, still available? i want to buy for my sister's kitchen\\r\\n [Merchant] yes avai\"\n"}
+,{"stream_name":"stdout","time":295.540781553,"data":"  [ no] '[Buyer] hey is the black and red gaming chair still up for grabs? i wanna order it today\\r\\n [Merchant] yes available, 11,'\n"}
+,{"stream_name":"stderr","time":296.783860417,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":296.783899187,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":296.783906242,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":296.783911335,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":296.783916684,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":296.783922292,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":296.783927582,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":296.783933264,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":296.783938714,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":296.783944039,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":296.78394885,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":296.783954669,"data":"\n"}
+,{"stream_name":"stderr","time":296.783960274,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":296.783984471,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":296.783989882,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":296.783994172,"data":"\n"}
+,{"stream_name":"stderr","time":296.783998532,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":296.784002287,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":296.78400582,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":296.784010366,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":296.784013972,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":296.784018001,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":296.78402167,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":296.784025139,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":296.784029064,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":296.784033062,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":296.784037357,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":296.784041034,"data":"\n"}
+,{"stream_name":"stderr","time":296.784044225,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":296.784048725,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":296.784053256,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stdout","time":536.576405638,"data":"  best val macroF1=1.0000\n"}
+,{"stream_name":"stdout","time":538.022857255,"data":"  TEST: acc=0.9667 macroF1=0.9666\n"}
+,{"stream_name":"stdout","time":538.214102043,"data":"Reversal-tagged: train=91, val=15, test=24\n"}
+,{"stream_name":"stdout","time":538.214132298,"data":"\n"}
+,{"stream_name":"stdout","time":538.214136333,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":538.214139842,"data":"ARM: pre-reversal-only  (encoder=roberta-base, max_len=512)\n"}
+,{"stream_name":"stdout","time":538.214143135,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":538.214146441,"data":"Sample inputs this arm sees:\n"}
+,{"stream_name":"stdout","time":538.214149459,"data":"  [ no] '[Buyer] hi, interested in the chicco baby stroller, lightweight foldable model, available?\\r\\n [Merchant] Yes, available, '\n"}
+,{"stream_name":"stdout","time":538.214152717,"data":"  [ no] \"[Buyer] hi, the 6pc german steel knife set, still available? i want to buy for my sister's kitchen\\r\\n [Merchant] yes avai\"\n"}
+,{"stream_name":"stdout","time":538.214156148,"data":"  [ no] '[Buyer] hey is the black and red gaming chair still up for grabs? i wanna order it today\\r\\n [Merchant] yes available, 11,'\n"}
+,{"stream_name":"stderr","time":539.426093894,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":539.426129668,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":539.426134953,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":539.426154645,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":539.426157861,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":539.426161003,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":539.426164458,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":539.426167685,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":539.426172693,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":539.426175665,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":539.426178803,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":539.426181768,"data":"\n"}
+,{"stream_name":"stderr","time":539.426184792,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":539.42618777,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":539.426191247,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":539.426194545,"data":"\n"}
+,{"stream_name":"stderr","time":539.426197453,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":539.426200487,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":539.426203445,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":539.426206452,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":539.426209579,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":539.426212668,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":539.426215712,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":539.426219387,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":539.426222422,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":539.426225475,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":539.426228617,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":539.426231811,"data":"\n"}
+,{"stream_name":"stderr","time":539.426235424,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":539.426238568,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":539.426241892,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stdout","time":649.254201326,"data":"  best val macroF1=1.0000\n"}
+,{"stream_name":"stdout","time":650.314819899,"data":"  TEST: acc=0.9583 macroF1=0.9577\n"}
+,{"stream_name":"stdout","time":650.510606067,"data":"\n"}
+,{"stream_name":"stdout","time":650.510636367,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":650.510641947,"data":"ARM: first-half-only  (encoder=roberta-base, max_len=512)\n"}
+,{"stream_name":"stdout","time":650.510652479,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":650.510666029,"data":"Sample inputs this arm sees:\n"}
+,{"stream_name":"stdout","time":650.510668638,"data":"  [ no] '[Buyer] hi, interested in the chicco baby stroller, lightweight foldable model, available?\\r\\n [Merchant] Yes, available, '\n"}
+,{"stream_name":"stdout","time":650.510671421,"data":"  [ no] \"[Buyer] hi, the 6pc german steel knife set, still available? i want to buy for my sister's kitchen\\r\\n [Merchant] yes avai\"\n"}
+,{"stream_name":"stdout","time":650.510674211,"data":"  [ no] '[Buyer] hey is the black and red gaming chair still up for grabs? i wanna order it today\\r\\n [Merchant] yes available, 11,'\n"}
+,{"stream_name":"stderr","time":651.767820749,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":651.76785387,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":651.767858725,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":651.767862302,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":651.767865839,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":651.767869646,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":651.767872882,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":651.767876267,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":651.76787966,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":651.767882896,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":651.767886829,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":651.76789031,"data":"\n"}
+,{"stream_name":"stderr","time":651.767893481,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":651.767897025,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":651.767901374,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":651.767905365,"data":"\n"}
+,{"stream_name":"stderr","time":651.767908646,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":651.767912187,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":651.767915723,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":651.76791952,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":651.767923038,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":651.76792661,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":651.767930042,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":651.76793356,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":651.767936894,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":651.767940112,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":651.767943272,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":651.767946775,"data":"\n"}
+,{"stream_name":"stderr","time":651.767949995,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":651.767953204,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":651.767972674,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stdout","time":876.544814656,"data":"  best val macroF1=0.9666\n"}
+,{"stream_name":"stdout","time":877.912546138,"data":"  TEST: acc=0.8667 macroF1=0.8661\n"}
+,{"stream_name":"stdout","time":878.121279535,"data":"\n"}
+,{"stream_name":"stdout","time":878.121333232,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":878.121340746,"data":"NECESSITY gap (full model[audit] - last-turn-removed[this run]) = -0.0267 macro-F1\n"}
+,{"stream_name":"stdout","time":878.121347081,"data":"SUFFICIENCY gap (full model[audit] - last-turn-only[audit])      = +0.0001 macro-F1  (cited, not re-computed)\n"}
+,{"stream_name":"stdout","time":878.121351463,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":878.121355943,"data":"Reading these two gaps together:\n"}
+,{"stream_name":"stdout","time":878.121360247,"data":"  - small SUFFICIENCY gap  -\u003e the closing turn is enough on its own (already known).\n"}
+,{"stream_name":"stdout","time":878.121366712,"data":"  - small NECESSITY gap   -\u003e the rest of the dialogue can also fully substitute for\n"}
+,{"stream_name":"stdout","time":878.121370927,"data":"    the closing turn once it's hidden. Both small at once means the label is\n"}
+,{"stream_name":"stdout","time":878.121374862,"data":"    heavily over-determined in this corpus: it leaks from more than one place.\n"}
+,{"stream_name":"stdout","time":878.121378682,"data":"  - small SUFFICIENCY gap + LARGE necessity gap is the interesting split-outcome:\n"}
+,{"stream_name":"stdout","time":878.121382702,"data":"    the closing turn is sufficient (fast/explicit) but NOT redundant -- hide it and\n"}
+,{"stream_name":"stdout","time":878.121386457,"data":"    the rest of the dialogue is not enough to recover it. That is what a corpus\n"}
+,{"stream_name":"stdout","time":878.121390335,"data":"    with genuine reversals (Arm B / Arm C) is expected to surface.\n"}
+,{"stream_name":"stdout","time":878.121394104,"data":"\n"}
+,{"stream_name":"stdout","time":878.121397885,"data":"Saved /kaggle/working/results_summary_generic-abl-b-strict.csv\n"}
+,{"stream_name":"stdout","time":878.763132164,"data":"24 reversal-tagged dialogue(s) in TEST. Re-scoring the last-turn-removed model on them.\n"}
+,{"stream_name":"stderr","time":879.865975425,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":879.866011053,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":879.866016692,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":879.86602171,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":879.866026542,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":879.866031419,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":879.866037666,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":879.866046688,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":879.866050362,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":879.866053572,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":879.866070214,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":879.866072955,"data":"\n"}
+,{"stream_name":"stderr","time":879.866075388,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":879.866077935,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":879.866080811,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":879.866083368,"data":"\n"}
+,{"stream_name":"stderr","time":879.866085717,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":879.866088154,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":879.866090527,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":879.866093249,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":879.866095703,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":879.866098122,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":879.866100489,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":879.866102857,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":879.866105278,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":879.866107638,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":879.866109987,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":879.866112344,"data":"\n"}
+,{"stream_name":"stderr","time":879.866114698,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":879.866117033,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":879.86611979,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stdout","time":881.445278682,"data":"\n"}
+,{"stream_name":"stdout","time":881.445331362,"data":"0/24 reversal dialogues: the last-turn-removed model predicted the WRONG, pre-reversal label.\n"}
+,{"stream_name":"stdout","time":881.445337839,"data":"Saved /kaggle/working/reversal_flip_diagnostic_generic-abl-b-strict.csv\n"}
+,{"stream_name":"stdout","time":881.50760306,"data":"Saved /kaggle/working/run_report_generic-abl-b-strict.json\n"}
+,{"stream_name":"stdout","time":881.507628113,"data":"\n"}
+,{"stream_name":"stdout","time":881.507632476,"data":"Artefacts written to /kaggle/working\n"}
+,{"stream_name":"stdout","time":881.507638066,"data":"  - ablation_comparison_generic-abl-b-strict.png\n"}
+,{"stream_name":"stdout","time":881.507644741,"data":"  - checkpoints_generic-abl-b-strict\n"}
+,{"stream_name":"stdout","time":881.507647183,"data":"  - results_summary_generic-abl-b-strict.csv\n"}
+,{"stream_name":"stdout","time":881.507649653,"data":"  - reversal_flip_diagnostic_generic-abl-b-strict.csv\n"}
+,{"stream_name":"stdout","time":881.507652748,"data":"  - run_report_generic-abl-b-strict.json\n"}
+,{"stream_name":"stderr","time":882.784812529,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":882.784854736,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":882.784862514,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":882.784881801,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":882.784887022,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":882.784891845,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":882.784896698,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":882.784901257,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":882.784905549,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":882.784910712,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":882.784915124,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":882.78491945,"data":"\n"}
+,{"stream_name":"stderr","time":882.784924566,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":882.784928753,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":882.784934285,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":882.784939724,"data":"\n"}
+,{"stream_name":"stderr","time":882.784943694,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":882.784947981,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":882.784952388,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":882.784956535,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":882.784960804,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":882.784965062,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":882.784969388,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":882.784973595,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":882.784977839,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":882.784982075,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":882.784986437,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":882.784991381,"data":"\n"}
+,{"stream_name":"stderr","time":882.784995575,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":882.784999794,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":882.785005021,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":884.981147874,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":884.981198692,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":884.981205136,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":884.981211348,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":884.98121571,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":884.981220096,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":884.981248057,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":884.981253078,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":884.981258068,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":884.981262343,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":884.981267064,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":884.981271779,"data":"\n"}
+,{"stream_name":"stderr","time":884.981276415,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":884.981280826,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":884.981285881,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":884.981290438,"data":"\n"}
+,{"stream_name":"stderr","time":884.981294362,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":884.981298818,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":884.981303128,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":884.98130729,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":884.98131153,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":884.981315968,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":884.981320284,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":884.981324439,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":884.981328654,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":884.981333286,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":884.981337544,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":884.981342075,"data":"\n"}
+,{"stream_name":"stderr","time":884.981346196,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":884.981350666,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":884.981355276,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stdout","time":886.486379892,"data":"accuracy within each opening stance, reversal vs matched negative:\n"}
+,{"stream_name":"stdout","time":886.503022245,"data":"\n"}
+,{"stream_name":"stdout","time":886.50304917,"data":"If an arm scores high on BOTH rows of a stance, the stance itself\n"}
+,{"stream_name":"stdout","time":886.503054781,"data":"is not what it is using. If it scores high on reversals and low on\n"}
+,{"stream_name":"stdout","time":886.503060149,"data":"the matched negatives, it is riding the opening stance.\n"}
+,{"stream_name":"stdout","time":886.503064907,"data":"Saved /kaggle/working/matched_control_generic-abl-b-strict.csv\n"}
+,{"stream_name":"stderr","time":892.519687417,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":892.519749494,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":892.692192925,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":892.692221884,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":893.342012821,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":893.858839126,"data":"[NbConvertApp] Writing 1029220 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":896.271210257,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":897.460316315,"data":"[NbConvertApp] Support files will be in __results___files/\n"}
+,{"stream_name":"stderr","time":897.460344526,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":897.460672625,"data":"[NbConvertApp] Writing 1197688 bytes to __results__.html\n"}
+]

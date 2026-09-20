@@ -1,0 +1,245 @@
+[{"stream_name":"stderr","time":6.488696177,"data":"/usr/local/lib/python3.12/dist-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.\n"}
+,{"stream_name":"stderr","time":6.489453024,"data":"  validate(nb)\n"}
+,{"stream_name":"stderr","time":7.385246398,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.385279312,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.385285398,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.385290039,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.095131622,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.0951729,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.095179427,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.095183918,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":35.44949893,"data":"Using device: cuda\n"}
+,{"stream_name":"stdout","time":35.449597762,"data":"GPU: Tesla T4\n"}
+,{"stream_name":"stdout","time":35.449606797,"data":"{\n"}
+,{"stream_name":"stdout","time":35.449612939,"data":"  \"dataset_path\": \"final.json\",\n"}
+,{"stream_name":"stdout","time":35.449618752,"data":"  \"run_tag\": \"generic-ablation-v1\",\n"}
+,{"stream_name":"stdout","time":35.44962431,"data":"  \"search_roots\": [\n"}
+,{"stream_name":"stdout","time":35.449629478,"data":"    \"/kaggle/input\",\n"}
+,{"stream_name":"stdout","time":35.449634578,"data":"    \"/kaggle/working\",\n"}
+,{"stream_name":"stdout","time":35.449639862,"data":"    \"/workspace\",\n"}
+,{"stream_name":"stdout","time":35.449648175,"data":"    \"/data\",\n"}
+,{"stream_name":"stdout","time":35.449652004,"data":"    \".\",\n"}
+,{"stream_name":"stdout","time":35.449655367,"data":"    \"..\",\n"}
+,{"stream_name":"stdout","time":35.449658916,"data":"    \"../..\",\n"}
+,{"stream_name":"stdout","time":35.449662381,"data":"    \"Generic\",\n"}
+,{"stream_name":"stdout","time":35.449665859,"data":"    \"../Generic\"\n"}
+,{"stream_name":"stdout","time":35.449669344,"data":"  ],\n"}
+,{"stream_name":"stdout","time":35.449672804,"data":"  \"out_dir\": \"/kaggle/working\",\n"}
+,{"stream_name":"stdout","time":35.449676311,"data":"  \"binary_classes\": [\n"}
+,{"stream_name":"stdout","time":35.449679792,"data":"    \"no\",\n"}
+,{"stream_name":"stdout","time":35.449683154,"data":"    \"yes\"\n"}
+,{"stream_name":"stdout","time":35.449686634,"data":"  ],\n"}
+,{"stream_name":"stdout","time":35.449690053,"data":"  \"ablation_encoder\": {\n"}
+,{"stream_name":"stdout","time":35.449693576,"data":"    \"name\": \"roberta-base\",\n"}
+,{"stream_name":"stdout","time":35.449697105,"data":"    \"hf_id\": \"roberta-base\"\n"}
+,{"stream_name":"stdout","time":35.449700675,"data":"  },\n"}
+,{"stream_name":"stdout","time":35.449703985,"data":"  \"ablation_max_len\": 64,\n"}
+,{"stream_name":"stdout","time":35.449707475,"data":"  \"ablation_max_len_full\": 512,\n"}
+,{"stream_name":"stdout","time":35.449732758,"data":"  \"ablation_epochs\": 15,\n"}
+,{"stream_name":"stdout","time":35.449735955,"data":"  \"ablation_batch_size\": 16,\n"}
+,{"stream_name":"stdout","time":35.449738639,"data":"  \"train_frac\": 0.7,\n"}
+,{"stream_name":"stdout","time":35.449741342,"data":"  \"val_frac\": 0.15,\n"}
+,{"stream_name":"stdout","time":35.449743966,"data":"  \"test_frac\": 0.15,\n"}
+,{"stream_name":"stdout","time":35.449746603,"data":"  \"lr\": 2e-05,\n"}
+,{"stream_name":"stdout","time":35.449749275,"data":"  \"weight_decay\": 0.01,\n"}
+,{"stream_name":"stdout","time":35.449751925,"data":"  \"warmup_ratio\": 0.06,\n"}
+,{"stream_name":"stdout","time":35.449754538,"data":"  \"max_grad_norm\": 1.0,\n"}
+,{"stream_name":"stdout","time":35.449757157,"data":"  \"cb_beta\": 0.999,\n"}
+,{"stream_name":"stdout","time":35.449759812,"data":"  \"focal_gamma\": 2.0,\n"}
+,{"stream_name":"stdout","time":35.449763086,"data":"  \"checkpoint_dir_name\": \"checkpoints_generic-ablation\"\n"}
+,{"stream_name":"stdout","time":35.449782364,"data":"}\n"}
+,{"stream_name":"stderr","time":35.717628525,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":35.71766638,"data":"\n"}
+,{"stream_name":"stderr","time":35.717672167,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":37.301146884,"data":"SENSITIVITY VARIANT: truncation_side='left' (base notebook uses HF default 'right'), run_tag=generic-ablation-v1-lefttrunc\n"}
+,{"stream_name":"stdout","time":37.464558851,"data":"Loading dataset from: /kaggle/input/datasets/ahmadmuhammad26/generic-antiphony-ablation/final.json\n"}
+,{"stream_name":"stdout","time":37.464598661,"data":"Loaded 500 dialogues.\n"}
+,{"stream_name":"stdout","time":37.464604308,"data":"\n"}
+,{"stream_name":"stdout","time":37.464608217,"data":"Loaded 500 labeled dialogues after cleaning.\n"}
+,{"stream_name":"stdout","time":37.464612186,"data":"Dialogues carrying reversal_turn_id: 0/500\n"}
+,{"stream_name":"stdout","time":37.52772914,"data":"train: n=350 (70.0%)\n"}
+,{"stream_name":"stdout","time":37.527771819,"data":"val: n=75 (15.0%)\n"}
+,{"stream_name":"stdout","time":37.527777423,"data":"test: n=75 (15.0%)\n"}
+,{"stream_name":"stdout","time":37.527781658,"data":"\n"}
+,{"stream_name":"stdout","time":37.527785995,"data":"binary_label composition per split:\n"}
+,{"stream_name":"stdout","time":37.575012569,"data":"Majority-class baseline on THIS run's TEST split:\n"}
+,{"stream_name":"stdout","time":37.575057259,"data":"{\n"}
+,{"stream_name":"stdout","time":37.575063638,"data":"  \"model\": \"majority_baseline\",\n"}
+,{"stream_name":"stdout","time":37.575068612,"data":"  \"binary_accuracy\": 0.5333333333333333,\n"}
+,{"stream_name":"stdout","time":37.575073505,"data":"  \"binary_f1\": 0.0,\n"}
+,{"stream_name":"stdout","time":37.57507709,"data":"  \"binary_macro_f1\": 0.34782608695652173\n"}
+,{"stream_name":"stdout","time":37.575081788,"data":"}\n"}
+,{"stream_name":"stdout","time":37.64301421,"data":"Class-balanced weights: {'no': 0.9582, 'yes': 1.0418}\n"}
+,{"stream_name":"stdout","time":37.776220957,"data":"\n"}
+,{"stream_name":"stdout","time":37.776253467,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":37.776257407,"data":"ARM: last-turn-removed  (encoder=roberta-base, max_len=512)\n"}
+,{"stream_name":"stdout","time":37.776300674,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":37.776306159,"data":"Sample inputs this arm sees:\n"}
+,{"stream_name":"stdout","time":37.776310271,"data":"  [yes] '[Buyer] Hi there, is the Fujifilm X-T30 II Mirrorless Camera available in ready stock?\\r\\n [Merchant] Hi! Absolutely, we h'\n"}
+,{"stream_name":"stdout","time":37.77631479,"data":"  [yes] '[Buyer] Hello, could you please tell me if the Garmin Forerunner 265 GPS Watch is currently in ready stock? Thank you\\r\\n '\n"}
+,{"stream_name":"stdout","time":37.776328357,"data":"  [ no] '[Buyer] Hello. Do you still have the Keychron Q1 Pro Custom Keyboard?\\r\\n [Merchant] Greetings! Yes, we have brand new uni'\n"}
+,{"stream_name":"stderr","time":49.137235641,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":49.137286337,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":49.137294414,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":49.137300165,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":49.137305661,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":49.137310745,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":49.137316076,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":49.137321259,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":49.13732627,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":49.137336948,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":49.137342396,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":49.137369222,"data":"\n"}
+,{"stream_name":"stderr","time":49.137375128,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":49.137380825,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":49.137387397,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":49.137393758,"data":"\n"}
+,{"stream_name":"stderr","time":49.137398796,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":49.137403866,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":49.137408965,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":49.137414426,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":49.137457283,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":49.137463472,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":49.137469728,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":49.137475125,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":49.137480341,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":49.137485407,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":49.137490412,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":49.137495599,"data":"\n"}
+,{"stream_name":"stderr","time":49.137515128,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":49.137523034,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":49.137526354,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stdout","time":604.14559115,"data":"  best val macroF1=0.9867\n"}
+,{"stream_name":"stdout","time":607.190090269,"data":"  TEST: acc=0.9333 macroF1=0.9331\n"}
+,{"stream_name":"stdout","time":607.370541123,"data":"\n"}
+,{"stream_name":"stdout","time":607.37060326,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":607.370627019,"data":"ARM: last-turn+merchant-removed  (encoder=roberta-base, max_len=512)\n"}
+,{"stream_name":"stdout","time":607.370632699,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":607.370637903,"data":"Sample inputs this arm sees:\n"}
+,{"stream_name":"stdout","time":607.370644874,"data":"  [yes] '[Buyer] Hi there, is the Fujifilm X-T30 II Mirrorless Camera available in ready stock?\\r\\n [Merchant] Hi! Absolutely, we h'\n"}
+,{"stream_name":"stdout","time":607.370653079,"data":"  [yes] '[Buyer] Hello, could you please tell me if the Garmin Forerunner 265 GPS Watch is currently in ready stock? Thank you\\r\\n '\n"}
+,{"stream_name":"stdout","time":607.370657112,"data":"  [ no] '[Buyer] Hello. Do you still have the Keychron Q1 Pro Custom Keyboard?\\r\\n [Merchant] Greetings! Yes, we have brand new uni'\n"}
+,{"stream_name":"stderr","time":609.087832194,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":609.087883596,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":609.087888738,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":609.087892373,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":609.087895778,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":609.087899218,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":609.087902841,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":609.087906173,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":609.087909484,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":609.087912893,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":609.087916238,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":609.087919624,"data":"\n"}
+,{"stream_name":"stderr","time":609.087922899,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":609.087926327,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":609.087930328,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":609.087933846,"data":"\n"}
+,{"stream_name":"stderr","time":609.087937346,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":609.087940589,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":609.087943832,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":609.087976318,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":609.087979209,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":609.087981738,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":609.087984299,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":609.087986791,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":609.087989491,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":609.087991999,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":609.087994498,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":609.087997021,"data":"\n"}
+,{"stream_name":"stderr","time":609.087999503,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":609.088002081,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":609.088004963,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stdout","time":1172.066048341,"data":"  best val macroF1=0.9867\n"}
+,{"stream_name":"stdout","time":1174.953228563,"data":"  TEST: acc=0.9333 macroF1=0.9331\n"}
+,{"stream_name":"stdout","time":1175.006633807,"data":"0 reversal-tagged dialogues found in this split -- 'pre-reversal-only' arm skipped.\n"}
+,{"stream_name":"stdout","time":1175.006678312,"data":"This is EXPECTED on the current 500-dialogue corpus (Arm A). Re-run this\n"}
+,{"stream_name":"stdout","time":1175.006685548,"data":"notebook once Generic/Dataset/reversal_dataset.json exists and is merged in\n"}
+,{"stream_name":"stdout","time":1175.00669119,"data":"(see Generic/ABLATION_STUDY_GUIDELINE.md, Arm B / Arm C) to populate this section.\n"}
+,{"stream_name":"stdout","time":1175.133512087,"data":"\n"}
+,{"stream_name":"stdout","time":1175.133556485,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":1175.133562334,"data":"ARM: first-half-only  (encoder=roberta-base, max_len=512)\n"}
+,{"stream_name":"stdout","time":1175.133566166,"data":"======================================================================\n"}
+,{"stream_name":"stdout","time":1175.13357002,"data":"Sample inputs this arm sees:\n"}
+,{"stream_name":"stdout","time":1175.133573873,"data":"  [yes] '[Buyer] Hi there, is the Fujifilm X-T30 II Mirrorless Camera available in ready stock?\\r\\n [Merchant] Hi! Absolutely, we h'\n"}
+,{"stream_name":"stdout","time":1175.13357838,"data":"  [yes] '[Buyer] Hello, could you please tell me if the Garmin Forerunner 265 GPS Watch is currently in ready stock? Thank you\\r\\n '\n"}
+,{"stream_name":"stdout","time":1175.133582321,"data":"  [ no] '[Buyer] Hello. Do you still have the Keychron Q1 Pro Custom Keyboard?\\r\\n [Merchant] Greetings! Yes, we have brand new uni'\n"}
+,{"stream_name":"stderr","time":1176.810048239,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":1176.810094424,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":1176.810099372,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":1176.810103499,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":1176.810107197,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":1176.810136082,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":1176.810139685,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":1176.810142475,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":1176.810145106,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":1176.81014778,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":1176.810150393,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":1176.810153044,"data":"\n"}
+,{"stream_name":"stderr","time":1176.81015563,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":1176.810158409,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":1176.810161629,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stderr","time":1176.810164486,"data":"\n"}
+,{"stream_name":"stderr","time":1176.810167007,"data":"RobertaModel LOAD REPORT from: roberta-base\n"}
+,{"stream_name":"stderr","time":1176.810169696,"data":"Key                             | Status     | \n"}
+,{"stream_name":"stderr","time":1176.810172301,"data":"--------------------------------+------------+-\n"}
+,{"stream_name":"stderr","time":1176.810174885,"data":"roberta.embeddings.position_ids | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":1176.810177469,"data":"lm_head.bias                    | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":1176.810180141,"data":"lm_head.dense.bias              | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":1176.810182743,"data":"lm_head.layer_norm.weight       | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":1176.810185335,"data":"lm_head.layer_norm.bias         | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":1176.810187932,"data":"lm_head.dense.weight            | UNEXPECTED | \n"}
+,{"stream_name":"stderr","time":1176.810190566,"data":"pooler.dense.bias               | MISSING    | \n"}
+,{"stream_name":"stderr","time":1176.810193153,"data":"pooler.dense.weight             | MISSING    | \n"}
+,{"stream_name":"stderr","time":1176.81019576,"data":"\n"}
+,{"stream_name":"stderr","time":1176.810198258,"data":"Notes:\n"}
+,{"stream_name":"stderr","time":1176.810200794,"data":"- UNEXPECTED\t:can be ignored when loading from different task/architecture; not ok if you expect identical arch.\n"}
+,{"stream_name":"stderr","time":1176.810203761,"data":"- MISSING\t:those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.\n"}
+,{"stream_name":"stdout","time":1590.723780422,"data":"  best val macroF1=0.8365\n"}
+,{"stream_name":"stdout","time":1592.850475594,"data":"  TEST: acc=0.7733 macroF1=0.7707\n"}
+,{"stream_name":"stdout","time":1593.043976919,"data":"\n"}
+,{"stream_name":"stdout","time":1593.044020423,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":1593.044029303,"data":"NECESSITY gap (full model[audit] - last-turn-removed[this run]) = +0.0402 macro-F1\n"}
+,{"stream_name":"stdout","time":1593.044036029,"data":"SUFFICIENCY gap (full model[audit] - last-turn-only[audit])      = +0.0001 macro-F1  (cited, not re-computed)\n"}
+,{"stream_name":"stdout","time":1593.044041942,"data":"========================================================================\n"}
+,{"stream_name":"stdout","time":1593.044047511,"data":"Reading these two gaps together:\n"}
+,{"stream_name":"stdout","time":1593.044078291,"data":"  - small SUFFICIENCY gap  -\u003e the closing turn is enough on its own (already known).\n"}
+,{"stream_name":"stdout","time":1593.044084428,"data":"  - small NECESSITY gap   -\u003e the rest of the dialogue can also fully substitute for\n"}
+,{"stream_name":"stdout","time":1593.044090264,"data":"    the closing turn once it's hidden. Both small at once means the label is\n"}
+,{"stream_name":"stdout","time":1593.044095964,"data":"    heavily over-determined in this corpus: it leaks from more than one place.\n"}
+,{"stream_name":"stdout","time":1593.044101686,"data":"  - small SUFFICIENCY gap + LARGE necessity gap is the interesting split-outcome:\n"}
+,{"stream_name":"stdout","time":1593.04410658,"data":"    the closing turn is sufficient (fast/explicit) but NOT redundant -- hide it and\n"}
+,{"stream_name":"stdout","time":1593.044111297,"data":"    the rest of the dialogue is not enough to recover it. That is what a corpus\n"}
+,{"stream_name":"stdout","time":1593.044115898,"data":"    with genuine reversals (Arm B / Arm C) is expected to surface.\n"}
+,{"stream_name":"stdout","time":1593.044120568,"data":"\n"}
+,{"stream_name":"stdout","time":1593.044125297,"data":"Saved /kaggle/working/results_summary_generic-ablation-v1-lefttrunc.csv\n"}
+,{"stream_name":"stdout","time":1593.424350744,"data":"0 reversal-tagged dialogues found in this split's TEST set.\n"}
+,{"stream_name":"stdout","time":1593.424394443,"data":"This is EXPECTED on the current 500-dialogue corpus (Arm A) -- no dialogue in\n"}
+,{"stream_name":"stdout","time":1593.424400711,"data":"final.json carries reversal_turn_id. Re-run this notebook on Arm B (reversal-only)\n"}
+,{"stream_name":"stdout","time":1593.424405024,"data":"or Arm C (combined) once Generic/Dataset/reversal_dataset.json exists (see\n"}
+,{"stream_name":"stdout","time":1593.424411315,"data":"Generic/ABLATION_STUDY_GUIDELINE.md) to populate this diagnostic.\n"}
+,{"stream_name":"stdout","time":1593.488334656,"data":"Saved /kaggle/working/run_report_generic-ablation-v1-lefttrunc.json\n"}
+,{"stream_name":"stdout","time":1593.488369095,"data":"\n"}
+,{"stream_name":"stdout","time":1593.488375533,"data":"Artefacts written to /kaggle/working\n"}
+,{"stream_name":"stdout","time":1593.488380163,"data":"  - ablation_comparison_generic-ablation-v1-lefttrunc.png\n"}
+,{"stream_name":"stdout","time":1593.488384494,"data":"  - results_summary_generic-ablation-v1-lefttrunc.csv\n"}
+,{"stream_name":"stdout","time":1593.488390372,"data":"  - run_report_generic-ablation-v1-lefttrunc.json\n"}
+,{"stream_name":"stdout","time":1599.942115285,"data":"\n"}
+,{"stream_name":"stdout","time":1599.942159879,"data":"Read: 'tail_lost_RIGHT' = dialogues whose FINAL 60 characters are deleted\n"}
+,{"stream_name":"stdout","time":1599.942165734,"data":"by HuggingFace's default right-truncation at max_length=512.\n"}
+,{"stream_name":"stdout","time":1599.94216969,"data":"Those are the dialogues the BASE notebook scored without the text nearest\n"}
+,{"stream_name":"stdout","time":1599.942173326,"data":"the removed closing turn. 'tail_lost_LEFT' is the same count for THIS\n"}
+,{"stream_name":"stdout","time":1599.942176965,"data":"variant, which drops the opening instead and should be ~0.\n"}
+,{"stream_name":"stdout","time":1599.942180455,"data":"\n"}
+,{"stream_name":"stdout","time":1599.942183871,"data":"Saved /kaggle/working/truncation_diagnostic_generic-ablation-v1-lefttrunc.csv\n"}
+,{"stream_name":"stderr","time":1606.172039914,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1606.172087459,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1606.351233874,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1606.351263882,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1607.061519273,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":1607.632273239,"data":"[NbConvertApp] Writing 785421 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":1610.686557476,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1612.060089406,"data":"[NbConvertApp] Support files will be in __results___files/\n"}
+,{"stream_name":"stderr","time":1612.060132559,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":1612.06075503,"data":"[NbConvertApp] Writing 998764 bytes to __results__.html\n"}
+]

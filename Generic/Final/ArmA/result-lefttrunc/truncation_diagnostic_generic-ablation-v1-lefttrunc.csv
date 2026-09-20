@@ -1,0 +1,5 @@
+arm,median_tokens,p95_tokens,max_tokens,n_over_cap,pct_over_cap,tail_lost_RIGHT,tail_lost_LEFT
+"full dialogue (reference, not an arm)",376,751,918,152,30.4,152,0
+last-turn-removed,355,705,858,126,25.2,126,0
+last-turn+merchant-removed,324,673,818,108,21.6,107,0
+first-half-only,181,329,414,0,0.0,0,0

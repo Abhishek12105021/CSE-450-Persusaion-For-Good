@@ -1,0 +1,9 @@
+system,input,source,accuracy,macro_f1,macro_f1_over_baseline
+majority baseline,none,this run,0.5333333333333333,0.34782608695652173,0.0
+"majority baseline (audit, Arm A ref.)",none,AUDIT_generic-antiphony.md §4,0.5333,0.3478,-0.0
+"full model (deberta-v3-base, dual-stream)",full dialogue,"AUDIT_generic-antiphony.md §4 (Arm A ref., NOT re-run here)",0.9733,0.9733,0.6255
+last-turn-only (roberta-base),final Buyer turn ONLY,"AUDIT_generic-antiphony.md §6 (Arm A ref., NOT re-run here)",0.9733,0.9732,0.6254
+last-turn-removed,full dialogue MINUS final Buyer turn,this run,0.9333333333333333,0.933143162774113,0.5853
+last-turn+merchant-removed,full dialogue MINUS final Buyer turn and any trailing Merchant courtesy turn(s),this run,0.9333333333333333,0.933143162774113,0.5853
+first-half-only,first ~50% of turns,this run,0.7733333333333333,0.7707246898039921,0.4229
+pre-reversal-only,"reversal-tagged dialogues, truncated before reversal_turn_id",this run,,,

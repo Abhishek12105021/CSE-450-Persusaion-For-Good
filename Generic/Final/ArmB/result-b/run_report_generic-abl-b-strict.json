@@ -1,0 +1,50 @@
+{
+  "run_tag": "generic-abl-b-strict",
+  "dataset_path": "/kaggle/input/datasets/ahmadmuhammad26/generic-antiphony-ablation/reversal_dataset_v3.json",
+  "n_total": 200,
+  "n_train": 140,
+  "n_val": 30,
+  "n_test": 30,
+  "n_reversal_tagged_total": 130,
+  "n_reversal_tagged_test": 24,
+  "baseline": {
+    "model": "majority_baseline",
+    "binary_accuracy": 0.5,
+    "binary_f1": 0.0,
+    "binary_macro_f1": 0.3333333333333333
+  },
+  "audit_reference_arm_a": {
+    "majority_baseline": {
+      "accuracy": 0.5333,
+      "macro_f1": 0.3478
+    },
+    "full_model_deberta_v3": {
+      "accuracy": 0.9733,
+      "macro_f1": 0.9733
+    },
+    "last_turn_only_roberta": {
+      "accuracy": 0.9733,
+      "macro_f1": 0.9732
+    },
+    "dialogue_contribution_gap": 0.0001,
+    "citation": "Generic/ran-nb/AUDIT_generic-antiphony.md"
+  },
+  "arms": {
+    "last_turn_removed": {
+      "accuracy": 1.0,
+      "macro_f1": 1.0
+    },
+    "last_turn_plus_merchant_removed": {
+      "accuracy": 0.9666666666666667,
+      "macro_f1": 0.9666295884315907
+    },
+    "first_half_only": {
+      "accuracy": 0.8666666666666667,
+      "macro_f1": 0.8660714285714286
+    },
+    "pre_reversal_only": {
+      "accuracy": 0.9583333333333334,
+      "macro_f1": 0.9576719576719577
+    }
+  }
+}
