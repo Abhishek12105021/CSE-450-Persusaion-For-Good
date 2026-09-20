@@ -11,26 +11,32 @@ This appendix provides the complete optimization and hyperparameter configuratio
   \label{tab:app-hyperparams}
   \begin{tabularx}{\textwidth}{lYYY}
     \toprule
-    \textbf{Hyperparameter} & \textbf{Intention Models (v6--v14)} & \textbf{Strategy Encoders (v17/v18)} & \textbf{E-Commerce Transfer} \\
+    \textbf{Hyperparameter} & \textbf{Intention Models (Hierarchical \& Antiphony)} & \textbf{Multi-Task Strategy Ensembles} & \textbf{E-Commerce Transfer} \\
     \midrule
     Optimizer & AdamW \cite{loshchilov2019adamw} & AdamW & AdamW \\
+    \rowcolor{lightbg}
     Base Learning Rate & $2 \times 10^{-5}$ & $2 \times 10^{-5}$ & $2 \times 10^{-5}$ \\
     Weight Decay & $0.01$ & $0.01$ & $0.01$ \\
+    \rowcolor{lightbg}
     Learning Rate Schedule & Linear warmup (10\%) & Linear warmup (10\%) & Linear warmup (10\%) \\
     Training Epochs & 15 to 25 (early stop) & 5 to 10 epochs & 15 to 25 epochs \\
+    \rowcolor{lightbg}
     Batch Size (Train / Eval) & $2$ / $4$ & $8$ / $16$ & $2$ / $4$ \\
     Gradient Checkpointing & Enabled & Disabled & Enabled \\
+    \rowcolor{lightbg}
     Primary Loss & CB-Focal ($\gamma=2, \beta=0.999$) & Asymmetric Loss ($\gamma_+=0, \gamma_-=4$) & CB-Focal ($\gamma=2, \beta=0.999$) \\
     Auxiliary Loss & SupCon ($\tau=0.1, \lambda=0.3$) & Strategy Head ($\lambda=0.2$) & SupCon ($\tau=0.1, \lambda=0.3$) \\
+    \rowcolor{lightbg}
     Max Turns / Max Tokens & 32 turns $\times$ 64 tokens & 1 turn + 5 history & 32 turns $\times$ 64 tokens \\
     Role Stream Truncation & $R=20$ turns per role & N/A & $R=20$ turns per role \\
+    \rowcolor{lightbg}
     Random Seed & 42 (all seeds) & 42 (all seeds) & 42 (all seeds) \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
 \section*{XGBoost Decision Stacker Tuning Grid}
-The tuned XGBoost stacking decision layer (evaluated in v18) performed grid search across 72 configurations:
+The tuned XGBoost stacking decision layer evaluated across 72 candidate grid configurations:
 \begin{itemize}
   \item \textbf{Feature Regimes:} Logits Mode (20 features) and Rich Mode (41 features).
   \item \textbf{Max Depth:} $\in \{3, 4, 6\}$ (winning value: 4).
@@ -54,23 +60,31 @@ The tuned XGBoost stacking decision layer (evaluated in v18) performed grid sear
     \textbf{Directory / Artifact} & \textbf{File Name} & \textbf{Architectural Scope / Contents} \\
     \midrule
     \texttt{Intention/Classifier/} & \texttt{v1\_flat\_baseline.ipynb} & Flat 256-token transformer baseline with dual heads. \\
+    \rowcolor{lightbg}
     & \texttt{v2\_speaker\_aware.ipynb} & Additive role embeddings prior to masked pooling. \\
     & \texttt{v3\_augmentation\_collapse.ipynb} & EDA augmentation run diagnosing metric and weight bugs. \\
+    \rowcolor{lightbg}
     & \texttt{v4\_loss\_metric\_fix.ipynb} & True Macro-F1 metric selection, CB-Focal, and SupCon. \\
     & \texttt{v5\_token\_safe\_aug.ipynb} & Forensic regex tokenization fixing speaker marker gluing. \\
+    \rowcolor{lightbg}
     & \texttt{v6\_hierarchical\_dialogue.ipynb} & Hierarchical transformer with inter-turn self-attention. \\
     & \texttt{v8\_hierarchical\_bt.ipynb} & Hierarchical transformer with back-translation. \\
+    \rowcolor{lightbg}
     & \texttt{v9\_ensemble\_dropout.ipynb} & Tri-model soft ensembling and Monte Carlo uncertainty. \\
     & \texttt{v10\_last\_turn\_gated.ipynb} & Last-Persuadee-turn sigmoid gating architecture. \\
+    \rowcolor{lightbg}
     & \texttt{v13\_solo\_binary.ipynb} & Modifier head removal and dedicated binary capacity. \\
     & \texttt{v14\_antiphony.ipynb} & Dual-stream cross-attention Antiphony architecture. \\
     \midrule
     \texttt{Strategy/} & \texttt{multistrat-capstone2-final.ipynb} & 39-strategy baseline with decoupled training tests. \\
+    \rowcolor{lightbg}
     & \texttt{multistrat-capstone\_v17.ipynb} & 19-member pool, Asymmetric Loss, calibrated blends. \\
     & \texttt{multistrat-capstone\_v18.ipynb} & 72-grid XGBoost stacker search vs. power-mean blend. \\
+    \rowcolor{lightbg}
     & \texttt{pipeline.py} & Automated schema validation for strategy batches. \\
     \midrule
     \texttt{Generic/} & \texttt{generate\_negotiation\_dialogues.py} & Persona-conditioned synthetic generation engine. \\
+    \rowcolor{lightbg}
     & \texttt{humanize\_dialogues\_gemini.py} & Gemini Flash organic paraphrasing and jitter script. \\
     & \texttt{run\_adversarial\_ablation.py} & Input ablation harness (LTR, LTR+M, FHO, PRO). \\
     \bottomrule
@@ -105,7 +119,7 @@ Below is an illustrative JSON record from \texttt{multilabel\_merged.jsonl} repr
   ],
   "n_labels": 3,
   "flags": {"empty_set": false, "uncertain": false},
-  "annotator_segment": "shimanto"
+  "annotator_segment": "segment_track_a"
 }
 \end{lstlisting}
 
@@ -134,6 +148,10 @@ Below is an illustrative record from \texttt{final\_plus\_reversal\_v3.json} sho
 
 To ensure complete scientific integrity, this appendix documents the resolution of all fifteen empirical and textual discrepancies identified in the project record:
 
+\begin{keypoint}[Audit Rule of Primacy: Ground-Truth Empirical Primacy]
+Whenever prompt narratives, retrospective slides, or draft summaries contradict raw serialized artifacts (\texttt{.jsonl}, \texttt{.csv}, evaluation outputs, or reproducible notebook execution cells), the empirical data artifacts are held strictly authoritative. Speculative claims and draft misstatements are formally audited and corrected.
+\end{keypoint}
+
 \begin{table}[htbp]
   \centering
   \small
@@ -145,30 +163,37 @@ To ensure complete scientific integrity, this appendix documents the resolution 
     \midrule
     \textbf{C1} & Strategy Decision Layer & Early drafts incorrectly referred to an XGBoost stacking system as the winner. & Shipped decision layer is the \textbf{calibrated power-mean blend} ($0.5716$ macro-F1); XGBoost stacker is documented as tested ($0.5508$). \\
     \midrule
+    \rowcolor{lightbg}
     \textbf{C2} & Context Window Width & Prompts claimed $k \in \{0,1,3,5,7\}$ was tested. & Verified tests compare $0$ vs $3$ turns ($0.6675$ vs $0.6756$) and BoW $0$ vs $5$ turns; $0.7062$ is v17's micro-optimal decode. \\
     \midrule
     \textbf{C3} & Strategy Prevalence Tail & Annotation doc had erroneous tail counts (e.g. \texttt{door\_in\_the\_face} 15). & Recomputed directly from \texttt{multilabel\_merged.jsonl} ($2, 5, 5, 8, 7, 14, 21, 27, 31$). \\
     \midrule
+    \rowcolor{lightbg}
     \textbf{C4} & Strategy Annotator ID & Conflicting references to Claude models and manual raters. & Described as LLM agent under human checkpoints across four named segments; marked with \texttt{\pending{...}}. \\
     \midrule
     \textbf{C5} & E-Commerce Dataset Counts & Text prompts claimed 250/250 and 6 outcome classes. & Frozen files contain $262$ no / $238$ yes ($N=500$) and $362$ no / $338$ yes ($N=700$) across 4 outcome classes. \\
     \midrule
+    \rowcolor{lightbg}
     \textbf{C6} & Ablation Terminology & Prompts cited non-existent regimes (`\texttt{Suffix'', }`$+0.1420$''). & Followed report: LTR, LTR+M, FHO, PRO; necessity gap dropped from $0.1600$ to $0.0402$. \\
     \midrule
-    \textbf{C7} & Stage Boundaries & Conflicting epoch definitions across prompts. & Standardized to 4 stages: 1 (v1--v5), 2 (v6--v9), 3 (v10--v13), 4 (v14). \\
+    \textbf{C7} & Stage Boundaries & Conflicting epoch definitions across prompts. & Standardized to 4 stages: Stage 1 (Flat Baselines), Stage 2 (Hierarchical Transformers), Stage 3 (Gated \& Decoupled), Stage 4 (Dual-Stream Antiphony). \\
     \midrule
-    \textbf{C8} & Table B Thresholds & Mixed default ($0.8623$) and tuned ($0.8600$) scores. & Reported both numbers transparently; noted that v14 beats v13 under either rule. \\
+    \rowcolor{lightbg}
+    \textbf{C8} & Table B Thresholds & Mixed default ($0.8623$) and tuned ($0.8600$) scores. & Reported both numbers transparently; noted that Antiphony beats the Decoupled Baseline under either rule. \\
     \midrule
     \textbf{C9} & Unsupported Claims & Inventions: unsubstantiated monetary budgets, inflated emissions, external serving frameworks, and graph runtime exports. & Deleted all unsubstantiated claims; replaced with grounded hardware estimates. \\
     \midrule
+    \rowcolor{lightbg}
     \textbf{C10} & Left-Truncated Flat Run & Presentation cited $0.842$ flat run not in chronicle. & Noted the presentation finding; discussed token length diagnosis without building claims on it. \\
     \midrule
     \textbf{C11} & Strategy Encoders & Abstract claimed DeBERTa/TOD-BERT on strategy. & Clarified that strategy used RoBERTa (x6) and ELECTRA (x1); 3-backbone test applied to intention. \\
     \midrule
+    \rowcolor{lightbg}
     \textbf{C12} & Directive Issuer & Referred to ``supervisor'' vs ``course instructor''. & Standardized to ``supervisor (course instructor)'' and marked \pending{Confirm directive issuer}. \\
     \midrule
     \textbf{C13} & Pass Numbering & Guidelines and reports used divergent pass labels. & Followed \texttt{donation\_intent.md}: Pass 1 (dual), Pass 2 (binary), Pass 3 (strict). \\
     \midrule
+    \rowcolor{lightbg}
     \textbf{C14} & Agreement Scope & 92.21\% cited as a 5-annotator study. & Clarified: 92.21\% represents independent second-pass on 154 dialogues. \\
     \midrule
     \textbf{C15} & HiTrans Attribution & Chronicle cited ``Le et al., EMNLP 2021''. & Corrected to Li et al., COLING 2020 \cite{li2020hitrans}. \\
@@ -195,44 +220,64 @@ To ensure complete scientific integrity, this appendix documents the resolution 
   \bottomrule
   \endfoot
   \texttt{rapport\_building} & Relational and Interactive & 2,860 & 27.0\% \\
+  \rowcolor{lightbg}
   \texttt{organization\_information} & Information Provision & 1,735 & 16.4\% \\
   \texttt{donation\_procedure\_information} & Information Provision & 1,417 & 13.4\% \\
+  \rowcolor{lightbg}
   \texttt{personal\_related\_inquiry} & Relational and Interactive & 1,328 & 12.5\% \\
   \texttt{personal\_story} & Relational and Interactive & 1,150 & 10.8\% \\
+  \rowcolor{lightbg}
   \texttt{emotion\_appeal} & Emotional Appeal & 1,023 & 9.7\% \\
   \texttt{gratitude\_and\_appreciation} & Reciprocity and Exchange & 966 & 9.1\% \\
+  \rowcolor{lightbg}
   \texttt{minimization\_framing} & Framing and Presentation & 849 & 8.0\% \\
   \texttt{task\_clarification} & Information Provision & 770 & 7.3\% \\
+  \rowcolor{lightbg}
   \texttt{hope\_and\_positive\_impact} & Emotional Appeal & 628 & 5.9\% \\
   \texttt{self\_modeling} & Social Influence & 619 & 5.8\% \\
+  \rowcolor{lightbg}
   \texttt{source\_related\_inquiry} & Relational and Interactive & 615 & 5.8\% \\
   \texttt{in\_group\_appeal} & Social Influence & 598 & 5.6\% \\
+  \rowcolor{lightbg}
   \texttt{impact\_information} & Information Provision & 477 & 4.5\% \\
   \texttt{organizational\_credibility} & Credibility Appeal & 389 & 3.7\% \\
+  \rowcolor{lightbg}
   \texttt{evidence\_and\_statistics} & Rational Appeal & 378 & 3.6\% \\
   \texttt{logical\_appeal} & Rational Appeal & 304 & 2.9\% \\
+  \rowcolor{lightbg}
   \texttt{transparency\_and\_accountability} & Credibility Appeal & 274 & 2.6\% \\
   \texttt{source\_citation} & Credibility Appeal & 193 & 1.8\% \\
+  \rowcolor{lightbg}
   \texttt{persistent\_repetition} & Threat and Pressure & 167 & 1.6\% \\
   \texttt{urgency\_appeal} & Urgency and Scarcity & 150 & 1.4\% \\
+  \rowcolor{lightbg}
   \texttt{donor\_benefit} & Reciprocity and Exchange & 109 & 1.0\% \\
   \texttt{anchoring} & Framing and Presentation & 94 & 0.9\% \\
+  \rowcolor{lightbg}
   \texttt{value\_consistency\_appeal} & Commitment and Consistency & 79 & 0.7\% \\
   \texttt{personal\_credibility} & Credibility Appeal & 78 & 0.7\% \\
+  \rowcolor{lightbg}
   \texttt{obligation\_pressure} & Threat and Pressure & 78 & 0.7\% \\
   \texttt{comparison\_framing} & Framing and Presentation & 74 & 0.7\% \\
+  \rowcolor{lightbg}
   \texttt{social\_proof} & Social Influence & 67 & 0.6\% \\
   \texttt{empathy\_and\_perspective\_taking} & Emotional Appeal & 66 & 0.6\% \\
+  \rowcolor{lightbg}
   \texttt{feasibility\_and\_ease} & Rational Appeal & 55 & 0.5\% \\
   \texttt{foot\_in\_the\_door} & Commitment and Consistency & 53 & 0.5\% \\
+  \rowcolor{lightbg}
   \texttt{incremental\_ask} & Commitment and Consistency & 35 & 0.3\% \\
   \texttt{guilt\_induction} & Emotional Appeal & 31 & 0.3\% \\
+  \rowcolor{lightbg}
   \texttt{cost\_benefit\_framing} & Rational Appeal & 27 & 0.3\% \\
   \texttt{loss\_versus\_gain\_framing} & Framing and Presentation & 21 & 0.2\% \\
+  \rowcolor{lightbg}
   \texttt{reciprocity} & Reciprocity and Exchange & 14 & 0.1\% \\
   \texttt{scarcity\_appeal} & Urgency and Scarcity & 8 & 0.1\% \\
+  \rowcolor{lightbg}
   \texttt{negative\_consequence\_warning} & Threat and Pressure & 7 & 0.1\% \\
   \texttt{authority\_endorsement} & Social Influence & 5 & 0.0\% \\
+  \rowcolor{lightbg}
   \texttt{deadline\_pressure} & Urgency and Scarcity & 5 & 0.0\% \\
   \texttt{door\_in\_the\_face} & Commitment and Consistency & 2 & 0.0\% \\
 \end{longtable}

@@ -20,6 +20,8 @@
   {\textbf{Dialogue-state register}\\[1pt]\scriptsize used in both regimes: tracks fulfilled goals, forbids repeated questions, locks product specifications};
 \node[neu, text width=4.6cm, minimum height=1.6cm, anchor=north west] (r4) at (0.2,-8.35)
   {\textbf{Output}\\[1pt]\scriptsize draft dialogues from several LLMs, written as fluent but rigid text};
+\draw[flow] (r1.south) -- (r2.north);
+\draw[flow] (r2.south) -- (r3.north);
 \draw[flow] (r3.south) -- (r4.north);
 
 % =============== phase 2 ==========================================================================
@@ -43,6 +45,7 @@
 \draw[flow] (l1) -- (l2); \draw[flow] (l2) -- (l3);
 \node[neu, text width=4.6cm, minimum height=1.5cm, anchor=north west] (l4) at (11.2,-8.6)
   {\scriptsize Data files used in every experiment: canonical 262 no / 238 yes; combined 362 no / 338 yes};
+\draw[flow, dashed] (l3.south) -- (l4.north);
 
 % ---------------- long connectors -------------------------------------------------------------------
 \draw[flow, line width=1.3pt] (r4.east) -- (5.25,-9.15) -- (5.25,-1.75) -- (p1.west);

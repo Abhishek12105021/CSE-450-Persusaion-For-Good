@@ -23,11 +23,13 @@ This capstone project directly resolves these challenges by constructing a mathe
 \section{Problem Statement}
 \label{sec:problem-statement}
 
+\begin{summarybox}[Mathematical Invariant: Two-Party Asymmetric Dialogue Representation]
 Let a multi-turn two-party dialogue $\mathcal{D}$ be represented as an ordered sequence of $N$ utterances:
 \begin{equation}
   \mathcal{D} = \big( (u_1, r_1), (u_2, r_2), \dots, (u_N, r_N) \big)
 \end{equation}
 where each utterance $u_i \in \mathcal{V}^*$ is a sequence of tokens from vocabulary $\mathcal{V}$, and $r_i \in \{\mathcal{P}, \mathcal{D}\}$ designates the speaker role, partitioned strictly between the Persuader/Merchant ($\mathcal{P}$) and the Persuadee/Buyer ($\mathcal{D}$).
+\end{summarybox}
 
 We formulate three distinct, interconnected computational sub-problems:
 
@@ -78,14 +80,17 @@ The technical challenges addressed in this capstone project constitute a complex
     \midrule
     \textbf{P1} & \textbf{Depth of Knowledge Required} \newline Cannot be resolved without in-depth engineering knowledge at the level of K3, K4, K5, or K8. & Required simultaneous mastery of mathematical loss design (Class-Balanced Focal Loss, Asymmetric Loss), hierarchical transformer attention mechanics, recurrent state tracking, and multi-model calibrated ensemble blending across 19 candidate models. \\
     \midrule
+    \rowcolor{lightbg}
     \textbf{P2} & \textbf{Range of Conflicting Requirements} \newline Involves wide-ranging or conflicting technical, engineering, and other issues. & Severe tension between binary commitment accuracy and minority modifier/hedge recall; optimizing macro-F1 (rare classes) directly degraded global micro-F1 by chasing recall on 2-example labels; processing $2{,}048$-token hierarchical dialogues conflicted with the 16\,GB VRAM ceiling of NVIDIA T4 GPUs. \\
     \midrule
     \textbf{P3} & \textbf{Depth of Analysis Required} \newline Has no obvious solution and requires abstract thinking and originality in analysis. & Standard monolithic transformers failed ($\text{Macro-F1} \le 0.65$); solving the task required originating a speaker-disentangled dual-stream network (\textit{Antiphony}) wherein the decider queries the persuader via directional cross-attention, coupled with an empirical sufficiency gap analysis. \\
     \midrule
+    \rowcolor{lightbg}
     \textbf{P4} & \textbf{Familiarity of Issues} \newline Involves infrequently encountered issues. & Extremely skewed tail classes with only 2 to 5 instances in $10{,}600$ turns (\texttt{door\_in\_the\_face}); subtle tokenizer truncation side-effects where default right-truncation silently excised closing decisions in $30.4\%$ of dialogues; whitespace-gluing corrupting speaker tags in $15.9\%$ of augmented data. \\
     \midrule
     \textbf{P5} & \textbf{Extent of Applicable Codes} \newline Outside problems encompassed by standard codes of practice. & No standardized engineering codes exist for multi-label persuasion taxonomy annotation or synthetic negotiation generation; required formulating custom 4-tier decision rules (Removal Test, Function-over-Keyword) and rigorous three-phase human-in-the-loop verification protocols. \\
     \midrule
+    \rowcolor{lightbg}
     \textbf{P6} & \textbf{Stakeholder Involvement and Conflicts} \newline Involves diverse stakeholder groups with widely varying needs. & Direct conflict between commercial merchants aiming to maximize conversion velocity and consumers requiring protection from predatory manipulation; academic requirements for reproducible open-source benchmarks vs. strict privacy constraints prohibiting the release of private customer chats. \\
     \midrule
     \textbf{P7} & \textbf{Interdependence} \newline High-level problem with many interconnected sub-problems. & Tight cascading dependencies across three datasets ($N=1{,}017$ P4G, $10{,}600$ strategy turns, $N=700$ negotiation benchmark); tightening ground-truth intention labels in Pass 3 necessitated retraining and recalibrating the entire downstream 14-model architectural lineage. \\
@@ -103,8 +108,10 @@ The technical challenges addressed in this capstone project constitute a complex
     \textbf{Code} & \textbf{Description} \\
     \midrule
     \textbf{K3} & A systematic, theory-based formulation of engineering fundamentals required in the engineering discipline. \\
+    \rowcolor{lightbg}
     \textbf{K4} & Engineering specialist knowledge that provides theoretical frameworks and bodies of knowledge for the accepted practice areas in the engineering discipline; much is at the forefront of the discipline. \\
     \textbf{K5} & Knowledge that supports engineering design in a practice area. \\
+    \rowcolor{lightbg}
     \textbf{K6} & Knowledge of engineering practice (technology) in the practice areas in the engineering discipline. \\
     \textbf{K8} & Engagement with selected knowledge in the research literature of the discipline. \\
     \bottomrule
@@ -118,7 +125,7 @@ The technical challenges addressed in this capstone project constitute a complex
 To address the problem formulation and resolve its inherent technical complexities, this capstone project pursued seven concrete, verifiable engineering objectives:
 \begin{enumerate}[label=\textbf{O\arabic*.}]
   \item \textbf{Curation of Ground-Truth Intention Corpus:} Re-annotate the 1,017-dialogue P4G corpus across three rigorous passes, resolving discrepancies between recorded metadata and transcript text, establishing a high-integrity binary benchmark (694 yes / 323 no) with verified inter-annotator consistency ($92.21\%$ agreement).
-  \item \textbf{Systematic Intention Architecture Evolution:} Implement and systematically evaluate 14 successive intention classification architectures across four evolutionary stages, overcoming the 256-token context ceiling of flat transformers and formulating the role-disentangled \textit{AntiphonyClassifier} (v14).
+  \item \textbf{Systematic Intention Architecture Evolution:} Implement and systematically evaluate 14 successive intention classification architectures across four evolutionary stages, overcoming the 256-token context ceiling of flat transformers and formulating the role-disentangled \textit{AntiphonyClassifier} (Dual-Stream Cross-Attention Architecture).
   \item \textbf{Establish State-of-the-Art Intention Prediction:} Achieve superior predictive performance on held-out test splits, exceeding $0.86$ Macro-F1 on second-pass labels and $0.84$ Macro-F1 on strict third-pass labels across multiple pre-trained transformer backbones (RoBERTa, DeBERTa-v3, TOD-BERT).
   \item \textbf{Fine-Grained Persuasion Strategy Annotation:} Construct a verified multi-label dataset of $10{,}600$ Persuader utterances annotated under an 11-category, 41-strategy hierarchical taxonomy, enforcing strict decision protocols and deriving an empirical cross-annotator agreement ceiling ($0.79$ micro-F1).
   \item \textbf{Multi-Task Strategy and Category Modeling:} Build an ensemble modeling framework over an 11-category primary objective with a 41-strategy auxiliary head, evaluating a 19-member model pool and demonstrating that a calibrated power-mean blend achieves competitive validation scores ($0.6949$ micro-F1 / $0.5597$ macro-F1, with a micro-optimal operating point of $0.7062$ / $0.5642$) outperforming an XGBoost stacker.
@@ -128,6 +135,8 @@ To address the problem formulation and resolve its inherent technical complexiti
 
 \subsection{Project Scope and Explicit Exclusions}
 To maintain engineering depth and focus computational resources effectively, the following boundaries define the project scope:
+
+\begin{keypoint}[Operational Scope Boundaries \& Explicit Exclusions]
 \begin{itemize}
   \item \textbf{In Scope:} Offline discriminative modeling of conversational commitment and rhetorical strategy; multi-label and multi-task loss formulation; hierarchical neural architecture design; synthetic dialogue generation pipelines; comprehensive empirical ablation and forensic post-mortems; compute and energy accounting.
   \item \textbf{Explicit Exclusions:}
@@ -138,3 +147,4 @@ To maintain engineering depth and focus computational resources effectively, the
       \item \textit{No Human Subject Interventional Field Trials:} The research relies on public academic datasets and synthetic simulations; no randomized human behavioral intervention trials were conducted on commercial platforms.
     \end{enumerate}
 \end{itemize}
+\end{keypoint}

@@ -1,29 +1,45 @@
 %======================================================================
-%  cse450.sty -- formatting for the CSE 450 Capstone Project Report
-%  Students should not need to edit this file.
+%  cse-capstone.sty -- Visual & Architectural Design System
+%  Master Design Standard based on design.md
 %======================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{cse450}[2026/08/31 CSE450 Capstone Report]
+\ProvidesPackage{cse-capstone}[2026/09/21 BUET CSE Capstone Report Design System]
 
-% ---- Page and fonts ------------------------------------------------
-% Match the official BUET CSE undergraduate thesis template page geometry.
+% ---- Page Geometry --------------------------------------------------
 \RequirePackage[a4paper,left=25mm,right=25mm,top=25mm,bottom=25mm]{geometry}
+
+% ---- Color Palette A: Signature Deep Navy & Slate Blue --------------
+\RequirePackage{xcolor}
+\definecolor{primary}{RGB}{15, 44, 89}        % Deep Navy Blue   - #0F2C59
+\definecolor{secondary}{RGB}{31, 110, 140}    % Slate Blue       - #1F6E8C
+\definecolor{accent}{RGB}{43, 91, 169}       % Royal Accent     - #2B5BA9
+\definecolor{lightbg}{RGB}{246, 248, 250}     % Soft Neutral     - #F6F8FA
+\definecolor{darkslate}{RGB}{33, 37, 41}      % Charcoal Text    - #212529
+\definecolor{alertred}{RGB}{192, 41, 43}      % Warning / Target - #C0292B
+\definecolor{successgreen}{RGB}{39, 174, 96}  % Success / Verify - #27AE60
+\definecolor{codebg}{RGB}{240, 243, 246}      % Code / Console   - #F0F3F6
+\definecolor{frameborder}{RGB}{209, 217, 224} % Subtle Rule      - #D1D9E0
+
+% ---- Typography & Font Stack Triad ----------------------------------
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
-% Times-style text, as in the official template; newtx gives better modern
-% font and mathematics support than the legacy `times` package.
+% 1. Serif: Times Roman with matching math
 \RequirePackage{newtxtext}
-\RequirePackage{setspace}
-\onehalfspacing
+\RequirePackage{newtxmath}
+% 2. Sans-Serif: Scaled Helvetica (0.92 to match Times x-height)
+\RequirePackage[scaled=0.92]{helvet}
+% 3. Monospace: Typewriter font with breakable hyphenation
+\RequirePackage[htt]{hyphenat}
+\renewcommand{\_}{\textunderscore\penalty0\relax}
+
+% Spacing & Paragraph Layout
 \RequirePackage{microtype}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{2.5mm}
+\setlength{\parskip}{5.5pt}
+\setlength{\emergencystretch}{2.5em}
+\raggedbottom
 
-% ---- Maths ----------------------------------------------------------
-\RequirePackage{amsmath,amssymb}
-\RequirePackage{newtxmath}
-
-% ---- Figures and tables ---------------------------------------------
+% ---- Figures and Tables ---------------------------------------------
 \RequirePackage{graphicx}
 \graphicspath{{figures/}}
 \RequirePackage{float}
@@ -32,64 +48,178 @@
 \RequirePackage{tabularx}
 \RequirePackage{longtable}
 \RequirePackage{multirow}
-\RequirePackage[font=small,labelfont=bf]{caption}
-\RequirePackage{subcaption}
+\RequirePackage{colortbl}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\renewcommand{\arraystretch}{1.2}
 
-% ---- Lists, code, colours -------------------------------------------
+% ---- Captions Styling -----------------------------------------------
+\RequirePackage{caption}
+\captionsetup{
+    labelfont={bf,sf,color=primary},
+    textfont={small},
+    labelsep=colon,
+    skip=7pt
+}
+\RequirePackage{subcaption}
+\captionsetup[subfigure]{
+    labelfont={bf,sf,color=secondary},
+    textfont={footnotesize},
+    labelsep=space,
+    skip=5pt
+}
+
+% ---- Lists ----------------------------------------------------------
 \RequirePackage{enumitem}
-\setlist{itemsep=2pt,topsep=4pt}
-\RequirePackage{needspace}
-\RequirePackage{xcolor}
+\setlist{itemsep=2.5pt,topsep=4pt}
+
+% ---- Code Listings --------------------------------------------------
 \RequirePackage{listings}
 \lstset{
   basicstyle=\ttfamily\footnotesize,
   breaklines=true,
+  backgroundcolor=\color{codebg},
   frame=single,
+  rulecolor=\color{frameborder},
   numbers=left,
-  numberstyle=\tiny\color{gray},
-  keywordstyle=\bfseries,
-  commentstyle=\itshape\color{gray},
+  numberstyle=\tiny\color{secondary!70},
+  keywordstyle=\bfseries\color{primary},
+  commentstyle=\itshape\color{darkslate!60},
+  stringstyle=\color{accent},
   showstringspaces=false,
   captionpos=b,
   xleftmargin=14pt
 }
 
-% ---- Gantt chart (Chapter 7) ----------------------------------------
-\RequirePackage{pgfgantt}
-
-% ---- Headings, headers ----------------------------------------------
+% ---- Section Heading Hierarchy (titlesec) ---------------------------
 \RequirePackage{titlesec}
+
+% \chapter format (matching report class with design.md styling)
 \titleformat{\chapter}[display]
-  {\vspace*{20pt}\normalfont\Large\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\LARGE}
-\titlespacing*{\chapter}{0pt}{0pt}{24pt}
+  {\vspace*{10pt}\normalfont\sffamily\Large\bfseries\color{secondary}}
+  {\color{primary}\chaptertitlename\ \thechapter}{8pt}
+  {\LARGE\bfseries\color{primary}}[\color{primary}\vspace{4pt}\titlerule]
+\titlespacing*{\chapter}{0pt}{0pt}{18pt}
+
+% \section: Large Bold Sans, Primary Color with Underline
+\titleformat{\section}
+  {\color{primary}\normalfont\Large\bfseries\sffamily}
+  {\thesection}{1em}{}[\color{primary}\titlerule]
+\titlespacing*{\section}{0pt}{11pt plus 2pt minus 2pt}{5pt plus 1pt minus 1pt}
+
+% \subsection: Large Bold Sans, Secondary Color
+\titleformat{\subsection}
+  {\color{secondary}\normalfont\large\bfseries\sffamily}
+  {\thesubsection}{0.8em}{}
+\titlespacing*{\subsection}{0pt}{8pt plus 2pt minus 1pt}{3pt plus 1pt minus 1pt}
+
+% \subsubsection: Normalsize Bold Sans, Charcoal Text
+\titleformat{\subsubsection}
+  {\color{darkslate}\normalfont\normalsize\bfseries\sffamily}
+  {\thesubsubsection}{0.6em}{}
+\titlespacing*{\subsubsection}{0pt}{6pt plus 1pt minus 1pt}{2.5pt plus 1pt minus 1pt}
+
 \setcounter{secnumdepth}{2}
 \setcounter{tocdepth}{2}
 
+% ---- Running Headers and Footers (fancyhdr) -------------------------
 \RequirePackage{fancyhdr}
-\setlength{\headheight}{14pt}
 \pagestyle{fancy}
+\setlength{\headheight}{14.5pt}
 \fancyhf{}
-% Use the chapter in running headers; short rubric subsections can otherwise
-% advance the section mark before the preceding subsection has finished.
-\fancyhead[L]{\small\slshape\nouppercase{\leftmark}}
-\fancyhead[R]{\small\bfseries\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
-\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\thepage}\renewcommand{\headrulewidth}{0pt}}
 
-% ---- References and links -------------------------------------------
+% Header
+\fancyhead[L]{\small\textbf{\color{primary}{Computational Modeling of Conversational Intention}} \ $\cdot$ \ {\color{secondary}{Capstone Report}}}
+\fancyhead[R]{\small\color{darkslate!80}{CSE 450} $\cdot$ Group 10}
+
+% Footer
+\fancyfoot[L]{\small\color{darkslate!75}{Dual-Perspective Persuasive Dialogue Modeling}}
+\fancyfoot[R]{\small\bfseries\color{primary}Page \thepage}
+
+% Custom Colored Divider Rules
+\renewcommand{\headrulewidth}{0.75pt}
+\renewcommand{\headrule}{%
+  \vskip 2.5pt%
+  {\color{secondary!60}\hrule height \headrulewidth width \headwidth}%
+  \vskip -\headrulewidth%
+}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\footrule}{%
+  {\color{frameborder}\hrule height \footrulewidth width \headwidth\vskip-\footrulewidth}%
+}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[R]{\small\bfseries\color{primary}Page \thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0.4pt}%
+  \renewcommand{\footrule}{{\color{frameborder}\hrule height \footrulewidth width \headwidth\vskip-\footrulewidth}}%
+}
+
+% ---- Callouts & Box Environments (tcolorbox) ------------------------
+\RequirePackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+\newtcolorbox{terminalbox}[1][]{%
+    colback=codebg,
+    colframe=primary,
+    coltitle=white,
+    fonttitle=\bfseries\small\sffamily,
+    title={#1},
+    sharp corners,
+    boxrule=1pt,
+    left=8pt, right=8pt, top=6pt, bottom=6pt,
+    fontupper=\ttfamily\footnotesize,
+    breakable
+}
+
+\newtcolorbox{summarybox}[1][]{%
+    colback=lightbg,
+    colframe=secondary,
+    coltitle=white,
+    fonttitle=\bfseries\small\sffamily,
+    title={#1},
+    sharp corners,
+    boxrule=1pt,
+    left=9pt, right=9pt, top=6pt, bottom=6pt,
+    fontupper=\small,
+    breakable
+}
+
+\newtcolorbox{keypoint}[1][Key Takeaway]{%
+    enhanced, sharp corners,
+    colback=lightbg,
+    colframe=primary,
+    boxrule=0pt,
+    leftrule=3.0pt,
+    left=9pt, right=9pt, top=6pt, bottom=6pt,
+    fonttitle=\sffamily\bfseries\small\color{primary},
+    title={#1},
+    coltitle=primary
+}
+
+\newcommand{\shotscreenshot}[3][0.92\linewidth]{%
+  \begin{center}%
+  \IfFileExists{#2}{%
+    \includegraphics[width=#1]{#2}%
+  }{%
+    \setlength{\fboxrule}{0.6pt}\setlength{\fboxsep}{0pt}%
+    \textcolor{frameborder}{\fbox{\parbox[c][2.6cm][c]{#1}{\centering%
+    \sffamily\footnotesize\color{alertred}[\,DEMONSTRATION FIGURE PLACEHOLDER\,]\\[3pt]%
+    \color{darkslate}\normalfont\footnotesize #3\\[2pt]%
+    \tiny\ttfamily\color{darkslate!60}(File target: \detokenize{#2})}}}%
+  }%
+  \end{center}}
+
+% ---- Project Timeline (Gantt) ---------------------------------------
+\RequirePackage{pgfgantt}
+
+% ---- References and Hyperlinks --------------------------------------
 \RequirePackage{cite}
-\RequirePackage[hidelinks]{hyperref}
+\RequirePackage[colorlinks=true, linkcolor=primary, citecolor=secondary, urlcolor=accent]{hyperref}
 \RequirePackage[nameinlink,capitalise]{cleveref}
 
-% ---- Student guidance ------------------------------------------------
-% Visible guidance is deliberately unobtrusive. Replace every instruction
-% with project content before submission.
+% ---- Student Guidance & Placeholders (Legacy Compatibility) ---------
 \newcommand{\guidance}[1]{{\small\itshape\color{gray!75!black}#1}}
-
-% ---- Figure placeholder ---------------------------------------------
-% \figplaceholder[width-fraction]{label text}
-% Keeps the document compiling before real figures exist.
 \newcommand{\figplaceholder}[2][0.8]{%
   \fbox{\parbox[c][0.14\textheight][c]{#1\textwidth}{\centering\itshape\color{gray}#2}}}
 

@@ -1,9 +1,9 @@
-% Four architectural stages, v1 to v14. Metrics are the best test macro-F1 of each stage
-% (Tables A and B of the report, 153-row test split).
+% Four architectural stages. Metrics are the best test macro-F1 of each stage
+% (153-row test split).
 \begin{tikzpicture}[x=1cm,y=1cm]
 
 % ------------- card frames and headers ---------------------------------------
-\foreach \x/\c/\t in {0/94A3B8/{Stage 1\quad v1--v5}, 4.1/64748B/{Stage 2\quad v6--v9}, 8.2/334155/{Stage 3\quad v10--v13}, 12.3/0F172A/{Stage 4\quad v14}}{
+\foreach \x/\c/\t in {0/94A3B8/{Stage 1: Monolithic Flat}, 4.1/64748B/{Stage 2: Hierarchical Interleaved}, 8.2/334155/{Stage 3: Gated \& Decoupled}, 12.3/0F172A/{Stage 4: Dual-Stream Antiphony}}{
   \definecolor{stg}{HTML}{\c}
   \draw[rounded corners=5pt, draw=stg, fill=white, line width=0.9pt] (\x,0.05) rectangle ++(3.7,-9.75);
   \fill[stg, rounded corners=5pt] (\x,0.05) rectangle ++(3.7,-0.75);
@@ -59,7 +59,7 @@
   \node[oplus] (g3) at (1.5,-4.75) {\scriptsize $\otimes$};
   \node[amb, minimum width=1.4cm, font=\tiny] (l3) at (2.85,-4.75) {last\\Persuadee};
   \node[font=\tiny, anchor=east] at (1.25,-4.75) {gate};
-  \node[neu, minimum width=3.2cm] (h3) at (1.85,-5.5) {\scriptsize Binary head only (v13)};
+  \node[neu, minimum width=3.2cm] (h3) at (1.85,-5.5) {\scriptsize Binary head only (Decoupled)};
   \draw[flow] (e3) -- (d3); \draw[flow] (d3) -- (a3); \draw[flow] (a3.south) -- (a3.south |- g3.north); \draw[flow] (g3.south) -- (g3.south |- h3.north);
   \draw[flow] (l3.west) -- (g3.east);
 \end{scope}
@@ -90,16 +90,16 @@
 \node[anchor=north west, text width=3.35cm, font=\scriptsize, align=left] at (0.17,-6.2)
   {$\bullet$ 256-token right truncation\\
    $\bullet$ role embeddings, focal loss, marker-safe augmentation\\
-   $\bullet$ two independent heads};
+   $\bullet$ dual-task joint heads};
 \node[anchor=north west, text width=3.35cm, font=\scriptsize, align=left] at (4.27,-6.2)
   {$\bullet$ 32 turns $\times$ 64 tokens\\ \hphantom{$\bullet$} = 2048-token capacity\\
-   $\bullet$ back-translation (v8)\\
-   $\bullet$ tri-model ensemble (v9)};
+   $\bullet$ back-translation data augmentation\\
+   $\bullet$ tri-backbone soft ensemble};
 \node[anchor=north west, text width=3.35cm, font=\scriptsize, align=left] at (8.37,-6.2)
-  {$\bullet$ last-turn gate (v10)\\
-   $\bullet$ multi-pivot back-translation (v11)\\
-   $\bullet$ specialist routing (v12)\\
-   $\bullet$ modifier head removed (v13)};
+  {$\bullet$ last-turn commitment gate\\
+   $\bullet$ multi-pivot translation diversity\\
+   $\bullet$ confidence specialist routing\\
+   $\bullet$ modifier head decoupled};
 \node[anchor=north west, text width=3.35cm, font=\scriptsize, align=left] at (12.47,-6.2)
   {$\bullet$ role-pure streams\\
    $\bullet$ directional cross-attention\\
@@ -107,16 +107,16 @@
 
 % ------------- performance bars ----------------------------------------------------
 % track = 3.3 cm spans macro-F1 0.40 to 0.90
-\foreach \x/\v/\w/\lab/\sub in {0.2/0.70/1.98/0.70/{v2, RoBERTa},
-                                4.3/0.821/2.78/0.821/{v8, DeBERTa},
-                                8.4/0.834/2.86/0.834/{v10, RoBERTa},
-                                12.5/0.862/3.05/0.862/{v14, DeBERTa}}{
+\foreach \x/\v/\w/\lab/\sub in {0.2/0.70/1.98/0.70/{Role-Flat, RoBERTa},
+                                4.3/0.821/2.78/0.821/{Aug-Hier, DeBERTa},
+                                8.4/0.834/2.86/0.834/{Gated-Hier, RoBERTa},
+                                12.5/0.862/3.05/0.862/{Antiphony, DeBERTa}}{
   \fill[NeuFill, rounded corners=2pt] (\x,-8.7) rectangle ++(3.3,-0.28);
   \fill[Slate, rounded corners=2pt] (\x,-8.7) rectangle ++(\w,-0.28);
   \node[font=\footnotesize\bfseries, anchor=west] at (\x,-8.4) {\lab};
   \node[font=\scriptsize, anchor=east, text=SlateSoft] at (\x+3.3,-8.4) {\sub};
 }
 \node[font=\tiny, text=SlateSoft, anchor=north west] at (0.2,-9.05) {best macro-F1 per stage; bar spans 0.40 to 0.90};
-\node[font=\tiny, text=SlateSoft, anchor=north east] at (15.8,-9.05) {v14: 0.8446 on the third-pass labels};
+\node[font=\tiny, text=SlateSoft, anchor=north east] at (15.8,-9.05) {Antiphony: 0.8446 on third-pass labels};
 
 \end{tikzpicture}

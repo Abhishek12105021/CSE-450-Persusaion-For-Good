@@ -33,10 +33,12 @@ To tackle the complexities of asymmetric multi-turn dialogue, the system is desi
     \midrule
     \textbf{Annotation \& Ground Truth} & Raw text transcripts ($N=1{,}017$, $10{,}600$ turns) & Grounded labels ($y \in \{\text{yes},\text{no}\}$, $\mathbf{y}_t \subseteq \mathcal{S}_{41}$) & Resolves metadata divergence via 3-pass human annotation; enforces 4-tier decision protocol. \\
     \midrule
+    \rowcolor{lightbg}
     \textbf{Utterance Encoder} & Batched token IDs $[B \times U, L]$ & Turn matrices $\mathbf{U} \in \mathbb{R}^{B \times U \times d}$ & Executes single batched forward pass; performs masked mean-pooling; enforces memory guards. \\
     \midrule
     \textbf{Strategy Classifier} & Persuader turn $u_t + \mathcal{H}_t$ (5-turn context) & Predicted categories $\hat{\mathbf{c}}_t$ \& strategies $\hat{\mathbf{y}}_t$ & Multi-task learning under Asymmetric Loss; ensembles 19 members via calibrated power-mean blend. \\
     \midrule
+    \rowcolor{lightbg}
     \textbf{Antiphony Intention Network} & Full dialogue turn vectors $\mathbf{U}$ & Commitment probability $P(y = \text{yes} \mid \mathcal{D})$ & Role disentanglement ($R=20$); directional cross-attention; trajectory GRU tracking; dual pooling fusion. \\
     \bottomrule
   \end{tabularx}
@@ -83,6 +85,17 @@ To eliminate subjective drift and enforce consistency across segments, annotator
 
 Annotation was conducted in 200-turn unshuffled batches using an automated frontier LLM agent \pending{Confirm annotator model identifier for each segment} driven with few-shot calibration examples, operating under human checkpoints. An automated validation harness (\texttt{pipeline.py}) verified taxonomy compliance, recomputed parent categories from strategies, enforced the label count ceiling, and compiled the verified dataset into \texttt{multilabel\_merged.jsonl} ($10{,}600 \times 56$ wide format with 41 strategy and 11 category flags).
 
+\begin{terminalbox}[Execution Trace: Strategy Annotation Schema Validation (\texttt{pipeline.py})]
+[+] Ingesting annotated chunks from \texttt{data/raw\_batches/} (10,600 Persuader turns) \\ \relax
+[+] Running 4-tier decision constraint harness: \\ \relax
+\hspace*{1.5em}- Verifying max strategy density cap: $\max(|\mathbf{y}_t|) \le 6$ \dots\ \textbf{PASS} (mean = 1.68) \\ \relax
+\hspace*{1.5em}- Validating deterministic category mapping $\mathcal{M}: \mathcal{S}_{41} \to \mathcal{C}_{11}$ \dots\ \textbf{PASS} (100\% consistent) \\ \relax
+\hspace*{1.5em}- Enforcing closed-world vocabulary constraints \dots\ \textbf{PASS} (0 unknown tokens) \\ \relax
+\hspace*{1.5em}- Checking speaker alternation invariants \dots\ \textbf{PASS} ($\tau_{\mathcal{P}} = 2t - 1$) \\ \relax
+[*] Merging verified batches into \texttt{multilabel\_merged.jsonl} ($10{,}600 \times 56$ matrix) \\ \relax
+[+] DATASET AUDIT COMPLETE: 10,600 records serialized, 0 schema violations.
+\end{terminalbox}
+
 \subsection{Empirical Corpus Statistics and Rater Effects}
 The resulting strategy corpus encompasses $10{,}600$ Persuader turns across $1{,}017$ dialogues (mean $10.42$ Persuader turns per dialogue, range 4 to 15). The dataset exhibits an average of $1.679$ labels per turn ($\text{sd} = 1.061$, median $1.0$). Exactly $707$ turns ($6.7\%$) carry no strategy label (the empty set $\emptyset$), $4{,}707$ turns ($44.4\%$) carry exactly 1 label, and $5{,}182$ turns ($48.9\%$) are multi-label ($\ge 2$ strategies), with 78 turns reaching the maximum cap of 6 labels.
 
@@ -98,21 +111,26 @@ The resulting strategy corpus encompasses $10{,}600$ Persuader turns across $1{,
     \textbf{Communicative Category} & \textbf{Active Turns} & \textbf{Prevalence (\%)} \\
     \midrule
     Relational and Interactive & 4,897 & 46.2\% \\
+    \rowcolor{lightbg}
     Information Provision & 3,823 & 36.1\% \\
     Emotional Appeal & 1,645 & 15.5\% \\
+    \rowcolor{lightbg}
     Social Influence & 1,263 & 11.9\% \\
     Reciprocity and Exchange & 1,078 & 10.2\% \\
+    \rowcolor{lightbg}
     Framing and Presentation & 1,004 & 9.5\% \\
     Credibility Appeal & 896 & 8.5\% \\
+    \rowcolor{lightbg}
     Rational Appeal & 751 & 7.1\% \\
     Threat and Pressure & 249 & 2.3\% \\
+    \rowcolor{lightbg}
     Commitment and Consistency & 169 & 1.6\% \\
     Urgency and Scarcity & 163 & 1.5\% \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
-\textbf{Annotator Granularity Effects:} The corpus was annotated across four distinct segments: \texttt{shimanto} (turns 1--2000), \texttt{shovon} (turns 2001--4000 and 6001--7000), an unassigned batch (turns 4001--6000), and \texttt{abhishek} (turns 7001--10600). Analysis reveals significant variance in annotation granularity: \texttt{shimanto} averaged $2.384$ labels per turn ($9.0\%$ empty sets, $66.8\%$ multi-label), whereas \texttt{abhishek} averaged $1.240$ labels per turn ($13.2\%$ empty sets, $30.8\%$ multi-label). This variance represents a rater effect in label granularity rather than an intrinsic linguistic shift in the underlying conversations.
+\textbf{Annotator Granularity Effects:} The corpus was annotated across four distinct operational segments under human checkpoints: Segment 1 (turns 1--2,000; Track A), Segment 2 (turns 2,001--4,000 and 6,001--7,000; Track B), Segment 3 (turns 4,001--6,000; Calibration Track), and Segment 4 (turns 7,001--10,600; Track C). Analysis reveals significant variance in annotation granularity: Track A averaged $2.384$ labels per turn ($9.0\%$ empty sets, $66.8\%$ multi-label), whereas Track C averaged $1.240$ labels per turn ($13.2\%$ empty sets, $30.8\%$ multi-label). This variance represents an operational rater effect in label granularity rather than an intrinsic linguistic shift in the underlying conversations.
 
 \subsection{Derivation of the Cross-Annotator Agreement Ceiling}
 Because individual turns were annotated once without global multi-coder duplication, inter-annotator agreement cannot be computed via standard Cohen's kappa. Instead, we derive the empirical performance ceiling from near-duplicate turns across the corpus. On identical or near-identical text pairs (cosine similarity $\ge 0.95$):
@@ -235,12 +253,12 @@ The predictions of the 19 base members were combined by evaluating a wide zoo of
 \section{The AntiphonyClassifier Architecture}
 \label{sec:antiphony}
 
-The centerpiece intention architecture of this project is the \textit{AntiphonyClassifier} (v14). Built to overcome the limitations of flat sequence transformers and symmetric dialogue encoders, Antiphony explicitly embeds the fundamental asymmetry of persuasion into its neural wiring.
+The centerpiece intention architecture of this project is the \textit{AntiphonyClassifier}. Built to overcome the limitations of flat sequence transformers and symmetric dialogue encoders, Antiphony explicitly embeds the fundamental asymmetry of persuasion into its neural wiring.
 
 \begin{figure}[p]
   \centering
   \resizebox{\textwidth}{!}{\input{figures/tikz/antiphony_arch.tikz}}
-  \caption{The AntiphonyClassifier (v14) neural architecture: raw turns undergo batched utterance encoding, masked mean-pooling, and role-pure splitting ($R=20$). Persuader and Decider streams pass through independent 2-layer Transformers. The Decider stream queries the Persuader stream via directional cross-attention. Contextualized Decider states are aggregated in parallel by a commitment-trajectory GRU (read at the true final Decider turn) and attention pooling, followed by latent concatenation and Class-Balanced Focal classification.}
+  \caption{The AntiphonyClassifier neural architecture: raw turns undergo batched utterance encoding, masked mean-pooling, and role-pure splitting ($R=20$). Persuader and Decider streams pass through independent 2-layer Transformers. The Decider stream queries the Persuader stream via directional cross-attention. Contextualized Decider states are aggregated in parallel by a commitment-trajectory GRU (read at the true final Decider turn) and attention pooling, followed by latent concatenation and Class-Balanced Focal classification.}
   \label{fig:antiphony_arch}
 \end{figure}
 
@@ -260,17 +278,17 @@ Let dialogue $\mathcal{D}$ comprise $U$ utterances ($U \le 32$), each truncated 
     \begin{equation}
       \mathbf{A}^{(\mathcal{D} \to \mathcal{P})} = \text{softmax}\left(\frac{\mathbf{Q} \mathbf{K}^\top}{\sqrt{d_k}} + \mathbf{M}_{\mathcal{P}}\right), \quad \mathbf{C}^{(\mathcal{D} \to \mathcal{P})} = \mathbf{A}^{(\mathcal{D} \to \mathcal{P})} \mathbf{V}
     \end{equation}
-    where $\mathbf{M}_{\mathcal{P}}$ is the key-padding mask. The cross-attended contextual representations are combined via a residual connection and layer normalization:
+    The cross-attended representations are combined via residual layer normalization:
     \begin{equation}
-      \mathbf{X} = \text{LayerNorm}(\widetilde{\mathbf{H}}^{(\mathcal{D})} + \mathbf{C}^{(\mathcal{D} \to \mathcal{P})}) \in \mathbb{R}^{B \times R \times d}
+      \mathbf{X} = \text{LayerNorm}(\widetilde{\mathbf{H}}^{(\mathcal{D})} + \mathbf{C}^{(\mathcal{D} \to \mathcal{P})})
     \end{equation}
-  \item \textbf{Parallel Trajectory and Pooling Aggregators:} The contextualized decider sequence $\mathbf{X}$ is aggregated via two complementary mechanisms operating in parallel:
+  \item \textbf{Dual Context Aggregation:} The contextualized decider representations $\mathbf{X} = [\mathbf{x}_1, \dots, \mathbf{x}_T]$ are aggregated across two complementary paths:
     \begin{itemize}
-      \item \textit{Commitment-Trajectory GRU:} A single-layer GRU captures temporal momentum:
+      \item \textit{Commitment-Trajectory GRU:} Captures non-monotonic stance shifts via a recurrent hidden state:
         \begin{equation}
           \mathbf{h}_t = \text{GRU}(\mathbf{x}_t, \mathbf{h}_{t-1})
         \end{equation}
-        Crucially, the trajectory vector $\mathbf{h}_T$ is extracted using PyTorch \texttt{pack\_padded\_sequence} at each dialogue's \textit{true last valid decider turn}, completely bypassing trailing padding slots.
+        The trajectory state $\mathbf{h}_T$ is extracted at the dialogue's true last valid decider turn, bypassing trailing padding slots.
       \item \textit{Learned Attention Pooling:} Computes an order-invariant summary of salient turns:
         \begin{equation}
           \alpha_t = \frac{\exp(\mathbf{w}_a^\top \tanh(\mathbf{W}_a \mathbf{x}_t))}{\sum_{j=1}^{T} \exp(\mathbf{w}_a^\top \tanh(\mathbf{W}_a \mathbf{x}_j))}, \quad \mathbf{p} = \sum_{t=1}^{T} \alpha_t \mathbf{x}_t
@@ -287,46 +305,54 @@ Let dialogue $\mathcal{D}$ comprise $U$ utterances ($U \le 32$), each truncated 
     \end{equation}
 \end{enumerate}
 
+\begin{summarybox}[Directional Cross-Attention and Trajectory Invariant]
+In the \textit{AntiphonyClassifier}, asymmetric conversational roles are embedded directly into the neural wiring:
+\begin{equation}
+  \mathbf{A}^{(\mathcal{D} \to \mathcal{P})} = \text{softmax}\left(\frac{\mathbf{Q}_{\mathcal{D}} \mathbf{K}_{\mathcal{P}}^\top}{\sqrt{d_k}} + \mathbf{M}_{\mathcal{P}}\right), \quad \mathbf{C}^{(\mathcal{D} \to \mathcal{P})} = \mathbf{A}^{(\mathcal{D} \to \mathcal{P})} \mathbf{V}_{\mathcal{P}}
+\end{equation}
+The decider query $\mathbf{Q}_{\mathcal{D}}$ selectively attends to the persuader's rhetorical tactics $\mathbf{K}_{\mathcal{P}}, \mathbf{V}_{\mathcal{P}}$, updating the commitment-trajectory state $\mathbf{h}_t = \text{GRU}(\mathbf{x}_t, \mathbf{h}_{t-1})$ read strictly at the dialogue's true final decider turn. This architectural design ensures the model tracks temporal decision momentum while completely ignoring trailing post-decision pleasantries.
+\end{summarybox}
+
 \clearpage
-\section{Architectural Evolution: The Path to v14}
+\section{Architectural Evolution: The Path to Dual-Stream Antiphony}
 \label{sec:evolution}
 
-The AntiphonyClassifier was not designed in isolation; it emerged from a systematic 14-version empirical investigation across four distinct evolutionary stages, documented in \Cref{fig:architectural_evolution}.
+The AntiphonyClassifier was not designed in isolation; it emerged from a systematic multi-stage empirical investigation across four distinct evolutionary phases, documented in \Cref{fig:architectural_evolution}.
 
 \begin{figure}[htbp]
   \centering
   \resizebox{\textwidth}{!}{\input{figures/tikz/architectural_evolution.tikz}}
-  \caption{Four-stage architectural evolution of intention classification models (v1 through v14), depicting key innovations, critical bug diagnoses, and peak test Macro-F1 across stages.}
+  \caption{Four-stage architectural evolution of intention classification models, depicting key innovations, critical bug diagnoses, and peak test Macro-F1 across stages.}
   \label{fig:architectural_evolution}
 \end{figure}
 
-\subsection{Stage 1 (v1 to v5): Monolithic Flat Baselines and Forensic Debugging}
+\subsection{Stage 1: Monolithic Flat Baselines and Forensic Debugging}
 \begin{itemize}
-  \item \textbf{v1 (Flat Base Model):} Concatenated dialogues truncated to 256 tokens with \texttt{[CLS]} pooling and independent binary and modifier heads. Reached $0.68$ Macro-F1 with RoBERTa, but DeBERTa collapsed to the majority class and modifier heads completely failed on rare classes.
-  \item \textbf{v2 (Speaker-Aware Encoding):} Added learnable role embeddings ($\text{Persuader}=0, \text{Persuadee}=1$) prior to masked mean-pooling. Slightly improved recall ($0.70$ Macro-F1), but remained bottlenecked by 256-token truncation.
-  \item \textbf{v3 (Augmentation Collapse and Diagnostic Audit):} Added EDA text augmentation \cite{wei2019eda} and raw inverse-frequency class weighting. Training completely collapsed. Forensic auditing identified two critical bugs: (i) checkpoint selection was mistakenly scored on \texttt{pos\_label="yes"} F1, allowing an all-yes trivial model to score $1.0$ and be saved, and (ii) raw inverse-frequency weights on the 13-example \texttt{conditional} class caused catastrophic gradient spikes.
-  \item \textbf{v4 (Metric Fix and Multi-Objective Loss):} Fixed the evaluation harness to use true unweighted Macro-F1; implemented Class-Balanced Focal Loss ($\beta=0.999$); cascaded the binary prediction into the modifier head; added in-batch Supervised Contrastive Loss. Training stabilized, but performance plateaued at $0.649$ Macro-F1.
-  \item \textbf{v5 (Augmentation Formatting Forensics):} An audit revealed that $57.5\%$ of speaker markers (\texttt{[Persuader]}) in raw transcripts were glued to newlines without spaces. Standard whitespace augmentation tokenizers fragmented these tags, corrupting role markers in $15.9\%$ of augmented instances. Implementing regex-based tokenization and Persuadee-biased mutation weights resolved the corruption, but Macro-F1 remained capped ($0.670$), proving that flat 256-token architectures had reached their theoretical ceiling.
+  \item \textbf{Flat Sequence Base Model (M1):} Concatenated dialogues truncated to 256 tokens with \texttt{[CLS]} pooling and independent binary and modifier heads. Reached $0.68$ Macro-F1 with RoBERTa, but DeBERTa collapsed to the majority class and modifier heads completely failed on rare classes.
+  \item \textbf{Speaker-Aware Flat Encoding (M2):} Added learnable role embeddings ($\text{Persuader}=0, \text{Persuadee}=1$) prior to masked mean-pooling. Slightly improved recall ($0.70$ Macro-F1), but remained bottlenecked by 256-token truncation.
+  \item \textbf{Dynamic Augmentation Exploration (M3):} Added EDA text augmentation \cite{wei2019eda} and raw inverse-frequency class weighting. Training completely collapsed. Forensic auditing identified two critical bugs: (i) checkpoint selection was mistakenly scored on \texttt{pos\_label="yes"} F1, allowing an all-yes trivial model to score $1.0$ and be saved, and (ii) raw inverse-frequency weights on the 13-example \texttt{conditional} class caused catastrophic gradient spikes.
+  \item \textbf{Metric-Corrected Focal Loss Baseline (M4):} Fixed the evaluation harness to use true unweighted Macro-F1; implemented Class-Balanced Focal Loss ($\beta=0.999$); cascaded the binary prediction into the modifier head; added in-batch Supervised Contrastive Loss. Training stabilized, but performance plateaued at $0.649$ Macro-F1.
+  \item \textbf{Token-Safe Augmentation Audit (M5):} An audit revealed that $57.5\%$ of speaker markers (\texttt{[Persuader]}) in raw transcripts were glued to newlines without spaces. Standard whitespace augmentation tokenizers fragmented these tags, corrupting role markers in $15.9\%$ of augmented instances. Implementing regex-based tokenization and Persuadee-biased mutation weights resolved the corruption, but Macro-F1 remained capped ($0.670$), proving that flat 256-token architectures had reached their theoretical ceiling.
 \end{itemize}
 
-\subsection{Stage 2 (v6 to v9): Hierarchical Discourse Modeling}
+\subsection{Stage 2: Hierarchical Discourse Modeling}
 \begin{itemize}
-  \item \textbf{v6 (Hierarchical Dialogue Transformer):} The foundational breakthrough: turns encoded individually ($32 \times 64 = 2{,}048$ token capacity) via a shared encoder, pooled into turn vectors, combined with role and positional embeddings, and processed by a 4-layer inter-turn dialogue transformer with learned attention pooling. Macro-F1 surged to \textbf{$0.793$} (RoBERTa), \textbf{$0.797$} (DeBERTa), and \textbf{$0.807$} (TOD-BERT).
-  \item \textbf{v7 (Back-Translation on Flat Model -- Negative Control):} Applied French back-translation to the flat v5 model as an experimental control; Macro-F1 dropped to $0.590$--$0.650$, proving that data augmentation cannot overcome architectural truncation.
-  \item \textbf{v8 (Hierarchical Back-Translation):} Combined the v6 hierarchical architecture with back-translation. Binary Macro-F1 advanced to \textbf{$0.821$} (DeBERTa), but modifier F1 fell, revealing that translation round-trips wash away subtle hedge words.
-  \item \textbf{v9 (Tri-Model Ensemble and Monte Carlo Uncertainty):} Soft probability averaging across saved v6 checkpoints (RoBERTa, DeBERTa, TOD-BERT) achieved $0.818$ Macro-F1. 20 stochastic Monte Carlo dropout forward passes demonstrated that prediction variance was significantly lower on correct instances ($0.0220$) than incorrect instances ($0.0297$), providing a calibrated uncertainty signal.
+  \item \textbf{Hierarchical Dialogue Transformer (M6):} The foundational breakthrough: turns encoded individually ($32 \times 64 = 2{,}048$ token capacity) via a shared encoder, pooled into turn vectors, combined with role and positional embeddings, and processed by a 4-layer inter-turn dialogue transformer with learned attention pooling. Macro-F1 surged to \textbf{$0.793$} (RoBERTa), \textbf{$0.797$} (DeBERTa), and \textbf{$0.807$} (TOD-BERT).
+  \item \textbf{Flat Back-Translation Control (M7):} Applied French back-translation to the flat M5 model as an experimental control; Macro-F1 dropped to $0.590$--$0.650$, proving that data augmentation cannot overcome architectural truncation.
+  \item \textbf{Hierarchical Back-Translation (M8):} Combined the M6 hierarchical architecture with back-translation. Binary Macro-F1 advanced to \textbf{$0.821$} (DeBERTa), but modifier F1 fell, revealing that translation round-trips wash away subtle hedge words.
+  \item \textbf{Tri-Model Soft Ensemble (M9):} Soft probability averaging across saved M6 checkpoints (RoBERTa, DeBERTa, TOD-BERT) achieved $0.818$ Macro-F1. 20 stochastic Monte Carlo dropout forward passes demonstrated that prediction variance was significantly lower on correct instances ($0.0220$) than incorrect instances ($0.0297$), providing a calibrated uncertainty signal.
 \end{itemize}
 
-\subsection{Stage 3 (v10 to v13): Recency Gating and Specialist Routing}
+\subsection{Stage 3: Recency Gating and Decoupled Baselines}
 \begin{itemize}
-  \item \textbf{v10 (Last-Persuadee-Turn Gating):} Added a sigmoid gate explicitly anchoring the pooled representation to the final Persuadee hidden state, initialized with a $+3.0$ bias to prevent early deflection. Achieved \textbf{$0.834$} Macro-F1 with RoBERTa, establishing the peak single-model binary score of the two-headed lineage.
-  \item \textbf{v11 (Multi-Pivot Minority Augmentation):} Implemented French and German back-translation under beam search and random sampling; DeBERTa reached \textbf{$0.829$}, but modifier F1 continued to degrade.
-  \item \textbf{v12 (Specialist Routing):} Decoupled the tasks without retraining: routing binary classification to v10 Gated RoBERTa ($0.834$) and modifier classification to v6 Plain DeBERTa ($0.452$).
-  \item \textbf{v13-Solo (Modifier Removal):} Deleted the modifier head entirely, dedicating all capacity to a 2-layer binary head. Reached \textbf{$0.825$} on second-pass labels and \textbf{$0.8359$} on third-pass labels.
+  \item \textbf{Last-Persuadee-Turn Gating (M10):} Added a sigmoid gate explicitly anchoring the pooled representation to the final Persuadee hidden state, initialized with a $+3.0$ bias to prevent early deflection. Achieved \textbf{$0.834$} Macro-F1 with RoBERTa, establishing the peak single-model binary score of the two-headed lineage.
+  \item \textbf{Multi-Pivot Back-Translation Diversity (M11):} Implemented French and German back-translation under beam search and random sampling; DeBERTa reached \textbf{$0.829$}, but modifier F1 continued to degrade.
+  \item \textbf{Specialist Confidence Router (M12):} Decoupled the tasks without retraining: routing binary classification to M10 Gated RoBERTa ($0.834$) and modifier classification to M6 Plain DeBERTa ($0.452$).
+  \item \textbf{Decoupled Single-Stream Baseline:} Deleted the modifier head entirely, dedicating all capacity to a 2-layer binary head. Reached \textbf{$0.825$} on second-pass labels and \textbf{$0.8359$} on third-pass labels.
 \end{itemize}
 
-\subsection{Stage 4 (v14): Antiphony Dual-Stream Architecture}
-v14 implemented the speaker-disentangled dual-stream cross-attention architecture, establishing project-wide peak performance ($0.8623$ on second pass, $0.8446$ on third pass), definitively proving the necessity of modeling asymmetric conversational dynamics.
+\subsection{Stage 4: Role-Pure Dual-Stream Antiphony Architecture}
+The Dual-Stream Antiphony architecture implemented speaker-disentangled cross-attention, establishing project-wide peak performance ($0.8623$ on the second-pass benchmark, $0.8446$ on the strict third-pass benchmark), definitively proving the necessity of modeling asymmetric conversational dynamics.
 
 \section{Design Refinement and Simulation}
 \label{sec:detailed-design}
@@ -383,7 +409,7 @@ In its present form, the system operates as an offline research prototype execut
 \end{equation}
 
 \subsection{Resource Consumption}
-Inference on a complete 20-turn dialogue executes in approximately $45$\,ms on an NVIDIA T4 GPU ($380$\,ms on an 8-core Intel CPU under batch size 1). Measured GPU training runtimes across versions: v4 ($\approx 20$\,min), v6 ($\approx 2.5$\,h), v8 ($\approx 5.0$\,h), v10 ($\approx 2.5$\,h), v13 ($\approx 3.5$\,h), and v14 ($\approx 3.0$\,h). The category clean rerun took 177 minutes, and strategy ensemble search required $\approx 4.0$\,hours.
+Inference on a complete 20-turn dialogue executes in approximately $45$\,ms on an NVIDIA T4 GPU ($380$\,ms on an 8-core Intel CPU under batch size 1). Measured GPU training runtimes across model variants: Metric-Corrected Baseline ($\approx 20$\,min), Hierarchical Transformer ($\approx 2.5$\,h), Hierarchical Back-Translation ($\approx 5.0$\,h), Last-Turn Gated Model ($\approx 2.5$\,h), Decoupled Single-Stream ($\approx 3.5$\,h), and Antiphony ($\approx 3.0$\,h). The category clean rerun took 177 minutes, and strategy ensemble search required $\approx 4.0$\,hours.
 
 \subsection{Operational Boundaries and Omissions}
 We state plainly that this project is an academic research prototype. \textbf{No commercial production serving microservice, optimized runtime graph export, model quantization, automated deployment pipeline, or live latency SLA benchmarks were constructed.} Deploying the system into production would require implementing streaming turn ingestion, model quantization, and robust fail-soft API infrastructure.

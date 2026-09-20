@@ -1,0 +1,15 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage{xcolor}
+\definecolor{primary}{RGB}{15, 44, 89}
+\definecolor{secondary}{RGB}{31, 110, 140}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\newtcolorbox{terminalbox}[1][]{
+    colback=white, colframe=primary, title={#1}, breakable
+}
+\begin{document}
+\begin{terminalbox}[Test Box]
+Hello World
+\end{terminalbox}
+\end{document}

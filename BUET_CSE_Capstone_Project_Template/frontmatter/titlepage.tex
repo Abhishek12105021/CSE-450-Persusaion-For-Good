@@ -1,34 +1,69 @@
 \thispagestyle{empty}
+
+% Top-Right Header Block (design.md Section 5)
+\begin{flushright}
+    {\color{darkslate!75}\large\scshape CAPSTONE PROJECT FINAL REPORT}\\[3pt]
+    {\color{darkslate!85}\normalsize\bfseries CSE 450 -- Capstone Project}
+\end{flushright}
+
+\vspace*{0.6cm}
+
+% Institution Crest & Department
 \begin{center}
-
-{\large CSE450 Capstone Project Report}
-
-\vspace*{\stretch{2}}
-{\LARGE\bfseries \ProjectTitle}
-
-\vspace*{\stretch{4}}
-{\large Submitted by}\\[10pt]
-\begin{tabular}{ll}
-  Arnob Biswas & \pending{Student ID} \\
-  Nawriz Ahmed Turjo & \pending{Student ID} \\
-  Abhishek Roy & \pending{Student ID} \\
-  Monjur Hossain Khan & \pending{Student ID} \\
-  Shams Hossain Simanto & \pending{Student ID}
-\end{tabular}
-
-\vspace*{\stretch{3}}
-{\large Supervised by}\\[10pt]
-\Supervisors
-
-\vspace*{\stretch{3}}
-\includegraphics[width=30mm]{buet_logo.png}\\[8pt]
-\textbf{Department of Computer Science and Engineering}\\
-{\large\bfseries Bangladesh University of Engineering and Technology}\\
-Dhaka, Bangladesh
-
-\vspace*{\stretch{1}}
-\Session\\
-\SubmissionDate
-
+    \includegraphics[width=26mm]{buet_logo.png}\\[6pt]
+    {\large\textsc{\textbf{Department of Computer Science and Engineering}}}\\[2pt]
+    {\large\textbf{Bangladesh University of Engineering and Technology}}\\
+    Dhaka, Bangladesh
 \end{center}
+
+\vspace*{0.6cm}
+
+% Hero Title with Left Vertical Accent Bar (design.md Modern Executive Architecture)
+\noindent
+{\color{secondary}\vrule width 5.5pt}%
+\hspace*{16pt}%
+\begin{minipage}{\dimexpr\textwidth-24pt\relax}
+    {\fontsize{20pt}{24pt}\selectfont\bfseries\color{primary} \ProjectTitle}\\[6pt]
+    {\large\bfseries\color{secondary} Dual-Perspective Modeling in Asymmetric Multi-Turn Dialogue}\\[4pt]
+    {\normalsize\itshape\color{darkslate} A Hierarchical Cross-Attention Framework for Strategy Attribution and Commitment Tracking}
+\end{minipage}
+
+\vspace*{0.8cm}
+
+% Metadata Block (Left-Aligned, Bold Secondary Labels)
+\noindent
+{\normalsize\setlength{\tabcolsep}{8pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\dimexpr\textwidth-2pt\relax}{@{}l >{\raggedright\arraybackslash}X@{}}
+    \textbf{\color{secondary} Academic Session:} & \Session \\
+    \textbf{\color{secondary} Submission Date:} & \SubmissionDate \\[3pt]
+    \textbf{\color{secondary} Supervised By:} & \textbf{\SupervisorName} \\
+    & \SupervisorDesignation \\[3pt]
+    \textbf{\color{secondary} Submitted By (Group 10):} & \textbf{Arnob Biswas} (2105015) \\
+    & \textbf{Nawriz Ahmed Turjo} (2105032) \\
+    & \textbf{Abhishek Roy} (2105033) \\
+    & \textbf{Monjur Hossain Khan} (2105043) \\
+    & \textbf{Shams Hossain Simanto} (2105048) \\
+\end{tabularx}}
+
+\vfill
+
+% Bottom Summary Highlight Card (design.md Executive Summary Card)
+\noindent
+\begin{tcolorbox}[
+    colback=lightbg,
+    colframe=secondary!55,
+    arc=3pt,
+    boxrule=1.1pt,
+    left=14pt, right=14pt, top=8pt, bottom=8pt
+]
+    \centering
+    {\bfseries\large\color{secondary} Key Architectural Innovations \& Engineering Deliverables}\\[6pt]
+    \small
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lr@{}}
+        \textbf{AntiphonyClassifier Dual-Stream Architecture} & \textbf{11-Category / 41-Strategy Multi-Task Hierarchy} \\[2pt]
+        Strict 3-Pass Ground Truth (1,017 P4G Dialogues) & 700-Dialogue Reversal E-Commerce Benchmark \\
+    \end{tabular*}
+\end{tcolorbox}
+
 \clearpage

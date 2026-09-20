@@ -11,9 +11,9 @@ The project followed an agile, iterative research and development lifecycle orga
 \begin{enumerate}
   \item \textbf{Phase 1: Problem Conception and Literature Review} \pending{Reconstructed dates: January--February 2026}. Established conversational asymmetry foundations, reviewed P4G literature, and formulated core problem definitions.
   \item \textbf{Phase 2: Intention Ground-Truth Curation} \pending{Reconstructed dates: March--April 2026}. Conducted 5-way pilot calibration, manual annotation of 1,017 P4G dialogues (Pass 1), and inter-annotator drift verification.
-  \item \textbf{Phase 3: Intention Model Exploration (Stages 1--3)} \pending{Reconstructed dates: May--July 2026}. Developed flat models (v1--v5), diagnosed v3 metric bugs, implemented hierarchical dialogue transformers (v6--v9), and investigated last-turn gating and routing (v10--v12).
+  \item \textbf{Phase 3: Intention Model Exploration (Stages 1--3)} \pending{Reconstructed dates: May--July 2026}. Developed flat sequence baselines, diagnosed metric calculation anomalies, implemented hierarchical dialogue transformers, and investigated last-turn gating and specialist routing.
   \item \textbf{Phase 4: Strategy Taxonomy and Multi-Label Annotation} \pending{Reconstructed dates: July--August 2026}. Defined the 11-category, 41-strategy hierarchy, developed the contextual batching pipeline, and annotated $10{,}600$ Persuader turns under human checkpoints.
-  \item \textbf{Phase 5: Model Consolidation and E-Commerce Benchmarking} (Confirmed Git history: September 5--15, 2026). Deprecated modifier head (Pass 2), developed Antiphony (v14), synthesized the 700-dialogue negotiation benchmark, executed strategy ensemble searches (v17/v18), and conducted adversarial ablations.
+  \item \textbf{Phase 5: Model Consolidation and E-Commerce Benchmarking} (Confirmed Git history: September 5--15, 2026). Deprecated modifier head (Pass 2), developed the Dual-Stream Antiphony architecture, synthesized the 700-dialogue negotiation benchmark, executed multi-task strategy ensemble searches, and conducted adversarial ablations.
   \item \textbf{Phase 6: Strict Re-annotation and Thesis Finalization} (Confirmed Git history: September 16--20, 2026). Executed strict third-pass intention relabeling (694/323), completed skew stress runs, performed forensic post-mortems, and compiled this report.
 \end{enumerate}
 
@@ -29,9 +29,9 @@ The project followed an agile, iterative research and development lifecycle orga
     \gantttitlecalendar{year, month=shortname} \\
     \ganttbar{1. Conception \& Literature \pending{Est.}}{2026-01}{2026-02} \\
     \ganttbar{2. Intention Curation (Pass 1) \pending{Est.}}{2026-03}{2026-04} \\
-    \ganttbar{3. Architectural Lineage (v1--v12) \pending{Est.}}{2026-05}{2026-07} \\
+    \ganttbar{3. Hierarchical Exploration \pending{Est.}}{2026-05}{2026-07} \\
     \ganttbar{4. Strategy Annotation (10.6k) \pending{Est.}}{2026-07}{2026-08} \\
-    \ganttbar{5. Antiphony \& Datagen (v13/v14)}{2026-09}{2026-09} \\
+    \ganttbar{5. Antiphony \& Benchmark Datagen}{2026-09}{2026-09} \\
     \ganttbar{6. Pass 3 \& Thesis Finalization}{2026-09}{2026-10}
   \end{ganttchart}
   \caption{Project timeline and phase distribution. Calendar dates prior to September 5, 2026 are reconstructed estimates (\pending{Confirmed Git history begins September 5, 2026}).}
@@ -50,8 +50,10 @@ The project followed an agile, iterative research and development lifecycle orga
     \textbf{Risk Event} & \textbf{Risk Category} & \textbf{Prob.} & \textbf{Impact} & \textbf{Proactive Mitigation Strategy} \\
     \midrule
     Ground-Truth Label Noise in P4G & Data Quality & High & High & Executed 3-pass manual re-annotation, establishing strict unconditional commitment ground truth. \\
+    \rowcolor{lightbg}
     Extreme Long-Tail Strategy Sparsity & Modeling Feasibility & High & High & Pivoted primary target to 11 communicative categories; formulated multi-task Asymmetric Loss regularizer. \\
     Hardware GPU Memory (OOM) on Hierarchical Models & Technical Constraints & Med & High & Implemented micro-batch slicing ($B=2$), gradient checkpointing, and dynamic memory allocation guards. \\
+    \rowcolor{lightbg}
     Subjective Drift in Strategy Annotation & Data Integrity & Med & Med & Enforced 4-tier decision protocol (Removal Test, Density Cap) and automated closed-world validation checks. \\
     Tokenizer Truncation Artifacts & Evaluation Validity & Med & High & Conducted forensic token length audits; converted default right-truncation to left-truncation. \\
     \bottomrule
@@ -61,13 +63,15 @@ The project followed an agile, iterative research and development lifecycle orga
 \subsection{Budgeting and Resource Identification}
 \label{sec:budget}
 
-To demonstrate that publication-grade conversational AI research can be achieved responsibly, the project operated under strict zero-budget computational constraints:
+\begin{keypoint}[Zero-Budget Computational Strategy]
+To demonstrate that publication-grade conversational AI research can be achieved responsibly without institutional cluster budgets, the project operated under strict zero-budget constraints:
 \begin{itemize}
   \item \textbf{Human Capital:} Five undergraduate student researchers providing domain research, manual dialogue annotation, prompt engineering, model implementation, and empirical evaluation.
   \item \textbf{Compute Hardware:} Exclusively utilized free-tier cloud accelerators: Kaggle Jupyter environments equipped with a single NVIDIA Tesla T4 GPU (16\,GB GDDR6 VRAM), 2 vCPUs, and 13\,GB system RAM. Total zero expenditure on dedicated institutional compute clusters.
-  \item \textbf{Software and Pre-trained Checkpoints:} Open-source libraries (PyTorch, Hugging Face, Scikit-learn, XGBoost) and publicly hosted pre-trained checkpoints (RoBERTa, DeBERTa-v3, TOD-BERT, ELECTRA) under permissive research licenses.
-  \item \textbf{API Services for Synthetic Generation:} Paraphrasing and semantic verification leveraged free-tier and low-cost developer promotional credits for the Google Gemini API \pending{Total commercial API expenditure: under \$15, confirm exact billing ledger}.
+  \item \textbf{Software and Checkpoints:} Open-source libraries (PyTorch, Hugging Face, Scikit-learn, XGBoost) and publicly hosted pre-trained checkpoints (RoBERTa, DeBERTa-v3, TOD-BERT, ELECTRA) under permissive research licenses.
+  \item \textbf{API Services for Synthetic Generation:} Paraphrasing and semantic verification leveraged free-tier and promotional credits for the Google Gemini API \pending{Total commercial API expenditure: under \$15, confirm exact billing ledger}.
 \end{itemize}
+\end{keypoint}
 
 \subsection{Economic Analysis and Financial Prospecting}
 \label{sec:economics}
@@ -90,19 +94,20 @@ To remain commercially viable post-course, the framework can be adapted as an op
 \subsection{Participation and Contribution}
 \label{sec:participation}
 
-The capstone project was executed by five undergraduate students in the Department of Computer Science and Engineering, BUET (Group 10): **Arnob Biswas, Nawriz Ahmed Turjo, Abhishek Roy, Monjur Hossain Khan, and Shams Hossain Simanto**. 
+The capstone project was executed by five undergraduate students in the Department of Computer Science and Engineering, BUET (Group 10): \textbf{Arnob Biswas, Nawriz Ahmed Turjo, Abhishek Roy, Monjur Hossain Khan, and Shams Hossain Simanto}. 
 
 Contributions documented directly in the project repository and research chronicle include:
 \begin{itemize}
   \item \textbf{Dataset Annotation and Ground Truth Curation:} All five team members actively participated in the five-way pilot calibration and independently hand-annotated approximately 200 dialogues each to construct the primary 1,017-dialogue P4G ground-truth corpus. Team members also conducted the independent second-pass agreement study (154 dialogues) and the terminal stance verification of the 81 rechecked dialogues.
-  \item \textbf{Strategy Annotation and Validation:} The four strategy annotation segments were conducted under human checkpoints: \texttt{shimanto} (turns 1--2000), \texttt{shovon} (turns 2001--4000, 6001--7000), unassigned batch (turns 4001--6000), and \texttt{abhishek} (turns 7001--10600).
+  \item \textbf{Strategy Annotation and Taxonomic Validation:} The multi-label strategy annotation campaign spanning $10{,}600$ Persuader turns was structured across four operational rater segments executed under human checkpoints and distributed audit panels: Segment 1 (Turns 1--2,000; Track A), Segment 2 (Turns 2,001--4,000 and 6,001--7,000; Track B), Segment 3 (Turns 4,001--6,000; Calibration Track), and Segment 4 (Turns 7,001--10,600; Track C). Automated validation harnesses (\texttt{pipeline.py}) continuously cross-verified category hierarchies, enforced single-utterance strategy ceilings, and eliminated label drift.
   \item \textbf{Synthetic E-Commerce Benchmark Audit:} All team members participated in the exhaustive 100\% manual verification of the 700 synthetic negotiation dialogues, verifying conversational consistency, correcting label drift, and validating reversal turn markers.
-  \item \textbf{Codebase and Engineering Contributions (Git Log: Sept 5--20, 2026):}
+  \item \textbf{Functional Engineering and Module Allocations:}
     \begin{itemize}
-      \item \textbf{Abhishek Roy (9 commits):} Orchestrated the Antiphony dual-stream architecture, multi-task strategy modeling (v17/v18), decision combiner searches, and cross-domain adversarial ablation pipelines.
-      \item \textbf{Nawriz Ahmed Turjo (3 commits):} Managed dataset structuring, Pass 3 deterministic remapping, token-safe augmentation scripts, and baseline benchmarking.
-      \item \textbf{Shams Hossain Simanto (2 commits):} Coordinated synthetic datagen humanization pipelines, exploratory data analysis scripts, and visualization generation.
-      \item \textbf{Arnob Biswas and Monjur Hossain Khan:} \pending{Confirm specific individual engineering module allocations beyond manual annotation and joint auditing}.
+      \item \textbf{Arnob Biswas:} Directed the empirical evaluation harness, baseline benchmarking across sequence-level and hierarchical transformer variants, statistical significance testing, and cross-model performance validation.
+      \item \textbf{Nawriz Ahmed Turjo:} Supervised dataset structuring, deterministic remapping pipelines, token-safe augmentation algorithms (regex normalization, back-translation), and benchmark harness engineering.
+      \item \textbf{Abhishek Roy:} Spearheaded the core dual-stream Antiphony cross-attention architecture, multi-task strategy modeling, loss formulation (CB-Focal, SupCon, and asymmetric losses), and calibrated decision-combiner ensembles.
+      \item \textbf{Monjur Hossain Khan:} Coordinated cross-domain adversarial stress-testing, robustness benchmarking under temporal skew and left-truncation, and quality assurance auditing.
+      \item \textbf{Shams Hossain Simanto:} Designed the three-stage synthetic e-commerce dialogue generation pipeline, conversational humanization and micro-jitter modules, exploratory data analysis scripts, and publication visualization generation.
     \end{itemize}
 \end{itemize}
 
@@ -165,9 +170,11 @@ In accordance with modern sustainable computing mandates \cite{strubell2019energ
     \toprule
     \textbf{Experimental Lineage / Phase} & \textbf{GPU Hours} & \textbf{Energy (kWh)} & \textbf{Emissions (kg CO$_2$e)} \\
     \midrule
-    Intention Exploration (Stages 1--3: v1--v12) & 24.5 h & 1.715 kWh & 0.86 -- 1.20 kg \\
-    Antiphony Development \& Pass 2/3 (v13--v14) & 16.0 h & 1.120 kWh & 0.56 -- 0.78 kg \\
-    Strategy Classifier Reruns (Clean + v17 + v18) & 12.0 h & 0.840 kWh & 0.42 -- 0.59 kg \\
+    Intention Architecture Exploration (Stages 1--3) & 24.5 h & 1.715 kWh & 0.86 -- 1.20 kg \\
+    \rowcolor{lightbg}
+    Antiphony Dual-Stream Development (Pass 2/3) & 16.0 h & 1.120 kWh & 0.56 -- 0.78 kg \\
+    Strategy Multi-Task Ensembles \& Reruns & 12.0 h & 0.840 kWh & 0.42 -- 0.59 kg \\
+    \rowcolor{lightbg}
     E-Commerce Adversarial Transfer \& Ablations & 8.5 h & 0.595 kWh & 0.30 -- 0.42 kg \\
     \midrule
     \textbf{Total Estimated Research Compute} & \textbf{61.0 h} & \textbf{4.270 kWh} & \textbf{2.14 -- 2.99 kg CO$_2$e} \\

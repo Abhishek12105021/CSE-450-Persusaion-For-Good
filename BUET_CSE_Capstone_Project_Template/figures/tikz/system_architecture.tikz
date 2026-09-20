@@ -24,6 +24,7 @@
 \node[trj, text width=2.95cm, minimum height=1.85cm] (c4) at (1.75,-8.65)
   {\textbf{E-commerce benchmark}\\[1pt]\scriptsize 500 canonical + 200 reversal dialogues\\ three-phase synthesis};
 \draw[flow] (c1) -- (c2);
+\draw[flow] (c2) -- (c3);
 
 % ---------------- 2 shared representation ------------------------------------------
 \node[neu, text width=2.7cm, minimum height=2.6cm] (r1) at (5.6,-2.15)
@@ -36,26 +37,26 @@
 
 % ---------------- 3a intention stream -----------------------------------------------
 \node[xat, text width=4.0cm, minimum height=2.6cm] (m1) at (10.0,-2.35)
-  {\textbf{AntiphonyClassifier (v14)}\\[1pt]\scriptsize role-pure Persuader and Persuadee streams\\ Persuadee-to-Persuader cross-attention\\ trajectory GRU and attention pooling};
+  {\textbf{AntiphonyClassifier}\\[1pt]\scriptsize Role-pure dual-stream cross-attention\\ Persuadee-to-Persuader attention\\ Trajectory GRU and attention pooling};
 \node[fin, minimum width=2.6cm] (o1) at (10.0,-4.4) {\scriptsize commitment: yes / no};
 \draw[flowX] (m1) -- (o1);
 
 % ---------------- 3b strategy stream ------------------------------------------------
 \node[amb, text width=4.0cm, minimum height=1.2cm] (s1) at (10.0,-6.95)
-  {\textbf{Multi-task classifier (v17, v18)}\\[1pt]\scriptsize 11 categories main, 41 strategies auxiliary};
+  {\textbf{Multi-Task Strategy Model}\\[1pt]\scriptsize 11 categories main, 41 strategies auxiliary};
 \node[amb, text width=4.0cm, minimum height=1.0cm] (s2) at (10.0,-8.2)
-  {\scriptsize 19-member pool: encoders, few-shot, TF-IDF and zero-shot members};
-\node[amb, text width=1.85cm, minimum height=0.95cm, draw=AmbBord, fill=white] (s3a) at (8.95,-9.75)
-  {\scriptsize calibrated blend\\ \textbf{selected}};
-\node[amb, text width=1.75cm, minimum height=0.95cm, draw=AmbBord, fill=white, dashed] (s3b) at (11.2,-9.75)
-  {\scriptsize XGBoost stacker\\ tested};
+  {\scriptsize 19-member pool: fine-tuned encoders, few-shot, TF-IDF and zero-shot members};
+\node[amb, text width=1.85cm, minimum height=0.95cm, draw=AmbBord, fill=white] (s3a) at (8.95,-9.8)
+  {\scriptsize \textbf{Calibrated blend}\\ Selected ($q=2$)};
+\node[amb, text width=1.85cm, minimum height=0.95cm, draw=AmbBord, fill=white, dashed] (s3b) at (11.05,-9.8)
+  {\scriptsize \textbf{XGBoost stacker}\\ Evaluated ($0.551$)};
 \draw[flow] (s1) -- (s2);
-\draw[flow] (s2.south) -- ++(0,-0.25) -| (s3a.north);
-\draw[flow, dashed] (s2.south) -- ++(0,-0.25) -| (s3b.north);
+\draw[flow] (s2.south) -- ++(0,-0.2) -| (s3a.north);
+\draw[flow, dashed] (s2.south) -- ++(0,-0.2) -| (s3b.north);
 
 % ---------------- 4 evaluation -----------------------------------------------------
 \node[trj, text width=2.7cm, minimum height=1.9cm] (e1) at (14.43,-1.6)
-  {\textbf{Intention benchmark}\\[1pt]\scriptsize macro-F1 on 153 test dialogues, Tables A to C};
+  {\textbf{Intention benchmark}\\[1pt]\scriptsize Macro-F1 on 153 test dialogues across Pass 1--3 splits};
 \node[trj, text width=2.7cm, minimum height=2.1cm] (e2) at (14.43,-3.85)
   {\textbf{Adversarial transfer}\\[1pt]\scriptsize four input ablations, sufficiency gap $\Delta_{\mathrm{suff}}$, skew stress};
 \node[trj, text width=2.7cm, minimum height=1.9cm] (e3) at (14.43,-6.2)
@@ -64,7 +65,8 @@
   {\textbf{Forensic checks}\\[1pt]\scriptsize truncation side, marker corruption, merchant-side leakage};
 
 % ---------------- inter-group arrows -----------------------------------------------
-\draw[flow, line width=1.3pt] (3.5,-5.3) -- (4.05,-5.3);
+\draw[flow, line width=1.3pt] (3.5,-2.15) -- (4.05,-2.15);
+\draw[flow, line width=1.3pt] (3.5,-8.15) -- (4.05,-8.15);
 \draw[flow, line width=1.3pt] (7.15,-2.6) -- (7.7,-2.6);
 \draw[flow, line width=1.3pt] (7.15,-8.0) -- (7.7,-8.0);
 \draw[flow, line width=1.3pt] (12.3,-2.6) -- (12.85,-2.6);

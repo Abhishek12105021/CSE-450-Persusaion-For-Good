@@ -66,7 +66,7 @@ Responsible engineering requires rigorous alignment with professional ethics, ar
 
 To identify the optimal system architecture for asymmetric intention and strategy modeling, we formulate five genuinely distinct candidate engineering solutions:
 
-\begin{enumerate}[label=\textbf{Candidate \arabic*:}]
+\begin{enumerate}[wide=0pt, label=\textbf{Candidate \arabic*:}, itemsep=6pt]
   \item \textbf{Monolithic Flat Sequence Transformer:} Concatenates all turns of the dialogue into a single flat string separated by special speaker tokens, passing it to a pre-trained transformer (RoBERTa-base) with a standard sequence classification head over the \texttt{[CLS]} token. Imposes a rigid 256- or 512-token cap.
   \item \textbf{Prompt-Engineered General-Purpose LLM:} Uses zero-shot and few-shot natural language prompts dispatched via API calls to a commercial proprietary LLM (e.g., GPT-4 or Claude-3.5) with structured JSON decoding.
   \item \textbf{Classical Bag-of-Words and Gradient Boosted Decision Trees:} Extracts turn-level and dialogue-level n-gram TF-IDF representations combined with hand-crafted conversational features, classified using tuned XGBoost \cite{chen2016xgboost} or Logistic Regression ensembles.
@@ -92,18 +92,23 @@ To evaluate these candidate architectures rigorously, we define six explicit eng
   \small
   \caption{Multi-criteria architectural decision matrix (scores: 1 = Poor, 5 = Excellent)}
   \label{tab:decision-matrix}
-  \begin{tabularx}{\textwidth}{lccccccY}
+  \setlength{\tabcolsep}{3.5pt}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X *{6}{>{\centering\arraybackslash}p{0.075\textwidth}} >{\centering\arraybackslash\bfseries}p{0.14\textwidth}}
     \toprule
-    \textbf{Candidate Architecture} & \textbf{C1} \newline (20\%) & \textbf{C2} \newline (20\%) & \textbf{C3} \newline (15\%) & \textbf{C4} \newline (15\%) & \textbf{C5} \newline (10\%) & \textbf{C6} \newline (20\%) & \textbf{Weighted Score} \\
+    \textbf{Candidate Architecture} & \textbf{C1} \newline (20\%) & \textbf{C2} \newline (20\%) & \textbf{C3} \newline (15\%) & \textbf{C4} \newline (15\%) & \textbf{C5} \newline (10\%) & \textbf{C6} \newline (20\%) & \textbf{Weighted} \newline \textbf{Score} \\
     \midrule
-    1. Monolithic Flat Transformer & 1 & 2 & 3 & 4 & 5 & 2.5 ($0.65$) & \textbf{2.60} \\
-    2. Prompt-Engineered LLM & 4 & 3 & 2 & 1 & 1 & N/E & \textbf{2.30} \\
-    3. Classical TF-IDF + GBDT & 2 & 1 & 2 & 5 & 5 & 2.0 ($0.46$) & \textbf{2.50} \\
-    4. Single-Stream Hierarchical & 5 & 3 & 4 & 4 & 4 & 4.0 ($0.82$) & \textbf{3.95} \\
-    5. Dual-Stream Antiphony & \textbf{5} & \textbf{5} & \textbf{4} & \textbf{4} & \textbf{4} & \textbf{5.0 ($0.86$)} & \textbf{4.60} \\
+    1. Monolithic Flat Transformer & 1 & 2 & 3 & 4 & 5 & 2.5 ($0.65$) & 2.60 \\
+    \rowcolor{lightbg}
+    2. Prompt-Engineered LLM & 4 & 3 & 2 & 1 & 1 & N/E & 2.30 \\
+    3. Classical TF-IDF + GBDT & 2 & 1 & 2 & 5 & 5 & 2.0 ($0.46$) & 2.50 \\
+    \rowcolor{lightbg}
+    4. Single-Stream Hierarchical & 5 & 3 & 4 & 4 & 4 & 4.0 ($0.82$) & 3.95 \\
+    \textbf{5. Dual-Stream Antiphony} & \textbf{5} & \textbf{5} & \textbf{4} & \textbf{4} & \textbf{4} & \textbf{5.0 ($0.86$)} & \textbf{4.60} \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
 \subsection{Conclusion and Selection Justification}
+\begin{keypoint}[Architectural Selection Justification]
 As demonstrated in \Cref{tab:decision-matrix}, Candidate 5 (\textbf{Dual-Stream Antiphony}) achieves the highest weighted score ($4.60/5.00$). Candidate 1 is crippled by context truncation; Candidate 2 is ruled out by extreme financial costs, high latency, and data privacy issues; Candidate 3 lacks deep semantic reasoning; and Candidate 4, while achieving strong results ($0.821$ Macro-F1), relies on additive role embeddings and lacks an explicit mechanism for directional decider-on-persuader cross-attention. Consequently, the Dual-Stream Antiphony architecture is selected as the definitive system design.
+\end{keypoint}

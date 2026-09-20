@@ -21,20 +21,31 @@ This capstone project formulated, developed, and empirically evaluated a compreh
     \midrule
     O1: Intention Ground Truth & Re-annotate 1,017 P4G dialogues to resolve metadata divergence. & \textbf{ACHIEVED} & Completed 3 passes; final strict unconditional ground truth: 694 yes / 323 no ($92.21\%$ agreement). \\
     \midrule
+    \rowcolor{lightbg}
     O2: Architecture Evolution & Develop and evaluate 14 intention models across 4 stages. & \textbf{ACHIEVED} & Progressed from flat 256-token baselines to hierarchical models and the dual-stream Antiphony network. \\
     \midrule
     O3: SOTA Intention Prediction & Achieve $>0.84$ Macro-F1 on held-out test splits. & \textbf{ACHIEVED} & Antiphony achieved $0.8623$ (second pass) and $0.8446$ (strict third pass) on held-out splits ($n=153$). \\
     \midrule
+    \rowcolor{lightbg}
     O4: Strategy Taxonomy \& Dataset & Annotate 10,600 Persuader turns under 11-cat / 41-strat hierarchy. & \textbf{ACHIEVED} & Completed full annotation with 4-tier decision protocol; derived empirical human agreement ceiling ($0.79$). \\
     \midrule
     O5: Strategy Modeling Ensemble & Build multi-task ensemble; evaluate decision combiners. & \textbf{ACHIEVED} & 19-member pool under Asymmetric Loss; calibrated power-mean blend ($0.6949$ / $0.5597$; micro-optimal $0.7062$ / $0.5642$) beat tuned XGBoost stacker ($0.5508$). \\
     \midrule
+    \rowcolor{lightbg}
     O6: Synthetic E-Commerce Data & Construct 700-dialogue negotiation benchmark with reversals. & \textbf{ACHIEVED} & Generated 500 canonical and 200 adversarial dialogues with Gemini humanization and $100\%$ manual audit. \\
     \midrule
     O7: Cross-Domain Adversarial Ablation & Evaluate transfer and measure sufficiency gap on reversals. & \textbf{ACHIEVED} & Antiphony reached $0.9619$ Macro-F1; widened sufficiency gap from $+0.0001$ to $+0.0384$ on reversals. \\
     \bottomrule
   \end{tabularx}
 \end{table}
+
+\begin{summarybox}[Capstone Final Deliverables and Empirical Contributions]
+\begin{itemize}
+  \item \textbf{Antiphony Dual-Stream Architecture:} Asymmetric directional cross-attention ($Q_{\mathcal{D}}, K_{\mathcal{P}}, V_{\mathcal{P}}$) and GRU trajectory tracking achieving $0.8623$ (Pass 2) and $0.8446$ (Pass 3) binary Macro-F1, decisively outperforming flat transformers and symmetric discourse baselines.
+  \item \textbf{11-Category / 41-Strategy Benchmark:} Complete taxonomy and gold-standard annotations across $10{,}600$ turns, modeled via a 19-member multi-task ensemble with calibrated power-mean blending capturing $89\%$ of the empirical human agreement ceiling.
+  \item \textbf{Cross-Domain Transfer \& Trajectory Validation:} Construction of the 700-dialogue e-commerce negotiation dataset and empirical demonstration of sufficiency gap widening ($+0.0001 \to +0.0384$), establishing trajectory tracking under adversarial stance shifts.
+\end{itemize}
+\end{summarybox}
 
 \subsection{Documented Limitations}
 Rigorous academic accountability requires transparent acknowledgment of system limitations:
