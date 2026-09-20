@@ -4,11 +4,65 @@
 
 \section{Conclusion and Future Work}
 \label{sec:conclusion}
-\guidance{Summarise achievement against each objective, the limitations, and
-focused future work. Do not repeat the abstract.}
+
+This capstone project formulated, developed, and empirically evaluated a comprehensive computational framework for modeling conversational intention and rhetorical persuasion strategies in asymmetric multi-turn dialogues. By moving beyond conventional flat sequence transformers and symmetric discourse models, the project originated the \textit{AntiphonyClassifier} architecture, established a verified multi-label strategy benchmark, synthesized a high-fidelity e-commerce negotiation dataset, and conducted rigorous adversarial evaluations proving the reality of trajectory tracking.
+
+\subsection{Summary of Achievements Against Objectives}
+\Cref{tab:objective-verification} provides an objective-by-objective audit of achievements against the seven project goals defined in Chapter 1.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Objective-by-objective verification of project outcomes}
+  \label{tab:objective-verification}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash\bfseries}p{0.22\textwidth} >{\raggedright\arraybackslash}p{0.26\textwidth} >{\centering\arraybackslash}p{0.14\textwidth} >{\raggedright\arraybackslash}X}
+    \toprule
+    \textbf{Objective} & \textbf{Target Goal} & \textbf{Status} & \textbf{Documented Outcome / Metric} \\
+    \midrule
+    O1: Intention Ground Truth & Re-annotate 1,017 P4G dialogues to resolve metadata divergence. & \textbf{ACHIEVED} & Completed 3 passes; final strict unconditional ground truth: 694 yes / 323 no ($92.21\%$ agreement). \\
+    \midrule
+    O2: Architecture Evolution & Develop and evaluate 14 intention models across 4 stages. & \textbf{ACHIEVED} & Progressed from flat 256-token baselines to hierarchical models and the dual-stream Antiphony network. \\
+    \midrule
+    O3: SOTA Intention Prediction & Achieve $>0.84$ Macro-F1 on held-out test splits. & \textbf{ACHIEVED} & Antiphony achieved $0.8623$ (second pass) and $0.8446$ (strict third pass) on held-out splits ($n=153$). \\
+    \midrule
+    O4: Strategy Taxonomy \& Dataset & Annotate 10,600 Persuader turns under 11-cat / 41-strat hierarchy. & \textbf{ACHIEVED} & Completed full annotation with 4-tier decision protocol; derived empirical human agreement ceiling ($0.79$). \\
+    \midrule
+    O5: Strategy Modeling Ensemble & Build multi-task ensemble; evaluate decision combiners. & \textbf{ACHIEVED} & 19-member pool under Asymmetric Loss; calibrated power-mean blend ($0.6949$ / $0.5597$; micro-optimal $0.7062$ / $0.5642$) beat tuned XGBoost stacker ($0.5508$). \\
+    \midrule
+    O6: Synthetic E-Commerce Data & Construct 700-dialogue negotiation benchmark with reversals. & \textbf{ACHIEVED} & Generated 500 canonical and 200 adversarial dialogues with Gemini humanization and $100\%$ manual audit. \\
+    \midrule
+    O7: Cross-Domain Adversarial Ablation & Evaluate transfer and measure sufficiency gap on reversals. & \textbf{ACHIEVED} & Antiphony reached $0.9619$ Macro-F1; widened sufficiency gap from $+0.0001$ to $+0.0384$ on reversals. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Documented Limitations}
+Rigorous academic accountability requires transparent acknowledgment of system limitations:
+\begin{enumerate}
+  \item \textbf{Small Intention Test Split Sample Size:} The held-out test set comprises exactly 153 dialogues. Consequently, a shift of a single prediction alters accuracy and per-class recall by $\approx 0.65\%$. While results are statistically consistent across backbones, future work must evaluate on larger multi-thousand-dialogue test sets.
+  \item \textbf{Single Train/Validation/Test Split:} Because fine-tuning deep hierarchical transformers and running 19-member ensemble searches on cloud GPUs was bounded by 12-hour compute limits, intention experiments utilized a single fixed random split (Seed $= 42$) rather than full 10-fold nested cross-validation.
+  \item \textbf{Inherent Human Label Noise Ceiling:} As derived in Chapter 4, cross-annotator agreement on near-duplicate strategy turns is bounded by an F1 of $0.657$, imposing an empirical performance ceiling of $\approx 0.79$ micro-F1. Models cannot advance beyond this ceiling without overfitting to specific annotators' subjective granularities.
+  \item \textbf{Synthetic Benchmark Fidelity:} While the 700-dialogue negotiation benchmark was meticulously audited, synthetic dialogues cannot replicate the full chaos of real-world consumer chats, such as fragmented non-grammatical slang, voice notes, and off-platform payment confirmations.
+  \item \textbf{Linguistic and Monolingual Scope:} The framework is restricted to English. It does not model Bengali or the code-mixed dialects (Banglish) that characterize actual social commerce in South Asia.
+\end{enumerate}
+
+\subsection{Focused Future Work}
+\begin{itemize}
+  \item \textbf{Asymmetric Persuader-Only Back-Translation:} Data augmentation via back-translation was shown in v8 and v11 to wash away subtle decider hedges (``maybe'', ``if''). Future iterations should explore \textit{asymmetric augmentation}, wherein only the Persuader's rhetorical arguments are paraphrased or back-translated, leaving the Decider's precise linguistic commitments untouched.
+  \item \textbf{Multilingual and Code-Mixed Adaptation:} Adapting Antiphony to Bengali and Banglish conversational commerce transcripts using multilingual pre-trained encoders (e.g., BanglaBERT, XLM-RoBERTa).
+  \item \textbf{Early-Warning Trajectory Monitoring:} In production CRM platforms, the hidden state $\mathbf{h}_t$ of the commitment-trajectory GRU can be evaluated turn-by-turn to provide real-time ``flight risk'' alerts, notifying merchants when buyer commitment begins to decline.
+  \item \textbf{Multi-Seed Significance Testing:} Conducting multi-seed replication runs across cluster hardware to establish formal p-value significance bounds across the 14-version lineage.
+\end{itemize}
 
 \section{Continuous Engagement and Self-directed Learning}
 \label{sec:lessons}
-\guidance{Demonstrate engagement in staying up to date: the tools, technologies,
-and domain knowledge learned independently during the project, and the
-emerging technical literature or documentation identified and used.}
+
+The execution of this capstone project demanded continuous self-directed learning and independent mastery of advanced, rapidly evolving technologies at the forefront of computational linguistics and machine learning:
+\begin{itemize}
+  \item \textbf{Advanced Discourse and Attention Mechanics:} Beyond standard classroom NLP, the team independently studied specialized dialogue modeling literature, mastering hierarchical attention mechanisms (HiTrans \cite{li2020hitrans}), recurrent party tracking (DialogueRNN \cite{majumder2019dialoguernn}), and custom cross-attention matrix routing ($Q_{\mathcal{D}}, K_{\mathcal{P}}, V_{\mathcal{P}}$) implemented via PyTorch autograd.
+  \item \textbf{Specialized Optimization for Extreme Imbalance:} The team engaged with advanced machine learning literature to understand and implement Class-Balanced Focal Loss \cite{cui2019class}, Asymmetric Loss for multi-label tagging \cite{benbaruch2021asymmetric}, and Supervised Contrastive Loss \cite{khosla2020supervised}, resolving critical gradient explosion bugs through empirical diagnostics.
+  \item \textbf{Ensembling and Meta-Learning Architectures:} Developing the 19-member strategy classification pipeline required mastering stacked generalization \cite{wolpert1992stacked}, Platt probability calibration \cite{platt1999probabilistic}, and power-mean blending algorithms.
+  \item \textbf{Hardware-Constrained Deep Learning:} Overcoming the 16\,GB VRAM limitations of NVIDIA T4 GPUs forced the team to master gradient checkpointing, mixed-precision arithmetic, micro-batching, and CUDA memory allocators.
+  \item \textbf{Publication-Grade Typographic and Vector Design:} The team independently mastered advanced \LaTeX, TikZ graphics libraries, and PGFPlots, producing publication-quality vector architecture schematics and empirical data visualizations.
+\end{itemize}
+In summary, this capstone project provided profound professional preparation, instilling a deep appreciation for rigorous engineering methodologies, empirical honesty, and lifelong self-directed technical inquiry.

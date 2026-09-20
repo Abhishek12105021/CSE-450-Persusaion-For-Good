@@ -1,0 +1,135 @@
+\contentsline {chapter}{Candidates' Declaration}{i}{Doc-Start}%
+\contentsline {chapter}{Acknowledgement}{ii}{chapter*.1}%
+\contentsline {chapter}{Abstract}{iii}{chapter*.2}%
+\contentsline {chapter}{\numberline {1}Problem Identification and Formulation}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Background and Motivation}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Problem Statement}{2}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Sub-Problem 1: Grounded Conversational Intention Classification}{2}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Sub-Problem 2: Multi-Label Persuasion Strategy and Category Attribution}{2}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Sub-Problem 3: Cross-Domain Transfer and Adversarial Trajectory Tracking}{3}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Required Engineering Knowledge Profiles}{3}{subsection.1.2.4}%
+\contentsline {section}{\numberline {1.3}Complexity of the Problem}{3}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Project Objectives and Scope}{4}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Project Objectives}{4}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Project Scope and Explicit Exclusions}{5}{subsection.1.4.2}%
+\contentsline {chapter}{\numberline {2}Preliminary Research}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Literature Review}{7}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Persuasion Theory and Rhetorical Frameworks}{7}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Persuasion Corpora and Conversational Strategy Annotation}{7}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Transformer Encoders and Dialogue Language Models}{8}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Hierarchical and Role-Aware Dialogue Networks}{8}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}Imbalanced Learning and Loss Formulations}{8}{subsection.2.1.5}%
+\contentsline {subsection}{\numberline {2.1.6}Ensembling and Stacking Generalization}{8}{subsection.2.1.6}%
+\contentsline {subsection}{\numberline {2.1.7}Negotiation Benchmarks and Shortcut Learning}{9}{subsection.2.1.7}%
+\contentsline {subsection}{\numberline {2.1.8}Synthesis of Research Gaps}{9}{subsection.2.1.8}%
+\contentsline {section}{\numberline {2.2}Existing Solutions and Technologies}{9}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Market and User Research}{10}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}The Rise of Conversational Social Commerce}{10}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}User Personas and Behavioral Dynamics}{10}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Industry Consultations and Field Observations}{11}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}Feasibility Study}{11}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Requirements Analysis}{12}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Project Objectives and Constraints}{12}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Stakeholder Analysis and Conflicting Expectations}{12}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Functional Requirements (FR)}{12}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Non-Functional Requirements (NFR)}{13}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Physical and Operational Constraints}{13}{subsection.3.1.4}%
+\contentsline {section}{\numberline {3.2}Regulatory Requirements and Standards}{14}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Formulation of Solutions}{14}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Multi-Criteria Evaluation and Decision Matrix}{15}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Conclusion and Selection Justification}{15}{subsection.3.3.2}%
+\contentsline {chapter}{\numberline {4}System Design and Implementation}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Functional Design and Sub-problem Partitioning}{17}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Persuasion Strategy Annotation and Taxonomy}{18}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Hierarchical Taxonomy Formulation}{18}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Contextual Annotation Pipeline and Decision Protocol}{19}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Empirical Corpus Statistics and Rater Effects}{20}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Derivation of the Cross-Annotator Agreement Ceiling}{21}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.3}Conversational Intention Ground Truth Generation}{21}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}The Ground-Truth Divergence Problem}{21}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}The Three-Pass Annotation Lineage}{21}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Inter-Annotator Agreement and Boundary Cases}{22}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}Synthetic E-Commerce Negotiation Benchmark}{23}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Motivation and Privacy Bottlenecks}{23}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}The Three-Phase Generation Framework}{23}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Frozen Benchmark Dataset Counts}{24}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Strategy and Category Modeling Architecture}{24}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Multi-Task Category-First Formulation}{24}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}The 19-Member Heterogeneous Model Pool}{25}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Decision Layer Search: Calibrated Blend vs. XGBoost Stacker}{25}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}The AntiphonyClassifier Architecture}{27}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Detailed Mathematical Formulation}{27}{subsection.4.6.1}%
+\contentsline {section}{\numberline {4.7}Architectural Evolution: The Path to v14}{30}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Stage 1 (v1 to v5): Monolithic Flat Baselines and Forensic Debugging}{30}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Stage 2 (v6 to v9): Hierarchical Discourse Modeling}{31}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}Stage 3 (v10 to v13): Recency Gating and Specialist Routing}{31}{subsection.4.7.3}%
+\contentsline {subsection}{\numberline {4.7.4}Stage 4 (v14): Antiphony Dual-Stream Architecture}{31}{subsection.4.7.4}%
+\contentsline {section}{\numberline {4.8}Design Refinement and Simulation}{32}{section.4.8}%
+\contentsline {subsection}{\numberline {4.8.1}Capacity Calculations and Sequence Length Budgeting}{32}{subsection.4.8.1}%
+\contentsline {subsection}{\numberline {4.8.2}Memory Profiling and Hardware Guards}{32}{subsection.4.8.2}%
+\contentsline {section}{\numberline {4.9}Application of Tools}{32}{section.4.9}%
+\contentsline {section}{\numberline {4.10}Implementation}{33}{section.4.10}%
+\contentsline {subsection}{\numberline {4.10.1}Version Control and Development History}{33}{subsection.4.10.1}%
+\contentsline {subsection}{\numberline {4.10.2}Deterministic Seeding and Audit Artifacts}{33}{subsection.4.10.2}%
+\contentsline {section}{\numberline {4.11}Deployment}{33}{section.4.11}%
+\contentsline {subsection}{\numberline {4.11.1}Prototype Execution Pipeline}{33}{subsection.4.11.1}%
+\contentsline {subsection}{\numberline {4.11.2}Resource Consumption}{33}{subsection.4.11.2}%
+\contentsline {subsection}{\numberline {4.11.3}Operational Boundaries and Omissions}{33}{subsection.4.11.3}%
+\contentsline {chapter}{\numberline {5}Investigation and Evaluation}{35}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Experimental Investigation Setup}{35}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Research Questions and Hypotheses}{35}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Data Splits and Evaluation Protocols}{35}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Evaluation Metrics}{36}{subsection.5.1.3}%
+\contentsline {section}{\numberline {5.2}Corpus Dynamics and Strategy Exploratory Data Analysis}{36}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Key Analytical EDA Takeaways}{36}{subsection.5.2.1}%
+\contentsline {section}{\numberline {5.3}Intention Classification Results Across Three Passes}{36}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Part 1: Results on the First-Pass Dataset (Binary + Modifier)}{36}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Part 2: Results on the Second-Pass Dataset (Modifier Dropped)}{41}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Part 3: Results on the Third-Pass Dataset (Strict Commitment)}{41}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Direct Comparison: v13-Solo vs. v14-Antiphony}{42}{subsection.5.3.4}%
+\contentsline {section}{\numberline {5.4}Strategy and Category Multi-Task Benchmarking}{42}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}The Evolutionary Arc Across Five Modeling Stages}{42}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Operating Points and the v17 Micro-Optimal Decode}{42}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Evaluated Decision Combiners: Stacker vs. Blend}{43}{subsection.5.4.3}%
+\contentsline {section}{\numberline {5.5}Cross-Domain Transfer and Adversarial Ablation}{43}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Monolithic Input Ablation Study}{43}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Treatment Evaluation: Antiphony on Augmented Dialogues}{44}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}Widening of the Sufficiency Gap}{44}{subsection.5.5.3}%
+\contentsline {section}{\numberline {5.6}Skew Stress Analysis}{44}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Forensic Post-Mortems}{46}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Tokenizer Truncation Directionality Forensic}{46}{subsection.5.7.1}%
+\contentsline {subsection}{\numberline {5.7.2}Merchant Accommodation Leakage}{46}{subsection.5.7.2}%
+\contentsline {section}{\numberline {5.8}Performance Evaluation Against Requirements}{47}{section.5.8}%
+\contentsline {section}{\numberline {5.9}Deviations and Design Revisions}{47}{section.5.9}%
+\contentsline {chapter}{\numberline {6}Project Management, Teamwork, and Impact}{49}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Project Management and Finance}{49}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Planning and Risk Management}{49}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Budgeting and Resource Identification}{49}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Economic Analysis and Financial Prospecting}{51}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.4}Sustainability in Business and Commercialisation}{51}{subsection.6.1.4}%
+\contentsline {section}{\numberline {6.2}Individual and Teamwork}{51}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Participation and Contribution}{51}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Collaboration and Conflict Resolution}{52}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Leadership and Direction}{52}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Multidisciplinary Engagement}{52}{subsection.6.2.4}%
+\contentsline {section}{\numberline {6.3}Impact on Society}{53}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Positive Societal and Commercial Benefits}{53}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Dual-Use Risks: Coercive Manipulation and Dark Patterns}{53}{subsection.6.3.2}%
+\contentsline {section}{\numberline {6.4}Environmental Impact and Life Cycle Sustainability}{53}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Transparent Computational Energy and Carbon Accounting}{53}{subsection.6.4.1}%
+\contentsline {section}{\numberline {6.5}Ethics}{54}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Equity and Inclusivity}{54}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}Accountability and Personal Responsibility}{54}{subsection.6.5.2}%
+\contentsline {subsection}{\numberline {6.5.3}Proper Use of Intellectual Property}{54}{subsection.6.5.3}%
+\contentsline {subsection}{\numberline {6.5.4}Professionalism and Ethical Codes}{55}{subsection.6.5.4}%
+\contentsline {chapter}{\numberline {7}Conclusion}{56}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Conclusion and Future Work}{56}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Summary of Achievements Against Objectives}{56}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Documented Limitations}{56}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Focused Future Work}{58}{subsection.7.1.3}%
+\contentsline {section}{\numberline {7.2}Continuous Engagement and Self-directed Learning}{58}{section.7.2}%
+\contentsline {chapter}{\numberline {A}Hyperparameters and Optimization Specifications}{62}{appendix.A}%
+\contentsline {chapter}{\numberline {B}Repository Map and Notebook Lineage}{63}{appendix.B}%
+\contentsline {chapter}{\numberline {C}Data Contracts and Schemas}{64}{appendix.C}%
+\contentsline {chapter}{\numberline {D}Conflict Register and Empirical Audit Log}{66}{appendix.D}%
+\contentsline {chapter}{\numberline {E}Complete 41-Strategy Empirical Prevalence Table}{68}{appendix.E}%

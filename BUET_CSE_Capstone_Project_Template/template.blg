@@ -1,0 +1,61 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: template.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: IEEEtran.bst
+Reallocating 'name_of_file' (item size: 1) to 11 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Database file #1: references.bib
+Warning--entry type for "nistairmf" isn't style-file defined
+--line 341 of file references.bib
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+
+Done.
+You've used 44 entries,
+            4087 wiz_defined-function locations,
+            1048 strings with 16962 characters,
+and the built_in function-call counts, 37521 in all, are:
+= -- 2757
+> -- 1132
+< -- 334
++ -- 620
+- -- 210
+* -- 1772
+:= -- 5137
+add.period$ -- 88
+call.type$ -- 44
+change.case$ -- 44
+chr.to.int$ -- 867
+cite$ -- 44
+duplicate$ -- 2607
+empty$ -- 3116
+format.name$ -- 238
+if$ -- 8869
+int.to.chr$ -- 0
+int.to.str$ -- 44
+missing$ -- 482
+newline$ -- 157
+num.names$ -- 44
+pop$ -- 1258
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 2864
+stack$ -- 0
+substring$ -- 1926
+swap$ -- 2148
+text.length$ -- 45
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 44
+warning$ -- 0
+while$ -- 158
+width$ -- 46
+write$ -- 418
+(There was 1 warning)

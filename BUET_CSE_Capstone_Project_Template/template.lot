@@ -1,0 +1,38 @@
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {1.1}{\ignorespaces Complex engineering problem characteristics (P1--P7) and project evidence}}{4}{table.caption.6}%
+\contentsline {table}{\numberline {1.2}{\ignorespaces Knowledge profiles referenced by P1}}{5}{table.caption.7}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Synthesis of research literature and identified gaps}}{9}{table.caption.8}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Multi-criteria architectural decision matrix (scores: 1 = Poor, 5 = Excellent)}}{15}{table.caption.9}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Modular subsystem decomposition and responsibilities}}{17}{table.caption.11}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Empirical prevalence of communicative categories across 10,600 Persuader turns}}{20}{table.caption.13}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Test set performance on First-Pass dataset (738 yes / 279 no, test $n=153$)}}{40}{table.caption.22}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Test set performance on Second-Pass dataset (738 yes / 279 no, test $n=153$)}}{41}{table.caption.23}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Detailed class-level test breakdown: v14-Antiphony on Second-Pass dataset}}{41}{table.caption.24}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Test set performance on Third-Pass dataset (694 yes / 323 no, test $n=153$)}}{41}{table.caption.25}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Detailed class-level test breakdown: v14-Antiphony on Third-Pass dataset}}{42}{table.caption.26}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Head-to-head comparison: best encoder of v13-Solo vs. v14-Antiphony}}{42}{table.caption.27}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Evolutionary progression of strategy and category modeling}}{42}{table.caption.28}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Comparison of operating points across v17 and v18}}{43}{table.caption.29}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Cross-validated evaluation of ensemble decision combiners}}{43}{table.caption.30}%
+\contentsline {table}{\numberline {5.10}{\ignorespaces Monolithic transformer input ablation results}}{44}{table.caption.31}%
+\contentsline {table}{\numberline {5.11}{\ignorespaces Benchmark performance on augmented negotiation corpus ($N=700$, test $n=105$)}}{44}{table.caption.32}%
+\contentsline {table}{\numberline {5.12}{\ignorespaces Sufficiency gap expansion across canonical and adversarial corpora}}{44}{table.caption.33}%
+\contentsline {table}{\numberline {5.13}{\ignorespaces Verification matrix evaluating system compliance against requirements}}{48}{table.caption.39}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Project risk management matrix, impact levels, and mitigations}}{50}{table.caption.41}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces Estimated computational energy consumption and greenhouse gas emissions}}{54}{table.caption.42}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {7.1}{\ignorespaces Objective-by-objective verification of project outcomes}}{57}{table.caption.43}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {A.1}{\ignorespaces Training and optimization hyperparameters across model families}}{62}{table.caption.45}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {B.1}{\ignorespaces Primary project artifacts, notebooks, and source code mapping}}{63}{table.caption.46}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {D.1}{\ignorespaces Project conflict register, discrepancies, and resolutions}}{67}{table.caption.47}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {E.1}{\ignorespaces Data-verified prevalence of all 41 persuasion strategies ($10{,}600$ turns)}}{68}{table.E.1}%
