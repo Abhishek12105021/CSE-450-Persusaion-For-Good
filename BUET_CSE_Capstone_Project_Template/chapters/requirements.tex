@@ -4,22 +4,111 @@
 
 \section{Project Objectives and Constraints}
 \label{sec:requirements}
-\guidance{Identify all stakeholders (users, client or industry partner,
-administrators, regulators) and their expectations, including conflicting
-ones. Then clearly state the objectives, the functional and non-functional
-requirements, and the constraints (time, budget, platform, data,
-deployment), taking those expectations into account.}
+
+Developing an effective, ethically grounded machine learning system for asymmetric conversational modeling requires translating high-level project goals into rigorous, verifiable functional and non-functional specifications while accounting for diverse stakeholder needs and strict computational boundaries.
+
+\subsection{Stakeholder Analysis and Conflicting Expectations}
+The system impacts multiple distinct stakeholder groups whose interests frequently diverge:
+\begin{enumerate}
+  \item \textbf{Academic Researchers in NLP and Behavioral Science:} Require high reproducibility, transparent reporting of negative findings, statistically valid significance bounds, and standardized open-source benchmarks free from data leakage and annotation artifacts.
+  \item \textbf{Social Commerce Micro-Merchants and Sales Managers:} Seek automated tools to rapidly identify high-probability purchase commitments, triage inbound inquiries, and identify which rhetorical tactics maximize sales conversion velocity. Their priority is high recall on affirmative buying decisions.
+  \item \textbf{Consumers and Persuadees:} Require protection against coercive persuasion, predatory pricing, and deceptive conversational tactics (dark patterns). They expect their privacy and transaction autonomy to be preserved.
+  \item \textbf{Data Annotators and Evaluators:} Demand clear, unambiguous guidelines with realistic task density limits to avoid cognitive fatigue and subjective drift during multi-label coding.
+  \item \textbf{Project Supervisors and Academic Assessors:} Expect adherence to rigorous engineering methodologies, transparent accounting of compute resources, and verifiable compliance with accreditation standards.
+\end{enumerate}
+
+These expectations introduce fundamental tensions: commercial stakeholders prioritize conversion metrics, whereas ethical standards mandate protecting consumer autonomy; maximizing rare-class recall conflicts with maintaining high overall precision; and comprehensive contextual modeling conflicts with hardware memory limitations.
+
+\subsection{Functional Requirements (FR)}
+The system must satisfy six core functional requirements:
+\begin{itemize}
+  \item \textbf{FR1: Grounded Binary Commitment Classification.} Given a complete multi-turn dialogue transcript $\mathcal{D}$, the model must predict the decider's final unconditional commitment state $y \in \{\text{yes}, \text{no}\}$, achieving an overall test Macro-F1 exceeding $0.84$ on strict third-pass labels.
+  \item \textbf{FR2: Turn-Level Multi-Label Strategy Attribution.} For any designated Persuader utterance $u_t$, the model must predict the active subset of rhetorical strategies $\mathbf{y}_t \subseteq \mathcal{S}_{41}$ ($|\mathbf{y}_t| \le 6$) and their corresponding parent communicative categories $\mathbf{c}_t \subseteq \mathcal{C}_{11}$.
+  \item \textbf{FR3: Strict Causal Information Gating.} At test and deployment time, the strategy model must operate strictly causally without access to: (i) future conversational turns ($u_{t+1}, \dots, u_N$), (ii) whole-dialogue post-hoc smoothing, or (iii) annotator identity metadata.
+  \item \textbf{FR4: Cross-Domain Transactional Generalization.} The intention modeling architecture must demonstrate zero-shot or fine-tuned domain transfer from charitable donation dialogues to commercial buyer-merchant negotiations.
+  \item \textbf{FR5: Adversarial Stance Reversal Detection.} Under non-monotonic conversational trajectories (e.g., initial skepticism reversing to late commitment, or tentative agreement collapsing into cancellation), the model must leverage multi-turn trajectory context, maintaining a positive sufficiency gap ($\Delta_{\text{suff}} > 0$) relative to localized closing-turn controls.
+  \item \textbf{FR6: Multi-Threshold Decision Calibration.} The system must provide calibrated output probabilities and tunable decision thresholds across both macro-oriented (rare class recovery) and micro-oriented (global accuracy) operating regimes.
+\end{itemize}
+
+\subsection{Non-Functional Requirements (NFR)}
+The system is governed by five essential non-functional requirements:
+\begin{itemize}
+  \item \textbf{NFR1: Absolute Deterministic Reproducibility.} All data preprocessing, random splits, augmentation pipelines, and neural network parameter initializations must be governed by fixed pseudo-random seeds (Seed $= 42$), enabling exact bitwise or statistical replication of all reported metrics.
+  \item \textbf{NFR2: Hardware and Memory Efficiency.} The entire model training, fine-tuning, and inference pipeline must execute within the hardware constraints of a single commodity cloud GPU accelerator (NVIDIA Tesla T4 with 16\,GB VRAM). Batch sizes, gradient checkpointing, and tensor dimensions must prevent Out-Of-Memory (OOM) faults during 2,048-token hierarchical passes.
+  \item \textbf{NFR3: Noise-Aware Performance Benchmarking.} In recognition of human subjective disagreement, strategy model performance must be benchmarked against an empirically derived cross-annotator agreement ceiling ($0.79$ micro-F1) rather than a naive 1.0 ceiling.
+  \item \textbf{NFR4: Data Privacy and Confidentiality.} To eliminate legal and ethical risks regarding customer Personally Identifiable Information (PII), cross-domain commercial evaluation must utilize high-fidelity synthetic benchmarks generated under strict privacy constraints.
+  \item \textbf{NFR5: Transparent Negative Result Reporting.} All architectural failures, negative ablation results, and unresolved dataset conflicts must be documented transparently in the engineering record without retroactively altering experimental protocols.
+\end{itemize}
+
+\subsection{Physical and Operational Constraints}
+\begin{itemize}
+  \item \textbf{Data Sample Constraints:} The core intention corpus contains exactly 1,017 dialogues ($711$ train, $153$ validation, $153$ test). The held-out test split of 153 dialogues implies that each single misclassification alters accuracy and per-class recall by $\approx 0.65\%$.
+  \item \textbf{Extreme Tail Sparsity:} In the strategy dataset ($10{,}600$ turns), the rarest strategy (\texttt{door\_in\_the\_face}) occurs only twice, precluding independent single-model supervised convergence and enforcing an 11-category primary modeling objective.
+  \item \textbf{Compute Horizon Constraints:} Cloud runtime session limits (Kaggle maximum 12 hours per session) enforce strict per-epoch training velocity, precluding massive unconstrained parameter searches.
+\end{itemize}
 
 \section{Regulatory Requirements and Standards}
 \label{sec:standards}
-\guidance{Identify all relevant regulatory requirements, engineering standards, and
-codes of practice (e.g. data-protection law, WCAG, OWASP, ISO/IEC/IEEE
-standards, industry rules, partner policies). For each, state why it applies
-and how the design complies.}
+
+Responsible engineering requires rigorous alignment with professional ethics, artificial intelligence risk frameworks, and software quality standards:
+
+\begin{enumerate}
+  \item \textbf{ACM and IEEE Codes of Ethics:} The development adheres strictly to the ACM Code of Ethics \cite{acmcode} and IEEE Code of Ethics \cite{ieeecode}, specifically mandates regarding contributing to societal human well-being, avoiding deception and harm, respecting privacy, and upholding intellectual honesty in scientific reporting.
+  \item \textbf{IEEE 7000-2021 Standard Model Process:} Aligns with IEEE 7000-2021 (\textit{Addressing Ethical Concerns During System Design}) \cite{ieee7000} by conducting early stakeholder impact analysis, identifying potential dual-use vulnerabilities of persuasive AI, and incorporating explicit value-based design boundaries.
+  \item \textbf{NIST AI Risk Management Framework (AI RMF 1.0):} The project structure mirrors NIST AI 100-1 \cite{nistairmf} core functions: \textit{Govern} (establishing research scope and ethical boundaries), \textit{Map} (identifying context, conversational asymmetry, and failure modes), \textit{Measure} (rigorous empirical testing, sufficiency gap calculations, and noise ceiling derivations), and \textit{Manage} (systematic ablation, forensic debugging, and mitigation of shortcut learning).
+  \item \textbf{ISO/IEC 25010:2011 Software Quality Requirements:} Evaluates system quality against the ISO/IEC 25010 \cite{iso25010} product quality model, focusing on functional suitability (completeness, correctness), performance efficiency (time behavior, resource utilization on 16\,GB GPUs), reliability (fault tolerance against corrupted tokens), and maintainability (modular notebook architecture).
+  \item \textbf{Model Cards and Datasheets for Datasets:} Documentation follows the ethical transparency protocols established by Mitchell et al. \cite{mitchell2019model} (\textit{Model Cards}) and Gebru et al. \cite{gebru2021datasheets} (\textit{Datasheets for Datasets}), detailing training data provenance, intended use, performance limitations, and known demographic skews.
+  \item \textbf{Data Protection and Statutory Compliance:} Respects the terms of use of the original P4G benchmark and public cloud providers. In relation to national jurisdictions, the project notes the evolving legal standards in Bangladesh regarding digital privacy and cyber-security \pending{Confirm specific sections of the relevant Bangladeshi data protection and cyber-security statutes}.
+\end{enumerate}
 
 \section{Formulation of Solutions}
 \label{sec:alternatives}
-\guidance{Formulate multiple genuinely different solutions that could each
-functionally meet most requirements. Compare and evaluate them against
-explicit criteria from the requirements and constraints, and draw a valid
-conclusion that justifies the selected solution.}
+
+To identify the optimal system architecture for asymmetric intention and strategy modeling, we formulate five genuinely distinct candidate engineering solutions:
+
+\begin{enumerate}[wide=0pt, label=\textbf{Candidate \arabic*:}, itemsep=6pt]
+  \item \textbf{Monolithic Flat Sequence Transformer:} Concatenates all turns of the dialogue into a single flat string separated by special speaker tokens, passing it to a pre-trained transformer (RoBERTa-base) with a standard sequence classification head over the \texttt{[CLS]} token. Imposes a rigid 256- or 512-token cap.
+  \item \textbf{Prompt-Engineered General-Purpose LLM:} Uses zero-shot and few-shot natural language prompts dispatched via API calls to a commercial proprietary LLM (e.g., GPT-4 or Claude-3.5) with structured JSON decoding.
+  \item \textbf{Classical Bag-of-Words and Gradient Boosted Decision Trees:} Extracts turn-level and dialogue-level n-gram TF-IDF representations combined with hand-crafted conversational features, classified using tuned XGBoost \cite{chen2016xgboost} or Logistic Regression ensembles.
+  \item \textbf{Single-Stream Hierarchical Dialogue Transformer:} Employs a dual-level architecture (HiTrans-style \cite{li2020hitrans}): turns are encoded individually by a frozen or fine-tuned transformer, turn vectors are pooled, and a second transformer performs self-attention over the interleaved sequence of all turns using additive role embeddings.
+  \item \textbf{Role-Pure Dual-Stream Antiphony Architecture (Selected):} Disentangles the dialogue into two pure speaker streams ($\mathcal{P}$ and $\mathcal{D}$). Each stream is processed by independent transformer layers, connected via directional cross-attention ($Q_{\mathcal{D}}, K_{\mathcal{P}}, V_{\mathcal{P}}$), and aggregated through a parallel combination of a commitment-trajectory GRU (read at the true final decider turn) and attention pooling.
+\end{enumerate}
+
+\subsection{Multi-Criteria Evaluation and Decision Matrix}
+To evaluate these candidate architectures rigorously, we define six explicit engineering criteria grounded in our requirements:
+\begin{itemize}
+  \item \textbf{C1: Multi-Turn Context Capacity} (Weight: 20\%) -- Ability to ingest dialogues exceeding 500 words without sequence truncation.
+  \item \textbf{C2: Asymmetric Interaction Modeling} (Weight: 20\%) -- Architectural fidelity in capturing the directional influence of persuader arguments on decider commitment.
+  \item \textbf{C3: Long-Tail and Imbalance Robustness} (Weight: 15\%) -- Resistance to gradient collapse on rare classes.
+  \item \textbf{C4: Hardware and Cost Feasibility} (Weight: 15\%) -- Ability to train and evaluate within free-tier GPU constraints (16\,GB T4) with zero recurring API costs.
+  \item \textbf{C5: Latency and Determinism} (Weight: 10\%) -- Fast, reproducible, non-stochastic inference suitable for offline batch analytics.
+  \item \textbf{C6: Empirical Intention Performance} (Weight: 20\%) -- Measured Macro-F1 on held-out benchmark splits.
+\end{itemize}
+
+\Cref{tab:decision-matrix} presents the comparative evaluation matrix.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Multi-criteria architectural decision matrix (scores: 1 = Poor, 5 = Excellent)}
+  \label{tab:decision-matrix}
+  \setlength{\tabcolsep}{3.5pt}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X *{6}{>{\centering\arraybackslash}p{0.075\textwidth}} >{\centering\arraybackslash\bfseries}p{0.14\textwidth}}
+    \toprule
+    \textbf{Candidate Architecture} & \textbf{C1} \newline (20\%) & \textbf{C2} \newline (20\%) & \textbf{C3} \newline (15\%) & \textbf{C4} \newline (15\%) & \textbf{C5} \newline (10\%) & \textbf{C6} \newline (20\%) & \textbf{Weighted} \newline \textbf{Score} \\
+    \midrule
+    1. Monolithic Flat Transformer & 1 & 2 & 3 & 4 & 5 & 2.5 ($0.65$) & 2.60 \\
+    \rowcolor{lightbg}
+    2. Prompt-Engineered LLM & 4 & 3 & 2 & 1 & 1 & N/E & 2.30 \\
+    3. Classical TF-IDF + GBDT & 2 & 1 & 2 & 5 & 5 & 2.0 ($0.46$) & 2.50 \\
+    \rowcolor{lightbg}
+    4. Single-Stream Hierarchical & 5 & 3 & 4 & 4 & 4 & 4.0 ($0.82$) & 3.95 \\
+    \textbf{5. Dual-Stream Antiphony} & \textbf{5} & \textbf{5} & \textbf{4} & \textbf{4} & \textbf{4} & \textbf{5.0 ($0.86$)} & \textbf{4.60} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{Conclusion and Selection Justification}
+\begin{keypoint}[Architectural Selection Justification]
+As demonstrated in \Cref{tab:decision-matrix}, Candidate 5 (\textbf{Dual-Stream Antiphony}) achieves the highest weighted score ($4.60/5.00$). Candidate 1 is crippled by context truncation; Candidate 2 is ruled out by extreme financial costs, high latency, and data privacy issues; Candidate 3 lacks deep semantic reasoning; and Candidate 4, while achieving strong results ($0.821$ Macro-F1), relies on additive role embeddings and lacks an explicit mechanism for directional decider-on-persuader cross-attention. Consequently, the Dual-Stream Antiphony architecture is selected as the definitive system design.
+\end{keypoint}

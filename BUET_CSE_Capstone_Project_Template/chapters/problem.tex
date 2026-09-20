@@ -4,66 +4,147 @@
 
 \section{Background and Motivation}
 \label{sec:background}
-\guidance{Introduce the domain and explain why the problem matters: who is
-affected, at what scale, and what the current situation costs them.}
+
+Conversational interaction is the primary medium through which human beings negotiate terms, coordinate actions, resolve conflicts, and solicit prosocial commitments. In contemporary digital ecosystems, conversational processes are increasingly mediated by computerized platforms, ranging from social commerce messaging channels (such as WhatsApp, Facebook Messenger, and Instagram Direct) to automated customer support, peer-to-peer micro-lending, and digital philanthropy. In these domains, interaction does not follow the symmetric patterns of open-ended chit-chat or standard task-oriented slot filling. Rather, it is defined by a fundamental \textit{communicative asymmetry}: one participant assumes the role of an \textit{Arguer} or \textit{Persuader} (e.g., a merchant pitching goods or an advocate soliciting charitable contributions), while the counterparty assumes the role of a \textit{Decider} or \textit{Persuadee} (e.g., a prospective buyer assessing product-price fit or a donor deciding whether to surrender a portion of their earnings).
+
+Understanding and modeling these interactions computationally holds profound socioeconomic importance. In developing economies such as Bangladesh, conversational commerce represents a multi-million-dollar informal market. Thousands of micro-enterprises and independent merchants conduct daily trade exclusively through unscripted multi-turn chats. Merchants must address customer skepticism, negotiate price concessions, and provide logistical assurances, while buyers must guard against counterfeit goods, non-delivery risks, and aggressive sales tactics. Similarly, in non-profit fundraising and public health advocacy, persuasive dialogues determine whether individuals commit to prosocial actions. 
+
+However, developing robust machine learning systems for asymmetric conversational analysis faces severe foundational bottlenecks:
+\begin{enumerate}[label=(\alph*)]
+  \item \textbf{Ground-Truth Unreliability in Existing Corpora:} In benchmark datasets such as \textit{Persuasion for Good} (P4G) \cite{wang2019persuasion}, the recorded numeric transaction metadata frequently contradicts the grounded semantic content of the conversation. For instance, participants who explicitly confirmed a monetary donation in the dialogue transcript have \$0 recorded in the dataset's tabular summary, while others who deferred or hedged are marked with positive values. Automated classifiers trained on raw tabular metadata inadvertently learn to fit logging artifacts rather than linguistic commitments.
+  \item \textbf{Structural Failure of Monolithic Sequence Encoders:} Conventional natural language processing pipelines flatten multi-turn dialogues into a single contiguous token sequence passed to a pre-trained transformer (e.g., BERT \cite{devlin2019bert} or RoBERTa \cite{liu2019roberta}). Standard pre-trained models enforce strict context ceilings (typically 256 or 512 tokens). Because natural dialogues frequently span 300 to 800 words across 15 to 30 turns, right-truncation silently discards the terminal turns where the actual decision is finalized, capping classification performance at trivial baselines ($\text{Macro-F1} \approx 0.65$).
+  \item \textbf{Neglect of Conversational Role Dynamics:} Standard hierarchical models mix utterances from both speakers into a single self-attention sequence, relying on weak positional or additive role embeddings to distinguish who is speaking. Such architectures fail to capture the directional dynamic wherein the decider's stance shifts specifically in reaction to the rhetorical moves deployed by the persuader.
+  \item \textbf{Severe Class Imbalance and Extreme Long Tails:} When annotating the specific rhetorical strategies deployed by the persuader (e.g., Cialdini's influence techniques \cite{cialdini2001influence}, emotional appeals, credibility citations), the resulting multi-label distribution exhibits extreme skew. Rare but psychologically potent strategies (e.g., \textit{door-in-the-face}) appear only a handful of times across thousands of turns, causing standard multi-label classifiers to collapse.
+  \item \textbf{Data Scarcity and Privacy Barriers in Commercial Negotiation:} Commercial negotiation logs from real social commerce platforms are heavily guarded proprietary assets subject to stringent privacy regulations. Researchers lack access to standardized, high-density negotiation benchmarks that test whether conversational models can track subtle, non-monotonic stance shifts (such as a buyer agreeing to purchase after severe resistance, or aborting a transaction at the final turn due to delivery friction).
+\end{enumerate}
+
+This capstone project directly resolves these challenges by constructing a mathematically grounded, empirically verified computational framework for modeling conversational intention and persuasion strategies in asymmetric multi-turn dialogues.
 
 \section{Problem Statement}
 \label{sec:problem-statement}
-\guidance{State precisely the problem the project solves. Formulate it in
-engineering terms: the inputs and outputs, the entities involved, the
-quantities to be optimised or guaranteed, and the assumptions made. Identify
-the engineering knowledge (mathematics, computing fundamentals, specialist
-knowledge) the problem demands.}
+
+\begin{summarybox}[Mathematical Invariant: Two-Party Asymmetric Dialogue Representation]
+Let a multi-turn two-party dialogue $\mathcal{D}$ be represented as an ordered sequence of $N$ utterances:
+\begin{equation}
+  \mathcal{D} = \big( (u_1, r_1), (u_2, r_2), \dots, (u_N, r_N) \big)
+\end{equation}
+where each utterance $u_i \in \mathcal{V}^*$ is a sequence of tokens from vocabulary $\mathcal{V}$, and $r_i \in \{\mathcal{P}, \mathcal{D}\}$ designates the speaker role, partitioned strictly between the Persuader/Merchant ($\mathcal{P}$) and the Persuadee/Buyer ($\mathcal{D}$).
+\end{summarybox}
+
+We formulate three distinct, interconnected computational sub-problems:
+
+\subsection{Sub-Problem 1: Grounded Conversational Intention Classification}
+Given the entire multi-turn transcript $\mathcal{D}$, the objective is to learn a mapping $f_\theta: \mathcal{D} \to \mathcal{Y}$ predicting the final binary commitment state $y \in \mathcal{Y} = \{\text{yes}, \text{no}\}$ of the decider $\mathcal{D}$. The ground-truth label $y$ is strictly defined by the decider's final, unconditional position: $y = \text{yes}$ if and only if the decider explicitly and unconditionally commits to the target action (e.g., donating task earnings or finalizing a product purchase); $y = \text{no}$ if the decider refuses, deflects, defers to an indeterminate future time, or imposes unresolved conditional hedges. The optimization objective maximizes binary Macro-F1:
+\begin{equation}
+  \text{Macro-F1} = \frac{1}{2} \left( F_1^{(\text{no})} + F_1^{(\text{yes})} \right)
+\end{equation}
+under severe class imbalance ($31.8\%$ negative prevalence in the ground-truth corpus).
+
+\subsection{Sub-Problem 2: Multi-Label Persuasion Strategy and Category Attribution}
+Given an arbitrary Persuader utterance $u_t$ (where $r_t = \mathcal{P}$) situated within a causal, non-anticipatory historical conversational context of prior turns $\mathcal{H}_t = (u_{\max(1, t-k)}, \dots, u_{t-1})$, the objective is to predict the active subset of rhetorical strategies $\mathbf{y}_t \subseteq \mathcal{S}_{41}$, where $|\mathbf{y}_t| \in \{0, 1, \dots, 6\}$ and $\mathcal{S}_{41}$ represents a closed taxonomy of 41 fine-grained persuasion strategies. The multi-label strategy vector deterministically maps to a higher-level communicative category subset $\mathbf{c}_t \subseteq \mathcal{C}_{11}$ via an surjective mapping $\mathcal{M}: \mathcal{S}_{41} \to \mathcal{C}_{11}$. The learning system must optimize predictive fidelity across the 11 communicative categories as the primary objective, with the 41 strategies acting as an auxiliary multi-task regularizer:
+\begin{equation}
+  \hat{\mathbf{c}}_t = g_\phi(u_t, \mathcal{H}_t) \in [0, 1]^{11}, \quad \hat{\mathbf{y}}_t = h_\psi(u_t, \mathcal{H}_t) \in [0, 1]^{41}
+\end{equation}
+subject to the operational constraint that neither future dialogue turns ($u_{t+1}, \dots, u_N$) nor human annotator identity tags are accessible at inference time.
+
+\subsection{Sub-Problem 3: Cross-Domain Transfer and Adversarial Trajectory Tracking}
+Given a target commercial domain with buyer-merchant negotiations $\mathcal{D}_{\text{comm}}$, the objective is to evaluate the cross-domain generalizability of the learned intention architectures under both canonical transactional dynamics and adversarial non-monotonic trajectory reversals. Let $\tau_{\text{rev}}$ denote an internal turn at which a buyer abruptly reverses their stance (e.g., transitioning from skeptical resistance to sudden purchase commitment, or from tentative agreement to explicit cancellation). We define the \textit{sufficiency gap} $\Delta_{\text{suff}}$ of a conversational model relative to a localized closing-turn decision baseline:
+\begin{equation}
+  \Delta_{\text{suff}} = \text{Macro-F1}(f_{\text{full}}(\mathcal{D})) - \text{Macro-F1}(f_{\text{last}}(u_{\text{final}}))
+  \label{eq:sufficiency_gap}
+\end{equation}
+The engineering objective is to demonstrate that trajectory-aware, role-disentangled architectures maintain a positive, widening sufficiency gap ($\Delta_{\text{suff}} \gg 0$) when closing turns are destabilized, whereas monolithic sequence baselines suffer catastrophic performance degradation.
+
+\subsection{Required Engineering Knowledge Profiles}
+Resolving this problem formulation requires rigorous synthesis of multiple foundational engineering and scientific knowledge profiles (as defined in \Cref{tab:knowledge-profile}):
+\begin{itemize}
+  \item \textbf{K3 (Theory-Based Engineering Fundamentals):} Mathematical probability theory, discrete multivariate distributions, gradient-based optimization dynamics, focal and contrastive loss formulations, and information-theoretic evaluation metrics (Macro-F1, micro-F1, Jaccard similarity, bootstrap confidence intervals).
+  \item \textbf{K4 (Specialist NLP and Deep Learning Frameworks):} Theoretical foundations of deep contextual language representation, self-attention and cross-attention mechanics, transformer computational complexity, recurrent gated state tracking (GRU), and out-of-fold stacked generalization.
+  \item \textbf{K5 (Architecture and System Design):} Design of decoupled dual-stream neural networks, masked tensor batching, memory footprint profiling for hardware accelerators, and cross-attention routing under asymmetric key-value constraints.
+  \item \textbf{K8 (Engagement with Frontier Research Literature):} Critical synthesis of recent peer-reviewed literature in dialogue discourse modeling (HiTrans, DialogueRNN), persuasion taxonomy design, asymmetric multi-label loss functions, and shortcut learning artifacts in natural language inference.
+\end{itemize}
 
 \section{Complexity of the Problem}
 \label{sec:complexity}
-A complex engineering problem must have characteristic P1 and some or all of
-P2--P7 (\Cref{tab:complexity}). P1 requires in-depth knowledge at the level
-of one or more of the knowledge profiles K3--K8 listed in
-\Cref{tab:knowledge-profile}.
 
-\guidance{For P1, name the knowledge profile(s) involved and show where in the
-project that knowledge was applied. For each of P2--P7 that applies, give
-concrete evidence from this project. Drop the rows that do not apply.}
+The technical challenges addressed in this capstone project constitute a complex engineering problem as defined by the International Engineering Alliance (IEA) and the Board of Accreditation for Engineering and Technical Education (BAETE). The project satisfies characteristic P1 and all six secondary characteristics P2 through P7. \Cref{tab:complexity} provides the mapping between these complexity characteristics and the concrete technical evidence established in this project. \Cref{tab:knowledge-profile} enumerates the referenced knowledge profiles.
 
 \begin{table}[htbp]
   \centering
-  \caption{Complex engineering problem characteristics (P1--P7) and evidence from this project}
+  \small
+  \caption{Complex engineering problem characteristics (P1--P7) and project evidence}
   \label{tab:complexity}
-  \begin{tabularx}{\textwidth}{l>{\hsize=1.15\hsize}Y>{\hsize=0.85\hsize}Y}
+  \begin{tabularx}{\textwidth}{l>{\hsize=0.85\hsize}Y>{\hsize=1.15\hsize}Y}
     \toprule
-    Code & Definition & Evidence from this project \\
+    \textbf{Code} & \textbf{IEA Characteristic} & \textbf{Evidence from this Project} \\
     \midrule
-    P1 & \textbf{Depth of knowledge required.} Cannot be resolved without in-depth engineering knowledge at the level of one or more of K3, K4, K5, K6, or K8, which allows a fundamentals-based, first-principles analytical approach. & \guidance{Which of K3--K8, and where applied (mandatory)} \\
-    P2 & \textbf{Range of conflicting requirements.} Involves wide-ranging or conflicting technical, engineering, and other issues. & \guidance{The conflicting requirements and trade-offs} \\
-    P3 & \textbf{Depth of analysis required.} Has no obvious solution and requires abstract thinking and originality in analysis to formulate suitable models. & \guidance{Why routine methods were insufficient} \\
-    P4 & \textbf{Familiarity of issues.} Involves infrequently encountered issues. & \guidance{The non-routine issues} \\
-    P5 & \textbf{Extent of applicable codes.} Is outside problems encompassed by standards and codes of practice for professional engineering. & \guidance{Where standards did not cover the problem} \\
-    P6 & \textbf{Extent of stakeholder involvement and conflicting requirements.} Involves diverse groups of stakeholders with widely varying needs. & \guidance{The stakeholder groups and their conflicting needs} \\
-    P7 & \textbf{Interdependence.} Is a high-level problem including many component parts or sub-problems. & \guidance{The sub-problems and their dependencies} \\
+    \textbf{P1} & \textbf{Depth of Knowledge Required} \newline Cannot be resolved without in-depth engineering knowledge at the level of K3, K4, K5, or K8. & Required simultaneous mastery of mathematical loss design (Class-Balanced Focal Loss, Asymmetric Loss), hierarchical transformer attention mechanics, recurrent state tracking, and multi-model calibrated ensemble blending across 19 candidate models. \\
+    \midrule
+    \rowcolor{lightbg}
+    \textbf{P2} & \textbf{Range of Conflicting Requirements} \newline Involves wide-ranging or conflicting technical, engineering, and other issues. & Severe tension between binary commitment accuracy and minority modifier/hedge recall; optimizing macro-F1 (rare classes) directly degraded global micro-F1 by chasing recall on 2-example labels; processing $2{,}048$-token hierarchical dialogues conflicted with the 16\,GB VRAM ceiling of NVIDIA T4 GPUs. \\
+    \midrule
+    \textbf{P3} & \textbf{Depth of Analysis Required} \newline Has no obvious solution and requires abstract thinking and originality in analysis. & Standard monolithic transformers failed ($\text{Macro-F1} \le 0.65$); solving the task required originating a speaker-disentangled dual-stream network (\textit{Antiphony}) wherein the decider queries the persuader via directional cross-attention, coupled with an empirical sufficiency gap analysis. \\
+    \midrule
+    \rowcolor{lightbg}
+    \textbf{P4} & \textbf{Familiarity of Issues} \newline Involves infrequently encountered issues. & Extremely skewed tail classes with only 2 to 5 instances in $10{,}600$ turns (\texttt{door\_in\_the\_face}); subtle tokenizer truncation side-effects where default right-truncation silently excised closing decisions in $30.4\%$ of dialogues; whitespace-gluing corrupting speaker tags in $15.9\%$ of augmented data. \\
+    \midrule
+    \textbf{P5} & \textbf{Extent of Applicable Codes} \newline Outside problems encompassed by standard codes of practice. & No standardized engineering codes exist for multi-label persuasion taxonomy annotation or synthetic negotiation generation; required formulating custom 4-tier decision rules (Removal Test, Function-over-Keyword) and rigorous three-phase human-in-the-loop verification protocols. \\
+    \midrule
+    \rowcolor{lightbg}
+    \textbf{P6} & \textbf{Stakeholder Involvement and Conflicts} \newline Involves diverse stakeholder groups with widely varying needs. & Direct conflict between commercial merchants aiming to maximize conversion velocity and consumers requiring protection from predatory manipulation; academic requirements for reproducible open-source benchmarks vs. strict privacy constraints prohibiting the release of private customer chats. \\
+    \midrule
+    \textbf{P7} & \textbf{Interdependence} \newline High-level problem with many interconnected sub-problems. & Tight cascading dependencies across three datasets ($N=1{,}017$ P4G, $10{,}600$ strategy turns, $N=700$ negotiation benchmark); tightening ground-truth intention labels in Pass 3 necessitated retraining and recalibrating the entire downstream 14-model architectural lineage. \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
 \begin{table}[htbp]
   \centering
+  \small
   \caption{Knowledge profiles referenced by P1}
   \label{tab:knowledge-profile}
   \begin{tabularx}{\textwidth}{lY}
     \toprule
-    Code & Description \\
+    \textbf{Code} & \textbf{Description} \\
     \midrule
-    K3 & A systematic, theory-based formulation of engineering fundamentals required in the engineering discipline. \\
-    K4 & Engineering specialist knowledge that provides theoretical frameworks and bodies of knowledge for the accepted practice areas in the engineering discipline; much is at the forefront of the discipline. \\
-    K5 & Knowledge that supports engineering design in a practice area. \\
-    K6 & Knowledge of engineering practice (technology) in the practice areas in the engineering discipline. \\
-    K8 & Engagement with selected knowledge in the research literature of the discipline. \\
+    \textbf{K3} & A systematic, theory-based formulation of engineering fundamentals required in the engineering discipline. \\
+    \rowcolor{lightbg}
+    \textbf{K4} & Engineering specialist knowledge that provides theoretical frameworks and bodies of knowledge for the accepted practice areas in the engineering discipline; much is at the forefront of the discipline. \\
+    \textbf{K5} & Knowledge that supports engineering design in a practice area. \\
+    \rowcolor{lightbg}
+    \textbf{K6} & Knowledge of engineering practice (technology) in the practice areas in the engineering discipline. \\
+    \textbf{K8} & Engagement with selected knowledge in the research literature of the discipline. \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
 \section{Project Objectives and Scope}
 \label{sec:objectives}
-\guidance{State the objectives as a numbered list of concrete, verifiable goals
-(\Cref{ch:evaluation} evaluates against them), then the scope: what is
-included and what is explicitly excluded.}
+
+\subsection{Project Objectives}
+To address the problem formulation and resolve its inherent technical complexities, this capstone project pursued seven concrete, verifiable engineering objectives:
+\begin{enumerate}[label=\textbf{O\arabic*.}]
+  \item \textbf{Curation of Ground-Truth Intention Corpus:} Re-annotate the 1,017-dialogue P4G corpus across three rigorous passes, resolving discrepancies between recorded metadata and transcript text, establishing a high-integrity binary benchmark (694 yes / 323 no) with verified inter-annotator consistency ($92.21\%$ agreement).
+  \item \textbf{Systematic Intention Architecture Evolution:} Implement and systematically evaluate 14 successive intention classification architectures across four evolutionary stages, overcoming the 256-token context ceiling of flat transformers and formulating the role-disentangled \textit{AntiphonyClassifier} (Dual-Stream Cross-Attention Architecture).
+  \item \textbf{Establish State-of-the-Art Intention Prediction:} Achieve superior predictive performance on held-out test splits, exceeding $0.86$ Macro-F1 on second-pass labels and $0.84$ Macro-F1 on strict third-pass labels across multiple pre-trained transformer backbones (RoBERTa, DeBERTa-v3, TOD-BERT).
+  \item \textbf{Fine-Grained Persuasion Strategy Annotation:} Construct a verified multi-label dataset of $10{,}600$ Persuader utterances annotated under an 11-category, 41-strategy hierarchical taxonomy, enforcing strict decision protocols and deriving an empirical cross-annotator agreement ceiling ($0.79$ micro-F1).
+  \item \textbf{Multi-Task Strategy and Category Modeling:} Build an ensemble modeling framework over an 11-category primary objective with a 41-strategy auxiliary head, evaluating a 19-member model pool and demonstrating that a calibrated power-mean blend achieves competitive validation scores ($0.6949$ micro-F1 / $0.5597$ macro-F1, with a micro-optimal operating point of $0.7062$ / $0.5642$) outperforming an XGBoost stacker.
+  \item \textbf{Synthetic E-Commerce Benchmark Generation:} Construct a high-fidelity 700-dialogue negotiation benchmark ($N=500$ canonical, $N=200$ adversarial reversals) utilizing persona-conditioned prompting, organic paraphrasing with linguistic jitter, and $100\%$ human-in-the-loop verification.
+  \item \textbf{Cross-Domain Transfer and Adversarial Sufficiency Diagnosis:} Conduct systematic input-ablation experiments across canonical and reversal negotiation corpora, proving that Antiphony maintains trajectory robustness ($0.9619$ Macro-F1) and widens the sufficiency gap ($\Delta_{\text{suff}} = +0.0384$) when closing utterances are destabilized.
+\end{enumerate}
+
+\subsection{Project Scope and Explicit Exclusions}
+To maintain engineering depth and focus computational resources effectively, the following boundaries define the project scope:
+
+\begin{keypoint}[Operational Scope Boundaries \& Explicit Exclusions]
+\begin{itemize}
+  \item \textbf{In Scope:} Offline discriminative modeling of conversational commitment and rhetorical strategy; multi-label and multi-task loss formulation; hierarchical neural architecture design; synthetic dialogue generation pipelines; comprehensive empirical ablation and forensic post-mortems; compute and energy accounting.
+  \item \textbf{Explicit Exclusions:}
+    \begin{enumerate}
+      \item \textit{No Live Conversational Chatbot Deployment:} The project develops research-grade discriminative classifiers; it does not deploy an autonomous agent interacting with live human users in production environments.
+      \item \textit{No Natural Language Generation (NLG):} The primary focus is dialogue understanding and strategy classification; autonomous tactical response generation is excluded.
+      \item \textit{No Non-English or Code-Mixed Modeling:} All investigated corpora and benchmarks are conducted in the English language. Modeling Bengali, Banglish, or regional code-mixed dialects is identified as future work.
+      \item \textit{No Human Subject Interventional Field Trials:} The research relies on public academic datasets and synthetic simulations; no randomized human behavioral intervention trials were conducted on commercial platforms.
+    \end{enumerate}
+\end{itemize}
+\end{keypoint}

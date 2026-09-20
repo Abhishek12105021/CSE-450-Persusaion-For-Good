@@ -29,7 +29,7 @@
   {\textbf{Algorithmic validation}\\[1pt]\scriptsize closed-world taxonomy, category invariant, at most six labels};
 \node[fin, text width=3.4cm, minimum height=1.7cm] (b4) at (14.1,-3.45)
   {\textbf{Merged corpus}\\[1pt]\scriptsize JSONL, CSV, and a $10{,}600\times56$ binary matrix};
-\draw[flow] (a4.south) -- ++(0,-0.4) -| (b1.north);
+\draw[flow, rounded corners=5pt] (a4.south) -- ++(0,-0.4) -| (b1.north);
 \draw[flow] (b1) -- (b2); \draw[flow] (b2) -- (b3); \draw[flow] (b3) -- (b4);
 
 % ---------------- decision tests, stacked under the prompt -----------------------------
@@ -42,7 +42,7 @@
 \node[xat, fill=white, text width=3.3cm, minimum height=1.08cm] (t4) at (1.98,-9.6)
   {\textbf{4  Density cap}\\[-1pt]\scriptsize one to three labels typical, empty set allowed, six at most};
 \draw[flowX] (t1) -- (t2); \draw[flowX] (t2) -- (t3); \draw[flowX] (t3) -- (t4);
-\draw[flowX, dashed] (1.98,-4.85) -- (1.98,-4.3);
+\draw[flowX, dashed] (t1.north) -- (b1.south);
 
 % ---------------- human checkpoints, under labelling and validation -----------------------
 \node[amb, fill=white, text width=3.2cm, minimum height=2.3cm] (h1) at (5.9,-6.55)
@@ -55,7 +55,7 @@
 % ---------------- corpus statistics --------------------------------------------------------
 \node[neu, fill=white, text width=3.3cm, minimum height=2.3cm] (st) at (14.03,-6.55)
   {\scriptsize mean $1.68$ labels per turn\\ $48.9\%$ multi-label turns\\ $6.7\%$ empty sets\\ all $41$ strategies and all $11$ categories occur};
-\draw[flow, dashed] (b4.south) -- (14.1,-4.85);
+\draw[flow, dashed] (b4.south) -- (st.north);
 
 % ---------------- note under the checkpoint group ----------------------------------------
 \node[nt, text width=7.2cm, anchor=north] at (8.0,-8.35)
