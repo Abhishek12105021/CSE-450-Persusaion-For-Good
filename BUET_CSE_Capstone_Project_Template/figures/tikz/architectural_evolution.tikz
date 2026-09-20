@@ -1,0 +1,122 @@
+% Four architectural stages, v1 to v14. Metrics are the best test macro-F1 of each stage
+% (Tables A and B of the report, 153-row test split).
+\begin{tikzpicture}[x=1cm,y=1cm]
+
+% ------------- card frames and headers ---------------------------------------
+\foreach \x/\c/\t in {0/94A3B8/{Stage 1\quad v1--v5}, 4.1/64748B/{Stage 2\quad v6--v9}, 8.2/334155/{Stage 3\quad v10--v13}, 12.3/0F172A/{Stage 4\quad v14}}{
+  \definecolor{stg}{HTML}{\c}
+  \draw[rounded corners=5pt, draw=stg, fill=white, line width=0.9pt] (\x,0.05) rectangle ++(3.7,-9.75);
+  \fill[stg, rounded corners=5pt] (\x,0.05) rectangle ++(3.7,-0.75);
+  \fill[stg] (\x,-0.4) rectangle ++(3.7,-0.3);
+  \node[text=white, font=\footnotesize\bfseries] at (\x+1.85,-0.33) {\t};
+}
+\foreach \x in {3.7,7.8,11.9}{ \draw[flow, line width=1.3pt] (\x-0.02,-0.35) -- ++(0.44,0); }
+
+% ------------- titles -----------------------------------------------------------
+\node[ttl] at (1.85,-1.05) {Flat sequence\\baseline};
+\node[ttl] at (5.95,-1.05) {Hierarchical dialogue\\transformer};
+\node[ttl] at (10.05,-1.05) {Last-turn gating and\\specialist routing};
+\node[ttl, text=Slate] at (14.15,-1.05) {AntiphonyClassifier};
+
+% =============== Stage 1 : flat baseline ========================================
+\begin{scope}[shift={(0,0)}]
+  \foreach \i in {0,1,2,3,4}{ \node[ten, minimum size=0.3cm, fill=NeuFill] at (0.5+0.36*\i,-1.9) {}; }
+  \foreach \i in {5,6,7}{ \node[ten, minimum size=0.3cm, draw=NeuBord!40, dashed, text=NeuBord!40] at (0.5+0.36*\i,-1.9) {}; }
+  \draw[PerMain, dashed, line width=0.9pt] (2.19,-1.6) -- (2.19,-2.2);
+  \node[font=\tiny, text=PerBord, anchor=west] at (2.25,-2.25) {ending discarded};
+  \node[font=\tiny, text=SlateSoft, anchor=east] at (2.1,-2.25) {256 tokens kept};
+  \node[neu, minimum width=3.2cm] (e1) at (1.85,-2.95) {\scriptsize Encoder, flat input};
+  \node[neu, minimum width=3.2cm] (p1) at (1.85,-3.7) {\scriptsize {[}CLS{]} / mean pooling};
+  \node[neu, minimum width=1.5cm] (h1a) at (1.05,-4.55) {\scriptsize Binary};
+  \node[neu, minimum width=1.5cm] (h1b) at (2.7,-4.55) {\scriptsize Modifier};
+  \draw[flow] (e1) -- (p1);
+  \draw[flow] (p1.south) -- ++(0,-0.15) -| (h1a.north);
+  \draw[flow] (p1.south) -- ++(0,-0.15) -| (h1b.north);
+\end{scope}
+
+% =============== Stage 2 : hierarchical =========================================
+\begin{scope}[shift={(4.1,0)}]
+  \foreach \i [evaluate=\j using {int(\i+1)}] in {0,1,2,3}{ \node[ten, minimum width=0.55cm, minimum height=0.3cm, fill=NeuFill] at (0.55+0.68*\i,-1.9) {\tiny $u_{\j}$}; }
+  \node[font=\tiny] at (3.3,-1.9) {$\cdots$};
+  \node[neu, minimum width=3.2cm] (e2) at (1.85,-2.6) {\scriptsize Utterance encoder, per turn};
+  \node[neu, minimum width=3.2cm] (p2) at (1.85,-3.3) {\scriptsize Turn vectors + role + position};
+  \node[amb, minimum width=3.2cm] (d2) at (1.85,-4.0) {\scriptsize Dialogue transformer, 4 layers};
+  \node[amb, minimum width=3.2cm] (a2) at (1.85,-4.7) {\scriptsize Learned attention pooling};
+  \node[neu, minimum width=1.5cm] (h2a) at (1.05,-5.5) {\scriptsize Binary};
+  \node[neu, minimum width=1.5cm] (h2b) at (2.7,-5.5) {\scriptsize Modifier};
+  \draw[flow] (e2) -- (p2); \draw[flow] (p2) -- (d2); \draw[flow] (d2) -- (a2);
+  \draw[flow] (a2.south) -- ++(0,-0.12) -| (h2a.north);
+  \draw[flow] (a2.south) -- ++(0,-0.12) -| (h2b.north);
+\end{scope}
+
+% =============== Stage 3 : gating and routing ===================================
+\begin{scope}[shift={(8.2,0)}]
+  \foreach \i [evaluate=\j using {int(\i+1)}] in {0,1,2,3}{ \node[ten, minimum width=0.55cm, minimum height=0.3cm, fill=NeuFill] at (0.55+0.68*\i,-1.9) {\tiny $u_{\j}$}; }
+  \node[font=\tiny] at (3.3,-1.9) {$\cdots$};
+  \node[neu, minimum width=3.2cm] (e3) at (1.85,-2.6) {\scriptsize Utterance encoder, per turn};
+  \node[amb, minimum width=3.2cm] (d3) at (1.85,-3.3) {\scriptsize Dialogue transformer, 4 layers};
+  \node[amb, minimum width=3.2cm] (a3) at (1.85,-4.0) {\scriptsize Attention pooling};
+  \node[oplus] (g3) at (1.5,-4.75) {\scriptsize $\otimes$};
+  \node[amb, minimum width=1.4cm, font=\tiny] (l3) at (2.85,-4.75) {last\\Persuadee};
+  \node[font=\tiny, anchor=east] at (1.25,-4.75) {gate};
+  \node[neu, minimum width=3.2cm] (h3) at (1.85,-5.5) {\scriptsize Binary head only (v13)};
+  \draw[flow] (e3) -- (d3); \draw[flow] (d3) -- (a3); \draw[flow] (a3.south) -- (a3.south |- g3.north); \draw[flow] (g3.south) -- (g3.south |- h3.north);
+  \draw[flow] (l3.west) -- (g3.east);
+\end{scope}
+
+% =============== Stage 4 : Antiphony ============================================
+\begin{scope}[shift={(12.3,0)}]
+  \foreach \i [evaluate=\j using {int(\i+1)}] in {0,2}{ \node[per, minimum width=0.5cm, minimum height=0.3cm, inner sep=0pt, font=\tiny] at (0.5+0.68*\i,-1.9) {$u_{\j}$}; }
+  \foreach \i [evaluate=\j using {int(\i+1)}] in {1,3}{ \node[dec, minimum width=0.5cm, minimum height=0.3cm, inner sep=0pt, font=\tiny] at (0.5+0.68*\i,-1.9) {$u_{\j}$}; }
+  \node[font=\tiny] at (3.3,-1.9) {$\cdots$};
+  \node[neu, minimum width=3.2cm] (e4) at (1.85,-2.5) {\scriptsize Utterance encoder, per turn};
+  \node[per, minimum width=1.5cm] (sp) at (1.05,-3.3) {\scriptsize Persuader\\[-2pt]\scriptsize stream};
+  \node[dec, minimum width=1.5cm] (sd) at (2.7,-3.3) {\scriptsize Persuadee\\[-2pt]\scriptsize stream};
+  \node[xat, minimum width=3.2cm] (cx) at (1.85,-4.2) {\scriptsize Cross-attention (Q\,$\leftarrow$\,Persuadee)};
+  \node[trj, minimum width=1.5cm] (gr) at (1.05,-4.95) {\scriptsize GRU};
+  \node[trj, minimum width=1.5cm] (pl) at (2.7,-4.95) {\scriptsize Pooling};
+  \node[fin, minimum width=3.2cm] (h4) at (1.85,-5.75) {\scriptsize Binary head};
+  \draw[flow] (e4.south) -- ++(0,-0.1) -| (sp.north);
+  \draw[flow] (e4.south) -- ++(0,-0.1) -| (sd.north);
+  \draw[flowP] (sp.south) -- (sp.south |- cx.north);
+  \draw[flowD] (sd.south) -- (sd.south |- cx.north);
+  \draw[flowX] (cx.south) -- ++(0,-0.1) -| (gr.north);
+  \draw[flowX] (cx.south) -- ++(0,-0.1) -| (pl.north);
+  \draw[flowT] (gr.south) -- ++(0,-0.1) -| (h4.north);
+  \draw[flowT] (pl.south) -- ++(0,-0.1) -| (h4.north);
+\end{scope}
+
+% ------------- what changed -------------------------------------------------------
+\node[anchor=north west, text width=3.35cm, font=\scriptsize, align=left] at (0.17,-6.2)
+  {$\bullet$ 256-token right truncation\\
+   $\bullet$ role embeddings, focal loss, marker-safe augmentation\\
+   $\bullet$ two independent heads};
+\node[anchor=north west, text width=3.35cm, font=\scriptsize, align=left] at (4.27,-6.2)
+  {$\bullet$ 32 turns $\times$ 64 tokens\\ \hphantom{$\bullet$} = 2048-token capacity\\
+   $\bullet$ back-translation (v8)\\
+   $\bullet$ tri-model ensemble (v9)};
+\node[anchor=north west, text width=3.35cm, font=\scriptsize, align=left] at (8.37,-6.2)
+  {$\bullet$ last-turn gate (v10)\\
+   $\bullet$ multi-pivot back-translation (v11)\\
+   $\bullet$ specialist routing (v12)\\
+   $\bullet$ modifier head removed (v13)};
+\node[anchor=north west, text width=3.35cm, font=\scriptsize, align=left] at (12.47,-6.2)
+  {$\bullet$ role-pure streams\\
+   $\bullet$ directional cross-attention\\
+   $\bullet$ trajectory GRU plus pooling};
+
+% ------------- performance bars ----------------------------------------------------
+% track = 3.3 cm spans macro-F1 0.40 to 0.90
+\foreach \x/\v/\w/\lab/\sub in {0.2/0.70/1.98/0.70/{v2, RoBERTa},
+                                4.3/0.821/2.78/0.821/{v8, DeBERTa},
+                                8.4/0.834/2.86/0.834/{v10, RoBERTa},
+                                12.5/0.862/3.05/0.862/{v14, DeBERTa}}{
+  \fill[NeuFill, rounded corners=2pt] (\x,-8.7) rectangle ++(3.3,-0.28);
+  \fill[Slate, rounded corners=2pt] (\x,-8.7) rectangle ++(\w,-0.28);
+  \node[font=\footnotesize\bfseries, anchor=west] at (\x,-8.4) {\lab};
+  \node[font=\scriptsize, anchor=east, text=SlateSoft] at (\x+3.3,-8.4) {\sub};
+}
+\node[font=\tiny, text=SlateSoft, anchor=north west] at (0.2,-9.05) {best macro-F1 per stage; bar spans 0.40 to 0.90};
+\node[font=\tiny, text=SlateSoft, anchor=north east] at (15.8,-9.05) {v14: 0.8446 on the third-pass labels};
+
+\end{tikzpicture}

@@ -1,0 +1,140 @@
+% AntiphonyClassifier (v14): role-pure streams, directional cross-attention,
+% commitment-trajectory GRU and parallel attention pooling.
+% Drawn at 16 cm width; tensor names follow Section 4.6 of the report.
+\begin{tikzpicture}[x=1cm,y=1cm]
+
+% ---------------- group backdrops (drawn first, nodes sit on top) --------------
+\draw[rounded corners=6pt, draw=PerBord!60, fill=PerFill!40, line width=0.7pt] (0.2,-4.35) rectangle (7.6,-7.55);
+\draw[rounded corners=6pt, draw=DecBord!60, fill=DecFill!40, line width=0.7pt] (8.4,-4.35) rectangle (15.8,-7.55);
+\draw[rounded corners=6pt, draw=XatBord!70, fill=XatFill!45, line width=0.8pt] (0.2,-8.25) rectangle (15.8,-13.15);
+\draw[rounded corners=6pt, draw=TrjBord!60, fill=TrjFill!40, line width=0.7pt] (0.2,-13.85) rectangle (7.6,-17.0);
+\draw[rounded corners=6pt, draw=TrjBord!60, fill=TrjFill!40, line width=0.7pt] (8.4,-13.85) rectangle (15.8,-17.0);
+
+% ---------------- input dialogue ----------------------------------------------
+\node[neu, minimum width=15.6cm, minimum height=1.5cm] (dlg) at (8,0) {};
+\node[ttl] at (8,0.42) {Dialogue $\mathcal{D}=(u_1,\dots,u_N)$, at most $32$ turns of $64$ tokens, role $r_i\in\{P,D\}$};
+\foreach \i [evaluate=\xx using {1.4+1.5*\i}] in {1,3,5}{
+  \node[per, minimum width=1.1cm, minimum height=0.48cm, inner sep=1pt, font=\scriptsize] at (\xx,-0.28) {$u_{\i}$};}
+\foreach \i [evaluate=\xx using {1.4+1.5*\i}] in {2,4,6}{
+  \node[dec, minimum width=1.1cm, minimum height=0.48cm, inner sep=1pt, font=\scriptsize] at (\xx,-0.28) {$u_{\i}$};}
+\node[font=\scriptsize] at (11.7,-0.28) {$\cdots$};
+\node[dec, minimum width=1.1cm, minimum height=0.48cm, inner sep=1pt, font=\scriptsize] at (13.0,-0.28) {$u_N$};
+
+% ---------------- shared utterance encoder ---------------------------------------
+\node[neu, minimum width=15.6cm, minimum height=1.0cm] (enc) at (8,-2.0)
+  {\textbf{Shared utterance encoder} (RoBERTa-base $\mid$ DeBERTa-v3-base $\mid$ TOD-BERT): one batched pass over $[B{\cdot}U,\,L]$, masked mean-pool per turn\\[-1pt]
+   {\scriptsize $\longrightarrow\ \mathbf{U}\in\mathbb{R}^{B\times U\times d}$}};
+\draw[flow] (dlg.south) -- (enc.north);
+
+% ---------------- role split ------------------------------------------------------
+\node[neu, minimum width=6.2cm] (split) at (8,-3.2) {Role split: last $R{=}20$ turns per role, chronological};
+\draw[flow] (enc.south) -- (split.north);
+\node[ten] (hP) at (3.9,-4.05) {$\mathbf{H}^{(P)}\in\mathbb{R}^{R\times d}$};
+\node[ten] (hD) at (12.1,-4.05) {$\mathbf{H}^{(D)}\in\mathbb{R}^{R\times d}$};
+\draw[flowP] (split.west) -| (hP.north);
+\draw[flowD] (split.east) -| (hD.north);
+
+% ---------------- stream transformers ---------------------------------------------
+\node[ttl, text=PerBord] at (3.9,-4.72) {Persuader stream Transformer ($\times 2$)};
+\node[ttl, text=DecBord] at (12.1,-4.72) {Persuadee stream Transformer ($\times 2$)};
+\node[ten] (pP) at (3.9,-5.35) {$\mathbf{H}^{(P)}+\mathbf{E}^{(P)}_{\mathrm{pos}}$};
+\node[ten] (pD) at (12.1,-5.35) {$\mathbf{H}^{(D)}+\mathbf{E}^{(D)}_{\mathrm{pos}}$};
+% sub-layer chain, persuader
+\node[per, minimum width=1.55cm, minimum height=0.85cm, font=\scriptsize] (aP1) at (1.25,-6.25) {Multi-head\\self-attn.};
+\node[per, minimum width=1.35cm, minimum height=0.85cm, font=\scriptsize] (aP2) at (3.15,-6.25) {Add \&\\LayerNorm};
+\node[per, minimum width=1.35cm, minimum height=0.85cm, font=\scriptsize] (aP3) at (4.85,-6.25) {Feed-\\forward};
+\node[per, minimum width=1.35cm, minimum height=0.85cm, font=\scriptsize] (aP4) at (6.55,-6.25) {Add \&\\LayerNorm};
+\draw[flowP] (pP.south) -- ++(0,-0.15) -| (aP1.north);
+\draw[flowP] (aP1) -- (aP2); \draw[flowP] (aP2) -- (aP3); \draw[flowP] (aP3) -- (aP4);
+% sub-layer chain, persuadee
+\node[dec, minimum width=1.55cm, minimum height=0.85cm, font=\scriptsize] (aD1) at (9.45,-6.25) {Multi-head\\self-attn.};
+\node[dec, minimum width=1.35cm, minimum height=0.85cm, font=\scriptsize] (aD2) at (11.35,-6.25) {Add \&\\LayerNorm};
+\node[dec, minimum width=1.35cm, minimum height=0.85cm, font=\scriptsize] (aD3) at (13.05,-6.25) {Feed-\\forward};
+\node[dec, minimum width=1.35cm, minimum height=0.85cm, font=\scriptsize] (aD4) at (14.75,-6.25) {Add \&\\LayerNorm};
+\draw[flowD] (pD.south) -- ++(0,-0.15) -| (aD1.north);
+\draw[flowD] (aD1) -- (aD2); \draw[flowD] (aD2) -- (aD3); \draw[flowD] (aD3) -- (aD4);
+% split -> stream inputs
+\draw[flowP] (hP.south) -- (pP.north);
+\draw[flowD] (hD.south) -- (pD.north);
+% outputs of the streams
+\node[ten] (tP) at (3.9,-7.05) {$\tilde{\mathbf{H}}^{(P)}\in\mathbb{R}^{R\times d}$};
+\node[ten] (tD) at (12.1,-7.05) {$\tilde{\mathbf{H}}^{(D)}\in\mathbb{R}^{R\times d}$};
+\draw[flowP] (aP4.south) |- (tP.east);
+\draw[flowD] (aD4.south) |- (tD.east);
+
+% ---------------- cross-attention block -------------------------------------------
+\node[ttl, text=XatBord, anchor=west, align=left] at (0.45,-12.68) {Directional asymmetric cross-attention\\[-1pt]{\scriptsize\normalfont the Persuadee queries the Persuader ($4$ heads)}};
+\node[per, minimum width=3.0cm] (wV) at (1.9,-9.55) {$\mathbf{V}=\tilde{\mathbf{H}}^{(P)}\mathbf{W}_V$};
+\node[per, minimum width=3.0cm] (wK) at (5.35,-9.55) {$\mathbf{K}=\tilde{\mathbf{H}}^{(P)}\mathbf{W}_K$};
+\node[dec, minimum width=3.0cm] (wQ) at (12.4,-9.55) {$\mathbf{Q}=\tilde{\mathbf{H}}^{(D)}\mathbf{W}_Q$};
+\draw[flowP] (tP.south) -- ++(0,-0.35) -| (wK.north);
+\draw[flowP, dsh] (tP.south) -- ++(0,-0.35) -| (wV.north);
+\draw[flowD] (tD.south) -- ++(0,-0.35) -| (wQ.north);
+
+\node[xat, minimum width=5.6cm] (att) at (8.1,-10.6)
+  {$\mathbf{A}=\operatorname{softmax}\!\big(\mathbf{Q}\mathbf{K}^{\top}/\sqrt{d_k}\big)\in\mathbb{R}^{R_D\times R_P}$};
+\draw[flowP] (wK.south) |- (att.west);
+\draw[flowD] (wQ.south) |- (att.east);
+\node[xat, minimum width=3.5cm] (cv) at (7.0,-11.75) {$\mathbf{C}^{(D\to P)}=\mathbf{A}\mathbf{V}$};
+\draw[flowX] (att.south) -- (att.south |- cv.north);
+\draw[flowP, dsh] (wV.south) |- (cv.west);
+\node[oplus] (ad) at (9.75,-11.75) {$+$};
+\node[xat, minimum width=1.7cm] (ln) at (11.35,-11.75) {LayerNorm};
+\node[ten, fill=XatFill] (xx) at (13.95,-11.75) {$\mathbf{X}\in\mathbb{R}^{R_D\times d}$};
+\draw[flowX] (cv) -- (ad);
+\draw[flowX] (ad) -- (ln);
+\draw[flowX] (ln) -- (xx);
+% residual from the Persuadee stream
+\draw[flowD, dsh] (tD.east) -- (15.5,-7.05) -- (15.5,-11.05) -- (9.75,-11.05) -- (ad.north);
+\node[nt,anchor=east] at (15.4,-10.75) {residual $\tilde{\mathbf{H}}^{(D)}$};
+\node[font=\scriptsize\bfseries, text=DecBord] at (10.5,-9.95) {Query};
+\node[font=\scriptsize\bfseries, text=PerBord] at (3.6,-10.15) {Key};
+\node[font=\scriptsize\bfseries, text=PerBord] at (0.75,-10.7) {Value};
+
+% ---------------- dual aggregation ------------------------------------------------
+\draw[flowX] (xx.south) -- ++(0,-0.3) -| (7.25,-14.85);
+\node[ttl, text=TrjBord] at (3.6,-14.15) {Commitment-trajectory GRU};
+\node[trj, minimum width=1.2cm, font=\scriptsize] (g1) at (1.4,-15.6) {GRU};
+\node[trj, minimum width=1.2cm, font=\scriptsize] (g2) at (3.4,-15.6) {GRU};
+\node[font=\scriptsize] (gd) at (4.75,-15.6) {$\cdots$};
+\node[trj, minimum width=1.2cm, font=\scriptsize] (g3) at (6.1,-15.6) {GRU};
+\draw[flowT] (g1) -- node[above,font=\tiny]{$\mathbf{h}_1$} (g2);
+\draw[flowT] (g2) -- (gd); \draw[flowT] (gd) -- (g3);
+\foreach \g/\l in {g1/{\mathbf{x}_1},g2/{\mathbf{x}_2},g3/{\mathbf{x}_{R_D}}}{
+  \draw[flowT] ([yshift=0.28cm]\g.north) -- (\g.north); \node[font=\tiny] at ([yshift=0.44cm]\g.north) {$\l$};}
+\node[ten, fill=TrjFill] (hT) at (6.1,-16.55) {$\mathbf{h}_T\in\mathbb{R}^{d}$};
+\draw[flowT] (g3.south) -- (hT.north);
+\node[nt,anchor=east] at (5.4,-16.55) {read at the last valid Persuadee turn};
+
+\node[ttl, text=TrjBord] at (12.1,-14.2) {Parallel attention pooling};
+\node[trj, minimum width=6.4cm] (alph) at (12.1,-15.1) {$\alpha_t=\operatorname{softmax}_t\!\big(\mathbf{w}^{\top}\tanh(\mathbf{W}\mathbf{x}_t)\big)$};
+\node[trj, minimum width=4.1cm] (pv) at (12.1,-16.2) {$\mathbf{p}=\sum_{t}\alpha_t\,\mathbf{x}_t\in\mathbb{R}^{d}$};
+\draw[flowT] (alph) -- (pv);
+\draw[flowX] (xx.south) -- (xx.south |- alph.north);
+
+% ---------------- fusion, head, output --------------------------------------------
+\node[fin,minimum width=5.4cm] (cat) at (8,-17.85) {$\mathbf{z}=[\,\mathbf{h}_T\,\Vert\,\mathbf{p}\,]\in\mathbb{R}^{2d}$};
+\draw[flowT] (hT.south) -- (hT.south |- cat.north);
+\draw[flowT] (pv.south) |- (cat.east);
+\node[fin,minimum width=5.4cm] (head) at (8,-18.95) {Binary head: 2-layer MLP};
+\node[fin,minimum width=5.4cm] (yh) at (8,-20.05) {$\hat{y}\in\{\text{yes},\text{no}\}$};
+\draw[flow] (cat) -- (head); \draw[flow] (head) -- (yh);
+\node[nt,anchor=west, text width=4.4cm, align=left] (lossnote) at (11.45,-19.5)
+  {Training loss: class-balanced focal ($\gamma{=}2$, $\beta{=}0.999$) plus $0.30\times$ supervised contrastive ($\tau{=}0.1$)};
+\draw[dotted, line width=0.8pt, draw=SlateSoft] (head.east) -- (head.east -| lossnote.west) -- (lossnote.north west);
+
+% ---------------- legend ------------------------------------------------------------
+\begin{scope}[shift={(0.5,-21.1)}]
+  \node[per, minimum width=0.45cm, minimum height=0.3cm] (l1) at (0,0) {};
+  \node[anchor=west, font=\scriptsize] at (0.35,0) {Persuader};
+  \node[dec, minimum width=0.45cm, minimum height=0.3cm] at (2.4,0) {};
+  \node[anchor=west, font=\scriptsize] at (2.75,0) {Persuadee};
+  \node[xat, minimum width=0.45cm, minimum height=0.3cm] at (4.9,0) {};
+  \node[anchor=west, font=\scriptsize] at (5.25,0) {Cross-attention};
+  \node[trj, minimum width=0.45cm, minimum height=0.3cm] at (8.1,0) {};
+  \node[anchor=west, font=\scriptsize] at (8.45,0) {Trajectory / pooling};
+  \node[fin,minimum width=0.45cm, minimum height=0.3cm] at (11.7,0) {};
+  \node[anchor=west, font=\scriptsize] at (12.05,0) {Fusion / output};
+\end{scope}
+
+\end{tikzpicture}

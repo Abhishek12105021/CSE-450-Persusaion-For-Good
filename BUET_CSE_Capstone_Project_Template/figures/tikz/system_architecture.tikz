@@ -1,0 +1,73 @@
+% End-to-end framework: corpora -> shared representation -> two model streams -> evaluation.
+\begin{tikzpicture}[x=1cm,y=1cm]
+
+% ---------------- group backdrops -------------------------------------------------
+\draw[rounded corners=6pt, draw=NeuBord!70, fill=NeuFill!55, line width=0.7pt] (0,0.1) rectangle (3.5,-10.7);
+\draw[rounded corners=6pt, draw=NeuBord!70, fill=NeuFill!55, line width=0.7pt] (4.05,0.1) rectangle (7.15,-10.7);
+\draw[rounded corners=6pt, draw=XatBord!70, fill=XatFill!45, line width=0.7pt] (7.7,0.1) rectangle (12.3,-5.15);
+\draw[rounded corners=6pt, draw=AmbBord!70, fill=AmbFill!55, line width=0.7pt] (7.7,-5.55) rectangle (12.3,-10.7);
+\draw[rounded corners=6pt, draw=TrjBord!70, fill=TrjFill!45, line width=0.7pt] (12.85,0.1) rectangle (16,-10.7);
+
+\node[ttl] at (1.75,-0.4) {1  Corpora};
+\node[ttl] at (5.6,-0.4) {2  Shared representation};
+\node[ttl, text=XatBord] at (10.0,-0.4) {3a  Intention stream};
+\node[ttl, text=AmbBord] at (10.0,-6.05) {3b  Strategy stream};
+\node[ttl, text=TrjBord] at (14.43,-0.4) {4  Evaluation};
+
+% ---------------- 1 corpora -------------------------------------------------------
+\node[neu, text width=2.95cm, minimum height=1.85cm] (c1) at (1.75,-1.9)
+  {\textbf{Persuasion for Good}\\[1pt]\scriptsize 1{,}017 dialogues\\ 10{,}600 Persuader turns\\ donation asks for Save the Children};
+\node[xat, text width=2.95cm, minimum height=1.85cm] (c2) at (1.75,-4.15)
+  {\textbf{Donation-intent labels}\\[1pt]\scriptsize three annotation passes\\ final split 694 yes / 323 no};
+\node[amb, text width=2.95cm, minimum height=1.85cm] (c3) at (1.75,-6.4)
+  {\textbf{Strategy labels}\\[1pt]\scriptsize 41 strategies, 11 categories\\ 1.68 labels per turn\\ 48.9\% multi-label turns};
+\node[trj, text width=2.95cm, minimum height=1.85cm] (c4) at (1.75,-8.65)
+  {\textbf{E-commerce benchmark}\\[1pt]\scriptsize 500 canonical + 200 reversal dialogues\\ three-phase synthesis};
+\draw[flow] (c1) -- (c2);
+
+% ---------------- 2 shared representation ------------------------------------------
+\node[neu, text width=2.7cm, minimum height=2.6cm] (r1) at (5.6,-2.15)
+  {\textbf{Pretrained encoders}\\[1pt]\scriptsize RoBERTa-base, DeBERTa-v3-base, TOD-BERT for intention\\ RoBERTa-base/large, ELECTRA-base for strategy};
+\node[neu, text width=2.7cm, minimum height=2.0cm] (r2) at (5.6,-5.05)
+  {\textbf{Role signal}\\[1pt]\scriptsize {[}Persuader{]} and {[}Persuadee{]} markers, role embeddings on every turn};
+\node[neu, text width=2.7cm, minimum height=2.6cm] (r3) at (5.6,-8.15)
+  {\textbf{Input policy}\\[1pt]\scriptsize turn-by-turn for intention\\ five turns of context and left truncation for flat inputs};
+\draw[flow] (r1) -- (r2); \draw[flow] (r2) -- (r3);
+
+% ---------------- 3a intention stream -----------------------------------------------
+\node[xat, text width=4.0cm, minimum height=2.6cm] (m1) at (10.0,-2.35)
+  {\textbf{AntiphonyClassifier (v14)}\\[1pt]\scriptsize role-pure Persuader and Persuadee streams\\ Persuadee-to-Persuader cross-attention\\ trajectory GRU and attention pooling};
+\node[fin, minimum width=2.6cm] (o1) at (10.0,-4.4) {\scriptsize commitment: yes / no};
+\draw[flowX] (m1) -- (o1);
+
+% ---------------- 3b strategy stream ------------------------------------------------
+\node[amb, text width=4.0cm, minimum height=1.2cm] (s1) at (10.0,-6.95)
+  {\textbf{Multi-task classifier (v17, v18)}\\[1pt]\scriptsize 11 categories main, 41 strategies auxiliary};
+\node[amb, text width=4.0cm, minimum height=1.0cm] (s2) at (10.0,-8.2)
+  {\scriptsize 19-member pool: encoders, few-shot, TF-IDF and zero-shot members};
+\node[amb, text width=1.85cm, minimum height=0.95cm, draw=AmbBord, fill=white] (s3a) at (8.95,-9.75)
+  {\scriptsize calibrated blend\\ \textbf{selected}};
+\node[amb, text width=1.75cm, minimum height=0.95cm, draw=AmbBord, fill=white, dashed] (s3b) at (11.2,-9.75)
+  {\scriptsize XGBoost stacker\\ tested};
+\draw[flow] (s1) -- (s2);
+\draw[flow] (s2.south) -- ++(0,-0.25) -| (s3a.north);
+\draw[flow, dashed] (s2.south) -- ++(0,-0.25) -| (s3b.north);
+
+% ---------------- 4 evaluation -----------------------------------------------------
+\node[trj, text width=2.7cm, minimum height=1.9cm] (e1) at (14.43,-1.6)
+  {\textbf{Intention benchmark}\\[1pt]\scriptsize macro-F1 on 153 test dialogues, Tables A to C};
+\node[trj, text width=2.7cm, minimum height=2.1cm] (e2) at (14.43,-3.85)
+  {\textbf{Adversarial transfer}\\[1pt]\scriptsize four input ablations, sufficiency gap $\Delta_{\mathrm{suff}}$, skew stress};
+\node[trj, text width=2.7cm, minimum height=1.9cm] (e3) at (14.43,-6.2)
+  {\textbf{Strategy benchmark}\\[1pt]\scriptsize micro and macro-F1 against the 0.79 annotation ceiling};
+\node[trj, text width=2.7cm, minimum height=2.1cm] (e4) at (14.43,-8.6)
+  {\textbf{Forensic checks}\\[1pt]\scriptsize truncation side, marker corruption, merchant-side leakage};
+
+% ---------------- inter-group arrows -----------------------------------------------
+\draw[flow, line width=1.3pt] (3.5,-5.3) -- (4.05,-5.3);
+\draw[flow, line width=1.3pt] (7.15,-2.6) -- (7.7,-2.6);
+\draw[flow, line width=1.3pt] (7.15,-8.0) -- (7.7,-8.0);
+\draw[flow, line width=1.3pt] (12.3,-2.6) -- (12.85,-2.6);
+\draw[flow, line width=1.3pt] (12.3,-8.0) -- (12.85,-8.0);
+
+\end{tikzpicture}

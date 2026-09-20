@@ -1,0 +1,89 @@
+% Three-pass engineering of the donation-intent labels (1,017 dialogues).
+% Bar lengths are proportional: 4.6 cm = 1,017 dialogues.
+\begin{tikzpicture}[x=1cm,y=1cm]
+
+% ---------------- frames and headers ------------------------------------------------
+\foreach \x/\c/\t in {0/94A3B8/{First pass: manual dual-field labels}, 5.5/64748B/{Second pass: plain binary}, 11/334155/{Third pass: strict commitment}}{
+  \definecolor{stg}{HTML}{\c}
+  \draw[rounded corners=5pt, draw=stg, fill=white, line width=0.9pt] (\x,0.05) rectangle ++(5,-9.65);
+  \fill[stg, rounded corners=5pt] (\x,0.05) rectangle ++(5,-0.75);
+  \fill[stg] (\x,-0.4) rectangle ++(5,-0.3);
+  \node[text=white, font=\footnotesize\bfseries] at (\x+2.5,-0.33) {\t};
+}
+\foreach \x in {5,10.5}{ \draw[flow, line width=1.3pt] (\x-0.02,-0.35) -- ++(0.54,0); }
+
+% ---------------- body text ---------------------------------------------------------------
+\node[anchor=north west, text width=4.7cm, font=\scriptsize, align=left] at (0.15,-0.95)
+  {$\bullet$ pilot of 200 dialogues split five ways, 50 each, with an annotator column for a drift check\\
+   $\bullet$ then about 200 dialogues per member, pooled to 1{,}017\\
+   $\bullet$ fields: \texttt{binary\_label} and \texttt{modifier} (none, deferred, conditional)\\
+   $\bullet$ motivation: the corpus donation fields disagree with the transcript};
+\node[anchor=north west, text width=4.7cm, font=\scriptsize, align=left] at (5.65,-0.95)
+  {$\bullet$ supervisor directive: drop the modifier and focus on the binary decision\\
+   $\bullet$ the rarest modifier class had 9 training and 3 test examples\\
+   $\bullet$ \texttt{binary\_label} is left exactly as annotated\\
+   $\bullet$ basis of v13-Solo and v14-Antiphony in their first form};
+\node[anchor=north west, text width=4.7cm, font=\scriptsize, align=left] at (11.15,-0.95)
+  {$\bullet$ any hesitation, condition, or deferral now counts as \emph{no}\\
+   $\bullet$ ``I'll donate \$1 now, and I might give more later'' becomes \emph{no}\\
+   $\bullet$ built in two steps, shown below\\
+   $\bullet$ basis of the reruns of v13 and v14};
+
+% ---------------- bars: first pass ------------------------------------------------------------
+\begin{scope}[shift={(0.2,0)}]
+  \node[font=\tiny, anchor=west, text=SlateSoft] at (0,-3.65) {commitment label};
+  \fill[TrjMain] (0,-3.8) rectangle (3.338,-4.2); \fill[AmbMain] (3.338,-3.8) rectangle (4.6,-4.2);
+  \node[font=\scriptsize\bfseries, text=white] at (1.67,-4.0) {yes 738 (72.6\%)};
+  \node[font=\scriptsize\bfseries, text=white] at (3.97,-4.0) {no 279};
+  \node[font=\tiny, anchor=west, text=SlateSoft] at (0,-4.5) {modifier among the yes dialogues};
+  \fill[TrjMain!55] (0,-4.65) rectangle (2.972,-5.0);
+  \fill[XatMain] (2.972,-4.65) rectangle (3.28,-5.0);
+  \fill[PerMain] (3.28,-4.65) rectangle (3.339,-5.0);
+  \node[font=\scriptsize, text=white] at (1.49,-4.83) {none 657};
+  \node[font=\tiny, anchor=north east, text=XatBord] at (3.45,-5.05) {deferred 68};
+  \node[font=\tiny, anchor=north west, text=PerBord] at (3.52,-5.05) {conditional 13};
+  \draw[XatMain, line width=0.5pt] (3.126,-5.0) -- (3.126,-5.06); \draw[PerMain, line width=0.5pt] (3.31,-5.0) -- (3.45,-5.06);
+\end{scope}
+
+% ---------------- bars: second pass -----------------------------------------------------------
+\begin{scope}[shift={(5.7,0)}]
+  \node[font=\tiny, anchor=west, text=SlateSoft] at (0,-3.65) {commitment label};
+  \fill[TrjMain] (0,-3.8) rectangle (3.338,-4.2); \fill[AmbMain] (3.338,-3.8) rectangle (4.6,-4.2);
+  \node[font=\scriptsize\bfseries, text=white] at (1.67,-4.0) {yes 738 (72.6\%)};
+  \node[font=\scriptsize\bfseries, text=white] at (3.97,-4.0) {no 279};
+  \node[font=\tiny, anchor=west, text=SlateSoft] at (0,-4.5) {modifier no longer a target};
+  \draw[SlateSoft, line width=0.6pt, dashed] (0,-4.65) rectangle (3.338,-5.0);
+  \draw[PerMain, line width=0.9pt] (0.15,-4.68) -- (3.19,-4.97);
+\end{scope}
+
+% ---------------- bars: third pass ------------------------------------------------------------
+\begin{scope}[shift={(11.2,0)}]
+  \node[font=\tiny, anchor=west, text=SlateSoft] at (0,-3.65) {after step 1 (deterministic remap)};
+  \fill[TrjMain] (0,-3.8) rectangle (2.972,-4.2); \fill[AmbMain] (2.972,-3.8) rectangle (4.6,-4.2);
+  \node[font=\scriptsize\bfseries, text=white] at (1.49,-4.0) {yes 657};
+  \node[font=\scriptsize\bfseries, text=white] at (3.79,-4.0) {no 360};
+  \node[font=\tiny, anchor=west, text=SlateSoft] at (0,-4.5) {final (after step 2, manual re-audit)};
+  \fill[TrjMain] (0,-4.65) rectangle (3.139,-5.05); \fill[AmbMain] (3.139,-4.65) rectangle (4.6,-5.05);
+  \node[font=\scriptsize\bfseries, text=white] at (1.57,-4.85) {yes 694 (68.2\%)};
+  \node[font=\scriptsize\bfseries, text=white] at (3.87,-4.85) {no 323};
+\end{scope}
+
+% ---------------- third pass, the two steps --------------------------------------------------
+\node[amb, fill=white, text width=4.5cm, minimum height=1.25cm, anchor=north west] (s1) at (11.15,-5.45)
+  {\textbf{Step 1}\\[-1pt]\scriptsize \emph{yes} with modifier \emph{none} stays \emph{yes}; everything else becomes \emph{no}. 81 dialogues move from yes to no.};
+\node[amb, fill=white, text width=4.5cm, minimum height=1.6cm, anchor=north west] (s2) at (11.15,-7.05)
+  {\textbf{Step 2}\\[-1pt]\scriptsize all 81 are read in full and judged by the Persuadee's last position: 44 are confirmed \emph{no}, 37 had resolved their hedge and revert to \emph{yes}.};
+\draw[flow] (s1.south) -- (s2.north);
+
+% ---------------- what the earlier passes leave open ---------------------------------------
+\node[anchor=north west, text width=4.7cm, font=\scriptsize, align=left] at (0.15,-5.75)
+  {\textbf{Reliability check.} An independent second pass over 154 dialogues of the lead partition, made without sight of the first labels, agreed on 142 of them (92.21\%). The 12 disagreements clustered around four boundary cases and were written back into the guideline.};
+\node[anchor=north west, text width=4.7cm, font=\scriptsize, align=left] at (5.65,-5.75)
+  {\textbf{Why this version exists.} With modifier gradients removed, the shared representation no longer trades binary accuracy against a data-starved head; every binary result in Table B comes from these labels.};
+
+% ---------------- where each pass is used -------------------------------------------------------
+\foreach \x/\t in {0.2/{Evaluated in Table A (v1 to v12)}, 5.7/{Evaluated in Table B (v13, v14)}, 11.2/{Evaluated in Table C (v13, v14)}}{
+  \node[trj, fill=TrjFill, text width=4.5cm, minimum height=0.6cm, anchor=north west] at (\x,-8.85) {\scriptsize\bfseries \t};
+}
+
+\end{tikzpicture}

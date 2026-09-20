@@ -1,0 +1,51 @@
+% Three-phase synthetic e-commerce negotiation benchmark: synthesis, humanisation, audit.
+\begin{tikzpicture}[x=1cm,y=1cm]
+
+% ---------------- phase frames ---------------------------------------------------------------
+\foreach \x/\c/\t in {0/94A3B8/{Phase 1: persona-driven synthesis}, 5.5/64748B/{Phase 2: organic paraphrasing}, 11/334155/{Phase 3: labelling and audit}}{
+  \definecolor{stg}{HTML}{\c}
+  \draw[rounded corners=5pt, draw=stg, fill=white, line width=0.9pt] (\x,0.05) rectangle ++(5,-10.5);
+  \fill[stg, rounded corners=5pt] (\x,0.05) rectangle ++(5,-0.75);
+  \fill[stg] (\x,-0.4) rectangle ++(5,-0.3);
+  \node[text=white, font=\footnotesize\bfseries] at (\x+2.5,-0.33) {\t};
+}
+\foreach \x in {5,10.5}{ \draw[flow, line width=1.3pt] (\x-0.02,-0.35) -- ++(0.54,0); }
+
+% =============== phase 1 ==========================================================================
+\node[per, text width=4.6cm, minimum height=2.55cm, anchor=north west] (r1) at (0.2,-0.95)
+  {\textbf{Regime A: canonical, $N=500$}\\[1pt]\scriptsize eight buyer archetypes: Skeptic, LowBaller, Urgent, Ghoster, Comparator, DeliveryObsessed, TrustSeeker, BulkBuyer\\ three merchant personas, four product catalogs};
+\node[dec, text width=4.6cm, minimum height=2.7cm, anchor=north west] (r2) at (0.2,-3.7)
+  {\textbf{Regime B: adversarial, $N=200$}\\[1pt]\scriptsize 65 resistance $\to$ agreement\\ 65 commitment $\to$ rejection\\ 70 hard monotonic controls\\ six sentiment states per buyer turn and a \texttt{reversal\_turn\_id}};
+\node[xat, text width=4.6cm, minimum height=1.55cm, anchor=north west] (r3) at (0.2,-6.6)
+  {\textbf{Dialogue-state register}\\[1pt]\scriptsize used in both regimes: tracks fulfilled goals, forbids repeated questions, locks product specifications};
+\node[neu, text width=4.6cm, minimum height=1.6cm, anchor=north west] (r4) at (0.2,-8.35)
+  {\textbf{Output}\\[1pt]\scriptsize draft dialogues from several LLMs, written as fluent but rigid text};
+\draw[flow] (r3.south) -- (r4.north);
+
+% =============== phase 2 ==========================================================================
+\node[trj, text width=4.6cm, minimum height=1.6cm, anchor=north west] (p1) at (5.7,-0.95)
+  {\textbf{Voice sampling, once per dialogue}\\[1pt]\scriptsize 5 buyer voices and 4 merchant voices, kept fixed from the first turn to the last};
+\node[trj, text width=4.6cm, minimum height=1.9cm, anchor=north west] (p2) at (5.7,-2.75)
+  {\textbf{Rewrite with hard rules}\\[1pt]\scriptsize Gemini Flash-Lite; same turn count and roles; facts, prices, phone numbers and transaction IDs locked; currency written as ``X taka''};
+\node[amb, text width=4.6cm, minimum height=2.5cm, anchor=north west] (p3) at (5.7,-4.85)
+  {\textbf{Quality gates}\\[1pt]\scriptsize reject a turn whose SequenceMatcher similarity to its source exceeds 0.82\\ entity check: same amounts and numbers before and after\\ currency normalised to one token pattern};
+\node[amb, text width=4.6cm, minimum height=2.0cm, anchor=north west] (p4) at (5.7,-7.55)
+  {\textbf{Controlled micro-jitter}\\[1pt]\scriptsize 25\% lowercased first words, 30\% dropped periods, fillers (ok, hmm, sure), sparse typos that never touch names or digits};
+\draw[flow] (p1) -- (p2); \draw[flow] (p2) -- (p3); \draw[flow] (p3) -- (p4);
+
+% =============== phase 3 ==========================================================================
+\node[xat, text width=4.6cm, minimum height=2.3cm, anchor=north west] (l1) at (11.2,-0.95)
+  {\textbf{Automated semantic parsing}\\[1pt]\scriptsize binary \texttt{buying\_intent}, transactional \texttt{outcome\_category}, a one-sentence \texttt{reason}, and normalised turn-level intent tags};
+\node[fin, text width=4.6cm, minimum height=2.7cm, anchor=north west] (l2) at (11.2,-3.45)
+  {\textbf{Human audit of all 700 dialogues}\\[1pt]\scriptsize line-by-line reading; label against final stance; reason checked against transcript; conditional cases adjudicated together; \texttt{reversal\_turn\_id} and sentiment tags verified};
+\node[trj, text width=4.6cm, minimum height=2.15cm, anchor=north west] (l3) at (11.2,-6.3)
+  {\textbf{Frozen benchmark}\\[1pt]\scriptsize \texttt{ENG\_001} to \texttt{ENG\_500} and \texttt{REV\_001} to \texttt{REV\_200}\\ 6 to 32 turns, 16.2 on average};
+\draw[flow] (l1) -- (l2); \draw[flow] (l2) -- (l3);
+\node[neu, text width=4.6cm, minimum height=1.5cm, anchor=north west] (l4) at (11.2,-8.6)
+  {\scriptsize Data files used in every experiment: canonical 262 no / 238 yes; combined 362 no / 338 yes};
+
+% ---------------- long connectors -------------------------------------------------------------------
+\draw[flow, line width=1.3pt] (r4.east) -- (5.25,-9.15) -- (5.25,-1.75) -- (p1.west);
+\draw[flow, line width=1.3pt] (p4.east) -- (10.75,-8.55) -- (10.75,-2.1) -- (l1.west);
+
+\end{tikzpicture}

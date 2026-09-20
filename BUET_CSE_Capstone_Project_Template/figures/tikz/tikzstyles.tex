@@ -1,0 +1,50 @@
+%======================================================================
+%  Shared palette and TikZ styles for every architecture / pipeline figure.
+%  Loaded once from template.tex (and from the standalone preview harness).
+%======================================================================
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds,calc,
+  shapes.geometric,shapes.misc,decorations.pathreplacing,decorations.markings}
+
+% ---- Palette: one hue per functional role, used in every figure -----
+% Persuader / merchant stream
+\definecolor{PerMain}{HTML}{E11D48}\definecolor{PerFill}{HTML}{FFE4E6}\definecolor{PerBord}{HTML}{BE123C}
+% Persuadee / buyer / decider stream
+\definecolor{DecMain}{HTML}{2563EB}\definecolor{DecFill}{HTML}{DBEAFE}\definecolor{DecBord}{HTML}{1D4ED8}
+% Directional cross-attention
+\definecolor{XatMain}{HTML}{7C3AED}\definecolor{XatFill}{HTML}{EDE9FE}\definecolor{XatBord}{HTML}{6D28D9}
+% Trajectory GRU and attention pooling
+\definecolor{TrjMain}{HTML}{059669}\definecolor{TrjFill}{HTML}{D1FAE5}\definecolor{TrjBord}{HTML}{047857}
+% Outputs and fusion heads
+\definecolor{Slate}{HTML}{0F172A}\definecolor{SlateSoft}{HTML}{475569}
+% Neutral encoders and data
+\definecolor{NeuFill}{HTML}{F1F5F9}\definecolor{NeuBord}{HTML}{64748B}
+% Accent for the strategy stream and warnings
+\definecolor{AmbFill}{HTML}{FEF3C7}\definecolor{AmbBord}{HTML}{B45309}\definecolor{AmbMain}{HTML}{D97706}
+
+\tikzset{
+  every picture/.append style={font=\footnotesize, >=Stealth,
+    execute at begin picture={\hyphenpenalty=10000\relax\exhyphenpenalty=10000\relax}},
+  blk/.style={rectangle, rounded corners=3pt, line width=0.8pt, align=center,
+              inner xsep=4pt, inner ysep=3pt, minimum height=0.62cm},
+  per/.style={blk, draw=PerBord, fill=PerFill},
+  dec/.style={blk, draw=DecBord, fill=DecFill},
+  xat/.style={blk, draw=XatBord, fill=XatFill},
+  trj/.style={blk, draw=TrjBord, fill=TrjFill},
+  neu/.style={blk, draw=NeuBord, fill=NeuFill},
+  amb/.style={blk, draw=AmbBord, fill=AmbFill},
+  fin/.style={blk, draw=Slate, fill=Slate, text=white},
+  ten/.style={rectangle, rounded corners=1.5pt, draw=NeuBord, fill=white,
+              line width=0.5pt, inner sep=1.6pt, font=\scriptsize},
+  nt/.style={font=\scriptsize\itshape, text=SlateSoft, align=center},
+  flow/.style={-{Stealth[length=4.2pt,width=3.6pt]}, line width=0.9pt, draw=SlateSoft},
+  flowP/.style={-{Stealth[length=4.2pt,width=3.6pt]}, line width=1.0pt, draw=PerMain},
+  flowD/.style={-{Stealth[length=4.2pt,width=3.6pt]}, line width=1.0pt, draw=DecMain},
+  flowX/.style={-{Stealth[length=4.2pt,width=3.6pt]}, line width=1.0pt, draw=XatMain},
+  flowT/.style={-{Stealth[length=4.2pt,width=3.6pt]}, line width=1.0pt, draw=TrjMain},
+  dsh/.style={dashed, dash pattern=on 3pt off 2pt},
+  grp/.style={rectangle, rounded corners=6pt, line width=0.7pt, draw=#1, fill=#1!6,
+              inner sep=6pt},
+  ttl/.style={font=\footnotesize\bfseries, align=center},
+  oplus/.style={circle, draw=Slate, fill=white, line width=0.8pt, inner sep=0pt,
+                minimum size=0.42cm, font=\footnotesize},
+}

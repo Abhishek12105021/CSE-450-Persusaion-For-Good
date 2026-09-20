@@ -1,0 +1,67 @@
+% Multi-task category classifier (v17, v18): member architecture, 19-member pool, decision layer.
+\begin{tikzpicture}[x=1cm,y=1cm]
+
+% ---------------- group frames -------------------------------------------------------------------
+\foreach \x/\c/\t in {0/94A3B8/{One ensemble member}, 5.5/64748B/{Pool of 19 members}, 11/334155/{Decision layer}}{
+  \definecolor{stg}{HTML}{\c}
+  \draw[rounded corners=5pt, draw=stg, fill=white, line width=0.9pt] (\x,0.05) rectangle ++(5,-10.2);
+  \fill[stg, rounded corners=5pt] (\x,0.05) rectangle ++(5,-0.75);
+  \fill[stg] (\x,-0.4) rectangle ++(5,-0.3);
+  \node[text=white, font=\footnotesize\bfseries] at (\x+2.5,-0.33) {\t};
+}
+\foreach \x in {5,10.5}{ \draw[flow, line width=1.3pt] (\x-0.02,-0.35) -- ++(0.54,0); }
+
+% ---------------- member architecture ---------------------------------------------------------------
+\node[neu, text width=4.3cm, minimum height=1.1cm] (in0) at (2.5,-1.4)
+  {\scriptsize a Persuader turn plus up to five turns of context; left truncation keeps the current turn};
+\node[amb, text width=4.3cm, minimum height=0.85cm] (m1) at (2.5,-2.75)
+  {\scriptsize pretrained transformer (RoBERTa-base or -large, ELECTRA-base)};
+\node[amb, text width=4.3cm, minimum height=0.85cm] (m2) at (2.5,-3.85)
+  {\scriptsize learned role embedding added to every token};
+\node[amb, text width=4.3cm, minimum height=0.85cm] (m3) at (2.5,-4.95)
+  {\scriptsize attention pooling: one vector $\mathbf{z}\in\mathbb{R}^{d}$, $d=768$ or $1024$};
+\node[xat, text width=1.95cm, minimum height=1.05cm] (hc) at (1.4,-6.55)
+  {\scriptsize \textbf{category head}\\ Linear$(d,11)$\\ main target};
+\node[amb, text width=1.95cm, minimum height=1.05cm] (hs) at (3.6,-6.55)
+  {\scriptsize \textbf{strategy head}\\ Linear$(d,41)$\\ auxiliary};
+\draw[flow] (in0) -- (m1); \draw[flow] (m1) -- (m2); \draw[flow] (m2) -- (m3);
+\draw[flow] (m3.south) -- ++(0,-0.15) -| (hc.north);
+\draw[flow] (m3.south) -- ++(0,-0.15) -| (hs.north);
+\node[neu, text width=4.3cm, minimum height=2.0cm] (ls) at (2.5,-8.6)
+  {\scriptsize asymmetric loss on both heads, so the 93\% of negative (turn, label) pairs do not swamp training; optional positive weights; rare-label copies in the training split only};
+\draw[flow] (hc.south) -- ++(0,-0.15) -| ([xshift=-0.6cm]ls.north);
+\draw[flow] (hs.south) -- ++(0,-0.15) -| ([xshift=0.6cm]ls.north);
+
+% ---------------- pool of 19 members --------------------------------------------------------------------
+\node[amb, text width=4.4cm, minimum height=1.85cm] (q1) at (8.0,-1.75)
+  {\textbf{7 fine-tuned encoders}\\[1pt]\scriptsize RoBERTa-base $\times4$, RoBERTa-large $\times2$, ELECTRA-base $\times1$; mixed context widths, seeds and loss orientations};
+\node[trj, text width=4.4cm, minimum height=1.85cm] (q2) at (8.0,-3.9)
+  {\textbf{8 few-shot companions}\\[1pt]\scriptsize distance to the mean vector of each label's training turns; one per encoder plus one on TF-IDF};
+\node[neu, text width=4.4cm, minimum height=1.6cm] (q3) at (8.0,-5.85)
+  {\textbf{2 TF-IDF classifiers}\\[1pt]\scriptsize logistic regression and XGBoost on word and character n-grams};
+\node[neu, text width=4.4cm, minimum height=1.6cm] (q4) at (8.0,-7.7)
+  {\textbf{2 zero-shot members}\\[1pt]\scriptsize text similarity between a turn and each label's written definition};
+\node[fin, text width=4.4cm, minimum height=0.95cm] (q5) at (8.0,-9.3)
+  {\scriptsize 19 probabilities per (turn, label)};
+\draw[flow] (q1) -- (q2); \draw[flow] (q2) -- (q3); \draw[flow] (q3) -- (q4); \draw[flow] (q4) -- (q5);
+\draw[flow, line width=1.1pt] (ls.east) -- (5.25,-8.6) -- (5.25,-1.75) -- (q1.west);
+
+% ---------------- decision layer ------------------------------------------------------------------------------
+\node[neu, text width=4.3cm, minimum height=2.3cm] (z0) at (13.5,-1.75)
+  {\textbf{Ensemble zoo}\\[1pt]\scriptsize 50 to 70 candidate combinations: plain and calibrated averages, greedy and bagged blends, power means, two stackers; scored by grouped cross-validation};
+\node[trj, fill=TrjFill, text width=1.95cm, minimum height=2.15cm] (za) at (12.35,-4.5)
+  {\scriptsize \textbf{calibrated power-mean blend}\\ $q=2$\\ val. macro-F1 $0.5716$\\ \textbf{selected}};
+\node[amb, fill=white, dashed, text width=1.95cm, minimum height=2.15cm] (zb) at (14.65,-4.5)
+  {\scriptsize \textbf{XGBoost stacker}\\ one shared model on a (turn, label) table\\ $0.5508$\\ tested};
+\draw[flow] (z0.south) -- ++(0,-0.2) -| (za.north);
+\draw[flow, dashed] (z0.south) -- ++(0,-0.2) -| (zb.north);
+\node[neu, text width=4.3cm, minimum height=1.3cm] (zr) at (13.5,-6.9)
+  {\scriptsize per-label decision rule, picked from nine candidates on validation data};
+\draw[flow] (za.south) -- ++(0,-0.15) -| ([xshift=-0.5cm]zr.north);
+\draw[flow, dashed] (zb.south) -- ++(0,-0.15) -| ([xshift=0.5cm]zr.north);
+\node[fin, text width=4.3cm, minimum height=1.15cm] (zo) at (13.5,-8.65)
+  {\scriptsize label set for the turn over the 11 categories};
+\draw[flow] (zr) -- (zo);
+\draw[flow, line width=1.1pt] (q5.east) -- (10.75,-9.3) -- (10.75,-1.75) -- (z0.west);
+
+\end{tikzpicture}
