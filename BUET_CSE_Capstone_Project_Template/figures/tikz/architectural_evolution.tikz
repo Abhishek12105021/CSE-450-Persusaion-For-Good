@@ -23,12 +23,13 @@
   \foreach \i in {0,1,2,3,4}{ \node[ten, minimum size=0.3cm, fill=NeuFill] at (0.5+0.36*\i,-1.9) {}; }
   \foreach \i in {5,6,7}{ \node[ten, minimum size=0.3cm, draw=NeuBord!40, dashed, text=NeuBord!40] at (0.5+0.36*\i,-1.9) {}; }
   \draw[PerMain, dashed, line width=0.9pt] (2.19,-1.6) -- (2.19,-2.2);
-  \node[font=\tiny, text=PerBord, anchor=west] at (2.25,-2.25) {ending discarded};
-  \node[font=\tiny, text=SlateSoft, anchor=east] at (2.1,-2.25) {256 tokens kept};
+  \node[font=\tiny, text=PerBord, anchor=center] at (2.8,-2.35) {ending discarded};
+  \node[font=\tiny, text=SlateSoft, anchor=center] at (1.22,-2.35) {256 tokens kept};
   \node[neu, minimum width=3.2cm] (e1) at (1.85,-2.95) {\scriptsize Encoder, flat input};
   \node[neu, minimum width=3.2cm] (p1) at (1.85,-3.7) {\scriptsize {[}CLS{]} / mean pooling};
   \node[neu, minimum width=1.5cm] (h1a) at (1.05,-4.55) {\scriptsize Binary};
-  \node[neu, minimum width=1.5cm] (h1b) at (2.7,-4.55) {\scriptsize Modifier};
+  \node[neu, minimum width=1.5cm] (h1b) at (2.65,-4.55) {\scriptsize Modifier};
+  \draw[flow] (1.85,-2.05) -- (e1.north);
   \draw[flow] (e1) -- (p1);
   \draw[flow] (p1.south) -- ++(0,-0.15) -| (h1a.north);
   \draw[flow] (p1.south) -- ++(0,-0.15) -| (h1b.north);
@@ -43,7 +44,8 @@
   \node[amb, minimum width=3.2cm] (d2) at (1.85,-4.0) {\scriptsize Dialogue transformer, 4 layers};
   \node[amb, minimum width=3.2cm] (a2) at (1.85,-4.7) {\scriptsize Learned attention pooling};
   \node[neu, minimum width=1.5cm] (h2a) at (1.05,-5.5) {\scriptsize Binary};
-  \node[neu, minimum width=1.5cm] (h2b) at (2.7,-5.5) {\scriptsize Modifier};
+  \node[neu, minimum width=1.5cm] (h2b) at (2.65,-5.5) {\scriptsize Modifier};
+  \draw[flow] (1.85,-2.05) -- (e2.north);
   \draw[flow] (e2) -- (p2); \draw[flow] (p2) -- (d2); \draw[flow] (d2) -- (a2);
   \draw[flow] (a2.south) -- ++(0,-0.12) -| (h2a.north);
   \draw[flow] (a2.south) -- ++(0,-0.12) -| (h2b.north);
@@ -56,34 +58,38 @@
   \node[neu, minimum width=3.2cm] (e3) at (1.85,-2.6) {\scriptsize Utterance encoder, per turn};
   \node[amb, minimum width=3.2cm] (d3) at (1.85,-3.3) {\scriptsize Dialogue transformer, 4 layers};
   \node[amb, minimum width=3.2cm] (a3) at (1.85,-4.0) {\scriptsize Attention pooling};
-  \node[oplus] (g3) at (1.5,-4.75) {\scriptsize $\otimes$};
+  \node[oplus] (g3) at (1.85,-4.75) {\scriptsize $\otimes$};
   \node[amb, minimum width=1.4cm, font=\tiny] (l3) at (2.85,-4.75) {last\\Persuadee};
-  \node[font=\tiny, anchor=east] at (1.25,-4.75) {gate};
+  \node[font=\tiny, anchor=east] at (1.5,-4.75) {gate};
   \node[neu, minimum width=3.2cm] (h3) at (1.85,-5.5) {\scriptsize Binary head only (Decoupled)};
-  \draw[flow] (e3) -- (d3); \draw[flow] (d3) -- (a3); \draw[flow] (a3.south) -- (a3.south |- g3.north); \draw[flow] (g3.south) -- (g3.south |- h3.north);
+  \draw[flow] (1.85,-2.05) -- (e3.north);
+  \draw[flow] (e3) -- (d3); \draw[flow] (d3) -- (a3); \draw[flow] (a3) -- (g3); \draw[flow] (g3) -- (h3);
   \draw[flow] (l3.west) -- (g3.east);
 \end{scope}
 
 % =============== Stage 4 : Antiphony ============================================
 \begin{scope}[shift={(12.3,0)}]
-  \foreach \i [evaluate=\j using {int(\i+1)}] in {0,2}{ \node[per, minimum width=0.5cm, minimum height=0.3cm, inner sep=0pt, font=\tiny] at (0.5+0.68*\i,-1.9) {$u_{\j}$}; }
-  \foreach \i [evaluate=\j using {int(\i+1)}] in {1,3}{ \node[dec, minimum width=0.5cm, minimum height=0.3cm, inner sep=0pt, font=\tiny] at (0.5+0.68*\i,-1.9) {$u_{\j}$}; }
+  \foreach \i [evaluate=\j using {int(\i+1)}] in {0,2}{ \node[per, minimum width=0.55cm, minimum height=0.3cm, inner sep=0pt, font=\tiny] at (0.55+0.68*\i,-1.9) {$u_{\j}$}; }
+  \foreach \i [evaluate=\j using {int(\i+1)}] in {1,3}{ \node[dec, minimum width=0.55cm, minimum height=0.3cm, inner sep=0pt, font=\tiny] at (0.55+0.68*\i,-1.9) {$u_{\j}$}; }
   \node[font=\tiny] at (3.3,-1.9) {$\cdots$};
-  \node[neu, minimum width=3.2cm] (e4) at (1.85,-2.5) {\scriptsize Utterance encoder, per turn};
+  \node[neu, minimum width=3.2cm] (e4) at (1.85,-2.6) {\scriptsize Utterance encoder, per turn};
   \node[per, minimum width=1.5cm] (sp) at (1.05,-3.3) {\scriptsize Persuader\\[-2pt]\scriptsize stream};
-  \node[dec, minimum width=1.5cm] (sd) at (2.7,-3.3) {\scriptsize Persuadee\\[-2pt]\scriptsize stream};
+  \node[dec, minimum width=1.5cm] (sd) at (2.65,-3.3) {\scriptsize Persuadee\\[-2pt]\scriptsize stream};
   \node[xat, minimum width=3.2cm] (cx) at (1.85,-4.2) {\scriptsize Cross-attention (Q\,$\leftarrow$\,Persuadee)};
   \node[trj, minimum width=1.5cm] (gr) at (1.05,-4.95) {\scriptsize GRU};
-  \node[trj, minimum width=1.5cm] (pl) at (2.7,-4.95) {\scriptsize Pooling};
+  \node[trj, minimum width=1.5cm] (pl) at (2.65,-4.95) {\scriptsize Pooling};
+  \node[oplus, inner sep=1pt] (cc) at (1.85,-5.35) {\tiny $[\,;]$};
   \node[fin, minimum width=3.2cm] (h4) at (1.85,-5.75) {\scriptsize Binary head};
+  \draw[flow] (1.85,-2.05) -- (e4.north);
   \draw[flow] (e4.south) -- ++(0,-0.1) -| (sp.north);
   \draw[flow] (e4.south) -- ++(0,-0.1) -| (sd.north);
   \draw[flowP] (sp.south) -- (sp.south |- cx.north);
   \draw[flowD] (sd.south) -- (sd.south |- cx.north);
   \draw[flowX] (cx.south) -- ++(0,-0.1) -| (gr.north);
   \draw[flowX] (cx.south) -- ++(0,-0.1) -| (pl.north);
-  \draw[flowT] (gr.south) -- ++(0,-0.1) -| (h4.north);
-  \draw[flowT] (pl.south) -- ++(0,-0.1) -| (h4.north);
+  \draw[flowT] (gr.south) |- (cc.west);
+  \draw[flowT] (pl.south) |- (cc.east);
+  \draw[flowT] (cc) -- (h4);
 \end{scope}
 
 % ------------- what changed -------------------------------------------------------
