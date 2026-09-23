@@ -765,9 +765,6 @@ INPUT figures\tikz\strategy_model.tikz
 INPUT D:\LaTex\MikTeX\fonts\vf\public\newtx\ntxsy5.vf
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\txsys.tfm
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\txex-bar.tfm
-INPUT D:\LaTex\MikTeX\fonts\vf\public\newtx\ntx-Bold-tlf-ot1.vf
-INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\txbmiaX.tfm
-INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\ntx-Bold-tlf-ot1r.tfm
 INPUT .\figures\tikz\antiphony_arch_simple.tikz
 INPUT .\figures\tikz\antiphony_arch_simple.tikz
 INPUT figures\tikz\antiphony_arch_simple.tikz
@@ -775,6 +772,9 @@ INPUT .\figures\tikz\antiphony_arch.tikz
 INPUT .\figures\tikz\antiphony_arch.tikz
 INPUT figures\tikz\antiphony_arch.tikz
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\ntx-Regular-tlf-t1.tfm
+INPUT D:\LaTex\MikTeX\fonts\vf\public\newtx\ntx-Bold-tlf-ot1.vf
+INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\txbmiaX.tfm
+INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\ntx-Bold-tlf-ot1r.tfm
 INPUT D:\LaTex\MikTeX\fonts\vf\public\newtx\ntxexx.vf
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\txexs.tfm
 INPUT D:\LaTex\MikTeX\fonts\vf\public\newtx\ntx-Bold-tlf-ot1.vf

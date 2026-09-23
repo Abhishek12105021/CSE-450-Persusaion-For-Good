@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.7.8)  23 SEP 2026 14:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.7.8)  23 SEP 2026 22:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1868,100 +1868,109 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 (Font)              scaled to size 5.5pt on input line 220.
  [22]
-(figures/tikz/strategy_model.tikz) [23] [24]
-(figures/tikz/antiphony_arch_simple.tikz) [25
+(figures/tikz/strategy_model.tikz
+Overfull \hbox (0.60889pt too wide) in paragraph at lines 34--34
+ \T1/ntxtlf/m/n/7 (-20) RoBERTa-large 
+ []
+
+
+Overfull \hbox (2.4904pt too wide) in paragraph at lines 34--34
+ \T1/ntxtlf/m/n/7 (-20) ELECTRA-base 
+ []
+
+) [23] [24] [25] (figures/tikz/antiphony_arch_simple.tikz) [26
 
 ]
 (figures/tikz/antiphony_arch.tikz
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 (Font)              scaled to size 6.0pt on input line 125.
-) [26] [27] [28]
-(figures/tikz/architectural_evolution.tikz) [29
+) [27] [28] [29]
+(figures/tikz/architectural_evolution.tikz) [30
 
-] [30] [31])
-(chapters/evaluation.tex [32]
+] [31] [32])
+(chapters/evaluation.tex [33]
 Chapter 5.
-[33
+[34
 
 ]
-<figures/eda_labels_per_turn.png, id=1234, 452.52138pt x 285.18854pt>
+<figures/eda_labels_per_turn.png, id=1238, 452.52138pt x 285.18854pt>
 File: figures/eda_labels_per_turn.png Graphic file (type png)
 <use figures/eda_labels_per_turn.png>
 Package pdftex.def Info: figures/eda_labels_per_turn.png  used on input line 50
 .
 (pdftex.def)             Requested size: 218.51521pt x 137.71138pt.
-<figures/eda_category_prevalence.png, id=1235, 608.73576pt x 340.78085pt>
+<figures/eda_category_prevalence.png, id=1239, 608.73576pt x 340.78085pt>
 File: figures/eda_category_prevalence.png Graphic file (type png)
 <use figures/eda_category_prevalence.png>
 Package pdftex.def Info: figures/eda_category_prevalence.png  used on input lin
 e 57.
 (pdftex.def)             Requested size: 218.51521pt x 122.32741pt.
-<figures/eda_strategy_prevalence.png, id=1236, 622.07793pt x 674.89061pt>
+<figures/eda_strategy_prevalence.png, id=1240, 622.07793pt x 674.89061pt>
 File: figures/eda_strategy_prevalence.png Graphic file (type png)
 <use figures/eda_strategy_prevalence.png>
 Package pdftex.def Info: figures/eda_strategy_prevalence.png  used on input lin
 e 64.
 (pdftex.def)             Requested size: 218.51521pt x 237.06998pt.
-<figures/eda_category_cooccurrence.png, id=1237, 652.09776pt x 588.16661pt>
+<figures/eda_category_cooccurrence.png, id=1241, 652.09776pt x 588.16661pt>
 File: figures/eda_category_cooccurrence.png Graphic file (type png)
 <use figures/eda_category_cooccurrence.png>
 Package pdftex.def Info: figures/eda_category_cooccurrence.png  used on input l
 ine 71.
 (pdftex.def)             Requested size: 218.51521pt x 197.08415pt.
-<figures/eda_strategy_cooccurrence.png, id=1238, 758.27908pt x 684.34131pt>
+<figures/eda_strategy_cooccurrence.png, id=1242, 758.27908pt x 684.34131pt>
 File: figures/eda_strategy_cooccurrence.png Graphic file (type png)
 <use figures/eda_strategy_cooccurrence.png>
 Package pdftex.def Info: figures/eda_strategy_cooccurrence.png  used on input l
 ine 83.
 (pdftex.def)             Requested size: 218.51521pt x 197.21127pt.
-<figures/eda_label_density_segment.png, id=1239, 668.21954pt x 281.853pt>
+<figures/eda_label_density_segment.png, id=1243, 668.21954pt x 281.853pt>
 File: figures/eda_label_density_segment.png Graphic file (type png)
 <use figures/eda_label_density_segment.png>
 Package pdftex.def Info: figures/eda_label_density_segment.png  used on input l
 ine 90.
 (pdftex.def)             Requested size: 218.51521pt x 92.16882pt.
-<figures/eda_category_by_segment.png, id=1240, 554.81123pt x 370.80069pt>
+<figures/eda_category_by_segment.png, id=1244, 554.81123pt x 370.80069pt>
 File: figures/eda_category_by_segment.png Graphic file (type png)
 <use figures/eda_category_by_segment.png>
 Package pdftex.def Info: figures/eda_category_by_segment.png  used on input lin
 e 97.
 (pdftex.def)             Requested size: 218.51521pt x 146.04314pt.
-<figures/eda_strategy_by_position.png, id=1241, 553.69939pt x 340.78085pt>
+<figures/eda_strategy_by_position.png, id=1245, 553.69939pt x 340.78085pt>
 File: figures/eda_strategy_by_position.png Graphic file (type png)
 <use figures/eda_strategy_by_position.png>
 Package pdftex.def Info: figures/eda_strategy_by_position.png  used on input li
 ne 104.
 (pdftex.def)             Requested size: 218.51521pt x 134.48996pt.
-<figures/eda_label_density_corpus.png, id=1242, 612.0713pt x 285.18854pt>
+<figures/eda_label_density_corpus.png, id=1246, 612.0713pt x 285.18854pt>
 File: figures/eda_label_density_corpus.png Graphic file (type png)
 <use figures/eda_label_density_corpus.png>
 Package pdftex.def Info: figures/eda_label_density_corpus.png  used on input li
 ne 116.
 (pdftex.def)             Requested size: 218.51521pt x 101.81487pt.
-<figures/eda_text_length.png, id=1243, 670.99916pt x 285.18854pt>
+<figures/eda_text_length.png, id=1247, 670.99916pt x 285.18854pt>
 File: figures/eda_text_length.png Graphic file (type png)
 <use figures/eda_text_length.png>
 Package pdftex.def Info: figures/eda_text_length.png  used on input line 123.
 (pdftex.def)             Requested size: 218.51521pt x 92.87228pt.
-<figures/eda_strategy_rank_frequency.png, id=1244, 446.40623pt x 317.43208pt>
+<figures/eda_strategy_rank_frequency.png, id=1248, 446.40623pt x 317.43208pt>
 File: figures/eda_strategy_rank_frequency.png Graphic file (type png)
 <use figures/eda_strategy_rank_frequency.png>
 Package pdftex.def Info: figures/eda_strategy_rank_frequency.png  used on input
  line 130.
 (pdftex.def)             Requested size: 218.51521pt x 155.38324pt.
-<figures/eda_strategy_correlation.png, id=1245, 865.57224pt x 773.84492pt>
+<figures/eda_strategy_correlation.png, id=1249, 865.57224pt x 773.84492pt>
 File: figures/eda_strategy_correlation.png Graphic file (type png)
 <use figures/eda_strategy_correlation.png>
 Package pdftex.def Info: figures/eda_strategy_correlation.png  used on input li
 ne 137.
 (pdftex.def)             Requested size: 218.51521pt x 195.35002pt.
- [34 <./figures/eda_labels_per_turn.png> <./figures/eda_category_prevalence.png
+ [35 <./figures/eda_labels_per_turn.png> <./figures/eda_category_prevalence.png
 > <./figures/eda_strategy_prevalence.png> <./figures/eda_category_cooccurrence.
-png>] [35 <./figures/eda_strategy_cooccurrence.png> <./figures/eda_label_densit
+png>] [36 <./figures/eda_strategy_cooccurrence.png> <./figures/eda_label_densit
 y_segment.png> <./figures/eda_category_by_segment.png> <./figures/eda_strategy_
-by_position.png>] [36 <./figures/eda_label_density_corpus.png> <./figures/eda_t
+by_position.png>] [37 <./figures/eda_label_density_corpus.png> <./figures/eda_t
 ext_length.png> <./figures/eda_strategy_rank_frequency.png> <./figures/eda_stra
-tegy_correlation.png>] [37]
+tegy_correlation.png>] [38]
 Underfull \hbox (badness 10000) in alignment at lines 303--303
 [][][][][][] 
  []
@@ -1971,7 +1980,7 @@ Underfull \hbox (badness 10000) in alignment at lines 358--358
 [][][][][][] 
  []
 
-[38] [39]
+[39] [40]
 Underfull \hbox (badness 10000) in alignment at lines 404--404
 [][][][][] 
  []
@@ -1986,7 +1995,7 @@ Underfull \hbox (badness 10000) in alignment at lines 461--461
 [][][][] 
  []
 
-[40]
+[41]
 Underfull \hbox (badness 10000) in alignment at lines 493--493
 [][][][][][] 
  []
@@ -1996,105 +2005,105 @@ Underfull \hbox (badness 10000) in alignment at lines 518--518
 [][][][][][] 
  []
 
-[41]
-<figures/ablation_antiphony.png, id=1318, 542.025pt x 325.215pt>
+[42]
+<figures/ablation_antiphony.png, id=1322, 542.025pt x 325.215pt>
 File: figures/ablation_antiphony.png Graphic file (type png)
 <use figures/ablation_antiphony.png>
 Package pdftex.def Info: figures/ablation_antiphony.png  used on input line 547
 .
 (pdftex.def)             Requested size: 218.51521pt x 131.1109pt.
-<figures/ablation_extended.png, id=1319, 542.025pt x 325.215pt>
+<figures/ablation_extended.png, id=1323, 542.025pt x 325.215pt>
 File: figures/ablation_extended.png Graphic file (type png)
 <use figures/ablation_extended.png>
 Package pdftex.def Info: figures/ablation_extended.png  used on input line 554.
 
 (pdftex.def)             Requested size: 218.51521pt x 131.1109pt.
-<figures/confusion_antiphony.png, id=1320, 1192.455pt x 325.215pt>
+<figures/confusion_antiphony.png, id=1324, 1192.455pt x 325.215pt>
 File: figures/confusion_antiphony.png Graphic file (type png)
 <use figures/confusion_antiphony.png>
 Package pdftex.def Info: figures/confusion_antiphony.png  used on input line 56
 1.
 (pdftex.def)             Requested size: 218.51521pt x 59.59315pt.
-<figures/confusion_extended.png, id=1321, 1192.455pt x 325.215pt>
+<figures/confusion_extended.png, id=1325, 1192.455pt x 325.215pt>
 File: figures/confusion_extended.png Graphic file (type png)
 <use figures/confusion_extended.png>
 Package pdftex.def Info: figures/confusion_extended.png  used on input line 568
 .
 (pdftex.def)             Requested size: 218.51521pt x 59.59315pt.
-<figures/training_curves_antiphony.png, id=1322, 505.89pt x 325.215pt>
+<figures/training_curves_antiphony.png, id=1326, 505.89pt x 325.215pt>
 File: figures/training_curves_antiphony.png Graphic file (type png)
 <use figures/training_curves_antiphony.png>
 Package pdftex.def Info: figures/training_curves_antiphony.png  used on input l
 ine 580.
 (pdftex.def)             Requested size: 218.51521pt x 140.4749pt.
-<figures/training_curves_extended.png, id=1323, 505.89pt x 325.215pt>
+<figures/training_curves_extended.png, id=1327, 505.89pt x 325.215pt>
 File: figures/training_curves_extended.png Graphic file (type png)
 <use figures/training_curves_extended.png>
 Package pdftex.def Info: figures/training_curves_extended.png  used on input li
 ne 587.
 (pdftex.def)             Requested size: 218.51521pt x 140.4749pt.
-<figures/summary_bar_antiphony.png, id=1324, 650.43pt x 361.35pt>
+<figures/summary_bar_antiphony.png, id=1328, 650.43pt x 361.35pt>
 File: figures/summary_bar_antiphony.png Graphic file (type png)
 <use figures/summary_bar_antiphony.png>
 Package pdftex.def Info: figures/summary_bar_antiphony.png  used on input line 
 594.
 (pdftex.def)             Requested size: 218.51521pt x 121.39622pt.
-<figures/summary_bar_extended.png, id=1325, 650.43pt x 361.35pt>
+<figures/summary_bar_extended.png, id=1329, 650.43pt x 361.35pt>
 File: figures/summary_bar_extended.png Graphic file (type png)
 <use figures/summary_bar_extended.png>
 Package pdftex.def Info: figures/summary_bar_extended.png  used on input line 6
 01.
 (pdftex.def)             Requested size: 218.51521pt x 121.39622pt.
-<figures/label_distribution_antiphony.png, id=1326, 939.51pt x 289.08pt>
+<figures/label_distribution_antiphony.png, id=1330, 939.51pt x 289.08pt>
 File: figures/label_distribution_antiphony.png Graphic file (type png)
 <use figures/label_distribution_antiphony.png>
 Package pdftex.def Info: figures/label_distribution_antiphony.png  used on inpu
 t line 611.
 (pdftex.def)             Requested size: 341.43307pt x 105.05678pt.
-<figures/skew_stress_antiphony.png, id=1327, 939.51pt x 325.215pt>
+<figures/skew_stress_antiphony.png, id=1331, 939.51pt x 325.215pt>
 File: figures/skew_stress_antiphony.png Graphic file (type png)
 <use figures/skew_stress_antiphony.png>
 Package pdftex.def Info: figures/skew_stress_antiphony.png  used on input line 
 623.
 (pdftex.def)             Requested size: 341.43307pt x 118.18887pt.
-<figures/ablation_lefttrunc.png, id=1329, 578.16pt x 361.35pt>
+<figures/ablation_lefttrunc.png, id=1333, 578.16pt x 361.35pt>
 File: figures/ablation_lefttrunc.png Graphic file (type png)
 <use figures/ablation_lefttrunc.png>
 Package pdftex.def Info: figures/ablation_lefttrunc.png  used on input line 638
 .
 (pdftex.def)             Requested size: 341.43307pt x 213.39314pt.
- [42 <./figures/ablation_antiphony.png> <./figures/ablation_extended.png> <./fi
-gures/confusion_antiphony.png> <./figures/confusion_extended.png>] [43 <./figur
+ [43 <./figures/ablation_antiphony.png> <./figures/ablation_extended.png> <./fi
+gures/confusion_antiphony.png> <./figures/confusion_extended.png>] [44 <./figur
 es/training_curves_antiphony.png> <./figures/training_curves_extended.png> <./f
 igures/summary_bar_antiphony.png> <./figures/summary_bar_extended.png> <./figur
-es/label_distribution_antiphony.png> <./figures/skew_stress_antiphony.png>] [44
+es/label_distribution_antiphony.png> <./figures/skew_stress_antiphony.png>] [45
  <./figures/ablation_lefttrunc.png>]) (chapters/management_impact.tex
-[45]
+[46]
 Chapter 6.
-[46
+[47
 
-] [47] [48] [49] [50]) (chapters/conclusion.tex [51]
+] [48] [49] [50] [51]) (chapters/conclusion.tex [52]
 Chapter 7.
 LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
 (Font)              scaled to size 9.0pt on input line 44.
-[52
+[53
 
-] [53]) (template.bbl [54] [55
+] [54]) (template.bbl [55] [56
 
-] [56]) (chapters/appendix.tex [57]
+] [57]) (chapters/appendix.tex [58]
 Appendix A.
-[58
+[59
 
 ]
 Appendix B.
-[59
+[60
 
 
 ]
 Appendix C.
 LaTeX Font Info:    Font shape `T1/ntxtt/b/n' in size <14.4> not available
 (Font)              Font shape `T1/txtt/bx/n' tried instead on input line 98.
-[60
+[61
 
 
 ]
@@ -2120,15 +2129,15 @@ Underfull \hbox (badness 3209) in paragraph at lines 201--201
  :\OT1/minntx/m/n/9 8623$\T1/ntxtlf/m/n/9 (+20) ) and tuned
  []
 
-[61
+[62
 
 
-] [62]
+] [63]
 Appendix E.
-[63
+[64
 
 
-]) [64] (template.aux)
+]) [65] (template.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2020/03/25>
@@ -2141,11 +2150,11 @@ Package rerunfilecheck Info: File `template.out' has not changed.
 (rerunfilecheck)             Checksum: ADE7F2375D452C21C4D43C0D572BC3FF;34609.
  ) 
 Here is how much of TeX's memory you used:
- 52199 strings out of 474486
- 1144272 string characters out of 5757366
+ 52188 strings out of 474486
+ 1144297 string characters out of 5757366
  2173542 words of memory out of 5000000
- 72658 multiletter control sequences out of 15000+600000
- 745379 words of font info for 447 fonts, out of 8000000 for 9000
+ 72648 multiletter control sequences out of 15000+600000
+ 745287 words of font info for 446 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  98i,16n,131p,1423b,1194s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <D:/LaTex/MikTeX/fonts/type1/public/newtx/NewTXMI.pfb><D:/LaTex/MikTeX/fonts/
@@ -2159,9 +2168,9 @@ X/fonts/type1/urw/helvetic/uhvb8a.pfb><D:/LaTex/MikTeX/fonts/type1/public/newtx
 /ztmb.pfb><D:/LaTex/MikTeX/fonts/type1/public/newtx/ztmbi.pfb><D:/LaTex/MikTeX/
 fonts/type1/public/newtx/ztmr.pfb><D:/LaTex/MikTeX/fonts/type1/public/newtx/ztm
 ri.pfb>
-Output written on template.pdf (74 pages, 2598924 bytes).
+Output written on template.pdf (75 pages, 2601386 bytes).
 PDF statistics:
- 1704 PDF objects out of 1728 (max. 8388607)
- 476 named destinations out of 1000 (max. 500000)
+ 1708 PDF objects out of 1728 (max. 8388607)
+ 477 named destinations out of 1000 (max. 500000)
  102597 words of extra memory for PDF output out of 106986 (max. 10000000)
 
