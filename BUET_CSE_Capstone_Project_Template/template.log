@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.3)  23 SEP 2026 14:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.3)  23 SEP 2026 15:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2259,11 +2259,11 @@ Package rerunfilecheck Info: File `template.out' has not changed.
 (rerunfilecheck)             Checksum: E0D083C4CD6BDC03F0F595B7EE829169;34271.
  ) 
 Here is how much of TeX's memory you used:
- 51978 strings out of 473682
- 1139051 string characters out of 5735771
- 1898692 words of memory out of 5000000
- 73278 multiletter control sequences out of 15000+600000
- 741511 words of font info for 435 fonts, out of 8000000 for 9000
+ 52054 strings out of 473682
+ 1140509 string characters out of 5735771
+ 1905945 words of memory out of 5000000
+ 73352 multiletter control sequences out of 15000+600000
+ 741603 words of font info for 436 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  113i,16n,131p,1423b,1186s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/MikTex/fonts/type1/public/newtx/NewTXMI.pfb><C:/MikTex/fonts/type1/public
@@ -2275,7 +2275,7 @@ x/fonts/type1/public/newtx/txsym.pfb><C:/MikTex/fonts/type1/public/newtx/txsys.
 pfb><C:/MikTex/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/MikTex/fonts/type1/publi
 c/newtx/ztmb.pfb><C:/MikTex/fonts/type1/public/newtx/ztmbi.pfb><C:/MikTex/fonts
 /type1/public/newtx/ztmr.pfb><C:/MikTex/fonts/type1/public/newtx/ztmri.pfb>
-Output written on template.pdf (71 pages, 2572409 bytes).
+Output written on template.pdf (71 pages, 2573219 bytes).
 PDF statistics:
  1662 PDF objects out of 1728 (max. 8388607)
  458 named destinations out of 1000 (max. 500000)

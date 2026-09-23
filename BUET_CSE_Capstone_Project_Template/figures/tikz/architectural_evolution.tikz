@@ -1,128 +1,231 @@
 % Four architectural stages. Metrics are the best test macro-F1 of each stage
 % (153-row test split).
-\begin{tikzpicture}[x=1cm,y=1cm]
+%
+% Layout grid (all lengths in cm, y grows downward from the card top at +0.10):
+%   card width 3.85, gutter 0.42, inner margin 0.225 -> content width 3.40
+%   x origins   : 0 / 4.27 / 8.54 / 12.81      card centre = x + 1.925
+%   half width  : 1.58 boxes at x+1.015 and x+2.835, 0.24 apart
+%   header band : +0.10 .. -0.86
+%   input frame : -1.72 .. -2.16, token chips on its centreline at -1.94;
+%                 the encoder arrow leaves the frame edge, not a chip
+%   encoder row : -2.78, shared by all four stages so the stacks line up
+%   clear gap   : tuned per stage so each stack fills its panel evenly --
+%                 0.72 (stage 1, 3 rows), 0.36 (stages 2-3), 0.26 (stage 4,
+%                 6 rows); fan-out rows add ~0.14 for the splitter bar
+%   output row  : -6.86, shared by the stage 2 and stage 3 heads
+%   panel rule  : -8.08    change list : -8.22
+%   metric rule : -10.42   bar track   : -10.98 .. -11.26   card foot : -11.50
+\begin{tikzpicture}[x=1cm,y=1cm,
+  % slimmer heads than the shared style: these connectors are short, and the
+  % default 4.2pt tip swallows the whole shaft.
+  flow/.append style ={-{Stealth[length=3.4pt,width=3.0pt]}},
+  flowP/.append style={-{Stealth[length=3.4pt,width=3.0pt]}},
+  flowD/.append style={-{Stealth[length=3.4pt,width=3.0pt]}},
+  flowX/.append style={-{Stealth[length=3.4pt,width=3.0pt]}},
+  flowT/.append style={-{Stealth[length=3.4pt,width=3.0pt]}},
+  % The turn sequence is one object. The encoder arrow leaves this frame, so it
+  % reads as "the whole sequence feeds the encoder" rather than appearing to
+  % come out of whichever chip happens to sit on the card axis.
+  seqbox/.style={rectangle, rounded corners=3pt, draw=NeuBord!45,
+                 fill=NeuFill!40, line width=0.6pt}]
+
+% hanging-indent bullet used by the four "what changed" lists
+\def\bi{\par\hangindent=0.26cm\hangafter=1\noindent\makebox[0.26cm][l]{{\tiny$\bullet$}}}
 
 % ------------- card frames and headers ---------------------------------------
-\foreach \x/\c/\t in {0/94A3B8/{Stage 1: Monolithic Flat}, 4.1/64748B/{Stage 2: Hierarchical Interleaved}, 8.2/334155/{Stage 3: Gated \& Decoupled}, 12.3/0F172A/{Stage 4: Dual-Stream Antiphony}}{
-  \definecolor{stg}{HTML}{\c}
-  \draw[rounded corners=5pt, draw=stg, fill=white, line width=0.9pt] (\x,0.05) rectangle ++(3.7,-9.75);
-  \fill[stg, rounded corners=5pt] (\x,0.05) rectangle ++(3.7,-0.75);
-  \fill[stg] (\x,-0.4) rectangle ++(3.7,-0.3);
-  \node[text=white, font=\footnotesize\bfseries] at (\x+1.85,-0.33) {\t};
+\foreach \px/\ph/\pn/\pt in {%
+    0/64748B/1/{Monolithic Flat},
+    4.27/475569/2/{Hierarchical Interleaved},
+    8.54/334155/3/{Gated \& Decoupled},
+    12.81/0F172A/4/{Dual-Stream Antiphony}}{
+  \definecolor{stg}{HTML}{\ph}
+  \fill[white, rounded corners=5pt] (\px,0.10) rectangle ++(3.85,-11.60);
+  \fill[stg, rounded corners=5pt]   (\px,0.10) rectangle ++(3.85,-0.96);
+  \fill[stg]                        (\px,-0.40) rectangle ++(3.85,-0.46);
+  \draw[rounded corners=5pt, draw=stg, line width=0.9pt]
+        (\px,0.10) rectangle ++(3.85,-11.60);
+  \node[text=white!85, font=\tiny\bfseries]       at (\px+1.925,-0.29) {STAGE \pn};
+  \node[text=white,    font=\scriptsize\bfseries] at (\px+1.925,-0.62) {\pt};
+  % rules that split each card into architecture / changes / metric bands
+  \draw[draw=NeuBord!35, line width=0.5pt] (\px+0.225,-8.08)  -- (\px+3.625,-8.08);
+  \draw[draw=NeuBord!35, line width=0.5pt] (\px+0.225,-10.42) -- (\px+3.625,-10.42);
 }
-\foreach \x in {3.7,7.8,11.9}{ \draw[flow, line width=1.3pt] (\x-0.02,-0.35) -- ++(0.44,0); }
+% stage-to-stage progression arrows, kept inside the gutters
+\foreach \px in {3.85,8.12,12.39}{
+  \draw[-{Stealth[length=5pt,width=4.2pt]}, line width=1.4pt, draw=Slate]
+        (\px+0.05,-0.38) -- (\px+0.37,-0.38);
+}
 
-% ------------- titles -----------------------------------------------------------
-\node[ttl] at (1.85,-1.05) {Flat sequence\\baseline};
-\node[ttl] at (5.95,-1.05) {Hierarchical dialogue\\transformer};
-\node[ttl] at (10.05,-1.05) {Last-turn gating and\\specialist routing};
-\node[ttl, text=Slate] at (14.15,-1.05) {AntiphonyClassifier};
+% ------------- descriptors ------------------------------------------------------
+\node[anchor=north, text width=3.40cm, align=center, font=\scriptsize, text=SlateSoft]
+  at (1.925,-0.98)  {Flat sequence baseline};
+\node[anchor=north, text width=3.40cm, align=center, font=\scriptsize, text=SlateSoft]
+  at (6.195,-0.98)  {Hierarchical dialogue transformer};
+\node[anchor=north, text width=3.40cm, align=center, font=\scriptsize, text=SlateSoft]
+  at (10.465,-0.98) {Last-turn gating and specialist routing};
+\node[anchor=north, text width=3.40cm, align=center, font=\scriptsize, text=SlateSoft]
+  at (14.735,-0.98) {Dual-stream AntiphonyClassifier};
 
 % =============== Stage 1 : flat baseline ========================================
 \begin{scope}[shift={(0,0)}]
-  \foreach \i in {0,1,2,3,4}{ \node[ten, minimum size=0.3cm, fill=NeuFill] at (0.5+0.36*\i,-1.9) {}; }
-  \foreach \i in {5,6,7}{ \node[ten, minimum size=0.3cm, draw=NeuBord!40, dashed, text=NeuBord!40] at (0.5+0.36*\i,-1.9) {}; }
-  \draw[PerMain, dashed, line width=0.9pt] (2.19,-1.6) -- (2.19,-2.2);
-  \node[font=\tiny, text=PerBord, anchor=center] at (2.8,-2.35) {ending discarded};
-  \node[font=\tiny, text=SlateSoft, anchor=center] at (1.22,-2.35) {256 tokens kept};
-  \node[neu, minimum width=3.2cm] (e1) at (1.85,-2.95) {\scriptsize Encoder, flat input};
-  \node[neu, minimum width=3.2cm] (p1) at (1.85,-3.7) {\scriptsize {[}CLS{]} / mean pooling};
-  \node[neu, minimum width=1.5cm] (h1a) at (1.05,-4.55) {\scriptsize Binary};
-  \node[neu, minimum width=1.5cm] (h1b) at (2.65,-4.55) {\scriptsize Modifier};
-  \draw[flow] (1.85,-2.05) -- (e1.north);
-  \draw[flow] (e1) -- (p1);
-  \draw[flow] (p1.south) -- ++(0,-0.15) -| (h1a.north);
-  \draw[flow] (p1.south) -- ++(0,-0.15) -| (h1b.north);
+  % Each caption is centred over the group it names, and the two groups are
+  % held 0.24 apart so the truncation rule gets a lane of its own.
+  \node[font=\tiny, text=SlateSoft] at (1.295,-1.54) {256 tokens kept};
+  \node[font=\tiny, text=PerBord]   at (2.915,-1.54) {ending discarded};
+  % only the kept window is framed: that is what actually reaches the encoder
+  \draw[seqbox] (0.375,-1.72) rectangle (2.215,-2.16);
+  \foreach \i in {0,1,2,3,4}{
+    \node[ten, minimum size=0.30cm] at (0.575+0.36*\i,-1.94) {}; }
+  \foreach \i in {0,1,2}{
+    \node[ten, minimum size=0.30cm, draw=NeuBord!40, dashed]
+          at (2.555+0.36*\i,-1.94) {}; }
+  \draw[PerMain, dashed, dash pattern=on 2pt off 1.6pt, line width=0.8pt]
+        (2.285,-1.66) -- (2.285,-2.22);
+  \node[neu, minimum width=3.40cm] (e1)  at (1.925,-2.78) {\scriptsize Encoder, flat input};
+  \node[neu, minimum width=3.40cm] (p1)  at (1.925,-4.12) {\scriptsize {[}CLS{]} / mean pooling};
+  \node[neu, minimum width=1.58cm] (h1a) at (1.015,-5.54) {\scriptsize Binary};
+  \node[neu, minimum width=1.58cm] (h1b) at (2.835,-5.54) {\scriptsize Modifier};
+  % leaves the centre of the KEPT frame (1.295), not the card axis: only that
+  % window reaches the encoder. The encoder box is full width, so it still lands.
+  \draw[flow]   (1.295,-2.16) -- (1.295,-2.47);
+  \draw[flow]   (e1) -- (p1);
+  \draw[flow,-] (p1.south)    -- (1.925,-4.83);
+  \draw[flow,-] (1.015,-4.83) -- (2.835,-4.83);
+  \draw[flow]   (1.015,-4.83) -- (h1a.north);
+  \draw[flow]   (2.835,-4.83) -- (h1b.north);
 \end{scope}
 
 % =============== Stage 2 : hierarchical =========================================
-\begin{scope}[shift={(4.1,0)}]
-  \foreach \i [evaluate=\j using {int(\i+1)}] in {0,1,2,3}{ \node[ten, minimum width=0.55cm, minimum height=0.3cm, fill=NeuFill] at (0.55+0.68*\i,-1.9) {\tiny $u_{\j}$}; }
-  \node[font=\tiny] at (3.3,-1.9) {$\cdots$};
-  \node[neu, minimum width=3.2cm] (e2) at (1.85,-2.6) {\scriptsize Utterance encoder, per turn};
-  \node[neu, minimum width=3.2cm] (p2) at (1.85,-3.3) {\scriptsize Turn vectors + role + position};
-  \node[amb, minimum width=3.2cm] (d2) at (1.85,-4.0) {\scriptsize Dialogue transformer, 4 layers};
-  \node[amb, minimum width=3.2cm] (a2) at (1.85,-4.7) {\scriptsize Learned attention pooling};
-  \node[neu, minimum width=1.5cm] (h2a) at (1.05,-5.5) {\scriptsize Binary};
-  \node[neu, minimum width=1.5cm] (h2b) at (2.65,-5.5) {\scriptsize Modifier};
-  \draw[flow] (1.85,-2.05) -- (e2.north);
-  \draw[flow] (e2) -- (p2); \draw[flow] (p2) -- (d2); \draw[flow] (d2) -- (a2);
-  \draw[flow] (a2.south) -- ++(0,-0.12) -| (h2a.north);
-  \draw[flow] (a2.south) -- ++(0,-0.12) -| (h2b.north);
+\begin{scope}[shift={(4.27,0)}]
+  \draw[seqbox] (0.32,-1.72) rectangle (3.53,-2.16);
+  \foreach \i [evaluate=\i as \j using {int(\i+1)}] in {0,1,2,3}{
+    \node[ten, minimum width=0.55cm, minimum height=0.30cm]
+          at (0.67+0.68*\i,-1.94) {\tiny $u_{\j}$}; }
+  \node[font=\tiny, text=SlateSoft] at (3.33,-1.94) {$\cdots$};
+  \node[neu, minimum width=3.40cm] (e2)  at (1.925,-2.78) {\scriptsize Utterance encoder, per turn};
+  \node[neu, minimum width=3.40cm] (p2)  at (1.925,-3.76) {\scriptsize Turn vectors + role + position};
+  \node[amb, minimum width=3.40cm] (d2)  at (1.925,-4.74) {\scriptsize Dialogue transformer, 4 layers};
+  \node[amb, minimum width=3.40cm] (a2)  at (1.925,-5.72) {\scriptsize Learned attention pooling};
+  \node[neu, minimum width=1.58cm] (h2a) at (1.015,-6.86) {\scriptsize Binary};
+  \node[neu, minimum width=1.58cm] (h2b) at (2.835,-6.86) {\scriptsize Modifier};
+  \draw[flow]   (1.925,-2.16) -- (e2.north);
+  \draw[flow]   (e2) -- (p2);
+  \draw[flow]   (p2) -- (d2);
+  \draw[flow]   (d2) -- (a2);
+  \draw[flow,-] (a2.south)    -- (1.925,-6.35);
+  \draw[flow,-] (1.015,-6.35) -- (2.835,-6.35);
+  \draw[flow]   (1.015,-6.35) -- (h2a.north);
+  \draw[flow]   (2.835,-6.35) -- (h2b.north);
 \end{scope}
 
 % =============== Stage 3 : gating and routing ===================================
-\begin{scope}[shift={(8.2,0)}]
-  \foreach \i [evaluate=\j using {int(\i+1)}] in {0,1,2,3}{ \node[ten, minimum width=0.55cm, minimum height=0.3cm, fill=NeuFill] at (0.55+0.68*\i,-1.9) {\tiny $u_{\j}$}; }
-  \node[font=\tiny] at (3.3,-1.9) {$\cdots$};
-  \node[neu, minimum width=3.2cm] (e3) at (1.85,-2.6) {\scriptsize Utterance encoder, per turn};
-  \node[amb, minimum width=3.2cm] (d3) at (1.85,-3.3) {\scriptsize Dialogue transformer, 4 layers};
-  \node[amb, minimum width=3.2cm] (a3) at (1.85,-4.0) {\scriptsize Attention pooling};
-  \node[oplus] (g3) at (1.85,-4.75) {\scriptsize $\otimes$};
-  \node[amb, minimum width=1.4cm, font=\tiny] (l3) at (2.85,-4.75) {last\\Persuadee};
-  \node[font=\tiny, anchor=east] at (1.5,-4.75) {gate};
-  \node[neu, minimum width=3.2cm] (h3) at (1.85,-5.5) {\scriptsize Binary head only (Decoupled)};
-  \draw[flow] (1.85,-2.05) -- (e3.north);
-  \draw[flow] (e3) -- (d3); \draw[flow] (d3) -- (a3); \draw[flow] (a3) -- (g3); \draw[flow] (g3) -- (h3);
-  \draw[flow] (l3.west) -- (g3.east);
+\begin{scope}[shift={(8.54,0)}]
+  \draw[seqbox] (0.32,-1.72) rectangle (3.53,-2.16);
+  \foreach \i [evaluate=\i as \j using {int(\i+1)}] in {0,1,2,3}{
+    \node[ten, minimum width=0.55cm, minimum height=0.30cm]
+          at (0.67+0.68*\i,-1.94) {\tiny $u_{\j}$}; }
+  \node[font=\tiny, text=SlateSoft] at (3.33,-1.94) {$\cdots$};
+  \node[neu, minimum width=3.40cm] (e3) at (1.925,-2.78) {\scriptsize Utterance encoder, per turn};
+  \node[amb, minimum width=3.40cm] (d3) at (1.925,-3.76) {\scriptsize Dialogue transformer, 4 layers};
+  \node[amb, minimum width=3.40cm] (a3) at (1.925,-4.74) {\scriptsize Attention pooling};
+  \node[oplus] (g3) at (1.925,-5.66) {\scriptsize $\otimes$};
+  \node[amb, minimum width=1.25cm, font=\tiny, inner xsep=2pt] (l3) at (3.00,-5.66) {last\\Persuadee};
+  \node[font=\tiny, text=SlateSoft, anchor=east] at (1.66,-5.66) {gate};
+  % The 0.834 model is the GATED TWO-HEADED one, so both heads are drawn. The
+  % modifier head is dashed because decoupling (deleting it) is what closes this
+  % stage -- drawing a binary-only head here would attribute 0.834 to a model
+  % that never produced it.
+  \node[neu, minimum width=1.58cm] (h3a) at (1.015,-6.86) {\scriptsize Binary};
+  \node[neu, minimum width=1.58cm, dashed, draw=NeuBord!45, fill=white,
+        text=NeuBord!75] (h3b) at (2.835,-6.86) {\scriptsize Modifier};
+  \node[font=\tiny, text=PerBord] at (2.835,-7.36) {then dropped};
+  \draw[flow] (1.925,-2.16) -- (e3.north);
+  \draw[flow] (e3) -- (d3);
+  \draw[flow] (d3) -- (a3);
+  \draw[flow] (a3.south) -- (g3.north);
+  \draw[flow] (l3.west)  -- (g3.east);
+  \draw[flow,-] (g3.south)    -- (1.925,-6.35);
+  \draw[flow,-] (1.015,-6.35) -- (2.835,-6.35);
+  \draw[flow]   (1.015,-6.35) -- (h3a.north);
+  \draw[flow, draw=NeuBord!55, dashed, dash pattern=on 2pt off 1.6pt]
+        (2.835,-6.35) -- (h3b.north);
 \end{scope}
 
 % =============== Stage 4 : Antiphony ============================================
-\begin{scope}[shift={(12.3,0)}]
-  \foreach \i [evaluate=\j using {int(\i+1)}] in {0,2}{ \node[per, minimum width=0.55cm, minimum height=0.3cm, inner sep=0pt, font=\tiny] at (0.55+0.68*\i,-1.9) {$u_{\j}$}; }
-  \foreach \i [evaluate=\j using {int(\i+1)}] in {1,3}{ \node[dec, minimum width=0.55cm, minimum height=0.3cm, inner sep=0pt, font=\tiny] at (0.55+0.68*\i,-1.9) {$u_{\j}$}; }
-  \node[font=\tiny] at (3.3,-1.9) {$\cdots$};
-  \node[neu, minimum width=3.2cm] (e4) at (1.85,-2.6) {\scriptsize Utterance encoder, per turn};
-  \node[per, minimum width=1.5cm] (sp) at (1.05,-3.3) {\scriptsize Persuader\\[-2pt]\scriptsize stream};
-  \node[dec, minimum width=1.5cm] (sd) at (2.65,-3.3) {\scriptsize Persuadee\\[-2pt]\scriptsize stream};
-  \node[xat, minimum width=3.2cm] (cx) at (1.85,-4.2) {\scriptsize Cross-attention (Q\,$\leftarrow$\,Persuadee)};
-  \node[trj, minimum width=1.5cm] (gr) at (1.05,-4.95) {\scriptsize GRU};
-  \node[trj, minimum width=1.5cm] (pl) at (2.65,-4.95) {\scriptsize Pooling};
-  \node[oplus, inner sep=1pt] (cc) at (1.85,-5.35) {\tiny $[\,;]$};
-  \node[fin, minimum width=3.2cm] (h4) at (1.85,-5.75) {\scriptsize Binary head};
-  \draw[flow] (1.85,-2.05) -- (e4.north);
-  \draw[flow] (e4.south) -- ++(0,-0.1) -| (sp.north);
-  \draw[flow] (e4.south) -- ++(0,-0.1) -| (sd.north);
-  \draw[flowP] (sp.south) -- (sp.south |- cx.north);
-  \draw[flowD] (sd.south) -- (sd.south |- cx.north);
-  \draw[flowX] (cx.south) -- ++(0,-0.1) -| (gr.north);
-  \draw[flowX] (cx.south) -- ++(0,-0.1) -| (pl.north);
-  \draw[flowT] (gr.south) |- (cc.west);
-  \draw[flowT] (pl.south) |- (cc.east);
-  \draw[flowT] (cc) -- (h4);
+\begin{scope}[shift={(12.81,0)}]
+  \draw[seqbox] (0.32,-1.72) rectangle (3.53,-2.16);
+  \foreach \i [evaluate=\i as \j using {int(\i+1)}] in {0,2}{
+    \node[per, minimum width=0.55cm, minimum height=0.30cm, inner sep=0pt, font=\tiny]
+          at (0.67+0.68*\i,-1.94) {$u_{\j}$}; }
+  \foreach \i [evaluate=\i as \j using {int(\i+1)}] in {1,3}{
+    \node[dec, minimum width=0.55cm, minimum height=0.30cm, inner sep=0pt, font=\tiny]
+          at (0.67+0.68*\i,-1.94) {$u_{\j}$}; }
+  \node[font=\tiny, text=SlateSoft] at (3.33,-1.94) {$\cdots$};
+  \node[neu, minimum width=3.40cm] (e4) at (1.925,-2.78) {\scriptsize Utterance encoder, per turn};
+  \node[per, minimum width=1.58cm] (sp) at (1.015,-3.88) {\scriptsize Persuader\\[-2pt]\scriptsize stream};
+  \node[dec, minimum width=1.58cm] (sd) at (2.835,-3.88) {\scriptsize Persuadee\\[-2pt]\scriptsize stream};
+  \node[xat, minimum width=3.40cm] (cx) at (1.925,-4.92)
+       {\scriptsize Directional cross-attention\\[-1.5pt]%
+        {\tiny Q\,$\leftarrow$\,Persuadee, K/V\,$\leftarrow$\,Persuader}};
+  \node[trj, minimum width=1.58cm] (gr) at (1.015,-5.98) {\scriptsize GRU};
+  \node[trj, minimum width=1.58cm] (pl) at (2.835,-5.98) {\scriptsize Pooling};
+  \node[oplus, minimum size=0.42cm] (cc) at (1.925,-6.76) {\tiny $[\,;]$};
+  \node[fin, minimum width=3.40cm] (h4) at (1.925,-7.54) {\scriptsize Binary head};
+  \draw[flow]    (1.925,-2.16) -- (e4.north);
+  \draw[flow,-]  (e4.south)    -- (1.925,-3.28);
+  \draw[flow,-]  (1.015,-3.28) -- (2.835,-3.28);
+  \draw[flowP]   (1.015,-3.28) -- (sp.north);
+  \draw[flowD]   (2.835,-3.28) -- (sd.north);
+  \draw[flowP]   (sp.south) -- (sp.south |- cx.north);
+  \draw[flowD]   (sd.south) -- (sd.south |- cx.north);
+  \draw[flowX,-] (cx.south)    -- (1.925,-5.48);
+  \draw[flowX,-] (1.015,-5.48) -- (2.835,-5.48);
+  \draw[flowX]   (1.015,-5.48) -- (gr.north);
+  \draw[flowX]   (2.835,-5.48) -- (pl.north);
+  \draw[flowT]   (gr.south) -- (cc.north west);
+  \draw[flowT]   (pl.south) -- (cc.north east);
+  \draw[flowT]   (cc.south) -- (h4.north);
 \end{scope}
 
 % ------------- what changed -------------------------------------------------------
-\node[anchor=north west, text width=3.35cm, font=\scriptsize, align=left] at (0.17,-6.2)
-  {$\bullet$ 256-token right truncation\\
-   $\bullet$ role embeddings, focal loss, marker-safe augmentation\\
-   $\bullet$ dual-task joint heads};
-\node[anchor=north west, text width=3.35cm, font=\scriptsize, align=left] at (4.27,-6.2)
-  {$\bullet$ 32 turns $\times$ 64 tokens\\ \hphantom{$\bullet$} = 2048-token capacity\\
-   $\bullet$ back-translation data augmentation\\
-   $\bullet$ tri-backbone soft ensemble};
-\node[anchor=north west, text width=3.35cm, font=\scriptsize, align=left] at (8.37,-6.2)
-  {$\bullet$ last-turn commitment gate\\
-   $\bullet$ multi-pivot translation diversity\\
-   $\bullet$ confidence specialist routing\\
-   $\bullet$ modifier head decoupled};
-\node[anchor=north west, text width=3.35cm, font=\scriptsize, align=left] at (12.47,-6.2)
-  {$\bullet$ role-pure streams\\
-   $\bullet$ directional cross-attention\\
-   $\bullet$ trajectory GRU plus pooling};
+\node[anchor=north west, text width=3.40cm, font=\scriptsize, align=left,
+      text=SlateSoft, inner sep=0pt] at (0.225,-8.22)
+  {\parskip=1.6pt\parindent=0pt
+   \bi 256-token right truncation
+   \bi role embeddings, focal loss, marker-safe augmentation
+   \bi dual-task joint heads\par};
+\node[anchor=north west, text width=3.40cm, font=\scriptsize, align=left,
+      text=SlateSoft, inner sep=0pt] at (4.495,-8.22)
+  {\parskip=1.6pt\parindent=0pt
+   \bi 32 turns $\times$ 64 tokens = 2048-token capacity
+   \bi back-translation data augmentation
+   \bi tri-backbone soft ensemble\par};
+\node[anchor=north west, text width=3.40cm, font=\scriptsize, align=left,
+      text=SlateSoft, inner sep=0pt] at (8.765,-8.22)
+  {\parskip=1.6pt\parindent=0pt
+   \bi last-turn commitment gate
+   \bi multi-pivot translation diversity
+   \bi confidence specialist routing
+   \bi modifier head decoupled\par};
+\node[anchor=north west, text width=3.40cm, font=\scriptsize, align=left,
+      text=SlateSoft, inner sep=0pt] at (13.035,-8.22)
+  {\parskip=1.6pt\parindent=0pt
+   \bi role-pure streams
+   \bi directional cross-attention
+   \bi trajectory GRU plus pooling\par};
 
 % ------------- performance bars ----------------------------------------------------
-% track = 3.3 cm spans macro-F1 0.40 to 0.90
-\foreach \x/\v/\w/\lab/\sub in {0.2/0.70/1.98/0.70/{Role-Flat, RoBERTa},
-                                4.3/0.821/2.78/0.821/{Aug-Hier, DeBERTa},
-                                8.4/0.834/2.86/0.834/{Gated-Hier, RoBERTa},
-                                12.5/0.862/3.05/0.862/{Antiphony, DeBERTa}}{
-  \fill[NeuFill, rounded corners=2pt] (\x,-8.7) rectangle ++(3.3,-0.28);
-  \fill[Slate, rounded corners=2pt] (\x,-8.7) rectangle ++(\w,-0.28);
-  \node[font=\footnotesize\bfseries, anchor=west] at (\x,-8.4) {\lab};
-  \node[font=\scriptsize, anchor=east, text=SlateSoft] at (\x+3.3,-8.4) {\sub};
+% track = 3.40 cm spans macro-F1 0.40 to 0.90, so width = (v - 0.40) / 0.50 * 3.40
+\foreach \px/\pw/\pv/\pm/\ph in {%
+    0/2.040/0.70/{Role-Flat, RoBERTa}/64748B,
+    4.27/2.863/0.821/{Aug-Hier, DeBERTa}/475569,
+    8.54/2.951/0.834/{Gated-Hier, RoBERTa}/334155,
+    12.81/3.142/0.862/{Antiphony, DeBERTa}/0F172A}{
+  \definecolor{stg}{HTML}{\ph}
+  \node[font=\footnotesize\bfseries, text=Slate, anchor=west] at (\px+0.225,-10.70) {\pv};
+  \node[font=\scriptsize, text=SlateSoft, anchor=east]        at (\px+3.625,-10.70) {\pm};
+  \fill[NeuFill, rounded corners=2pt] (\px+0.225,-10.98) rectangle ++(3.40,-0.28);
+  \fill[stg,     rounded corners=2pt] (\px+0.225,-10.98) rectangle ++(\pw,-0.28);
 }
-\node[font=\tiny, text=SlateSoft, anchor=north west] at (0.2,-9.05) {best macro-F1 per stage; bar spans 0.40 to 0.90};
-\node[font=\tiny, text=SlateSoft, anchor=north east] at (15.8,-9.05) {Antiphony: 0.8446 on third-pass labels};
 
 \end{tikzpicture}
