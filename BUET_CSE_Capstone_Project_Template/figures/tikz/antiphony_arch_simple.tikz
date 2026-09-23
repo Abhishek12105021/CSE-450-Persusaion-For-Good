@@ -1,0 +1,77 @@
+% AntiphonyClassifier (v14), conceptual view: the same blocks as antiphony_arch.tikz,
+% described in words instead of equations. Same palette, same top-to-bottom order.
+% Drawn at 16 cm width.
+\begin{tikzpicture}[x=1cm,y=1cm,
+  why/.style={font=\scriptsize\itshape},
+  lbl/.style={font=\scriptsize\itshape, text=SlateSoft, fill=white, inner sep=1.5pt},
+  chip/.style={minimum width=1.55cm, minimum height=0.46cm, inner sep=1pt, font=\scriptsize},
+]
+
+% ---------------- input dialogue ----------------------------------------------
+\node[neu, minimum width=15.6cm, minimum height=1.35cm] (dlg) at (8,0) {};
+\node[ttl] at (8,0.36) {Input: one dialogue, turns alternating between the two speakers};
+\foreach \i/\x in {1/1.6,3/5.2,5/8.8}{
+  \node[per, chip] at (\x,-0.25) {Persuader};}
+\foreach \i/\x in {2/3.4,4/7.0,6/10.6}{
+  \node[dec, chip] at (\x,-0.25) {Persuadee};}
+\node[font=\scriptsize] at (12.0,-0.25) {$\cdots$};
+\node[dec, chip] at (13.4,-0.25) {last turn};
+
+% ---------------- turn encoder and split ------------------------------------------
+\node[neu, minimum width=15.6cm, minimum height=0.9cm] (enc) at (8,-1.75)
+  {\textbf{Turn encoder}\quad a pretrained language model (RoBERTa, DeBERTa-v3 or TOD-BERT) reads each turn and summarises it as one vector};
+\draw[flow] (dlg) -- (enc);
+\node[neu, minimum width=6.2cm] (split) at (8,-2.95) {Separate the turns by speaker, keeping their order};
+\draw[flow] (enc) -- (split);
+
+% ---------------- two speaker streams ---------------------------------------------
+\node[per, text width=6.9cm, minimum height=1.55cm] (sP) at (4.0,-4.55)
+  {\textbf{Persuader stream}\\[1pt]\scriptsize a small Transformer reads only the Persuader's turns, in order\\[2pt] {\scriptsize\itshape\color{SlateSoft} how does the argument develop?}};
+\node[dec, text width=6.9cm, minimum height=1.55cm] (sD) at (12.0,-4.55)
+  {\textbf{Persuadee stream}\\[1pt]\scriptsize a small Transformer reads only the Persuadee's turns, in order\\[2pt] {\scriptsize\itshape\color{SlateSoft} how does the decision-maker's stance develop?}};
+\draw[flowP] (split.west) -| (sP.north);
+\draw[flowD] (split.east) -| (sD.north);
+
+% ---------------- directional cross-attention -------------------------------------
+\node[xat, text width=15.1cm, minimum height=1.6cm] (xa) at (8,-6.95)
+  {\textbf{Directional cross-attention}\quad{\scriptsize the Persuadee asks, the Persuader answers}\\[2pt]
+   \scriptsize each Persuadee turn looks back over the Persuader's turns and pulls in the arguments it is responding to;\\
+   \scriptsize the result is added back to the Persuadee's own representation\\[2pt]
+   {\scriptsize\itshape\color{SlateSoft} given what was argued, how is the decision-maker responding?}};
+\draw[flowP] (sP.south) -- node[lbl, right] {arguments} (sP.south |- xa.north);
+\draw[flowD] (sD.south) -- node[lbl, left] {questions} (sD.south |- xa.north);
+
+\node[ten, fill=XatFill, font=\scriptsize] (ctx) at (8,-8.45) {Persuadee turns, now aware of what was argued};
+\draw[flowX] (xa) -- (ctx);
+
+% ---------------- two readouts --------------------------------------------------
+\node[trj, text width=6.9cm, minimum height=1.75cm] (gru) at (4.0,-10.0)
+  {\textbf{Commitment trajectory}\enspace{\scriptsize(GRU)}\\[1pt]\scriptsize reads the Persuadee's turns in order with a running memory, and keeps that memory as it stands at the last Persuadee turn\\[2pt] {\scriptsize\itshape\color{SlateSoft} how did commitment build up, turn by turn?}};
+\node[trj, text width=6.9cm, minimum height=1.75cm] (pool) at (12.0,-10.0)
+  {\textbf{Attention pooling}\\[1pt]\scriptsize gives every Persuadee turn an importance weight and takes the weighted average\\[2pt] {\scriptsize\itshape\color{SlateSoft} which moments mattered most overall?}};
+\draw[flowX] (ctx.west) -| (gru.north);
+\draw[flowX] (ctx.east) -| (pool.north);
+
+% ---------------- fusion, head, output --------------------------------------------
+\node[fin, minimum width=5.4cm] (cat) at (8,-11.65) {Combine both views};
+\draw[flowT] (gru.south) |- (cat.west);
+\draw[flowT] (pool.south) |- (cat.east);
+\node[fin, minimum width=5.4cm] (head) at (8,-12.65) {Classifier (2-layer MLP)};
+\node[fin, minimum width=5.4cm] (yh) at (8,-13.65) {Does the Persuadee commit to donate?\enspace yes / no};
+\draw[flow] (cat) -- (head); \draw[flow] (head) -- (yh);
+
+% ---------------- legend ------------------------------------------------------------
+\begin{scope}[shift={(0.5,-14.75)}]
+  \node[per, minimum width=0.45cm, minimum height=0.3cm] at (0,0) {};
+  \node[anchor=west, font=\scriptsize] at (0.35,0) {Persuader};
+  \node[dec, minimum width=0.45cm, minimum height=0.3cm] at (2.4,0) {};
+  \node[anchor=west, font=\scriptsize] at (2.75,0) {Persuadee};
+  \node[xat, minimum width=0.45cm, minimum height=0.3cm] at (4.9,0) {};
+  \node[anchor=west, font=\scriptsize] at (5.25,0) {Cross-attention};
+  \node[trj, minimum width=0.45cm, minimum height=0.3cm] at (8.1,0) {};
+  \node[anchor=west, font=\scriptsize] at (8.45,0) {Trajectory / pooling};
+  \node[fin, minimum width=0.45cm, minimum height=0.3cm] at (11.7,0) {};
+  \node[anchor=west, font=\scriptsize] at (12.05,0) {Fusion / output};
+\end{scope}
+
+\end{tikzpicture}

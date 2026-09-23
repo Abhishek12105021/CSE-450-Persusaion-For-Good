@@ -143,9 +143,6 @@
 \newlabel{tab:decision-matrix}{{3.1}{13}{Multi-criteria architectural decision matrix (scores: 1 = Poor, 5 = Excellent)}{table.caption.9}{}}
 \newlabel{tab:decision-matrix@cref}{{[table][1][3]3.1}{[1][12][]13}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Conclusion and Selection Justification}{13}{subsection.3.3.2}\protected@file@percent }
-\citation{wang2019persuasion}
-\citation{cialdini2001influence}
-\citation{freedman1966compliance,cialdini1975reciprocal}
 \@writefile{toc}{\contentsline {chapter}{\numberline {4}System Design and Implementation}{14}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -157,382 +154,394 @@
 \@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Modular subsystem decomposition and responsibilities}}{14}{table.caption.11}\protected@file@percent }
 \newlabel{tab:subsystem-responsibilities}{{4.1}{14}{Modular subsystem decomposition and responsibilities}{table.caption.11}{}}
 \newlabel{tab:subsystem-responsibilities@cref}{{[table][1][4]4.1}{[1][14][]14}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Persuasion Strategy Annotation and Taxonomy}{14}{section.4.2}\protected@file@percent }
-\newlabel{sec:strategy-annotation}{{4.2}{14}{Persuasion Strategy Annotation and Taxonomy}{section.4.2}{}}
-\newlabel{sec:strategy-annotation@cref}{{[section][2][4]4.2}{[1][14][]14}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Overall functional system architecture, illustrating data ingestion across three corpora, shared utterance encoding, the dual-stream Antiphony intention network, and the 19-member multi-task strategy classification framework with calibrated decision blending.}}{15}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:system_architecture}{{4.1}{15}{Overall functional system architecture, illustrating data ingestion across three corpora, shared utterance encoding, the dual-stream Antiphony intention network, and the 19-member multi-task strategy classification framework with calibrated decision blending}{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Overall functional system architecture, illustrating data ingestion across three corpora, shared utterance encoding, the dual-stream Antiphony intention network, the 19-member multi-task strategy classification framework with calibrated decision blending, and the diagnostic ablation evaluation framework.}}{15}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:system_architecture}{{4.1}{15}{Overall functional system architecture, illustrating data ingestion across three corpora, shared utterance encoding, the dual-stream Antiphony intention network, the 19-member multi-task strategy classification framework with calibrated decision blending, and the diagnostic ablation evaluation framework}{figure.caption.10}{}}
 \newlabel{fig:system_architecture@cref}{{[figure][1][4]4.1}{[1][14][]15}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Hierarchical Taxonomy Formulation}{15}{subsection.4.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Contextual Annotation Pipeline and Decision Protocol}{16}{subsection.4.2.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Persuasion strategy annotation pipeline, depicting contextual batching (200 turns per batch, 5-turn history), the 4-tier decision protocol, LLM agent annotation under human checkpoints, automated schema validation, and multi-label compilation into \texttt  {multilabel\textunderscore \penalty 0\relax merged.jsonl}.}}{16}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:strategy_annotation_pipeline}{{4.2}{16}{Persuasion strategy annotation pipeline, depicting contextual batching (200 turns per batch, 5-turn history), the 4-tier decision protocol, LLM agent annotation under human checkpoints, automated schema validation, and multi-label compilation into \texttt {multilabel\_merged.jsonl}}{figure.caption.12}{}}
-\newlabel{fig:strategy_annotation_pipeline@cref}{{[figure][2][4]4.2}{[1][16][]16}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}Empirical Corpus Statistics and Rater Effects}{17}{subsection.4.2.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Empirical prevalence of communicative categories across 10,600 Persuader turns}}{17}{table.caption.13}\protected@file@percent }
-\newlabel{tab:category-prevalence}{{4.2}{17}{Empirical prevalence of communicative categories across 10,600 Persuader turns}{table.caption.13}{}}
-\newlabel{tab:category-prevalence@cref}{{[table][2][4]4.2}{[1][17][]17}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.4}Derivation of the Cross-Annotator Agreement Ceiling}{17}{subsection.4.2.4}\protected@file@percent }
 \citation{wang2019persuasion}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Conversational Intention Ground Truth Generation}{18}{section.4.3}\protected@file@percent }
-\newlabel{sec:intention-annotation}{{4.3}{18}{Conversational Intention Ground Truth Generation}{section.4.3}{}}
-\newlabel{sec:intention-annotation@cref}{{[section][3][4]4.3}{[1][18][]18}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}The Ground-Truth Divergence Problem}{18}{subsection.4.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Three-pass intention annotation lineage, showing the initial 738/279 binary split with modifier, the second pass deprecating the modifier, and the third pass enforcing strict unconditional commitment (694 yes / 323 no via two-step re-checking).}}{18}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:intention_annotation_passes}{{4.3}{18}{Three-pass intention annotation lineage, showing the initial 738/279 binary split with modifier, the second pass deprecating the modifier, and the third pass enforcing strict unconditional commitment (694 yes / 323 no via two-step re-checking)}{figure.caption.14}{}}
-\newlabel{fig:intention_annotation_passes@cref}{{[figure][3][4]4.3}{[1][18][]18}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}The Three-Pass Annotation Lineage}{18}{subsection.4.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Inter-Annotator Agreement and Boundary Cases}{19}{subsection.4.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Synthetic E-Commerce Negotiation Benchmark}{19}{section.4.4}\protected@file@percent }
-\newlabel{sec:synthetic-benchmark}{{4.4}{19}{Synthetic E-Commerce Negotiation Benchmark}{section.4.4}{}}
-\newlabel{sec:synthetic-benchmark@cref}{{[section][4][4]4.4}{[1][19][]19}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Motivation and Privacy Bottlenecks}{19}{subsection.4.4.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Three-phase synthetic negotiation benchmark generation pipeline, comprising persona-conditioned LLM drafting ($N=500$ canonical, $N=200$ adversarial reversals), organic paraphrasing with linguistic jitter, and multi-tier semantic audit.}}{19}{figure.caption.15}\protected@file@percent }
-\newlabel{fig:datagen_pipeline}{{4.4}{19}{Three-phase synthetic negotiation benchmark generation pipeline, comprising persona-conditioned LLM drafting ($N=500$ canonical, $N=200$ adversarial reversals), organic paraphrasing with linguistic jitter, and multi-tier semantic audit}{figure.caption.15}{}}
-\newlabel{fig:datagen_pipeline@cref}{{[figure][4][4]4.4}{[1][19][]19}}
-\citation{benbaruch2021asymmetric}
+\citation{cialdini2001influence}
+\citation{freedman1966compliance,cialdini1975reciprocal}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Persuasion Strategy Annotation and Taxonomy}{16}{section.4.2}\protected@file@percent }
+\newlabel{sec:strategy-annotation}{{4.2}{16}{Persuasion Strategy Annotation and Taxonomy}{section.4.2}{}}
+\newlabel{sec:strategy-annotation@cref}{{[section][2][4]4.2}{[1][16][]16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Hierarchical Taxonomy Formulation}{16}{subsection.4.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Contextual Annotation Pipeline and Decision Protocol}{16}{subsection.4.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Persuasion strategy annotation pipeline, depicting contextual batching (200 turns per batch, 5-turn history), the 4-tier decision protocol, LLM agent annotation under human checkpoints, automated schema validation, and multi-label compilation into \texttt  {multilabel\textunderscore \penalty 0\relax merged.jsonl}.}}{17}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:strategy_annotation_pipeline}{{4.2}{17}{Persuasion strategy annotation pipeline, depicting contextual batching (200 turns per batch, 5-turn history), the 4-tier decision protocol, LLM agent annotation under human checkpoints, automated schema validation, and multi-label compilation into \texttt {multilabel\_merged.jsonl}}{figure.caption.12}{}}
+\newlabel{fig:strategy_annotation_pipeline@cref}{{[figure][2][4]4.2}{[1][16][]17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}Empirical Corpus Statistics and Rater Effects}{18}{subsection.4.2.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Empirical prevalence of communicative categories across 10,600 Persuader turns}}{18}{table.caption.13}\protected@file@percent }
+\newlabel{tab:category-prevalence}{{4.2}{18}{Empirical prevalence of communicative categories across 10,600 Persuader turns}{table.caption.13}{}}
+\newlabel{tab:category-prevalence@cref}{{[table][2][4]4.2}{[1][18][]18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.4}Derivation of the Cross-Annotator Agreement Ceiling}{18}{subsection.4.2.4}\protected@file@percent }
+\citation{wang2019persuasion}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Conversational Intention Ground Truth Generation}{19}{section.4.3}\protected@file@percent }
+\newlabel{sec:intention-annotation}{{4.3}{19}{Conversational Intention Ground Truth Generation}{section.4.3}{}}
+\newlabel{sec:intention-annotation@cref}{{[section][3][4]4.3}{[1][19][]19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}The Ground-Truth Divergence Problem}{19}{subsection.4.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Three-pass intention annotation lineage, showing the initial 738/279 binary split with modifier, the second pass deprecating the modifier, and the third pass enforcing strict unconditional commitment (694 yes / 323 no via two-step re-checking).}}{19}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:intention_annotation_passes}{{4.3}{19}{Three-pass intention annotation lineage, showing the initial 738/279 binary split with modifier, the second pass deprecating the modifier, and the third pass enforcing strict unconditional commitment (694 yes / 323 no via two-step re-checking)}{figure.caption.14}{}}
+\newlabel{fig:intention_annotation_passes@cref}{{[figure][3][4]4.3}{[1][19][]19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}The Three-Pass Annotation Lineage}{19}{subsection.4.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Inter-Annotator Agreement and Boundary Cases}{20}{subsection.4.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Synthetic E-Commerce Negotiation Benchmark}{20}{section.4.4}\protected@file@percent }
+\newlabel{sec:synthetic-benchmark}{{4.4}{20}{Synthetic E-Commerce Negotiation Benchmark}{section.4.4}{}}
+\newlabel{sec:synthetic-benchmark@cref}{{[section][4][4]4.4}{[1][20][]20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Motivation and Privacy Bottlenecks}{20}{subsection.4.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}The Three-Phase Generation Framework}{20}{subsection.4.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}Frozen Benchmark Dataset Counts}{20}{subsection.4.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}Strategy and Category Modeling Architecture}{20}{section.4.5}\protected@file@percent }
-\newlabel{sec:strategy-modeling}{{4.5}{20}{Strategy and Category Modeling Architecture}{section.4.5}{}}
-\newlabel{sec:strategy-modeling@cref}{{[section][5][4]4.5}{[1][20][]20}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.1}Multi-Task Category-First Formulation}{20}{subsection.4.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Three-phase synthetic negotiation benchmark generation pipeline, comprising persona-conditioned LLM drafting ($N=500$ canonical, $N=200$ adversarial reversals), organic paraphrasing with linguistic jitter, and multi-tier semantic audit.}}{21}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:datagen_pipeline}{{4.4}{21}{Three-phase synthetic negotiation benchmark generation pipeline, comprising persona-conditioned LLM drafting ($N=500$ canonical, $N=200$ adversarial reversals), organic paraphrasing with linguistic jitter, and multi-tier semantic audit}{figure.caption.15}{}}
+\newlabel{fig:datagen_pipeline@cref}{{[figure][4][4]4.4}{[1][20][]21}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}Frozen Benchmark Dataset Counts}{22}{subsection.4.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.4}Generic Architecture Diagnostic and Ablation Harness}{22}{subsection.4.4.4}\protected@file@percent }
+\newlabel{sec:diagnostic-ablation-harness}{{4.4.4}{22}{Generic Architecture Diagnostic and Ablation Harness}{subsection.4.4.4}{}}
+\newlabel{sec:diagnostic-ablation-harness@cref}{{[subsection][4][4,4]4.4.4}{[1][22][]22}}
+\@writefile{toc}{\contentsline {subsubsection}{Counterfactual Input-Ablation Operators}{22}{subsubsection*.16}\protected@file@percent }
+\citation{benbaruch2021asymmetric}
+\@writefile{toc}{\contentsline {subsubsection}{Tokenizer Truncation Directionality Invariant}{23}{subsubsection*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Parametric Skew-Stress Formulation}{23}{subsubsection*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Strategy and Category Modeling Architecture}{23}{section.4.5}\protected@file@percent }
+\newlabel{sec:strategy-modeling}{{4.5}{23}{Strategy and Category Modeling Architecture}{section.4.5}{}}
+\newlabel{sec:strategy-modeling@cref}{{[section][5][4]4.5}{[1][23][]23}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.1}Multi-Task Category-First Formulation}{23}{subsection.4.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.2}The 19-Member Heterogeneous Model Pool}{23}{subsection.4.5.2}\protected@file@percent }
 \citation{platt1999probabilistic}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Strategy and category classification framework, illustrating the 19-member model pool, multi-task representation heads, and decision layer search comparing calibrated power-mean blending (selected, val macro-F1 0.5716) against XGBoost stacking (tested, val macro-F1 0.5508).}}{21}{figure.caption.16}\protected@file@percent }
-\newlabel{fig:strategy_model}{{4.5}{21}{Strategy and category classification framework, illustrating the 19-member model pool, multi-task representation heads, and decision layer search comparing calibrated power-mean blending (selected, val macro-F1 0.5716) against XGBoost stacking (tested, val macro-F1 0.5508)}{figure.caption.16}{}}
-\newlabel{fig:strategy_model@cref}{{[figure][5][4]4.5}{[1][20][]21}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.2}The 19-Member Heterogeneous Model Pool}{21}{subsection.4.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.3}Decision Layer Search: Calibrated Blend vs. XGBoost Stacker}{21}{subsection.4.5.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Strategy and category classification framework, illustrating the 19-member model pool, multi-task representation heads, and decision layer search comparing calibrated power-mean blending (selected, val macro-F1 0.5716) against XGBoost stacking (tested, val macro-F1 0.5508).}}{24}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:strategy_model}{{4.5}{24}{Strategy and category classification framework, illustrating the 19-member model pool, multi-task representation heads, and decision layer search comparing calibrated power-mean blending (selected, val macro-F1 0.5716) against XGBoost stacking (tested, val macro-F1 0.5508)}{figure.caption.19}{}}
+\newlabel{fig:strategy_model@cref}{{[figure][5][4]4.5}{[1][23][]24}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.3}Decision Layer Search: Calibrated Blend vs. XGBoost Stacker}{24}{subsection.4.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}The AntiphonyClassifier Architecture}{25}{section.4.6}\protected@file@percent }
+\newlabel{sec:antiphony}{{4.6}{25}{The AntiphonyClassifier Architecture}{section.4.6}{}}
+\newlabel{sec:antiphony@cref}{{[section][6][4]4.6}{[1][25][]25}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces High-level conceptual schematic of the AntiphonyClassifier architecture, illustrating the intuitive information flow from alternating conversational turns to speaker stream disentanglement, directional asymmetric cross-attention, dual trajectory and attention pooling context aggregation, and final commitment classification.}}{25}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:antiphony_simple}{{4.6}{25}{High-level conceptual schematic of the AntiphonyClassifier architecture, illustrating the intuitive information flow from alternating conversational turns to speaker stream disentanglement, directional asymmetric cross-attention, dual trajectory and attention pooling context aggregation, and final commitment classification}{figure.caption.20}{}}
+\newlabel{fig:antiphony_simple@cref}{{[figure][6][4]4.6}{[1][25][]25}}
 \citation{cui2019class}
 \citation{khosla2020supervised}
-\@writefile{toc}{\contentsline {section}{\numberline {4.6}The AntiphonyClassifier Architecture}{23}{section.4.6}\protected@file@percent }
-\newlabel{sec:antiphony}{{4.6}{23}{The AntiphonyClassifier Architecture}{section.4.6}{}}
-\newlabel{sec:antiphony@cref}{{[section][6][4]4.6}{[1][23][]23}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.1}Detailed Mathematical Formulation}{23}{subsection.4.6.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces The AntiphonyClassifier neural architecture: raw turns undergo batched utterance encoding, masked mean-pooling, and role-pure splitting ($R=20$). Persuader and Decider streams pass through independent 2-layer Transformers. The Decider stream queries the Persuader stream via directional cross-attention. Contextualized Decider states are aggregated in parallel by a commitment-trajectory GRU (read at the true final Decider turn) and attention pooling, followed by latent concatenation and Class-Balanced Focal classification.}}{24}{figure.caption.17}\protected@file@percent }
-\newlabel{fig:antiphony_arch}{{4.6}{24}{The AntiphonyClassifier neural architecture: raw turns undergo batched utterance encoding, masked mean-pooling, and role-pure splitting ($R=20$). Persuader and Decider streams pass through independent 2-layer Transformers. The Decider stream queries the Persuader stream via directional cross-attention. Contextualized Decider states are aggregated in parallel by a commitment-trajectory GRU (read at the true final Decider turn) and attention pooling, followed by latent concatenation and Class-Balanced Focal classification}{figure.caption.17}{}}
-\newlabel{fig:antiphony_arch@cref}{{[figure][6][4]4.6}{[1][23][]24}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.1}Detailed Mathematical Formulation}{26}{subsection.4.6.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces Detailed neural architecture and tensor specifications of the AntiphonyClassifier, depicting exact layer dimensions, 2-layer independent stream Transformers, directional cross-attention ($\mathbf  {Q}_{\mathcal  {D}} \mathbf  {K}_{\mathcal  {P}}^\top / \sqrt  {d_k}$), parallel commitment-trajectory GRU and learned attention pooling, and composite Class-Balanced Focal and Supervised Contrastive loss heads.}}{27}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:antiphony_arch}{{4.7}{27}{Detailed neural architecture and tensor specifications of the AntiphonyClassifier, depicting exact layer dimensions, 2-layer independent stream Transformers, directional cross-attention ($\mathbf {Q}_{\mathcal {D}} \mathbf {K}_{\mathcal {P}}^\top / \sqrt {d_k}$), parallel commitment-trajectory GRU and learned attention pooling, and composite Class-Balanced Focal and Supervised Contrastive loss heads}{figure.caption.21}{}}
+\newlabel{fig:antiphony_arch@cref}{{[figure][7][4]4.7}{[1][26][]27}}
 \citation{wei2019eda}
-\@writefile{toc}{\contentsline {section}{\numberline {4.7}Architectural Evolution: The Path to Dual-Stream Antiphony}{26}{section.4.7}\protected@file@percent }
-\newlabel{sec:evolution}{{4.7}{26}{Architectural Evolution: The Path to Dual-Stream Antiphony}{section.4.7}{}}
-\newlabel{sec:evolution@cref}{{[section][7][4]4.7}{[1][26][]26}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces Four-stage architectural evolution of intention classification models, depicting key innovations, critical bug diagnoses, and peak test Macro-F1 across stages.}}{26}{figure.caption.18}\protected@file@percent }
-\newlabel{fig:architectural_evolution}{{4.7}{26}{Four-stage architectural evolution of intention classification models, depicting key innovations, critical bug diagnoses, and peak test Macro-F1 across stages}{figure.caption.18}{}}
-\newlabel{fig:architectural_evolution@cref}{{[figure][7][4]4.7}{[1][26][]26}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.1}Stage 1: Monolithic Flat Baselines and Forensic Debugging}{26}{subsection.4.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.2}Stage 2: Hierarchical Discourse Modeling}{27}{subsection.4.7.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.3}Stage 3: Recency Gating and Decoupled Baselines}{27}{subsection.4.7.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.4}Stage 4: Role-Pure Dual-Stream Antiphony Architecture}{27}{subsection.4.7.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.8}Design Refinement and Simulation}{27}{section.4.8}\protected@file@percent }
-\newlabel{sec:detailed-design}{{4.8}{27}{Design Refinement and Simulation}{section.4.8}{}}
-\newlabel{sec:detailed-design@cref}{{[section][8][4]4.8}{[1][27][]27}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.1}Capacity Calculations and Sequence Length Budgeting}{27}{subsection.4.8.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.2}Memory Profiling and Hardware Guards}{27}{subsection.4.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.7}Architectural Evolution: The Path to Dual-Stream Antiphony}{29}{section.4.7}\protected@file@percent }
+\newlabel{sec:evolution}{{4.7}{29}{Architectural Evolution: The Path to Dual-Stream Antiphony}{section.4.7}{}}
+\newlabel{sec:evolution@cref}{{[section][7][4]4.7}{[1][29][]29}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces Four-stage architectural evolution of intention classification models, depicting key innovations, critical bug diagnoses, and peak test Macro-F1 across stages.}}{29}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:architectural_evolution}{{4.8}{29}{Four-stage architectural evolution of intention classification models, depicting key innovations, critical bug diagnoses, and peak test Macro-F1 across stages}{figure.caption.22}{}}
+\newlabel{fig:architectural_evolution@cref}{{[figure][8][4]4.8}{[1][29][]29}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.1}Stage 1: Monolithic Flat Baselines and Forensic Debugging}{29}{subsection.4.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.2}Stage 2: Hierarchical Discourse Modeling}{30}{subsection.4.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.3}Stage 3: Recency Gating and Decoupled Baselines}{30}{subsection.4.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.4}Stage 4: Role-Pure Dual-Stream Antiphony Architecture}{30}{subsection.4.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.8}Design Refinement and Simulation}{30}{section.4.8}\protected@file@percent }
+\newlabel{sec:detailed-design}{{4.8}{30}{Design Refinement and Simulation}{section.4.8}{}}
+\newlabel{sec:detailed-design@cref}{{[section][8][4]4.8}{[1][30][]30}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.1}Capacity Calculations and Sequence Length Budgeting}{30}{subsection.4.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8.2}Memory Profiling and Hardware Guards}{30}{subsection.4.8.2}\protected@file@percent }
 \citation{paszke2019pytorch}
 \citation{wolf2020transformers}
 \citation{chen2016xgboost}
 \citation{tiedemann2020opusmt}
 \citation{git}
-\@writefile{toc}{\contentsline {section}{\numberline {4.9}Application of Tools}{28}{section.4.9}\protected@file@percent }
-\newlabel{sec:tools}{{4.9}{28}{Application of Tools}{section.4.9}{}}
-\newlabel{sec:tools@cref}{{[section][9][4]4.9}{[1][28][]28}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.10}Implementation}{28}{section.4.10}\protected@file@percent }
-\newlabel{sec:implementation}{{4.10}{28}{Implementation}{section.4.10}{}}
-\newlabel{sec:implementation@cref}{{[section][10][4]4.10}{[1][28][]28}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.10.1}Version Control and Development History}{28}{subsection.4.10.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.10.2}Deterministic Seeding and Audit Artifacts}{28}{subsection.4.10.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.11}Deployment}{28}{section.4.11}\protected@file@percent }
-\newlabel{sec:deployment}{{4.11}{28}{Deployment}{section.4.11}{}}
-\newlabel{sec:deployment@cref}{{[section][11][4]4.11}{[1][28][]28}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.1}Prototype Execution Pipeline}{28}{subsection.4.11.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.2}Resource Consumption}{29}{subsection.4.11.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.3}Operational Boundaries and Omissions}{29}{subsection.4.11.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Investigation and Evaluation}{30}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.9}Application of Tools}{31}{section.4.9}\protected@file@percent }
+\newlabel{sec:tools}{{4.9}{31}{Application of Tools}{section.4.9}{}}
+\newlabel{sec:tools@cref}{{[section][9][4]4.9}{[1][31][]31}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.10}Implementation}{31}{section.4.10}\protected@file@percent }
+\newlabel{sec:implementation}{{4.10}{31}{Implementation}{section.4.10}{}}
+\newlabel{sec:implementation@cref}{{[section][10][4]4.10}{[1][31][]31}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.10.1}Version Control and Development History}{31}{subsection.4.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.10.2}Deterministic Seeding and Audit Artifacts}{31}{subsection.4.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.11}Deployment}{31}{section.4.11}\protected@file@percent }
+\newlabel{sec:deployment}{{4.11}{31}{Deployment}{section.4.11}{}}
+\newlabel{sec:deployment@cref}{{[section][11][4]4.11}{[1][31][]31}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.1}Prototype Execution Pipeline}{32}{subsection.4.11.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.2}Resource Consumption}{32}{subsection.4.11.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.3}Operational Boundaries and Omissions}{32}{subsection.4.11.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Investigation and Evaluation}{33}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:evaluation}{{5}{30}{Investigation and Evaluation}{chapter.5}{}}
-\newlabel{ch:evaluation@cref}{{[chapter][5][]5}{[1][30][]30}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Experimental Investigation Setup}{30}{section.5.1}\protected@file@percent }
-\newlabel{sec:investigation}{{5.1}{30}{Experimental Investigation Setup}{section.5.1}{}}
-\newlabel{sec:investigation@cref}{{[section][1][5]5.1}{[1][30][]30}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Research Questions and Hypotheses}{30}{subsection.5.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Data Splits and Evaluation Protocols}{30}{subsection.5.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Evaluation Metrics}{30}{subsection.5.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Corpus Dynamics and Strategy Exploratory Data Analysis}{31}{section.5.2}\protected@file@percent }
-\newlabel{sec:strategy-eda}{{5.2}{31}{Corpus Dynamics and Strategy Exploratory Data Analysis}{section.5.2}{}}
-\newlabel{sec:strategy-eda@cref}{{[section][2][5]5.2}{[1][31][]31}}
-\newlabel{fig:eda-labels}{{5.1a}{31}{Labels per turn distribution}{figure.caption.19}{}}
-\newlabel{fig:eda-labels@cref}{{[subfigure][1][5,1]5.1a}{[1][31][]31}}
-\newlabel{sub@fig:eda-labels}{{a}{31}{Labels per turn distribution}{figure.caption.19}{}}
-\newlabel{sub@fig:eda-labels@cref}{{[subfigure][1][5,1]5.1a}{[1][31][]31}}
-\newlabel{fig:eda-cat-prev}{{5.1b}{31}{Communicative category prevalence}{figure.caption.19}{}}
-\newlabel{fig:eda-cat-prev@cref}{{[subfigure][2][5,1]5.1b}{[1][31][]31}}
-\newlabel{sub@fig:eda-cat-prev}{{b}{31}{Communicative category prevalence}{figure.caption.19}{}}
-\newlabel{sub@fig:eda-cat-prev@cref}{{[subfigure][2][5,1]5.1b}{[1][31][]31}}
-\newlabel{fig:eda-strat-prev}{{5.1c}{31}{Strategy prevalence (all 41 strategies)}{figure.caption.19}{}}
-\newlabel{fig:eda-strat-prev@cref}{{[subfigure][3][5,1]5.1c}{[1][31][]31}}
-\newlabel{sub@fig:eda-strat-prev}{{c}{31}{Strategy prevalence (all 41 strategies)}{figure.caption.19}{}}
-\newlabel{sub@fig:eda-strat-prev@cref}{{[subfigure][3][5,1]5.1c}{[1][31][]31}}
-\newlabel{fig:eda-cat-cooc}{{5.1d}{31}{Category co-occurrence matrix}{figure.caption.19}{}}
-\newlabel{fig:eda-cat-cooc@cref}{{[subfigure][4][5,1]5.1d}{[1][31][]31}}
-\newlabel{sub@fig:eda-cat-cooc}{{d}{31}{Category co-occurrence matrix}{figure.caption.19}{}}
-\newlabel{sub@fig:eda-cat-cooc@cref}{{[subfigure][4][5,1]5.1d}{[1][31][]31}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Strategy corpus EDA: label density, category/strategy prevalence, and category co-occurrence.}}{31}{figure.caption.19}\protected@file@percent }
-\newlabel{fig:eda-grid-1}{{5.1}{31}{Strategy corpus EDA: label density, category/strategy prevalence, and category co-occurrence}{figure.caption.19}{}}
-\newlabel{fig:eda-grid-1@cref}{{[figure][1][5]5.1}{[1][31][]31}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Key Analytical EDA Takeaways}{31}{subsection.5.2.1}\protected@file@percent }
-\newlabel{fig:eda-strat-cooc}{{5.2a}{32}{Strategy co-occurrence matrix}{figure.caption.20}{}}
-\newlabel{fig:eda-strat-cooc@cref}{{[subfigure][1][5,2]5.2a}{[1][31][]32}}
-\newlabel{sub@fig:eda-strat-cooc}{{a}{32}{Strategy co-occurrence matrix}{figure.caption.20}{}}
-\newlabel{sub@fig:eda-strat-cooc@cref}{{[subfigure][1][5,2]5.2a}{[1][31][]32}}
-\newlabel{fig:eda-segment-density}{{5.2b}{32}{Label density across annotator segments}{figure.caption.20}{}}
-\newlabel{fig:eda-segment-density@cref}{{[subfigure][2][5,2]5.2b}{[1][31][]32}}
-\newlabel{sub@fig:eda-segment-density}{{b}{32}{Label density across annotator segments}{figure.caption.20}{}}
-\newlabel{sub@fig:eda-segment-density@cref}{{[subfigure][2][5,2]5.2b}{[1][31][]32}}
-\newlabel{fig:eda-cat-segment}{{5.2c}{32}{Category distribution by annotator}{figure.caption.20}{}}
-\newlabel{fig:eda-cat-segment@cref}{{[subfigure][3][5,2]5.2c}{[1][31][]32}}
-\newlabel{sub@fig:eda-cat-segment}{{c}{32}{Category distribution by annotator}{figure.caption.20}{}}
-\newlabel{sub@fig:eda-cat-segment@cref}{{[subfigure][3][5,2]5.2c}{[1][31][]32}}
-\newlabel{fig:eda-strat-pos}{{5.2d}{32}{Strategy deployment by turn position}{figure.caption.20}{}}
-\newlabel{fig:eda-strat-pos@cref}{{[subfigure][4][5,2]5.2d}{[1][31][]32}}
-\newlabel{sub@fig:eda-strat-pos}{{d}{32}{Strategy deployment by turn position}{figure.caption.20}{}}
-\newlabel{sub@fig:eda-strat-pos@cref}{{[subfigure][4][5,2]5.2d}{[1][31][]32}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Strategy corpus EDA: strategy co-occurrence, segment rater variance, and positional dynamics.}}{32}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:eda-grid-2}{{5.2}{32}{Strategy corpus EDA: strategy co-occurrence, segment rater variance, and positional dynamics}{figure.caption.20}{}}
-\newlabel{fig:eda-grid-2@cref}{{[figure][2][5]5.2}{[1][31][]32}}
-\newlabel{fig:eda-corpus-density}{{5.3a}{33}{Overall corpus label density}{figure.caption.21}{}}
-\newlabel{fig:eda-corpus-density@cref}{{[subfigure][1][5,3]5.3a}{[1][31][]33}}
-\newlabel{sub@fig:eda-corpus-density}{{a}{33}{Overall corpus label density}{figure.caption.21}{}}
-\newlabel{sub@fig:eda-corpus-density@cref}{{[subfigure][1][5,3]5.3a}{[1][31][]33}}
-\newlabel{fig:eda-text-len}{{5.3b}{33}{Turn text length distribution (words)}{figure.caption.21}{}}
-\newlabel{fig:eda-text-len@cref}{{[subfigure][2][5,3]5.3b}{[1][31][]33}}
-\newlabel{sub@fig:eda-text-len}{{b}{33}{Turn text length distribution (words)}{figure.caption.21}{}}
-\newlabel{sub@fig:eda-text-len@cref}{{[subfigure][2][5,3]5.3b}{[1][31][]33}}
-\newlabel{fig:eda-rank-freq}{{5.3c}{33}{Strategy rank-frequency distribution}{figure.caption.21}{}}
-\newlabel{fig:eda-rank-freq@cref}{{[subfigure][3][5,3]5.3c}{[1][31][]33}}
-\newlabel{sub@fig:eda-rank-freq}{{c}{33}{Strategy rank-frequency distribution}{figure.caption.21}{}}
-\newlabel{sub@fig:eda-rank-freq@cref}{{[subfigure][3][5,3]5.3c}{[1][31][]33}}
-\newlabel{fig:eda-strat-corr}{{5.3d}{33}{Strategy pairwise correlation matrix}{figure.caption.21}{}}
-\newlabel{fig:eda-strat-corr@cref}{{[subfigure][4][5,3]5.3d}{[1][31][]33}}
-\newlabel{sub@fig:eda-strat-corr}{{d}{33}{Strategy pairwise correlation matrix}{figure.caption.21}{}}
-\newlabel{sub@fig:eda-strat-corr@cref}{{[subfigure][4][5,3]5.3d}{[1][31][]33}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Strategy corpus EDA: length distributions, rank-frequency skew, and correlation structures.}}{33}{figure.caption.21}\protected@file@percent }
-\newlabel{fig:eda-grid-3}{{5.3}{33}{Strategy corpus EDA: length distributions, rank-frequency skew, and correlation structures}{figure.caption.21}{}}
-\newlabel{fig:eda-grid-3@cref}{{[figure][3][5]5.3}{[1][31][]33}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Intention Classification Results Across Three Passes}{33}{section.5.3}\protected@file@percent }
-\newlabel{sec:intention-results}{{5.3}{33}{Intention Classification Results Across Three Passes}{section.5.3}{}}
-\newlabel{sec:intention-results@cref}{{[section][3][5]5.3}{[1][33][]33}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Part 1: Results on the First-Pass Dataset (Binary + Modifier)}{33}{subsection.5.3.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Test set performance on First-Pass dataset (738 yes / 279 no, test $n=153$)}}{34}{table.caption.22}\protected@file@percent }
-\newlabel{tab:results-part1}{{5.1}{34}{Test set performance on First-Pass dataset (738 yes / 279 no, test $n=153$)}{table.caption.22}{}}
-\newlabel{tab:results-part1@cref}{{[table][1][5]5.1}{[1][33][]34}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}Part 2: Results on the Second-Pass Dataset (Modifier Dropped)}{35}{subsection.5.3.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Test set performance on Second-Pass dataset (738 yes / 279 no, test $n=153$)}}{35}{table.caption.23}\protected@file@percent }
-\newlabel{tab:results-part2}{{5.2}{35}{Test set performance on Second-Pass dataset (738 yes / 279 no, test $n=153$)}{table.caption.23}{}}
-\newlabel{tab:results-part2@cref}{{[table][2][5]5.2}{[1][35][]35}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces Detailed class-level test breakdown: Dual-Stream Antiphony on Second-Pass dataset}}{35}{table.caption.24}\protected@file@percent }
-\newlabel{tab:breakdown-second-pass}{{5.3}{35}{Detailed class-level test breakdown: Dual-Stream Antiphony on Second-Pass dataset}{table.caption.24}{}}
-\newlabel{tab:breakdown-second-pass@cref}{{[table][3][5]5.3}{[1][35][]35}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.3}Part 3: Results on the Third-Pass Dataset (Strict Commitment)}{35}{subsection.5.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.4}Direct Comparison: Decoupled Single-Stream vs. Dual-Stream Antiphony}{35}{subsection.5.3.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.4}{\ignorespaces Test set performance on Third-Pass dataset (694 yes / 323 no, test $n=153$)}}{36}{table.caption.25}\protected@file@percent }
-\newlabel{tab:results-part3}{{5.4}{36}{Test set performance on Third-Pass dataset (694 yes / 323 no, test $n=153$)}{table.caption.25}{}}
-\newlabel{tab:results-part3@cref}{{[table][4][5]5.4}{[1][35][]36}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.5}{\ignorespaces Detailed class-level test breakdown: Dual-Stream Antiphony on Third-Pass dataset}}{36}{table.caption.26}\protected@file@percent }
-\newlabel{tab:breakdown-third-pass}{{5.5}{36}{Detailed class-level test breakdown: Dual-Stream Antiphony on Third-Pass dataset}{table.caption.26}{}}
-\newlabel{tab:breakdown-third-pass@cref}{{[table][5][5]5.5}{[1][35][]36}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.6}{\ignorespaces Head-to-head comparison: best encoder of Decoupled Baseline vs. Dual-Stream Antiphony}}{36}{table.caption.27}\protected@file@percent }
-\newlabel{tab:v13-vs-v14}{{5.6}{36}{Head-to-head comparison: best encoder of Decoupled Baseline vs. Dual-Stream Antiphony}{table.caption.27}{}}
-\newlabel{tab:v13-vs-v14@cref}{{[table][6][5]5.6}{[1][35][]36}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}Strategy and Category Multi-Task Benchmarking}{37}{section.5.4}\protected@file@percent }
-\newlabel{sec:strategy-results}{{5.4}{37}{Strategy and Category Multi-Task Benchmarking}{section.5.4}{}}
-\newlabel{sec:strategy-results@cref}{{[section][4][5]5.4}{[1][37][]37}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.1}The Evolutionary Arc Across Five Modeling Stages}{37}{subsection.5.4.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.7}{\ignorespaces Evolutionary progression of strategy and category modeling}}{37}{table.caption.28}\protected@file@percent }
-\newlabel{tab:strategy-arc}{{5.7}{37}{Evolutionary progression of strategy and category modeling}{table.caption.28}{}}
-\newlabel{tab:strategy-arc@cref}{{[table][7][5]5.7}{[1][37][]37}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.2}Operating Points and Micro-Optimal Decoding Analyses}{37}{subsection.5.4.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.8}{\ignorespaces Comparison of operating points across multi-task ensemble configurations}}{37}{table.caption.29}\protected@file@percent }
-\newlabel{tab:operating-points}{{5.8}{37}{Comparison of operating points across multi-task ensemble configurations}{table.caption.29}{}}
-\newlabel{tab:operating-points@cref}{{[table][8][5]5.8}{[1][37][]37}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.3}Evaluated Decision Combiners: Stacker vs. Blend}{37}{subsection.5.4.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.9}{\ignorespaces Cross-validated evaluation of ensemble decision combiners}}{38}{table.caption.30}\protected@file@percent }
-\newlabel{tab:combiners}{{5.9}{38}{Cross-validated evaluation of ensemble decision combiners}{table.caption.30}{}}
-\newlabel{tab:combiners@cref}{{[table][9][5]5.9}{[1][37][]38}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.5}Cross-Domain Transfer and Adversarial Ablation}{38}{section.5.5}\protected@file@percent }
-\newlabel{sec:transfer-ablation}{{5.5}{38}{Cross-Domain Transfer and Adversarial Ablation}{section.5.5}{}}
-\newlabel{sec:transfer-ablation@cref}{{[section][5][5]5.5}{[1][37][]38}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.1}Monolithic Input Ablation Study}{38}{subsection.5.5.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.10}{\ignorespaces Monolithic transformer input ablation results}}{38}{table.caption.31}\protected@file@percent }
-\newlabel{tab:ablation-results}{{5.10}{38}{Monolithic transformer input ablation results}{table.caption.31}{}}
-\newlabel{tab:ablation-results@cref}{{[table][10][5]5.10}{[1][38][]38}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.2}Treatment Evaluation: Antiphony on Augmented Dialogues}{38}{subsection.5.5.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.11}{\ignorespaces Benchmark performance on augmented negotiation corpus ($N=700$, test $n=105$)}}{38}{table.caption.32}\protected@file@percent }
-\newlabel{tab:transfer-benchmark}{{5.11}{38}{Benchmark performance on augmented negotiation corpus ($N=700$, test $n=105$)}{table.caption.32}{}}
-\newlabel{tab:transfer-benchmark@cref}{{[table][11][5]5.11}{[1][38][]38}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.3}Widening of the Sufficiency Gap}{38}{subsection.5.5.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5.12}{\ignorespaces Sufficiency gap expansion across canonical and adversarial corpora}}{39}{table.caption.33}\protected@file@percent }
-\newlabel{tab:sufficiency-gap}{{5.12}{39}{Sufficiency gap expansion across canonical and adversarial corpora}{table.caption.33}{}}
-\newlabel{tab:sufficiency-gap@cref}{{[table][12][5]5.12}{[1][38][]39}}
-\newlabel{fig:abl-antiphony}{{5.4a}{39}{Ablation performance ($N=500$)}{figure.caption.34}{}}
-\newlabel{fig:abl-antiphony@cref}{{[subfigure][1][5,4]5.4a}{[1][39][]39}}
-\newlabel{sub@fig:abl-antiphony}{{a}{39}{Ablation performance ($N=500$)}{figure.caption.34}{}}
-\newlabel{sub@fig:abl-antiphony@cref}{{[subfigure][1][5,4]5.4a}{[1][39][]39}}
-\newlabel{fig:abl-extended}{{5.4b}{39}{Ablation performance ($N=700$)}{figure.caption.34}{}}
-\newlabel{fig:abl-extended@cref}{{[subfigure][2][5,4]5.4b}{[1][39][]39}}
-\newlabel{sub@fig:abl-extended}{{b}{39}{Ablation performance ($N=700$)}{figure.caption.34}{}}
-\newlabel{sub@fig:abl-extended@cref}{{[subfigure][2][5,4]5.4b}{[1][39][]39}}
-\newlabel{fig:conf-antiphony}{{5.4c}{39}{Confusion matrix ($N=500$)}{figure.caption.34}{}}
-\newlabel{fig:conf-antiphony@cref}{{[subfigure][3][5,4]5.4c}{[1][39][]39}}
-\newlabel{sub@fig:conf-antiphony}{{c}{39}{Confusion matrix ($N=500$)}{figure.caption.34}{}}
-\newlabel{sub@fig:conf-antiphony@cref}{{[subfigure][3][5,4]5.4c}{[1][39][]39}}
-\newlabel{fig:conf-extended}{{5.4d}{39}{Confusion matrix ($N=700$)}{figure.caption.34}{}}
-\newlabel{fig:conf-extended@cref}{{[subfigure][4][5,4]5.4d}{[1][39][]39}}
-\newlabel{sub@fig:conf-extended}{{d}{39}{Confusion matrix ($N=700$)}{figure.caption.34}{}}
-\newlabel{sub@fig:conf-extended@cref}{{[subfigure][4][5,4]5.4d}{[1][39][]39}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Cross-domain transfer: ablation curves and confusion matrices on canonical ($N=500$) and augmented ($N=700$) benchmarks.}}{39}{figure.caption.34}\protected@file@percent }
-\newlabel{fig:transfer-curves}{{5.4}{39}{Cross-domain transfer: ablation curves and confusion matrices on canonical ($N=500$) and augmented ($N=700$) benchmarks}{figure.caption.34}{}}
-\newlabel{fig:transfer-curves@cref}{{[figure][4][5]5.4}{[1][39][]39}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.6}Skew Stress Analysis}{39}{section.5.6}\protected@file@percent }
-\newlabel{sec:skew-stress}{{5.6}{39}{Skew Stress Analysis}{section.5.6}{}}
-\newlabel{sec:skew-stress@cref}{{[section][6][5]5.6}{[1][39][]39}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.7}Forensic Post-Mortems}{39}{section.5.7}\protected@file@percent }
-\newlabel{sec:forensics}{{5.7}{39}{Forensic Post-Mortems}{section.5.7}{}}
-\newlabel{sec:forensics@cref}{{[section][7][5]5.7}{[1][39][]39}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.7.1}Tokenizer Truncation Directionality Forensic}{39}{subsection.5.7.1}\protected@file@percent }
-\newlabel{fig:train-antiphony}{{5.5a}{40}{Training loss curves ($N=500$)}{figure.caption.35}{}}
-\newlabel{fig:train-antiphony@cref}{{[subfigure][1][5,5]5.5a}{[1][39][]40}}
-\newlabel{sub@fig:train-antiphony}{{a}{40}{Training loss curves ($N=500$)}{figure.caption.35}{}}
-\newlabel{sub@fig:train-antiphony@cref}{{[subfigure][1][5,5]5.5a}{[1][39][]40}}
-\newlabel{fig:train-extended}{{5.5b}{40}{Training loss curves ($N=700$)}{figure.caption.35}{}}
-\newlabel{fig:train-extended@cref}{{[subfigure][2][5,5]5.5b}{[1][39][]40}}
-\newlabel{sub@fig:train-extended}{{b}{40}{Training loss curves ($N=700$)}{figure.caption.35}{}}
-\newlabel{sub@fig:train-extended@cref}{{[subfigure][2][5,5]5.5b}{[1][39][]40}}
-\newlabel{fig:bar-antiphony}{{5.5c}{40}{Summary comparison ($N=500$)}{figure.caption.35}{}}
-\newlabel{fig:bar-antiphony@cref}{{[subfigure][3][5,5]5.5c}{[1][39][]40}}
-\newlabel{sub@fig:bar-antiphony}{{c}{40}{Summary comparison ($N=500$)}{figure.caption.35}{}}
-\newlabel{sub@fig:bar-antiphony@cref}{{[subfigure][3][5,5]5.5c}{[1][39][]40}}
-\newlabel{fig:bar-extended}{{5.5d}{40}{Summary comparison ($N=700$)}{figure.caption.35}{}}
-\newlabel{fig:bar-extended@cref}{{[subfigure][4][5,5]5.5d}{[1][39][]40}}
-\newlabel{sub@fig:bar-extended}{{d}{40}{Summary comparison ($N=700$)}{figure.caption.35}{}}
-\newlabel{sub@fig:bar-extended@cref}{{[subfigure][4][5,5]5.5d}{[1][39][]40}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Training convergence dynamics and performance summaries across both e-commerce benchmarks.}}{40}{figure.caption.35}\protected@file@percent }
-\newlabel{fig:training-curves-grid}{{5.5}{40}{Training convergence dynamics and performance summaries across both e-commerce benchmarks}{figure.caption.35}{}}
-\newlabel{fig:training-curves-grid@cref}{{[figure][5][5]5.5}{[1][39][]40}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Verified label distribution of the canonical e-commerce benchmark ($N=500$), displaying 262 negative / 238 affirmative instances across the four primary outcome categories.}}{40}{figure.caption.36}\protected@file@percent }
-\newlabel{fig:label-dist}{{5.6}{40}{Verified label distribution of the canonical e-commerce benchmark ($N=500$), displaying 262 negative / 238 affirmative instances across the four primary outcome categories}{figure.caption.36}{}}
-\newlabel{fig:label-dist@cref}{{[figure][6][5]5.6}{[1][39][]40}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces Skew stress analysis of Antiphony under severe class imbalance, showing Macro-F1 resilience across affirmative training proportions from 47.7\% down to 9.8\%.}}{40}{figure.caption.37}\protected@file@percent }
-\newlabel{fig:skew-stress}{{5.7}{40}{Skew stress analysis of Antiphony under severe class imbalance, showing Macro-F1 resilience across affirmative training proportions from 47.7\% down to 9.8\%}{figure.caption.37}{}}
-\newlabel{fig:skew-stress@cref}{{[figure][7][5]5.7}{[1][39][]40}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.8}{\ignorespaces Tokenizer truncation forensic: left-truncation retains proximal conversational context, recovering Macro-F1 from 0.8133 to 0.9331 and shrinking the apparent necessity gap from 0.1600 to 0.0402.}}{41}{figure.caption.38}\protected@file@percent }
-\newlabel{fig:left-trunc}{{5.8}{41}{Tokenizer truncation forensic: left-truncation retains proximal conversational context, recovering Macro-F1 from 0.8133 to 0.9331 and shrinking the apparent necessity gap from 0.1600 to 0.0402}{figure.caption.38}{}}
-\newlabel{fig:left-trunc@cref}{{[figure][8][5]5.8}{[1][39][]41}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.7.2}Merchant Accommodation Leakage}{41}{subsection.5.7.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.8}Performance Evaluation Against Requirements}{41}{section.5.8}\protected@file@percent }
-\newlabel{sec:compliance}{{5.8}{41}{Performance Evaluation Against Requirements}{section.5.8}{}}
-\newlabel{sec:compliance@cref}{{[section][8][5]5.8}{[1][41][]41}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.9}Deviations and Design Revisions}{41}{section.5.9}\protected@file@percent }
-\newlabel{sec:revisions}{{5.9}{41}{Deviations and Design Revisions}{section.5.9}{}}
-\newlabel{sec:revisions@cref}{{[section][9][5]5.9}{[1][41][]41}}
-\@writefile{lot}{\contentsline {table}{\numberline {5.13}{\ignorespaces Verification matrix evaluating system compliance against requirements}}{42}{table.caption.39}\protected@file@percent }
-\newlabel{tab:requirements-compliance}{{5.13}{42}{Verification matrix evaluating system compliance against requirements}{table.caption.39}{}}
-\newlabel{tab:requirements-compliance@cref}{{[table][13][5]5.13}{[1][41][]42}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Project Management, Teamwork, and Impact}{43}{chapter.6}\protected@file@percent }
+\newlabel{ch:evaluation}{{5}{33}{Investigation and Evaluation}{chapter.5}{}}
+\newlabel{ch:evaluation@cref}{{[chapter][5][]5}{[1][33][]33}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Experimental Investigation Setup}{33}{section.5.1}\protected@file@percent }
+\newlabel{sec:investigation}{{5.1}{33}{Experimental Investigation Setup}{section.5.1}{}}
+\newlabel{sec:investigation@cref}{{[section][1][5]5.1}{[1][33][]33}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Research Questions and Hypotheses}{33}{subsection.5.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Data Splits and Evaluation Protocols}{33}{subsection.5.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Evaluation Metrics}{33}{subsection.5.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Corpus Dynamics and Strategy Exploratory Data Analysis}{34}{section.5.2}\protected@file@percent }
+\newlabel{sec:strategy-eda}{{5.2}{34}{Corpus Dynamics and Strategy Exploratory Data Analysis}{section.5.2}{}}
+\newlabel{sec:strategy-eda@cref}{{[section][2][5]5.2}{[1][34][]34}}
+\newlabel{fig:eda-labels}{{5.1a}{34}{Labels per turn distribution}{figure.caption.23}{}}
+\newlabel{fig:eda-labels@cref}{{[subfigure][1][5,1]5.1a}{[1][34][]34}}
+\newlabel{sub@fig:eda-labels}{{a}{34}{Labels per turn distribution}{figure.caption.23}{}}
+\newlabel{sub@fig:eda-labels@cref}{{[subfigure][1][5,1]5.1a}{[1][34][]34}}
+\newlabel{fig:eda-cat-prev}{{5.1b}{34}{Communicative category prevalence}{figure.caption.23}{}}
+\newlabel{fig:eda-cat-prev@cref}{{[subfigure][2][5,1]5.1b}{[1][34][]34}}
+\newlabel{sub@fig:eda-cat-prev}{{b}{34}{Communicative category prevalence}{figure.caption.23}{}}
+\newlabel{sub@fig:eda-cat-prev@cref}{{[subfigure][2][5,1]5.1b}{[1][34][]34}}
+\newlabel{fig:eda-strat-prev}{{5.1c}{34}{Strategy prevalence (all 41 strategies)}{figure.caption.23}{}}
+\newlabel{fig:eda-strat-prev@cref}{{[subfigure][3][5,1]5.1c}{[1][34][]34}}
+\newlabel{sub@fig:eda-strat-prev}{{c}{34}{Strategy prevalence (all 41 strategies)}{figure.caption.23}{}}
+\newlabel{sub@fig:eda-strat-prev@cref}{{[subfigure][3][5,1]5.1c}{[1][34][]34}}
+\newlabel{fig:eda-cat-cooc}{{5.1d}{34}{Category co-occurrence matrix}{figure.caption.23}{}}
+\newlabel{fig:eda-cat-cooc@cref}{{[subfigure][4][5,1]5.1d}{[1][34][]34}}
+\newlabel{sub@fig:eda-cat-cooc}{{d}{34}{Category co-occurrence matrix}{figure.caption.23}{}}
+\newlabel{sub@fig:eda-cat-cooc@cref}{{[subfigure][4][5,1]5.1d}{[1][34][]34}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Strategy corpus EDA: label density, category/strategy prevalence, and category co-occurrence.}}{34}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:eda-grid-1}{{5.1}{34}{Strategy corpus EDA: label density, category/strategy prevalence, and category co-occurrence}{figure.caption.23}{}}
+\newlabel{fig:eda-grid-1@cref}{{[figure][1][5]5.1}{[1][34][]34}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Key Analytical EDA Takeaways}{34}{subsection.5.2.1}\protected@file@percent }
+\newlabel{fig:eda-strat-cooc}{{5.2a}{35}{Strategy co-occurrence matrix}{figure.caption.24}{}}
+\newlabel{fig:eda-strat-cooc@cref}{{[subfigure][1][5,2]5.2a}{[1][34][]35}}
+\newlabel{sub@fig:eda-strat-cooc}{{a}{35}{Strategy co-occurrence matrix}{figure.caption.24}{}}
+\newlabel{sub@fig:eda-strat-cooc@cref}{{[subfigure][1][5,2]5.2a}{[1][34][]35}}
+\newlabel{fig:eda-segment-density}{{5.2b}{35}{Label density across annotator segments}{figure.caption.24}{}}
+\newlabel{fig:eda-segment-density@cref}{{[subfigure][2][5,2]5.2b}{[1][34][]35}}
+\newlabel{sub@fig:eda-segment-density}{{b}{35}{Label density across annotator segments}{figure.caption.24}{}}
+\newlabel{sub@fig:eda-segment-density@cref}{{[subfigure][2][5,2]5.2b}{[1][34][]35}}
+\newlabel{fig:eda-cat-segment}{{5.2c}{35}{Category distribution by annotator}{figure.caption.24}{}}
+\newlabel{fig:eda-cat-segment@cref}{{[subfigure][3][5,2]5.2c}{[1][34][]35}}
+\newlabel{sub@fig:eda-cat-segment}{{c}{35}{Category distribution by annotator}{figure.caption.24}{}}
+\newlabel{sub@fig:eda-cat-segment@cref}{{[subfigure][3][5,2]5.2c}{[1][34][]35}}
+\newlabel{fig:eda-strat-pos}{{5.2d}{35}{Strategy deployment by turn position}{figure.caption.24}{}}
+\newlabel{fig:eda-strat-pos@cref}{{[subfigure][4][5,2]5.2d}{[1][34][]35}}
+\newlabel{sub@fig:eda-strat-pos}{{d}{35}{Strategy deployment by turn position}{figure.caption.24}{}}
+\newlabel{sub@fig:eda-strat-pos@cref}{{[subfigure][4][5,2]5.2d}{[1][34][]35}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Strategy corpus EDA: strategy co-occurrence, segment rater variance, and positional dynamics.}}{35}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:eda-grid-2}{{5.2}{35}{Strategy corpus EDA: strategy co-occurrence, segment rater variance, and positional dynamics}{figure.caption.24}{}}
+\newlabel{fig:eda-grid-2@cref}{{[figure][2][5]5.2}{[1][34][]35}}
+\newlabel{fig:eda-corpus-density}{{5.3a}{36}{Overall corpus label density}{figure.caption.25}{}}
+\newlabel{fig:eda-corpus-density@cref}{{[subfigure][1][5,3]5.3a}{[1][34][]36}}
+\newlabel{sub@fig:eda-corpus-density}{{a}{36}{Overall corpus label density}{figure.caption.25}{}}
+\newlabel{sub@fig:eda-corpus-density@cref}{{[subfigure][1][5,3]5.3a}{[1][34][]36}}
+\newlabel{fig:eda-text-len}{{5.3b}{36}{Turn text length distribution (words)}{figure.caption.25}{}}
+\newlabel{fig:eda-text-len@cref}{{[subfigure][2][5,3]5.3b}{[1][34][]36}}
+\newlabel{sub@fig:eda-text-len}{{b}{36}{Turn text length distribution (words)}{figure.caption.25}{}}
+\newlabel{sub@fig:eda-text-len@cref}{{[subfigure][2][5,3]5.3b}{[1][34][]36}}
+\newlabel{fig:eda-rank-freq}{{5.3c}{36}{Strategy rank-frequency distribution}{figure.caption.25}{}}
+\newlabel{fig:eda-rank-freq@cref}{{[subfigure][3][5,3]5.3c}{[1][34][]36}}
+\newlabel{sub@fig:eda-rank-freq}{{c}{36}{Strategy rank-frequency distribution}{figure.caption.25}{}}
+\newlabel{sub@fig:eda-rank-freq@cref}{{[subfigure][3][5,3]5.3c}{[1][34][]36}}
+\newlabel{fig:eda-strat-corr}{{5.3d}{36}{Strategy pairwise correlation matrix}{figure.caption.25}{}}
+\newlabel{fig:eda-strat-corr@cref}{{[subfigure][4][5,3]5.3d}{[1][34][]36}}
+\newlabel{sub@fig:eda-strat-corr}{{d}{36}{Strategy pairwise correlation matrix}{figure.caption.25}{}}
+\newlabel{sub@fig:eda-strat-corr@cref}{{[subfigure][4][5,3]5.3d}{[1][34][]36}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Strategy corpus EDA: length distributions, rank-frequency skew, and correlation structures.}}{36}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:eda-grid-3}{{5.3}{36}{Strategy corpus EDA: length distributions, rank-frequency skew, and correlation structures}{figure.caption.25}{}}
+\newlabel{fig:eda-grid-3@cref}{{[figure][3][5]5.3}{[1][34][]36}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Intention Classification Results Across Three Passes}{36}{section.5.3}\protected@file@percent }
+\newlabel{sec:intention-results}{{5.3}{36}{Intention Classification Results Across Three Passes}{section.5.3}{}}
+\newlabel{sec:intention-results@cref}{{[section][3][5]5.3}{[1][36][]36}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Part 1: Results on the First-Pass Dataset (Binary + Modifier)}{36}{subsection.5.3.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Test set performance on First-Pass dataset (738 yes / 279 no, test $n=153$)}}{37}{table.caption.26}\protected@file@percent }
+\newlabel{tab:results-part1}{{5.1}{37}{Test set performance on First-Pass dataset (738 yes / 279 no, test $n=153$)}{table.caption.26}{}}
+\newlabel{tab:results-part1@cref}{{[table][1][5]5.1}{[1][36][]37}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}Part 2: Results on the Second-Pass Dataset (Modifier Dropped)}{38}{subsection.5.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Test set performance on Second-Pass dataset (738 yes / 279 no, test $n=153$)}}{38}{table.caption.27}\protected@file@percent }
+\newlabel{tab:results-part2}{{5.2}{38}{Test set performance on Second-Pass dataset (738 yes / 279 no, test $n=153$)}{table.caption.27}{}}
+\newlabel{tab:results-part2@cref}{{[table][2][5]5.2}{[1][38][]38}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces Detailed class-level test breakdown: Dual-Stream Antiphony on Second-Pass dataset}}{38}{table.caption.28}\protected@file@percent }
+\newlabel{tab:breakdown-second-pass}{{5.3}{38}{Detailed class-level test breakdown: Dual-Stream Antiphony on Second-Pass dataset}{table.caption.28}{}}
+\newlabel{tab:breakdown-second-pass@cref}{{[table][3][5]5.3}{[1][38][]38}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.3}Part 3: Results on the Third-Pass Dataset (Strict Commitment)}{38}{subsection.5.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.4}Direct Comparison: Decoupled Single-Stream vs. Dual-Stream Antiphony}{38}{subsection.5.3.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.4}{\ignorespaces Test set performance on Third-Pass dataset (694 yes / 323 no, test $n=153$)}}{39}{table.caption.29}\protected@file@percent }
+\newlabel{tab:results-part3}{{5.4}{39}{Test set performance on Third-Pass dataset (694 yes / 323 no, test $n=153$)}{table.caption.29}{}}
+\newlabel{tab:results-part3@cref}{{[table][4][5]5.4}{[1][38][]39}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.5}{\ignorespaces Detailed class-level test breakdown: Dual-Stream Antiphony on Third-Pass dataset}}{39}{table.caption.30}\protected@file@percent }
+\newlabel{tab:breakdown-third-pass}{{5.5}{39}{Detailed class-level test breakdown: Dual-Stream Antiphony on Third-Pass dataset}{table.caption.30}{}}
+\newlabel{tab:breakdown-third-pass@cref}{{[table][5][5]5.5}{[1][38][]39}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.6}{\ignorespaces Head-to-head comparison: best encoder of Decoupled Baseline vs. Dual-Stream Antiphony}}{39}{table.caption.31}\protected@file@percent }
+\newlabel{tab:v13-vs-v14}{{5.6}{39}{Head-to-head comparison: best encoder of Decoupled Baseline vs. Dual-Stream Antiphony}{table.caption.31}{}}
+\newlabel{tab:v13-vs-v14@cref}{{[table][6][5]5.6}{[1][38][]39}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Strategy and Category Multi-Task Benchmarking}{40}{section.5.4}\protected@file@percent }
+\newlabel{sec:strategy-results}{{5.4}{40}{Strategy and Category Multi-Task Benchmarking}{section.5.4}{}}
+\newlabel{sec:strategy-results@cref}{{[section][4][5]5.4}{[1][40][]40}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.1}The Evolutionary Arc Across Five Modeling Stages}{40}{subsection.5.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.7}{\ignorespaces Evolutionary progression of strategy and category modeling}}{40}{table.caption.32}\protected@file@percent }
+\newlabel{tab:strategy-arc}{{5.7}{40}{Evolutionary progression of strategy and category modeling}{table.caption.32}{}}
+\newlabel{tab:strategy-arc@cref}{{[table][7][5]5.7}{[1][40][]40}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.2}Operating Points and Micro-Optimal Decoding Analyses}{40}{subsection.5.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.8}{\ignorespaces Comparison of operating points across multi-task ensemble configurations}}{40}{table.caption.33}\protected@file@percent }
+\newlabel{tab:operating-points}{{5.8}{40}{Comparison of operating points across multi-task ensemble configurations}{table.caption.33}{}}
+\newlabel{tab:operating-points@cref}{{[table][8][5]5.8}{[1][40][]40}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.3}Evaluated Decision Combiners: Stacker vs. Blend}{40}{subsection.5.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.9}{\ignorespaces Cross-validated evaluation of ensemble decision combiners}}{41}{table.caption.34}\protected@file@percent }
+\newlabel{tab:combiners}{{5.9}{41}{Cross-validated evaluation of ensemble decision combiners}{table.caption.34}{}}
+\newlabel{tab:combiners@cref}{{[table][9][5]5.9}{[1][40][]41}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}Cross-Domain Transfer and Adversarial Ablation}{41}{section.5.5}\protected@file@percent }
+\newlabel{sec:transfer-ablation}{{5.5}{41}{Cross-Domain Transfer and Adversarial Ablation}{section.5.5}{}}
+\newlabel{sec:transfer-ablation@cref}{{[section][5][5]5.5}{[1][40][]41}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.1}Monolithic Input Ablation Study}{41}{subsection.5.5.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.10}{\ignorespaces Monolithic transformer input ablation results}}{41}{table.caption.35}\protected@file@percent }
+\newlabel{tab:ablation-results}{{5.10}{41}{Monolithic transformer input ablation results}{table.caption.35}{}}
+\newlabel{tab:ablation-results@cref}{{[table][10][5]5.10}{[1][41][]41}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.2}Treatment Evaluation: Antiphony on Augmented Dialogues}{41}{subsection.5.5.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.11}{\ignorespaces Benchmark performance on augmented negotiation corpus ($N=700$, test $n=105$)}}{41}{table.caption.36}\protected@file@percent }
+\newlabel{tab:transfer-benchmark}{{5.11}{41}{Benchmark performance on augmented negotiation corpus ($N=700$, test $n=105$)}{table.caption.36}{}}
+\newlabel{tab:transfer-benchmark@cref}{{[table][11][5]5.11}{[1][41][]41}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.3}Widening of the Sufficiency Gap}{41}{subsection.5.5.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5.12}{\ignorespaces Sufficiency gap expansion across canonical and adversarial corpora}}{42}{table.caption.37}\protected@file@percent }
+\newlabel{tab:sufficiency-gap}{{5.12}{42}{Sufficiency gap expansion across canonical and adversarial corpora}{table.caption.37}{}}
+\newlabel{tab:sufficiency-gap@cref}{{[table][12][5]5.12}{[1][41][]42}}
+\newlabel{fig:abl-antiphony}{{5.4a}{42}{Ablation performance ($N=500$)}{figure.caption.38}{}}
+\newlabel{fig:abl-antiphony@cref}{{[subfigure][1][5,4]5.4a}{[1][42][]42}}
+\newlabel{sub@fig:abl-antiphony}{{a}{42}{Ablation performance ($N=500$)}{figure.caption.38}{}}
+\newlabel{sub@fig:abl-antiphony@cref}{{[subfigure][1][5,4]5.4a}{[1][42][]42}}
+\newlabel{fig:abl-extended}{{5.4b}{42}{Ablation performance ($N=700$)}{figure.caption.38}{}}
+\newlabel{fig:abl-extended@cref}{{[subfigure][2][5,4]5.4b}{[1][42][]42}}
+\newlabel{sub@fig:abl-extended}{{b}{42}{Ablation performance ($N=700$)}{figure.caption.38}{}}
+\newlabel{sub@fig:abl-extended@cref}{{[subfigure][2][5,4]5.4b}{[1][42][]42}}
+\newlabel{fig:conf-antiphony}{{5.4c}{42}{Confusion matrix ($N=500$)}{figure.caption.38}{}}
+\newlabel{fig:conf-antiphony@cref}{{[subfigure][3][5,4]5.4c}{[1][42][]42}}
+\newlabel{sub@fig:conf-antiphony}{{c}{42}{Confusion matrix ($N=500$)}{figure.caption.38}{}}
+\newlabel{sub@fig:conf-antiphony@cref}{{[subfigure][3][5,4]5.4c}{[1][42][]42}}
+\newlabel{fig:conf-extended}{{5.4d}{42}{Confusion matrix ($N=700$)}{figure.caption.38}{}}
+\newlabel{fig:conf-extended@cref}{{[subfigure][4][5,4]5.4d}{[1][42][]42}}
+\newlabel{sub@fig:conf-extended}{{d}{42}{Confusion matrix ($N=700$)}{figure.caption.38}{}}
+\newlabel{sub@fig:conf-extended@cref}{{[subfigure][4][5,4]5.4d}{[1][42][]42}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Cross-domain transfer: ablation curves and confusion matrices on canonical ($N=500$) and augmented ($N=700$) benchmarks.}}{42}{figure.caption.38}\protected@file@percent }
+\newlabel{fig:transfer-curves}{{5.4}{42}{Cross-domain transfer: ablation curves and confusion matrices on canonical ($N=500$) and augmented ($N=700$) benchmarks}{figure.caption.38}{}}
+\newlabel{fig:transfer-curves@cref}{{[figure][4][5]5.4}{[1][42][]42}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.6}Skew Stress Analysis}{42}{section.5.6}\protected@file@percent }
+\newlabel{sec:skew-stress}{{5.6}{42}{Skew Stress Analysis}{section.5.6}{}}
+\newlabel{sec:skew-stress@cref}{{[section][6][5]5.6}{[1][42][]42}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.7}Forensic Post-Mortems}{42}{section.5.7}\protected@file@percent }
+\newlabel{sec:forensics}{{5.7}{42}{Forensic Post-Mortems}{section.5.7}{}}
+\newlabel{sec:forensics@cref}{{[section][7][5]5.7}{[1][42][]42}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.7.1}Tokenizer Truncation Directionality Forensic}{42}{subsection.5.7.1}\protected@file@percent }
+\newlabel{fig:train-antiphony}{{5.5a}{43}{Training loss curves ($N=500$)}{figure.caption.39}{}}
+\newlabel{fig:train-antiphony@cref}{{[subfigure][1][5,5]5.5a}{[1][42][]43}}
+\newlabel{sub@fig:train-antiphony}{{a}{43}{Training loss curves ($N=500$)}{figure.caption.39}{}}
+\newlabel{sub@fig:train-antiphony@cref}{{[subfigure][1][5,5]5.5a}{[1][42][]43}}
+\newlabel{fig:train-extended}{{5.5b}{43}{Training loss curves ($N=700$)}{figure.caption.39}{}}
+\newlabel{fig:train-extended@cref}{{[subfigure][2][5,5]5.5b}{[1][42][]43}}
+\newlabel{sub@fig:train-extended}{{b}{43}{Training loss curves ($N=700$)}{figure.caption.39}{}}
+\newlabel{sub@fig:train-extended@cref}{{[subfigure][2][5,5]5.5b}{[1][42][]43}}
+\newlabel{fig:bar-antiphony}{{5.5c}{43}{Summary comparison ($N=500$)}{figure.caption.39}{}}
+\newlabel{fig:bar-antiphony@cref}{{[subfigure][3][5,5]5.5c}{[1][42][]43}}
+\newlabel{sub@fig:bar-antiphony}{{c}{43}{Summary comparison ($N=500$)}{figure.caption.39}{}}
+\newlabel{sub@fig:bar-antiphony@cref}{{[subfigure][3][5,5]5.5c}{[1][42][]43}}
+\newlabel{fig:bar-extended}{{5.5d}{43}{Summary comparison ($N=700$)}{figure.caption.39}{}}
+\newlabel{fig:bar-extended@cref}{{[subfigure][4][5,5]5.5d}{[1][42][]43}}
+\newlabel{sub@fig:bar-extended}{{d}{43}{Summary comparison ($N=700$)}{figure.caption.39}{}}
+\newlabel{sub@fig:bar-extended@cref}{{[subfigure][4][5,5]5.5d}{[1][42][]43}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Training convergence dynamics and performance summaries across both e-commerce benchmarks.}}{43}{figure.caption.39}\protected@file@percent }
+\newlabel{fig:training-curves-grid}{{5.5}{43}{Training convergence dynamics and performance summaries across both e-commerce benchmarks}{figure.caption.39}{}}
+\newlabel{fig:training-curves-grid@cref}{{[figure][5][5]5.5}{[1][42][]43}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Verified label distribution of the canonical e-commerce benchmark ($N=500$), displaying 262 negative / 238 affirmative instances across the four primary outcome categories.}}{43}{figure.caption.40}\protected@file@percent }
+\newlabel{fig:label-dist}{{5.6}{43}{Verified label distribution of the canonical e-commerce benchmark ($N=500$), displaying 262 negative / 238 affirmative instances across the four primary outcome categories}{figure.caption.40}{}}
+\newlabel{fig:label-dist@cref}{{[figure][6][5]5.6}{[1][42][]43}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces Skew stress analysis of Antiphony under severe class imbalance, showing Macro-F1 resilience across affirmative training proportions from 47.7\% down to 9.8\%.}}{43}{figure.caption.41}\protected@file@percent }
+\newlabel{fig:skew-stress}{{5.7}{43}{Skew stress analysis of Antiphony under severe class imbalance, showing Macro-F1 resilience across affirmative training proportions from 47.7\% down to 9.8\%}{figure.caption.41}{}}
+\newlabel{fig:skew-stress@cref}{{[figure][7][5]5.7}{[1][42][]43}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.8}{\ignorespaces Tokenizer truncation forensic: left-truncation retains proximal conversational context, recovering Macro-F1 from 0.8133 to 0.9331 and shrinking the apparent necessity gap from 0.1600 to 0.0402.}}{44}{figure.caption.42}\protected@file@percent }
+\newlabel{fig:left-trunc}{{5.8}{44}{Tokenizer truncation forensic: left-truncation retains proximal conversational context, recovering Macro-F1 from 0.8133 to 0.9331 and shrinking the apparent necessity gap from 0.1600 to 0.0402}{figure.caption.42}{}}
+\newlabel{fig:left-trunc@cref}{{[figure][8][5]5.8}{[1][42][]44}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.7.2}Merchant Accommodation Leakage}{44}{subsection.5.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.8}Performance Evaluation Against Requirements}{44}{section.5.8}\protected@file@percent }
+\newlabel{sec:compliance}{{5.8}{44}{Performance Evaluation Against Requirements}{section.5.8}{}}
+\newlabel{sec:compliance@cref}{{[section][8][5]5.8}{[1][44][]44}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.9}Deviations and Design Revisions}{44}{section.5.9}\protected@file@percent }
+\newlabel{sec:revisions}{{5.9}{44}{Deviations and Design Revisions}{section.5.9}{}}
+\newlabel{sec:revisions@cref}{{[section][9][5]5.9}{[1][44][]44}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.13}{\ignorespaces Verification matrix evaluating system compliance against requirements}}{45}{table.caption.43}\protected@file@percent }
+\newlabel{tab:requirements-compliance}{{5.13}{45}{Verification matrix evaluating system compliance against requirements}{table.caption.43}{}}
+\newlabel{tab:requirements-compliance@cref}{{[table][13][5]5.13}{[1][44][]45}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Project Management, Teamwork, and Impact}{46}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:management}{{6}{43}{Project Management, Teamwork, and Impact}{chapter.6}{}}
-\newlabel{ch:management@cref}{{[chapter][6][]6}{[1][43][]43}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}Project Management and Finance}{43}{section.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}Planning and Risk Management}{43}{subsection.6.1.1}\protected@file@percent }
-\newlabel{sec:plan}{{6.1.1}{43}{Planning and Risk Management}{subsection.6.1.1}{}}
-\newlabel{sec:plan@cref}{{[subsection][1][6,1]6.1.1}{[1][43][]43}}
+\newlabel{ch:management}{{6}{46}{Project Management, Teamwork, and Impact}{chapter.6}{}}
+\newlabel{ch:management@cref}{{[chapter][6][]6}{[1][46][]46}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Project Management and Finance}{46}{section.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}Planning and Risk Management}{46}{subsection.6.1.1}\protected@file@percent }
+\newlabel{sec:plan}{{6.1.1}{46}{Planning and Risk Management}{subsection.6.1.1}{}}
+\newlabel{sec:plan@cref}{{[subsection][1][6,1]6.1.1}{[1][46][]46}}
 \gtt@chartextrasize{0}{164.38593pt}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Project timeline and phase distribution. Calendar dates prior to September 5, 2026 are reconstructed estimates (\textcolor {red}{[PENDING: Confirmed Git history begins September 5, 2026]}).}}{44}{figure.caption.40}\protected@file@percent }
-\newlabel{fig:gantt}{{6.1}{44}{Project timeline and phase distribution. Calendar dates prior to September 5, 2026 are reconstructed estimates (\pending {Confirmed Git history begins September 5, 2026})}{figure.caption.40}{}}
-\newlabel{fig:gantt@cref}{{[figure][1][6]6.1}{[1][43][]44}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces Project risk management matrix, impact levels, and mitigations}}{44}{table.caption.41}\protected@file@percent }
-\newlabel{tab:risk-matrix}{{6.1}{44}{Project risk management matrix, impact levels, and mitigations}{table.caption.41}{}}
-\newlabel{tab:risk-matrix@cref}{{[table][1][6]6.1}{[1][43][]44}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}Budgeting and Resource Identification}{45}{subsection.6.1.2}\protected@file@percent }
-\newlabel{sec:budget}{{6.1.2}{45}{Budgeting and Resource Identification}{subsection.6.1.2}{}}
-\newlabel{sec:budget@cref}{{[subsection][2][6,1]6.1.2}{[1][43][]45}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.3}Economic Analysis and Financial Prospecting}{45}{subsection.6.1.3}\protected@file@percent }
-\newlabel{sec:economics}{{6.1.3}{45}{Economic Analysis and Financial Prospecting}{subsection.6.1.3}{}}
-\newlabel{sec:economics@cref}{{[subsection][3][6,1]6.1.3}{[1][45][]45}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.4}Sustainability in Business and Commercialisation}{45}{subsection.6.1.4}\protected@file@percent }
-\newlabel{sec:commercialisation}{{6.1.4}{45}{Sustainability in Business and Commercialisation}{subsection.6.1.4}{}}
-\newlabel{sec:commercialisation@cref}{{[subsection][4][6,1]6.1.4}{[1][45][]45}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}Individual and Teamwork}{45}{section.6.2}\protected@file@percent }
-\newlabel{sec:team}{{6.2}{45}{Individual and Teamwork}{section.6.2}{}}
-\newlabel{sec:team@cref}{{[section][2][6]6.2}{[1][45][]45}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Participation and Contribution}{45}{subsection.6.2.1}\protected@file@percent }
-\newlabel{sec:participation}{{6.2.1}{45}{Participation and Contribution}{subsection.6.2.1}{}}
-\newlabel{sec:participation@cref}{{[subsection][1][6,2]6.2.1}{[1][45][]45}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Project timeline and phase distribution. Calendar dates prior to September 5, 2026 are reconstructed estimates (\textcolor {red}{[PENDING: Confirmed Git history begins September 5, 2026]}).}}{47}{figure.caption.44}\protected@file@percent }
+\newlabel{fig:gantt}{{6.1}{47}{Project timeline and phase distribution. Calendar dates prior to September 5, 2026 are reconstructed estimates (\pending {Confirmed Git history begins September 5, 2026})}{figure.caption.44}{}}
+\newlabel{fig:gantt@cref}{{[figure][1][6]6.1}{[1][46][]47}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces Project risk management matrix, impact levels, and mitigations}}{47}{table.caption.45}\protected@file@percent }
+\newlabel{tab:risk-matrix}{{6.1}{47}{Project risk management matrix, impact levels, and mitigations}{table.caption.45}{}}
+\newlabel{tab:risk-matrix@cref}{{[table][1][6]6.1}{[1][46][]47}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}Budgeting and Resource Identification}{48}{subsection.6.1.2}\protected@file@percent }
+\newlabel{sec:budget}{{6.1.2}{48}{Budgeting and Resource Identification}{subsection.6.1.2}{}}
+\newlabel{sec:budget@cref}{{[subsection][2][6,1]6.1.2}{[1][46][]48}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.3}Economic Analysis and Financial Prospecting}{48}{subsection.6.1.3}\protected@file@percent }
+\newlabel{sec:economics}{{6.1.3}{48}{Economic Analysis and Financial Prospecting}{subsection.6.1.3}{}}
+\newlabel{sec:economics@cref}{{[subsection][3][6,1]6.1.3}{[1][48][]48}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.4}Sustainability in Business and Commercialisation}{48}{subsection.6.1.4}\protected@file@percent }
+\newlabel{sec:commercialisation}{{6.1.4}{48}{Sustainability in Business and Commercialisation}{subsection.6.1.4}{}}
+\newlabel{sec:commercialisation@cref}{{[subsection][4][6,1]6.1.4}{[1][48][]48}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Individual and Teamwork}{48}{section.6.2}\protected@file@percent }
+\newlabel{sec:team}{{6.2}{48}{Individual and Teamwork}{section.6.2}{}}
+\newlabel{sec:team@cref}{{[section][2][6]6.2}{[1][48][]48}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Participation and Contribution}{48}{subsection.6.2.1}\protected@file@percent }
+\newlabel{sec:participation}{{6.2.1}{48}{Participation and Contribution}{subsection.6.2.1}{}}
+\newlabel{sec:participation@cref}{{[subsection][1][6,2]6.2.1}{[1][48][]48}}
 \citation{cialdini2001influence}
 \citation{freedman1966compliance,cialdini1975reciprocal}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}Collaboration and Conflict Resolution}{46}{subsection.6.2.2}\protected@file@percent }
-\newlabel{sec:collaboration}{{6.2.2}{46}{Collaboration and Conflict Resolution}{subsection.6.2.2}{}}
-\newlabel{sec:collaboration@cref}{{[subsection][2][6,2]6.2.2}{[1][46][]46}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.3}Leadership and Direction}{46}{subsection.6.2.3}\protected@file@percent }
-\newlabel{sec:leadership}{{6.2.3}{46}{Leadership and Direction}{subsection.6.2.3}{}}
-\newlabel{sec:leadership@cref}{{[subsection][3][6,2]6.2.3}{[1][46][]46}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.4}Multidisciplinary Engagement}{46}{subsection.6.2.4}\protected@file@percent }
-\newlabel{sec:multidisciplinary}{{6.2.4}{46}{Multidisciplinary Engagement}{subsection.6.2.4}{}}
-\newlabel{sec:multidisciplinary@cref}{{[subsection][4][6,2]6.2.4}{[1][46][]46}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}Collaboration and Conflict Resolution}{49}{subsection.6.2.2}\protected@file@percent }
+\newlabel{sec:collaboration}{{6.2.2}{49}{Collaboration and Conflict Resolution}{subsection.6.2.2}{}}
+\newlabel{sec:collaboration@cref}{{[subsection][2][6,2]6.2.2}{[1][49][]49}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.3}Leadership and Direction}{49}{subsection.6.2.3}\protected@file@percent }
+\newlabel{sec:leadership}{{6.2.3}{49}{Leadership and Direction}{subsection.6.2.3}{}}
+\newlabel{sec:leadership@cref}{{[subsection][3][6,2]6.2.3}{[1][49][]49}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.4}Multidisciplinary Engagement}{49}{subsection.6.2.4}\protected@file@percent }
+\newlabel{sec:multidisciplinary}{{6.2.4}{49}{Multidisciplinary Engagement}{subsection.6.2.4}{}}
+\newlabel{sec:multidisciplinary@cref}{{[subsection][4][6,2]6.2.4}{[1][49][]49}}
 \citation{strubell2019energy,lacoste2019quantifying}
 \citation{lacoste2019quantifying}
-\@writefile{toc}{\contentsline {section}{\numberline {6.3}Impact on Society}{47}{section.6.3}\protected@file@percent }
-\newlabel{sec:society}{{6.3}{47}{Impact on Society}{section.6.3}{}}
-\newlabel{sec:society@cref}{{[section][3][6]6.3}{[1][46][]47}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}Positive Societal and Commercial Benefits}{47}{subsection.6.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}Dual-Use Risks: Coercive Manipulation and Dark Patterns}{47}{subsection.6.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6.4}Environmental Impact and Life Cycle Sustainability}{47}{section.6.4}\protected@file@percent }
-\newlabel{sec:sustainability}{{6.4}{47}{Environmental Impact and Life Cycle Sustainability}{section.6.4}{}}
-\newlabel{sec:sustainability@cref}{{[section][4][6]6.4}{[1][47][]47}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4.1}Transparent Computational Energy and Carbon Accounting}{47}{subsection.6.4.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces Estimated computational energy consumption and greenhouse gas emissions}}{47}{table.caption.42}\protected@file@percent }
-\newlabel{tab:carbon-footprint}{{6.2}{47}{Estimated computational energy consumption and greenhouse gas emissions}{table.caption.42}{}}
-\newlabel{tab:carbon-footprint@cref}{{[table][2][6]6.2}{[1][47][]47}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.5}Ethics}{47}{section.6.5}\protected@file@percent }
-\newlabel{sec:ethics}{{6.5}{47}{Ethics}{section.6.5}{}}
-\newlabel{sec:ethics@cref}{{[section][5][6]6.5}{[1][47][]47}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.1}Equity and Inclusivity}{47}{subsection.6.5.1}\protected@file@percent }
-\newlabel{sec:equity}{{6.5.1}{47}{Equity and Inclusivity}{subsection.6.5.1}{}}
-\newlabel{sec:equity@cref}{{[subsection][1][6,5]6.5.1}{[1][47][]47}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}Impact on Society}{50}{section.6.3}\protected@file@percent }
+\newlabel{sec:society}{{6.3}{50}{Impact on Society}{section.6.3}{}}
+\newlabel{sec:society@cref}{{[section][3][6]6.3}{[1][49][]50}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}Positive Societal and Commercial Benefits}{50}{subsection.6.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}Dual-Use Risks: Coercive Manipulation and Dark Patterns}{50}{subsection.6.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.4}Environmental Impact and Life Cycle Sustainability}{50}{section.6.4}\protected@file@percent }
+\newlabel{sec:sustainability}{{6.4}{50}{Environmental Impact and Life Cycle Sustainability}{section.6.4}{}}
+\newlabel{sec:sustainability@cref}{{[section][4][6]6.4}{[1][50][]50}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4.1}Transparent Computational Energy and Carbon Accounting}{50}{subsection.6.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces Estimated computational energy consumption and greenhouse gas emissions}}{50}{table.caption.46}\protected@file@percent }
+\newlabel{tab:carbon-footprint}{{6.2}{50}{Estimated computational energy consumption and greenhouse gas emissions}{table.caption.46}{}}
+\newlabel{tab:carbon-footprint@cref}{{[table][2][6]6.2}{[1][50][]50}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.5}Ethics}{50}{section.6.5}\protected@file@percent }
+\newlabel{sec:ethics}{{6.5}{50}{Ethics}{section.6.5}{}}
+\newlabel{sec:ethics@cref}{{[section][5][6]6.5}{[1][50][]50}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.1}Equity and Inclusivity}{50}{subsection.6.5.1}\protected@file@percent }
+\newlabel{sec:equity}{{6.5.1}{50}{Equity and Inclusivity}{subsection.6.5.1}{}}
+\newlabel{sec:equity@cref}{{[subsection][1][6,5]6.5.1}{[1][50][]50}}
 \citation{acmcode}
 \citation{ieeecode}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.2}Accountability and Personal Responsibility}{48}{subsection.6.5.2}\protected@file@percent }
-\newlabel{sec:accountability}{{6.5.2}{48}{Accountability and Personal Responsibility}{subsection.6.5.2}{}}
-\newlabel{sec:accountability@cref}{{[subsection][2][6,5]6.5.2}{[1][48][]48}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.3}Proper Use of Intellectual Property}{48}{subsection.6.5.3}\protected@file@percent }
-\newlabel{sec:ip}{{6.5.3}{48}{Proper Use of Intellectual Property}{subsection.6.5.3}{}}
-\newlabel{sec:ip@cref}{{[subsection][3][6,5]6.5.3}{[1][48][]48}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.4}Professionalism and Ethical Codes}{48}{subsection.6.5.4}\protected@file@percent }
-\newlabel{sec:codes}{{6.5.4}{48}{Professionalism and Ethical Codes}{subsection.6.5.4}{}}
-\newlabel{sec:codes@cref}{{[subsection][4][6,5]6.5.4}{[1][48][]48}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {7}Conclusion}{49}{chapter.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.2}Accountability and Personal Responsibility}{51}{subsection.6.5.2}\protected@file@percent }
+\newlabel{sec:accountability}{{6.5.2}{51}{Accountability and Personal Responsibility}{subsection.6.5.2}{}}
+\newlabel{sec:accountability@cref}{{[subsection][2][6,5]6.5.2}{[1][51][]51}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.3}Proper Use of Intellectual Property}{51}{subsection.6.5.3}\protected@file@percent }
+\newlabel{sec:ip}{{6.5.3}{51}{Proper Use of Intellectual Property}{subsection.6.5.3}{}}
+\newlabel{sec:ip@cref}{{[subsection][3][6,5]6.5.3}{[1][51][]51}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5.4}Professionalism and Ethical Codes}{51}{subsection.6.5.4}\protected@file@percent }
+\newlabel{sec:codes}{{6.5.4}{51}{Professionalism and Ethical Codes}{subsection.6.5.4}{}}
+\newlabel{sec:codes@cref}{{[subsection][4][6,5]6.5.4}{[1][51][]51}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Conclusion}{52}{chapter.7}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:conclusion}{{7}{49}{Conclusion}{chapter.7}{}}
-\newlabel{ch:conclusion@cref}{{[chapter][7][]7}{[1][49][]49}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.1}Conclusion and Future Work}{49}{section.7.1}\protected@file@percent }
-\newlabel{sec:conclusion}{{7.1}{49}{Conclusion and Future Work}{section.7.1}{}}
-\newlabel{sec:conclusion@cref}{{[section][1][7]7.1}{[1][49][]49}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.1}Summary of Achievements Against Objectives}{49}{subsection.7.1.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {7.1}{\ignorespaces Objective-by-objective verification of project outcomes}}{49}{table.caption.43}\protected@file@percent }
-\newlabel{tab:objective-verification}{{7.1}{49}{Objective-by-objective verification of project outcomes}{table.caption.43}{}}
-\newlabel{tab:objective-verification@cref}{{[table][1][7]7.1}{[1][49][]49}}
+\newlabel{ch:conclusion}{{7}{52}{Conclusion}{chapter.7}{}}
+\newlabel{ch:conclusion@cref}{{[chapter][7][]7}{[1][52][]52}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.1}Conclusion and Future Work}{52}{section.7.1}\protected@file@percent }
+\newlabel{sec:conclusion}{{7.1}{52}{Conclusion and Future Work}{section.7.1}{}}
+\newlabel{sec:conclusion@cref}{{[section][1][7]7.1}{[1][52][]52}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.1}Summary of Achievements Against Objectives}{52}{subsection.7.1.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7.1}{\ignorespaces Objective-by-objective verification of project outcomes}}{52}{table.caption.47}\protected@file@percent }
+\newlabel{tab:objective-verification}{{7.1}{52}{Objective-by-objective verification of project outcomes}{table.caption.47}{}}
+\newlabel{tab:objective-verification@cref}{{[table][1][7]7.1}{[1][52][]52}}
 \citation{li2020hitrans}
 \citation{majumder2019dialoguernn}
 \citation{cui2019class}
 \citation{benbaruch2021asymmetric}
 \citation{khosla2020supervised}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.2}Documented Limitations}{50}{subsection.7.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.3}Focused Future Work}{50}{subsection.7.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7.2}Continuous Engagement and Self-directed Learning}{50}{section.7.2}\protected@file@percent }
-\newlabel{sec:lessons}{{7.2}{50}{Continuous Engagement and Self-directed Learning}{section.7.2}{}}
-\newlabel{sec:lessons@cref}{{[section][2][7]7.2}{[1][50][]50}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.2}Documented Limitations}{53}{subsection.7.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.3}Focused Future Work}{53}{subsection.7.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.2}Continuous Engagement and Self-directed Learning}{53}{section.7.2}\protected@file@percent }
+\newlabel{sec:lessons}{{7.2}{53}{Continuous Engagement and Self-directed Learning}{section.7.2}{}}
+\newlabel{sec:lessons@cref}{{[section][2][7]7.2}{[1][53][]53}}
 \citation{wolpert1992stacked}
 \citation{platt1999probabilistic}
 \bibstyle{IEEEtran}
@@ -582,47 +591,47 @@
 \bibcite{lacoste2019quantifying}{43}
 \bibcite{loshchilov2019adamw}{44}
 \citation{loshchilov2019adamw}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}Hyperparameters and Optimization Specifications}{55}{appendix.A}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Hyperparameters and Optimization Specifications}{58}{appendix.A}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{app:hyperparameters}{{A}{55}{Hyperparameters and Optimization Specifications}{appendix.A}{}}
-\newlabel{app:hyperparameters@cref}{{[appendix][1][2147483647]A}{[1][55][]55}}
-\@writefile{lot}{\contentsline {table}{\numberline {A.1}{\ignorespaces Training and optimization hyperparameters across model families}}{55}{table.caption.45}\protected@file@percent }
-\newlabel{tab:app-hyperparams}{{A.1}{55}{Training and optimization hyperparameters across model families}{table.caption.45}{}}
-\newlabel{tab:app-hyperparams@cref}{{[table][1][2147483647,1]A.1}{[1][55][]55}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {B}Repository Map and Notebook Lineage}{56}{appendix.B}\protected@file@percent }
+\newlabel{app:hyperparameters}{{A}{58}{Hyperparameters and Optimization Specifications}{appendix.A}{}}
+\newlabel{app:hyperparameters@cref}{{[appendix][1][2147483647]A}{[1][58][]58}}
+\@writefile{lot}{\contentsline {table}{\numberline {A.1}{\ignorespaces Training and optimization hyperparameters across model families}}{58}{table.caption.49}\protected@file@percent }
+\newlabel{tab:app-hyperparams}{{A.1}{58}{Training and optimization hyperparameters across model families}{table.caption.49}{}}
+\newlabel{tab:app-hyperparams@cref}{{[table][1][2147483647,1]A.1}{[1][58][]58}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {B}Repository Map and Notebook Lineage}{59}{appendix.B}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{app:repository-map}{{B}{56}{Repository Map and Notebook Lineage}{appendix.B}{}}
-\newlabel{app:repository-map@cref}{{[appendix][2][2147483647]B}{[1][56][]56}}
-\@writefile{lot}{\contentsline {table}{\numberline {B.1}{\ignorespaces Primary project artifacts, notebooks, and source code mapping}}{56}{table.caption.46}\protected@file@percent }
-\newlabel{tab:app-repo-map}{{B.1}{56}{Primary project artifacts, notebooks, and source code mapping}{table.caption.46}{}}
-\newlabel{tab:app-repo-map@cref}{{[table][1][2147483647,2]B.1}{[1][56][]56}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {C}Data Contracts and Schemas}{57}{appendix.C}\protected@file@percent }
+\newlabel{app:repository-map}{{B}{59}{Repository Map and Notebook Lineage}{appendix.B}{}}
+\newlabel{app:repository-map@cref}{{[appendix][2][2147483647]B}{[1][59][]59}}
+\@writefile{lot}{\contentsline {table}{\numberline {B.1}{\ignorespaces Primary project artifacts, notebooks, and source code mapping}}{59}{table.caption.50}\protected@file@percent }
+\newlabel{tab:app-repo-map}{{B.1}{59}{Primary project artifacts, notebooks, and source code mapping}{table.caption.50}{}}
+\newlabel{tab:app-repo-map@cref}{{[table][1][2147483647,2]B.1}{[1][59][]59}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {C}Data Contracts and Schemas}{60}{appendix.C}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{app:schemas}{{C}{57}{Data Contracts and Schemas}{appendix.C}{}}
-\newlabel{app:schemas@cref}{{[appendix][3][2147483647]C}{[1][57][]57}}
+\newlabel{app:schemas}{{C}{60}{Data Contracts and Schemas}{appendix.C}{}}
+\newlabel{app:schemas@cref}{{[appendix][3][2147483647]C}{[1][60][]60}}
 \citation{li2020hitrans}
-\@writefile{toc}{\contentsline {chapter}{\numberline {D}Conflict Register and Empirical Audit Log}{58}{appendix.D}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {D}Conflict Register and Empirical Audit Log}{61}{appendix.D}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{app:conflicts}{{D}{58}{Conflict Register and Empirical Audit Log}{appendix.D}{}}
-\newlabel{app:conflicts@cref}{{[appendix][4][2147483647]D}{[1][58][]58}}
-\@writefile{lot}{\contentsline {table}{\numberline {D.1}{\ignorespaces Project conflict register, discrepancies, and resolutions}}{59}{table.caption.47}\protected@file@percent }
-\newlabel{tab:app-conflicts}{{D.1}{59}{Project conflict register, discrepancies, and resolutions}{table.caption.47}{}}
-\newlabel{tab:app-conflicts@cref}{{[table][1][2147483647,4]D.1}{[1][58][]59}}
+\newlabel{app:conflicts}{{D}{61}{Conflict Register and Empirical Audit Log}{appendix.D}{}}
+\newlabel{app:conflicts@cref}{{[appendix][4][2147483647]D}{[1][61][]61}}
+\@writefile{lot}{\contentsline {table}{\numberline {D.1}{\ignorespaces Project conflict register, discrepancies, and resolutions}}{62}{table.caption.51}\protected@file@percent }
+\newlabel{tab:app-conflicts}{{D.1}{62}{Project conflict register, discrepancies, and resolutions}{table.caption.51}{}}
+\newlabel{tab:app-conflicts@cref}{{[table][1][2147483647,4]D.1}{[1][61][]62}}
 \gdef \LT@i {\LT@entry 
     {4}{174.74953pt}\LT@entry 
     {4}{132.96999pt}\LT@entry 
     {1}{66.22998pt}\LT@entry 
     {1}{77.16pt}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {E}Complete 41-Strategy Empirical Prevalence Table}{60}{appendix.E}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {E}Complete 41-Strategy Empirical Prevalence Table}{63}{appendix.E}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{app:strategy-prevalence}{{E}{60}{Complete 41-Strategy Empirical Prevalence Table}{appendix.E}{}}
-\newlabel{app:strategy-prevalence@cref}{{[appendix][5][2147483647]E}{[1][60][]60}}
-\@writefile{lot}{\contentsline {table}{\numberline {E.1}{\ignorespaces Data-verified prevalence of all 41 persuasion strategies ($10{,}600$ turns)}}{60}{table.E.1}\protected@file@percent }
-\newlabel{tab:app-full-strategy-prevalence}{{E.1}{60}{Data-verified prevalence of all 41 persuasion strategies ($10{,}600$ turns)}{table.E.1}{}}
-\newlabel{tab:app-full-strategy-prevalence@cref}{{[table][1][2147483647,5]E.1}{[1][60][]60}}
-\gdef \@abspage@last{71}
+\newlabel{app:strategy-prevalence}{{E}{63}{Complete 41-Strategy Empirical Prevalence Table}{appendix.E}{}}
+\newlabel{app:strategy-prevalence@cref}{{[appendix][5][2147483647]E}{[1][63][]63}}
+\@writefile{lot}{\contentsline {table}{\numberline {E.1}{\ignorespaces Data-verified prevalence of all 41 persuasion strategies ($10{,}600$ turns)}}{63}{table.E.1}\protected@file@percent }
+\newlabel{tab:app-full-strategy-prevalence}{{E.1}{63}{Data-verified prevalence of all 41 persuasion strategies ($10{,}600$ turns)}{table.E.1}{}}
+\newlabel{tab:app-full-strategy-prevalence@cref}{{[table][1][2147483647,5]E.1}{[1][63][]63}}
+\gdef \@abspage@last{74}

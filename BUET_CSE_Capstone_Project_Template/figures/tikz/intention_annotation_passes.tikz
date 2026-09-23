@@ -1,91 +1,125 @@
 % Three-pass engineering of the donation-intent labels (1,017 dialogues).
-% Bar lengths are proportional: 4.6 cm = 1,017 dialogues.
-\begin{tikzpicture}[x=1cm,y=1cm]
+% One row per pass. Left: what the pass is. Middle: label distribution, every bar on the
+% same scale (7.4 cm = 1,017 dialogues) and aligned at zero, so the 81 hedged dialogues
+% (deferred 68 + conditional 13) sit in the same slot in every row. Right: where the
+% labels are used. Dotted guides mark the 657 and 738 boundaries through all rows.
+% Width is about 16.4 cm; wrap in \resizebox{\textwidth}{!}{...} if the text block is narrower.
+\begin{tikzpicture}[x=1cm,y=1cm,
+  passcard/.style={blk, draw=#1, fill=white, line width=1.0pt, text width=3.55cm,
+                   align=left, anchor=north west, inner xsep=5pt, inner ysep=4pt},
+  bench/.style={blk, draw=TrjBord, fill=TrjFill, text width=3.75cm, anchor=north west,
+                font=\scriptsize\bfseries, minimum height=0.55cm},
+  side/.style={font=\scriptsize, text=SlateSoft, text width=3.85cm, align=left, anchor=north west},
+  blab/.style={font=\scriptsize\bfseries, text=white},
+  barcap/.style={font=\scriptsize\itshape, text=SlateSoft, anchor=south west, inner sep=1pt, fill=white},
+  lead/.style={line width=0.5pt},
+]
+\definecolor{PassA}{HTML}{94A3B8}\definecolor{PassB}{HTML}{64748B}\definecolor{PassC}{HTML}{334155}
 
-% ---------------- frames and headers ------------------------------------------------
-\foreach \x/\c/\t in {0/94A3B8/{First pass: manual dual-field labels}, 5.5/64748B/{Second pass: plain binary}, 11/334155/{Third pass: strict commitment}}{
-  \definecolor{stg}{HTML}{\c}
-  \draw[rounded corners=5pt, draw=stg, fill=white, line width=0.9pt] (\x,0.05) rectangle ++(5,-9.65);
-  \fill[stg, rounded corners=5pt] (\x,0.05) rectangle ++(5,-0.75);
-  \fill[stg] (\x,-0.4) rectangle ++(5,-0.3);
-  \node[text=white, font=\footnotesize\bfseries] at (\x+2.5,-0.33) {\t};
-}
-\foreach \x in {5,10.5}{ \draw[flow, line width=1.3pt] (\x-0.02,-0.35) -- ++(0.54,0); }
+% ======================= column headings ============================================
+\node[font=\footnotesize\bfseries, text=Slate, anchor=west] at (0,0.35) {Annotation pass};
+\node[font=\footnotesize\bfseries, text=Slate, anchor=west] at (4.45,0.35) {Donation-intent labels, 1{,}017 dialogues};
+\node[font=\footnotesize\bfseries, text=Slate, anchor=west] at (12.3,0.35) {Used for};
 
-% ---------------- body text ---------------------------------------------------------------
-\node[anchor=north west, text width=4.7cm, font=\scriptsize, align=left] at (0.15,-0.95)
-  {$\bullet$ pilot of 200 dialogues split five ways, 50 each, with an annotator column for a drift check\\
-   $\bullet$ then about 200 dialogues per member, pooled to 1{,}017\\
-   $\bullet$ fields: \texttt{binary\_label} and \texttt{modifier} (none, deferred, conditional)\\
-   $\bullet$ motivation: the corpus donation fields disagree with the transcript};
-\node[anchor=north west, text width=4.7cm, font=\scriptsize, align=left] at (5.65,-0.95)
-  {$\bullet$ supervisor directive: drop the modifier and focus on the binary decision\\
-   $\bullet$ the rarest modifier class had 9 training and 3 test examples\\
-   $\bullet$ \texttt{binary\_label} is left exactly as annotated\\
-   $\bullet$ basis of Decoupled Baseline and Antiphony initial evaluations};
-\node[anchor=north west, text width=4.7cm, font=\scriptsize, align=left] at (11.15,-0.95)
-  {$\bullet$ any hesitation, condition, or deferral now counts as \emph{no}\\
-   $\bullet$ ``I'll donate \$1 now, and I might give more later'' becomes \emph{no}\\
-   $\bullet$ built in two steps, shown below\\
-   $\bullet$ basis of terminal benchmarking for Decoupled and Antiphony models};
+% ======================= left column: the three passes ==============================
+\node[passcard=PassA] (p1) at (0,-0.1)
+  {\textbf{\color{PassB}Pass 1}\enspace\textbf{Manual, two fields}\\[2pt]
+   \scriptsize pilot of 200 dialogues, 50 per annotator, drift check\\
+   then about 200 per member, pooled to 1{,}017\\
+   fields: \texttt{binary\_label} and \texttt{modifier}\\
+   why: the corpus donation fields contradict the transcripts};
+\node[passcard=PassB] (p2) at (0,-3.55)
+  {\textbf{\color{PassB}Pass 2}\enspace\textbf{Plain binary}\\[2pt]
+   \scriptsize \texttt{binary\_label} kept exactly as annotated\\
+   \texttt{modifier} dropped as a target, on the supervisor's direction};
+\node[passcard=PassC] (p3) at (0,-6.0)
+  {\textbf{\color{PassC}Pass 3}\enspace\textbf{Strict commitment}\\[2pt]
+   \scriptsize \emph{yes} only for a clear, unconditional commitment\\
+   any hesitation, condition or deferral counts as \emph{no}\\[2pt]
+   \emph{``I'll donate \$1 now, and I might give more later''} is now \emph{no}};
+\draw[flow, line width=1.2pt, draw=PassB] (p1.south -| 0.5,0) -- (p2.north -| 0.5,0);
+\draw[flow, line width=1.2pt, draw=PassC] (p2.south -| 0.5,0) -- (p3.north -| 0.5,0);
 
-% ---------------- bars: first pass ------------------------------------------------------------
-\begin{scope}[shift={(0.2,0)}]
-  \node[font=\tiny, anchor=west, text=SlateSoft] at (0,-3.65) {commitment label};
-  \fill[TrjMain] (0,-3.8) rectangle (3.338,-4.2); \fill[AmbMain] (3.338,-3.8) rectangle (4.6,-4.2);
-  \node[font=\scriptsize\bfseries, text=white] at (1.67,-4.0) {yes 738 (72.6\%)};
-  \node[font=\scriptsize\bfseries, text=white] at (3.97,-4.0) {no 279};
-  \node[font=\tiny, anchor=west, text=SlateSoft] at (0,-4.5) {modifier among the yes dialogues};
-  \fill[TrjMain!55] (0,-4.65) rectangle (2.972,-5.0);
-  \fill[XatMain] (2.972,-4.65) rectangle (3.28,-5.0);
-  \fill[PerMain] (3.28,-4.65) rectangle (3.339,-5.0);
-  \node[font=\scriptsize, text=white] at (1.49,-4.83) {none 657};
-  \node[font=\tiny, anchor=north east, text=XatBord] at (3.45,-5.05) {deferred 68};
-  \node[font=\tiny, anchor=north west, text=PerBord] at (3.52,-5.05) {conditional 13};
-  \draw[XatMain, line width=0.5pt] (3.126,-5.0) -- (3.126,-5.06); \draw[PerMain, line width=0.5pt] (3.31,-5.0) -- (3.45,-5.06);
+% ======================= middle column: proportional bars ===========================
+% inside this scope one x unit is one dialogue
+\begin{scope}[shift={(4.45,0)}, x=0.0072763cm]
+  % boundary guides at 657 (yes with modifier none) and 738 (all yes in pass 1)
+  \foreach \n in {657,738}{
+    \draw[SlateSoft!55, line width=0.5pt, dash pattern=on 1pt off 1.5pt] (\n,-0.15) -- (\n,-8.3);
+    \node[font=\tiny, text=SlateSoft, anchor=south] at (\n,-0.15) {\n};
+  }
+  \node[font=\tiny, text=SlateSoft, anchor=south] at (0,-0.15) {0};
+  \node[font=\tiny, text=SlateSoft, anchor=south] at (1017,-0.15) {1{,}017};
+
+  % ---------- pass 1: commitment label + modifier breakdown ----------
+  \node[barcap] at (0,-0.55) {commitment label};
+  \fill[TrjMain] (0,-0.55) rectangle (738,-0.97);
+  \fill[AmbMain] (738,-0.55) rectangle (1017,-0.97);
+  \node[blab] at (369,-0.76) {yes 738 (72.6\%)};
+  \node[blab] at (877.5,-0.76) {no 279};
+
+  \node[barcap] at (0,-1.4) {modifier, among the \emph{yes} dialogues};
+  \fill[TrjMain!45] (0,-1.4) rectangle (657,-1.72);
+  \fill[XatMain] (657,-1.4) rectangle (725,-1.72);
+  \fill[PerMain] (725,-1.4) rectangle (738,-1.72);
+  \node[font=\scriptsize, text=Slate] at (328.5,-1.56) {none 657};
+  \draw[lead, XatMain] (691,-1.72) -- (691,-1.9) -- (600,-1.9) node[left, font=\tiny, text=XatBord, inner sep=1pt] {deferred 68};
+  \draw[lead, PerMain] (731.5,-1.72) -- (731.5,-1.9) -- (800,-1.9) node[right, font=\tiny, text=PerBord, inner sep=1pt] {conditional 13};
+  \draw[decorate, decoration={brace, amplitude=3pt, mirror}, line width=0.6pt, draw=Slate]
+    (657,-2.08) -- (738,-2.08) node[midway, below=2pt, font=\tiny\bfseries, text=Slate] {81 hedged};
+
+  % ---------- pass 1 -> pass 2 ----------
+  \node[nt, anchor=west, align=left, fill=white, inner sep=1pt] at (0,-2.85)
+    {why drop it: the modifier head stayed near 0.45 F1, and its rarest class\\ had only 9 training and 3 test examples};
+
+  % ---------- pass 2: binary label unchanged, modifier dropped ----------
+  \node[barcap] at (0,-3.95) {commitment label (unchanged)};
+  \fill[TrjMain] (0,-3.95) rectangle (738,-4.37);
+  \fill[AmbMain] (738,-3.95) rectangle (1017,-4.37);
+  \node[blab] at (369,-4.16) {yes 738 (72.6\%)};
+  \node[blab] at (877.5,-4.16) {no 279};
+  \node[barcap] at (0,-4.8) {modifier};
+  \draw[SlateSoft!60, line width=0.6pt, dash pattern=on 2pt off 1.5pt, fill=NeuFill] (0,-4.8) rectangle (738,-5.12);
+  \node[font=\scriptsize\itshape, text=SlateSoft] at (369,-4.96) {no longer a training target};
+
+  % ---------- pass 3, step 1: deterministic remap ----------
+  \node[barcap] at (0,-6.3) {step 1, deterministic remap: \emph{yes} + \emph{none} stays \emph{yes}, all else becomes \emph{no}};
+  \fill[TrjMain] (0,-6.3) rectangle (657,-6.72);
+  \fill[AmbMain!50] (657,-6.3) rectangle (738,-6.72);
+  \draw[AmbBord, line width=0.7pt, dash pattern=on 2pt off 1pt] (657,-6.3) rectangle (738,-6.72);
+  \fill[AmbMain] (738,-6.3) rectangle (1017,-6.72);
+  \node[blab] at (328.5,-6.51) {yes 657};
+  \node[blab] at (877.5,-6.51) {no 360};
+  \node[font=\tiny\bfseries, text=AmbBord, anchor=north] at (697.5,-6.74) {81 moved to \emph{no}};
+
+  % ---------- pass 3, step 2: manual re-audit of the 81 ----------
+  \node[barcap] at (0,-7.75)
+    {step 2, manual re-audit of the 81, judged by the Persuadee's last position};
+  \fill[TrjMain] (0,-7.75) rectangle (657,-8.17);
+  \fill[TrjMain!50] (657,-7.75) rectangle (694,-8.17);
+  \draw[TrjBord, line width=0.7pt, dash pattern=on 2pt off 1pt] (657,-7.75) rectangle (694,-8.17);
+  \fill[AmbMain!50] (694,-7.75) rectangle (738,-8.17);
+  \draw[AmbBord, line width=0.7pt, dash pattern=on 2pt off 1pt] (694,-7.75) rectangle (738,-8.17);
+  \fill[AmbMain] (738,-7.75) rectangle (1017,-8.17);
+  \node[blab] at (328.5,-7.96) {yes 694 (68.2\%)};
+  \node[blab] at (877.5,-7.96) {no 323};
+  \draw[lead, TrjBord] (675.5,-8.17) -- (675.5,-8.45) -- (600,-8.45) node[left, font=\tiny\bfseries, text=TrjBord, inner sep=1pt] {37 revert to \emph{yes}};
+  \draw[lead, AmbBord] (716,-8.17) -- (716,-8.45) -- (800,-8.45) node[right, font=\tiny\bfseries, text=AmbBord, inner sep=1pt] {44 confirmed \emph{no}};
 \end{scope}
 
-% ---------------- bars: second pass -----------------------------------------------------------
-\begin{scope}[shift={(5.7,0)}]
-  \node[font=\tiny, anchor=west, text=SlateSoft] at (0,-3.65) {commitment label};
-  \fill[TrjMain] (0,-3.8) rectangle (3.338,-4.2); \fill[AmbMain] (3.338,-3.8) rectangle (4.6,-4.2);
-  \node[font=\scriptsize\bfseries, text=white] at (1.67,-4.0) {yes 738 (72.6\%)};
-  \node[font=\scriptsize\bfseries, text=white] at (3.97,-4.0) {no 279};
-  \node[font=\tiny, anchor=west, text=SlateSoft] at (0,-4.5) {modifier target (deprecated)};
-  \draw[SlateSoft!60, line width=0.6pt, dashed, fill=black!3] (0,-4.65) rectangle (3.338,-5.0);
-  \draw[red!80!black, line width=0.7pt] (0,-4.65) -- (3.338,-5.0);
-  \draw[red!80!black, line width=0.7pt] (0,-5.0) -- (3.338,-4.65);
-  \node[font=\tiny\bfseries, text=red!80!black, fill=white, inner sep=1.2pt] at (1.67,-4.825) {DEPRECATED HEAD};
-\end{scope}
+% ======================= right column: where each pass is used ======================
+\node[bench] (u1) at (12.3,-0.1) {First-Pass Benchmark};
+\node[side, below=4pt of u1.south west, anchor=north west] {\textbf{Dual-head models.} Reliability check: a blind second labelling of 154 dialogues agreed on 142 (92.2\%); the 12 disagreements were written back into the guideline.};
 
-% ---------------- bars: third pass ------------------------------------------------------------
-\begin{scope}[shift={(11.2,0)}]
-  \node[font=\tiny, anchor=west, text=SlateSoft] at (0,-3.65) {after step 1 (deterministic remap)};
-  \fill[TrjMain] (0,-3.8) rectangle (2.972,-4.2); \fill[AmbMain] (2.972,-3.8) rectangle (4.6,-4.2);
-  \node[font=\scriptsize\bfseries, text=white] at (1.49,-4.0) {yes 657};
-  \node[font=\scriptsize\bfseries, text=white] at (3.79,-4.0) {no 360};
-  \node[font=\tiny, anchor=west, text=SlateSoft] at (0,-4.5) {final (after step 2, manual re-audit)};
-  \fill[TrjMain] (0,-4.65) rectangle (3.139,-5.05); \fill[AmbMain] (3.139,-4.65) rectangle (4.6,-5.05);
-  \node[font=\scriptsize\bfseries, text=white] at (1.57,-4.85) {yes 694 (68.2\%)};
-  \node[font=\scriptsize\bfseries, text=white] at (3.87,-4.85) {no 323};
-\end{scope}
+\node[bench] (u2) at (12.3,-3.55) {Second-Pass Benchmark};
+\node[side, below=4pt of u2.south west, anchor=north west] {\textbf{Decoupled models.} Without modifier gradients, the shared representation no longer trades binary accuracy against a data-starved head.};
 
-% ---------------- third pass, the two steps --------------------------------------------------
-\node[amb, fill=white, text width=4.5cm, minimum height=1.25cm, anchor=north west] (s1) at (11.15,-5.45)
-  {\textbf{Step 1}\\[-1pt]\scriptsize \emph{yes} with modifier \emph{none} stays \emph{yes}; everything else becomes \emph{no}. 81 dialogues move from yes to no.};
-\node[amb, fill=white, text width=4.5cm, minimum height=1.6cm, anchor=north west] (s2) at (11.15,-7.05)
-  {\textbf{Step 2}\\[-1pt]\scriptsize all 81 are read in full and judged by the Persuadee's last position: 44 are confirmed \emph{no}, 37 had resolved their hedge and revert to \emph{yes}.};
-\draw[flow] (s1.south) -- (s2.north);
+\node[bench] (u3) at (12.3,-6.0) {Third-Pass Strict Benchmark};
+\node[side, below=4pt of u3.south west, anchor=north west] {\textbf{Final labels.} Used for the terminal v13-Solo and v14-Antiphony reruns.};
 
-% ---------------- what the earlier passes leave open ---------------------------------------
-\node[anchor=north west, text width=4.7cm, font=\scriptsize, align=left] at (0.15,-5.75)
-  {\textbf{Reliability check.} An independent second pass over 154 dialogues of the lead partition, made without sight of the first labels, agreed on 142 of them (92.21\%). The 12 disagreements clustered around four boundary cases and were written back into the guideline.};
-\node[anchor=north west, text width=4.7cm, font=\scriptsize, align=left] at (5.65,-5.75)
-  {\textbf{Why this version exists.} With modifier gradients removed, the shared representation no longer trades binary accuracy against a data-starved head; every binary result in the Second-Pass Benchmark comes from these labels.};
-
-% ---------------- where each pass is used -------------------------------------------------------
-\foreach \x/\t in {0.2/{First-Pass Benchmark (Dual-Head)}, 5.7/{Second-Pass Benchmark (Decoupled)}, 11.2/{Third-Pass Strict Benchmark}}{
-  \node[trj, fill=TrjFill, text width=4.5cm, minimum height=0.6cm, anchor=north west] at (\x,-8.85) {\scriptsize\bfseries \t};
+% ======================= row separators =============================================
+\foreach \y in {-3.2,-5.65}{
+  \draw[NeuBord!35, line width=0.5pt] (0,\y) -- (16.35,\y);
 }
 
 \end{tikzpicture}

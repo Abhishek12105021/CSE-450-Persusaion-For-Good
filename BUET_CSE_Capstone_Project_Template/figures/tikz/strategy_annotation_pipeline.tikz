@@ -1,64 +1,100 @@
 % Multi-label strategy annotation pipeline: 10,600 Persuader turns, 41 strategies, 11 categories.
-\begin{tikzpicture}[x=1cm,y=1cm]
+% Layout: data preparation runs down the left column, then the labelling run flows
+% left to right along the bottom row. The supporting groups sit directly above the
+% step they act on: decision tests -> prompt, human checkpoints -> labelling and
+% validation, merged corpus -> resulting corpus.
+% Boxes are stacked with relative positioning and every group backdrop is computed
+% with `fit`, so boxes cannot overlap or extend past their group.
+% Width is about 16.4 cm; wrap in \resizebox{\textwidth}{!}{...} if the text block is narrower.
+\begin{tikzpicture}[x=1cm,y=1cm, node distance=0.32cm,
+  gttl/.style={font=\footnotesize\bfseries, anchor=north, inner sep=2pt},
+  band/.style={rounded corners=6pt, line width=0.7pt, inner sep=0.17cm},
+  card/.style={blk, fill=white, text width=2.4cm},
+  prep/.style={neu, text width=2.4cm},
+  stp/.style={text width=2.45cm, minimum height=1.9cm},
+  mainflow/.style={flow, line width=1.1pt},
+]
 
-% ---------------- lower groups (backdrops first) ----------------------------------
-\draw[rounded corners=6pt, draw=XatBord!70, fill=XatFill!40, line width=0.7pt] (0,-4.85) rectangle (3.95,-10.35);
-\draw[rounded corners=6pt, draw=AmbBord!70, fill=AmbFill!45, line width=0.7pt] (4.2,-4.85) rectangle (11.8,-8.2);
-\draw[rounded corners=6pt, draw=NeuBord!70, fill=NeuFill!60, line width=0.7pt] (12.05,-4.85) rectangle (16,-8.2);
-\node[ttl, text=XatBord] at (1.98,-5.15) {Four decision tests};
-\node[ttl, text=AmbBord] at (8.0,-5.15) {Human evaluation checkpoints};
-\node[ttl] at (14.03,-5.15) {Resulting corpus};
+% column centres: 5 columns, 2.9 cm wide, 0.475 cm gutters
+\def\cA{1.45}\def\cB{4.825}\def\cC{8.2}\def\cD{11.575}\def\cE{14.95}
+\coordinate (xA) at (\cA,0); \coordinate (xC) at (\cC,0);
+\coordinate (xD) at (\cD,0); \coordinate (xE) at (\cE,0);
 
-% ---------------- row A: data preparation ------------------------------------------
-\node[neu, text width=3.4cm, minimum height=1.5cm] (a1) at (1.8,-0.85)
+% ======================= column 1: data preparation (top to bottom) ================
+\node[gttl] (gA) at (\cA,0) {Data preparation};
+\node[prep, below=0.12cm of gA] (a1)
   {\textbf{Persuasion for Good}\\[1pt]\scriptsize 1{,}017 two-party dialogues};
-\node[neu, text width=3.4cm, minimum height=1.5cm] (a2) at (5.9,-0.85)
+\node[prep, below=0.42cm of a1] (a2)
   {\textbf{Persuader turn table}\\[1pt]\scriptsize 10{,}600 turns in canonical chronological order};
-\node[neu, text width=3.4cm, minimum height=1.5cm] (a3) at (10.0,-0.85)
+\node[prep, below=0.42cm of a2] (a3)
   {\textbf{Contiguous batches}\\[1pt]\scriptsize 200 turns each, unshuffled, dialogues kept together};
-\node[neu, text width=3.4cm, minimum height=1.5cm] (a4) at (14.1,-0.85)
-  {\textbf{Five-turn context window}\\[1pt]\scriptsize five preceding turns, alternating roles};
-\draw[flow] (a1) -- (a2); \draw[flow] (a2) -- (a3); \draw[flow] (a3) -- (a4);
 
-% ---------------- row B: labelling ---------------------------------------------------
-\node[xat, text width=3.4cm, minimum height=1.7cm] (b1) at (1.8,-3.45)
+% ======================= column 2: four decision tests ==============================
+\node[gttl, text=XatBord] (gB) at (\cB,0) {Four decision tests};
+\node[xat, card, below=0.12cm of gB] (t1)
+  {\textbf{1\enspace Removal test}\\[1pt]\scriptsize a label needs evidence that survives deleting the others};
+\node[xat, card, below=of t1] (t2)
+  {\textbf{2\enspace Specific over general}\\[1pt]\scriptsize the fine strategy replaces its parent concept};
+\node[xat, card, below=of t2] (t3)
+  {\textbf{3\enspace Function over keyword}\\[1pt]\scriptsize pragmatic role in context, not trigger words};
+\node[xat, card, below=of t3] (t4)
+  {\textbf{4\enspace Density cap}\\[1pt]\scriptsize one to three labels typical, empty set allowed, six at most};
+
+% ======================= columns 3-4: human evaluation checkpoints ==================
+\coordinate (mCD) at ($(\cC,0)!0.5!(\cD,0)$);
+\node[gttl, text=AmbBord] (gC) at (mCD) {Human evaluation checkpoints};
+\node[amb, card, anchor=north] (h1) at ($(\cC,0)+(0,-0.62)$)
+  {\textbf{Smoke test}\\[1pt]\scriptsize the first batch of 200 is labelled alone; the team checks every label and signs off before the run continues};
+\node[amb, card, anchor=north] (h2) at ($(\cD,0)+(0,-0.62)$)
+  {\textbf{Spot checks}\\[1pt]\scriptsize sampled slices of later batches are audited for drift, especially rare strategies and turns with four or more labels};
+\node[nt, text width=2.55cm, anchor=north] (note) at ($(mCD |- h2.south)+(0,-0.3)$)
+  {labelled by a frontier LLM agent under these checkpoints; no turn was labelled twice};
+
+% ======================= column 5: resulting corpus =================================
+\node[gttl] (gE) at (\cE,0) {Resulting corpus};
+\node[neu, card, anchor=north] (st) at ($(\cE,0)+(0,-0.62)$)
+  {\scriptsize mean 1.68 labels per turn\\[2pt] 48.9\% multi-label turns\\[2pt] 6.7\% empty sets\\[2pt] all 41 strategies and all 11 categories occur};
+
+% ======================= top group backdrops (fitted) ===============================
+% Groups share a top edge and end at their own natural height.
+\begin{scope}[on background layer]
+  \node[band, draw=XatBord!70, fill=XatFill!40, fit=(gB)(t1)(t4)] (GB) {};
+  \node[band, draw=AmbBord!70, fill=AmbFill!45,
+        fit=(gC)(h1)(h2)(note)(GB.north -| h1.west)] (GC) {};
+  \node[band, draw=NeuBord!70, fill=NeuFill!60, fit=(gE)(st)] (GE) {};
+\end{scope}
+
+% ======================= main row: the labelling run ================================
+\node[xat, stp, anchor=north] (b1) at ($(GB.south)+(0,-0.75)$)
   {\textbf{Prompt assembly}\\[1pt]\scriptsize taxonomy of 11 + 41 labels, four decision tests, five gold few-shot examples};
-\node[amb, text width=3.4cm, minimum height=1.7cm] (b2) at (5.9,-3.45)
+\node[amb, stp] (b2) at (xC |- b1)
   {\textbf{LLM agent labels a batch}\\[1pt]\scriptsize JSON per turn: strategies, categories, n\_labels, flags, rationale};
-\node[trj, text width=3.4cm, minimum height=1.7cm] (b3) at (10.0,-3.45)
+\node[trj, stp] (b3) at (xD |- b1)
   {\textbf{Algorithmic validation}\\[1pt]\scriptsize closed-world taxonomy, category invariant, at most six labels};
-\node[fin, text width=3.4cm, minimum height=1.7cm] (b4) at (14.1,-3.45)
+\node[fin, stp] (b4) at (xE |- b1)
   {\textbf{Merged corpus}\\[1pt]\scriptsize JSONL, CSV, and a $10{,}600\times56$ binary matrix};
-\draw[flow, rounded corners=5pt] (a4.south) -- ++(0,-0.4) -| (b1.north);
-\draw[flow] (b1) -- (b2); \draw[flow] (b2) -- (b3); \draw[flow] (b3) -- (b4);
+\node[prep, minimum height=1.9cm] (a4) at (xA |- b1)
+  {\textbf{Five-turn context window}\\[1pt]\scriptsize five preceding turns, alternating roles};
 
-% ---------------- decision tests, stacked under the prompt -----------------------------
-\node[xat, fill=white, text width=3.3cm, minimum height=1.08cm] (t1) at (1.98,-6.0)
-  {\textbf{1  Removal test}\\[-1pt]\scriptsize a label needs evidence that survives deleting the others};
-\node[xat, fill=white, text width=3.3cm, minimum height=1.08cm] (t2) at (1.98,-7.2)
-  {\textbf{2  Specific over general}\\[-1pt]\scriptsize the fine strategy replaces its parent concept};
-\node[xat, fill=white, text width=3.3cm, minimum height=1.08cm] (t3) at (1.98,-8.4)
-  {\textbf{3  Function over keyword}\\[-1pt]\scriptsize pragmatic role in context, not trigger words};
-\node[xat, fill=white, text width=3.3cm, minimum height=1.08cm] (t4) at (1.98,-9.6)
-  {\textbf{4  Density cap}\\[-1pt]\scriptsize one to three labels typical, empty set allowed, six at most};
+\begin{scope}[on background layer]
+  \node[band, draw=NeuBord!70, fill=NeuFill!55, fit=(gA)(a1)(a2)(a3)(a4)] (GA) {};
+\end{scope}
+
+% ======================= arrows =====================================================
+% data preparation, top to bottom
+\draw[flow] (a1) -- (a2); \draw[flow] (a2) -- (a3); \draw[flow] (a3) -- (a4);
+% main labelling run, left to right
+\draw[mainflow] (a4) -- (b1);
+\draw[mainflow] (b1) -- (b2);
+\draw[mainflow] (b2) -- (b3);
+\draw[mainflow] (b3) -- (b4);
+% decision tests are written into the prompt
 \draw[flowX] (t1) -- (t2); \draw[flowX] (t2) -- (t3); \draw[flowX] (t3) -- (t4);
-\draw[flowX, dashed] (t1.north) -- (b1.south);
-
-% ---------------- human checkpoints, under labelling and validation -----------------------
-\node[amb, fill=white, text width=3.2cm, minimum height=2.3cm] (h1) at (5.9,-6.55)
-  {\textbf{Smoke test}\\[-1pt]\scriptsize the first batch of 200 is labelled alone; the team checks every label and signs off before the run continues};
-\node[amb, fill=white, text width=3.2cm, minimum height=2.3cm] (h2) at (10.0,-6.55)
-  {\textbf{Spot checks}\\[-1pt]\scriptsize sampled slices of later batches are audited for drift, especially rare strategies and turns with four or more labels};
-\draw[flow, dashed, draw=AmbBord] (h1.north) -- (b2.south);
-\draw[flow, dashed, draw=AmbBord] (h2.north) -- (b3.south);
-
-% ---------------- corpus statistics --------------------------------------------------------
-\node[neu, fill=white, text width=3.3cm, minimum height=2.3cm] (st) at (14.03,-6.55)
-  {\scriptsize mean $1.68$ labels per turn\\ $48.9\%$ multi-label turns\\ $6.7\%$ empty sets\\ all $41$ strategies and all $11$ categories occur};
-\draw[flow, dashed] (b4.south) -- (st.north);
-
-% ---------------- note under the checkpoint group ----------------------------------------
-\node[nt, text width=7.2cm, anchor=north] at (8.0,-8.35)
-  {Labelling was done by a frontier LLM agent under these checkpoints; no turn was labelled twice.};
+\draw[flowX, dsh] (t4.south) -- (b1.north);
+% human checkpoints act on labelling and validation
+\draw[flow, dsh, draw=AmbBord] (h1.south) -- (b2.north);
+\draw[flow, dsh, draw=AmbBord] (h2.south) -- (b3.north);
+% merged corpus summarised
+\draw[flow, dsh] (b4.north) -- (st.south);
 
 \end{tikzpicture}

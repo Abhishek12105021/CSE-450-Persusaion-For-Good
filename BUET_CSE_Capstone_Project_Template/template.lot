@@ -7,32 +7,32 @@
 \contentsline {table}{\numberline {3.1}{\ignorespaces Multi-criteria architectural decision matrix (scores: 1 = Poor, 5 = Excellent)}}{13}{table.caption.9}%
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {4.1}{\ignorespaces Modular subsystem decomposition and responsibilities}}{14}{table.caption.11}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Empirical prevalence of communicative categories across 10,600 Persuader turns}}{17}{table.caption.13}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Empirical prevalence of communicative categories across 10,600 Persuader turns}}{18}{table.caption.13}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Test set performance on First-Pass dataset (738 yes / 279 no, test $n=153$)}}{34}{table.caption.22}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Test set performance on Second-Pass dataset (738 yes / 279 no, test $n=153$)}}{35}{table.caption.23}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Detailed class-level test breakdown: Dual-Stream Antiphony on Second-Pass dataset}}{35}{table.caption.24}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Test set performance on Third-Pass dataset (694 yes / 323 no, test $n=153$)}}{36}{table.caption.25}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces Detailed class-level test breakdown: Dual-Stream Antiphony on Third-Pass dataset}}{36}{table.caption.26}%
-\contentsline {table}{\numberline {5.6}{\ignorespaces Head-to-head comparison: best encoder of Decoupled Baseline vs. Dual-Stream Antiphony}}{36}{table.caption.27}%
-\contentsline {table}{\numberline {5.7}{\ignorespaces Evolutionary progression of strategy and category modeling}}{37}{table.caption.28}%
-\contentsline {table}{\numberline {5.8}{\ignorespaces Comparison of operating points across multi-task ensemble configurations}}{37}{table.caption.29}%
-\contentsline {table}{\numberline {5.9}{\ignorespaces Cross-validated evaluation of ensemble decision combiners}}{38}{table.caption.30}%
-\contentsline {table}{\numberline {5.10}{\ignorespaces Monolithic transformer input ablation results}}{38}{table.caption.31}%
-\contentsline {table}{\numberline {5.11}{\ignorespaces Benchmark performance on augmented negotiation corpus ($N=700$, test $n=105$)}}{38}{table.caption.32}%
-\contentsline {table}{\numberline {5.12}{\ignorespaces Sufficiency gap expansion across canonical and adversarial corpora}}{39}{table.caption.33}%
-\contentsline {table}{\numberline {5.13}{\ignorespaces Verification matrix evaluating system compliance against requirements}}{42}{table.caption.39}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Test set performance on First-Pass dataset (738 yes / 279 no, test $n=153$)}}{37}{table.caption.26}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Test set performance on Second-Pass dataset (738 yes / 279 no, test $n=153$)}}{38}{table.caption.27}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Detailed class-level test breakdown: Dual-Stream Antiphony on Second-Pass dataset}}{38}{table.caption.28}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Test set performance on Third-Pass dataset (694 yes / 323 no, test $n=153$)}}{39}{table.caption.29}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Detailed class-level test breakdown: Dual-Stream Antiphony on Third-Pass dataset}}{39}{table.caption.30}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Head-to-head comparison: best encoder of Decoupled Baseline vs. Dual-Stream Antiphony}}{39}{table.caption.31}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Evolutionary progression of strategy and category modeling}}{40}{table.caption.32}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Comparison of operating points across multi-task ensemble configurations}}{40}{table.caption.33}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Cross-validated evaluation of ensemble decision combiners}}{41}{table.caption.34}%
+\contentsline {table}{\numberline {5.10}{\ignorespaces Monolithic transformer input ablation results}}{41}{table.caption.35}%
+\contentsline {table}{\numberline {5.11}{\ignorespaces Benchmark performance on augmented negotiation corpus ($N=700$, test $n=105$)}}{41}{table.caption.36}%
+\contentsline {table}{\numberline {5.12}{\ignorespaces Sufficiency gap expansion across canonical and adversarial corpora}}{42}{table.caption.37}%
+\contentsline {table}{\numberline {5.13}{\ignorespaces Verification matrix evaluating system compliance against requirements}}{45}{table.caption.43}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {6.1}{\ignorespaces Project risk management matrix, impact levels, and mitigations}}{44}{table.caption.41}%
-\contentsline {table}{\numberline {6.2}{\ignorespaces Estimated computational energy consumption and greenhouse gas emissions}}{47}{table.caption.42}%
+\contentsline {table}{\numberline {6.1}{\ignorespaces Project risk management matrix, impact levels, and mitigations}}{47}{table.caption.45}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces Estimated computational energy consumption and greenhouse gas emissions}}{50}{table.caption.46}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {7.1}{\ignorespaces Objective-by-objective verification of project outcomes}}{49}{table.caption.43}%
+\contentsline {table}{\numberline {7.1}{\ignorespaces Objective-by-objective verification of project outcomes}}{52}{table.caption.47}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces Training and optimization hyperparameters across model families}}{55}{table.caption.45}%
+\contentsline {table}{\numberline {A.1}{\ignorespaces Training and optimization hyperparameters across model families}}{58}{table.caption.49}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {B.1}{\ignorespaces Primary project artifacts, notebooks, and source code mapping}}{56}{table.caption.46}%
+\contentsline {table}{\numberline {B.1}{\ignorespaces Primary project artifacts, notebooks, and source code mapping}}{59}{table.caption.50}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {D.1}{\ignorespaces Project conflict register, discrepancies, and resolutions}}{59}{table.caption.47}%
+\contentsline {table}{\numberline {D.1}{\ignorespaces Project conflict register, discrepancies, and resolutions}}{62}{table.caption.51}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {E.1}{\ignorespaces Data-verified prevalence of all 41 persuasion strategies ($10{,}600$ turns)}}{60}{table.E.1}%
+\contentsline {table}{\numberline {E.1}{\ignorespaces Data-verified prevalence of all 41 persuasion strategies ($10{,}600$ turns)}}{63}{table.E.1}%
