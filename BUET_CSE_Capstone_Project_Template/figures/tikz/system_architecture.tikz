@@ -1,75 +1,123 @@
-% End-to-end framework: corpora -> shared representation -> two model streams -> evaluation.
-\begin{tikzpicture}[x=1cm,y=1cm]
+% End-to-end framework, drawn as three independent swim lanes.
+%   Lane 3a: donation intention on Persuasion for Good (one label per dialogue)
+%   Lane 3b: persuasion strategy on Persuasion for Good (one label set per Persuader turn)
+%   Lane 3c: generic transfer to buyer-merchant negotiation (e-commerce benchmark)
+% Columns: 1 data and labels | 2 encoding and input | 3 model | 4 evaluation.
+% The streams share encoder families and a role signal but no weights, so each lane
+% has its own encoding, model and evaluation boxes.
+% Width is about 16.4 cm; wrap in \resizebox{\textwidth}{!}{...} if the text block is narrower.
+\begin{tikzpicture}[x=1cm,y=1cm,
+  lanettl/.style={font=\footnotesize\bfseries, anchor=center},
+  colttl/.style={font=\footnotesize\bfseries, text=Slate, anchor=center},
+  evl/.style={blk, fill=white, draw=#1, line width=0.9pt},
+  lanearrow/.style={flow, line width=1.1pt},
+]
 
-% ---------------- group backdrops -------------------------------------------------
-\draw[rounded corners=6pt, draw=NeuBord!70, fill=NeuFill!55, line width=0.7pt] (0,0.1) rectangle (3.5,-10.7);
-\draw[rounded corners=6pt, draw=NeuBord!70, fill=NeuFill!55, line width=0.7pt] (4.05,0.1) rectangle (7.15,-10.7);
-\draw[rounded corners=6pt, draw=XatBord!70, fill=XatFill!45, line width=0.7pt] (7.7,0.1) rectangle (12.3,-5.15);
-\draw[rounded corners=6pt, draw=AmbBord!70, fill=AmbFill!55, line width=0.7pt] (7.7,-5.55) rectangle (12.3,-10.7);
-\draw[rounded corners=6pt, draw=TrjBord!70, fill=TrjFill!45, line width=0.7pt] (12.85,0.1) rectangle (16,-10.7);
+% ================= column headers ==================================================
+\node[colttl] at (2.2,-0.3)   {1\enspace Data and labels};
+\node[colttl] at (6.25,-0.3)  {2\enspace Encoding and input};
+\node[colttl] at (10.3,-0.3)  {3\enspace Model streams};
+\node[colttl] at (14.6,-0.3)  {4\enspace Evaluation per stream};
 
-\node[ttl] at (1.75,-0.4) {1  Corpora};
-\node[ttl] at (5.6,-0.4) {2  Shared representation};
-\node[ttl, text=XatBord] at (10.0,-0.4) {3a  Intention stream};
-\node[ttl, text=AmbBord] at (10.0,-6.05) {3b  Strategy stream};
-\node[ttl, text=TrjBord] at (14.43,-0.4) {4  Evaluation};
+% ================= lane bands ======================================================
+\draw[rounded corners=6pt, draw=XatBord!60, fill=XatFill!50, line width=0.7pt]
+  (0,-0.62) rectangle (16.35,-4.3);
+\draw[rounded corners=6pt, draw=AmbBord!55, fill=AmbFill!55, line width=0.7pt]
+  (0,-4.5) rectangle (16.35,-10.0);
+\draw[rounded corners=6pt, draw=DecBord!55, fill=DecFill!50, line width=0.7pt]
+  (0,-10.2) rectangle (16.35,-14.75);
 
-% ---------------- 1 corpora -------------------------------------------------------
-\node[neu, text width=2.95cm, minimum height=1.85cm] (c1) at (1.75,-1.9)
-  {\textbf{Persuasion for Good}\\[1pt]\scriptsize 1{,}017 dialogues\\ 10{,}600 Persuader turns\\ donation asks for Save the Children};
-\node[xat, text width=2.95cm, minimum height=1.85cm] (c2) at (1.75,-4.15)
-  {\textbf{Donation-intent labels}\\[1pt]\scriptsize three annotation passes\\ final split 694 yes / 323 no};
-\node[amb, text width=2.95cm, minimum height=1.85cm] (c3) at (1.75,-6.4)
-  {\textbf{Strategy labels}\\[1pt]\scriptsize 41 strategies, 11 categories\\ 1.68 labels per turn\\ 48.9\% multi-label turns};
-\node[trj, text width=2.95cm, minimum height=1.85cm] (c4) at (1.75,-8.65)
-  {\textbf{E-commerce benchmark}\\[1pt]\scriptsize 500 canonical + 200 reversal dialogues\\ three-phase synthesis};
-\draw[flow] (c1) -- (c2);
-\draw[flow] (c2) -- (c3);
+\node[lanettl, text=XatBord] at (10.3,-0.95) {3a\enspace Intention stream};
+\node[lanettl, text=AmbBord] at (10.3,-4.83) {3b\enspace Strategy stream};
+\node[lanettl, text=DecBord] at (10.3,-10.53) {3c\enspace Generic transfer stream};
 
-% ---------------- 2 shared representation ------------------------------------------
-\node[neu, text width=2.7cm, minimum height=2.6cm] (r1) at (5.6,-2.15)
-  {\textbf{Pretrained encoders}\\[1pt]\scriptsize RoBERTa-base, DeBERTa-v3-base, TOD-BERT for intention\\ RoBERTa-base/large, ELECTRA-base for strategy};
-\node[neu, text width=2.7cm, minimum height=2.0cm] (r2) at (5.6,-5.05)
-  {\textbf{Role signal}\\[1pt]\scriptsize {[}Persuader{]} and {[}Persuadee{]} markers, role embeddings on every turn};
-\node[neu, text width=2.7cm, minimum height=2.6cm] (r3) at (5.6,-8.15)
-  {\textbf{Input policy}\\[1pt]\scriptsize turn-by-turn for intention\\ five turns of context and left truncation for flat inputs};
-\draw[flow] (r1) -- (r2); \draw[flow] (r2) -- (r3);
+% ================= 1 data and labels ===============================================
+% One source corpus with two independent annotation tasks (not one after the other).
+\node[neu, text width=1.35cm, minimum height=1.5cm] (p4g) at (0.95,-4.85)
+  {\textbf{Persuasion for Good}\\[2pt]\scriptsize 1{,}017 dialogues};
+\node[nt, text width=1.5cm, anchor=north] at (0.95,-5.75) {two separate annotation tasks};
 
-% ---------------- 3a intention stream -----------------------------------------------
-\node[xat, text width=4.0cm, minimum height=2.6cm] (m1) at (10.0,-2.35)
-  {\textbf{AntiphonyClassifier}\\[1pt]\scriptsize Role-pure dual-stream cross-attention\\ Persuadee-to-Persuader attention\\ Trajectory GRU and attention pooling};
-\node[fin, minimum width=2.6cm] (o1) at (10.0,-4.4) {\scriptsize commitment: yes / no};
-\draw[flowX] (m1) -- (o1);
+\node[xat, text width=2.05cm, minimum height=2.9cm] (labA) at (3.3,-2.45)
+  {\textbf{Donation-intent labels}\\[3pt]\scriptsize one label per dialogue\\[1pt] three manual passes\\[1pt] 694 yes / 323 no};
+\node[amb, text width=2.05cm, minimum height=4.2cm] (labB) at (3.3,-7.25)
+  {\textbf{Strategy labels}\\[3pt]\scriptsize one label set per Persuader turn\\[1pt] 10{,}600 turns\\[1pt] 41 strategies in 11 categories\\[1pt] 48.9\% multi-label};
 
-% ---------------- 3b strategy stream ------------------------------------------------
-\node[amb, text width=4.0cm, minimum height=1.2cm] (s1) at (10.0,-6.95)
-  {\textbf{Multi-Task Strategy Model}\\[1pt]\scriptsize 11 categories main, 41 strategies auxiliary};
-\node[amb, text width=4.0cm, minimum height=1.0cm] (s2) at (10.0,-8.2)
-  {\scriptsize 19-member pool: fine-tuned encoders, few-shot, TF-IDF and zero-shot members};
-\node[amb, text width=1.85cm, minimum height=0.95cm, draw=AmbBord, fill=white] (s3a) at (8.95,-9.8)
-  {\scriptsize \textbf{Calibrated blend}\\ Selected ($q=2$)};
-\node[amb, text width=1.85cm, minimum height=0.95cm, draw=AmbBord, fill=white, dashed] (s3b) at (11.05,-9.8)
-  {\scriptsize \textbf{XGBoost stacker}\\ Evaluated ($0.551$)};
+\draw[flow] (p4g.east) -- ++(0.2,0) |- (labA.west);
+\draw[flow] (p4g.east) -- ++(0.2,0) |- (labB.west);
+
+\node[dec, text width=3.95cm, minimum height=2.9cm] (labC) at (2.3,-12.05)
+  {\textbf{E-commerce negotiation benchmark}\\[3pt]\scriptsize buyer--merchant chats, synthesised in three phases, fully human-audited\\[1pt] 500 canonical + 200 stance reversals\\[1pt] buying intent per dialogue, 338 yes / 362 no};
+
+% ================= 2 encoding and input ============================================
+\node[neu, draw=XatBord, text width=2.55cm, minimum height=2.9cm] (encA) at (6.25,-2.45)
+  {\textbf{Hierarchical turns}\\[3pt]\scriptsize up to 32 turns of 64 tokens\\[1pt] Persuader and Persuadee streams\\[1pt] RoBERTa, DeBERTa-v3, TOD-BERT};
+\node[neu, draw=AmbBord, text width=2.55cm, minimum height=4.2cm] (encB) at (6.25,-7.25)
+  {\textbf{Turn with context}\\[3pt]\scriptsize Persuader turn plus 0 or 3 prior turns\\[1pt] left truncation keeps the current turn\\[1pt] role embedding on every token\\[1pt] RoBERTa-base and RoBERTa-large};
+\node[neu, draw=DecBord, text width=2.55cm, minimum height=2.9cm] (encC) at (6.25,-12.05)
+  {\textbf{Hierarchical turns}\\[3pt]\scriptsize as in 3a, with Merchant and Buyer streams\\[1pt] flat controls: 512 tokens, left truncation};
+
+\draw[lanearrow] (labA.east) -- (encA.west);
+\draw[lanearrow] (labB.east) -- (encB.west);
+\draw[lanearrow] (labC.east) -- (encC.west);
+
+% ================= 3a intention model ==============================================
+\node[xat, text width=4.1cm, minimum height=1.5cm] (mA) at (10.3,-2.1)
+  {\textbf{AntiphonyClassifier}\\[2pt]\scriptsize role-pure Persuader and Persuadee streams\\ Persuadee-to-Persuader cross-attention\\ attention pooling + trajectory GRU};
+\node[fin, minimum width=2.6cm] (oA) at (10.3,-3.65) {\scriptsize donation commitment: yes / no};
+\draw[flowX] (mA) -- (oA);
+
+% ================= 3b strategy model ===============================================
+\node[amb, text width=4.1cm, minimum height=0.85cm] (s1) at (10.3,-5.62)
+  {\textbf{Multi-task strategy model}\\ \scriptsize 11 categories (main), 41 strategies (auxiliary)};
+\node[amb, text width=4.1cm, minimum height=0.85cm] (s2) at (10.3,-6.88)
+  {\textbf{19-member pool}\\ \scriptsize 7 fine-tuned, 8 few-shot, 2 TF-IDF, 2 zero-shot};
+\node[amb, fill=white, text width=1.85cm, minimum height=1.15cm] (s3a) at (9.1,-8.3)
+  {\scriptsize\textbf{Calibrated blend}\\ $q{=}2$ power mean\\ \textbf{selected}\,$\cdot$\,0.572};
+\node[amb, fill=white, dsh, text width=1.85cm, minimum height=1.15cm] (s3b) at (11.5,-8.3)
+  {\scriptsize\textbf{XGBoost stacker}\\ tuned, logits only\\ tested\,$\cdot$\,0.551};
+\node[fin, minimum width=2.1cm] (oB) at (9.1,-9.58) {\scriptsize category set per turn};
+\node[nt, text width=2.2cm] at (11.5,-9.25) {cross-fitted val macro-F1};
+
 \draw[flow] (s1) -- (s2);
-\draw[flow] (s2.south) -- ++(0,-0.2) -| (s3a.north);
-\draw[flow, dashed] (s2.south) -- ++(0,-0.2) -| (s3b.north);
+\draw[flow] (s3a.north |- s2.south) -- (s3a.north);
+\draw[flow, dsh] (s3b.north |- s2.south) -- (s3b.north);
+\draw[flow, draw=AmbMain] (s3a) -- (oB);
 
-% ---------------- 4 evaluation -----------------------------------------------------
-\node[trj, text width=2.7cm, minimum height=1.9cm] (e1) at (14.43,-1.6)
-  {\textbf{Intention benchmark}\\[1pt]\scriptsize Macro-F1 on 153 test dialogues across Pass 1--3 splits};
-\node[trj, text width=2.7cm, minimum height=2.1cm] (e2) at (14.43,-3.85)
-  {\textbf{Adversarial transfer}\\[1pt]\scriptsize four input ablations, sufficiency gap $\Delta_{\mathrm{suff}}$, skew stress};
-\node[trj, text width=2.7cm, minimum height=1.9cm] (e3) at (14.43,-6.2)
-  {\textbf{Strategy benchmark}\\[1pt]\scriptsize micro and macro-F1 against the 0.79 annotation ceiling};
-\node[trj, text width=2.7cm, minimum height=2.1cm] (e4) at (14.43,-8.6)
-  {\textbf{Forensic checks}\\[1pt]\scriptsize truncation side, marker corruption, merchant-side leakage};
+% ================= 3c generic transfer model =======================================
+\node[dec, text width=4.1cm, minimum height=1.05cm] (mC) at (10.3,-11.52)
+  {\textbf{AntiphonyClassifier, retrained}\\[2pt]\scriptsize Merchant and Buyer streams\\ Buyer-to-Merchant cross-attention, trajectory GRU};
+\node[neu, text width=2.25cm, minimum height=1.0cm] (ctl) at (9.3,-13.12)
+  {\scriptsize\textbf{Ablation baselines}\\ flat RoBERTa-base\\ four input ablations\\ last-Buyer-turn control};
+\node[fin, minimum width=1.6cm, align=center] (oC) at (11.62,-13.05) {\scriptsize buying intent\\ \scriptsize yes / no};
+\draw[flowD] (mC.south -| oC.north) -- (oC.north);
+\draw[flow] (ctl) -- (oC);
 
-% ---------------- inter-group arrows -----------------------------------------------
-\draw[flow, line width=1.3pt] (3.5,-2.15) -- (4.05,-2.15);
-\draw[flow, line width=1.3pt] (3.5,-8.15) -- (4.05,-8.15);
-\draw[flow, line width=1.3pt] (7.15,-2.6) -- (7.7,-2.6);
-\draw[flow, line width=1.3pt] (7.15,-8.0) -- (7.7,-8.0);
-\draw[flow, line width=1.3pt] (12.3,-2.6) -- (12.85,-2.6);
-\draw[flow, line width=1.3pt] (12.3,-8.0) -- (12.85,-8.0);
+% ---- lane entries into the models
+\draw[lanearrow] (encA.east |- mA)     -- (mA.west);
+\draw[lanearrow] (encB.east |- s1)     -- (s1.west);
+\draw[lanearrow] (encC.east |- mC)     -- (mC.west);
+\draw[lanearrow] (encC.east |- ctl)    -- (ctl.west);
+
+% ---- ablation findings fed back into the data: near-zero sufficiency gap on the
+%      canonical set motivated the 200 stance-reversal dialogues
+\draw[flow, draw=DecMain, dsh, line width=1.0pt] (ctl.south) -- (ctl.south |- 0,-14.22) -| (labC.south);
+\node[nt, text=DecBord, anchor=north] at (4.9,-14.25)
+  {ablation finding: $\Delta_{\mathrm{suff}}\approx 0$ on the canonical set $\Rightarrow$ 200 reversal dialogues added};
+
+% ================= 4 evaluation, one box per stream ================================
+\node[evl=XatBord, text width=2.95cm, minimum height=2.9cm] (eA) at (14.6,-2.45)
+  {\textbf{\color{XatBord}4a}\enspace\textbf{Intention benchmark}\\[3pt]\scriptsize Macro-F1, 153 test dialogues\\[1pt] pass 2 and pass 3 labels\\[1pt] v13-Solo baseline\\[2pt] \textbf{best 0.862}};
+\node[evl=AmbBord, text width=2.95cm, minimum height=4.6cm] (eB) at (14.6,-7.3)
+  {\textbf{\color{AmbBord}4b}\enspace\textbf{Strategy benchmark}\\[3pt]\scriptsize micro- and macro-F1, 11 categories\\[1pt] held-out turns, split by dialogue\\[1pt] against the 0.79 annotation ceiling\\[1pt] cluster-bootstrap 95\% CI\\[2pt] \textbf{0.695 micro, 0.560 macro}};
+\node[evl=DecBord, text width=2.95cm, minimum height=2.9cm] (eC) at (14.6,-12.05)
+  {\textbf{\color{DecBord}4c}\enspace\textbf{Adversarial transfer}\\[3pt]\scriptsize Macro-F1, $N{=}500$ and $N{=}700$\\[1pt] four input ablations, skew stress\\[1pt] truncation and leakage checks\\[2pt] \textbf{$\Delta_{\mathrm{suff}}$: $+$0.0001 $\rightarrow$ $+$0.0384}};
+
+\draw[lanearrow] (oA.east) -- (eA.west |- oA);
+\draw[lanearrow] (oB.east) -- (eB.west |- oB);
+\draw[lanearrow] (oC.east) -- (eC.west |- oC);
+
+% ================= footnote ========================================================
+\node[nt, text width=15.6cm] at (8.17,-15.1)
+  {Streams share encoder families and a role signal but are trained and evaluated separately; no weights are shared between them.};
 
 \end{tikzpicture}

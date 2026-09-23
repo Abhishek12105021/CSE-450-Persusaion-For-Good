@@ -1,54 +1,86 @@
 % Three-phase synthetic e-commerce negotiation benchmark: synthesis, humanisation, audit.
-\begin{tikzpicture}[x=1cm,y=1cm]
+% Each phase is a column read top to bottom. The artefact each phase hands on sits in a
+% common bottom row, so the hand-offs read left to right (drafts -> humanised -> frozen).
+% Regimes A and B are parallel prompt regimes feeding one generation engine.
+% Phase frames are computed with `fit`, so no box can extend past its frame.
+% Width is about 16.4 cm; wrap in \resizebox{\textwidth}{!}{...} if the text block is narrower.
+\begin{tikzpicture}[x=1cm,y=1cm, node distance=0.32cm,
+  phead/.style={rectangle, rounded corners=4pt, fill=#1, text=white, font=\footnotesize\bfseries,
+                minimum height=0.62cm, anchor=north},
+  pframe/.style={rounded corners=6pt, draw=#1, line width=0.9pt, fill=white, inner sep=0.16cm},
+  wide/.style={text width=4.3cm},
+  outbox/.style={blk, text width=4.3cm, minimum height=1.75cm, line width=1.0pt},
+  handoff/.style={flow, line width=1.3pt, draw=Slate},
+]
+\definecolor{PhA}{HTML}{94A3B8}\definecolor{PhB}{HTML}{64748B}\definecolor{PhC}{HTML}{334155}
 
-% ---------------- phase frames ---------------------------------------------------------------
-\foreach \x/\c/\t in {0/94A3B8/{Phase 1: persona-driven synthesis}, 5.5/64748B/{Phase 2: organic paraphrasing}, 11/334155/{Phase 3: labelling and audit}}{
-  \definecolor{stg}{HTML}{\c}
-  \draw[rounded corners=5pt, draw=stg, fill=white, line width=0.9pt] (\x,0.05) rectangle ++(5,-10.5);
-  \fill[stg, rounded corners=5pt] (\x,0.05) rectangle ++(5,-0.75);
-  \fill[stg] (\x,-0.4) rectangle ++(5,-0.3);
-  \node[text=white, font=\footnotesize\bfseries] at (\x+2.5,-0.33) {\t};
-}
-\foreach \x in {5,10.5}{ \draw[flow, line width=1.3pt] (\x-0.02,-0.35) -- ++(0.54,0); }
+% column spans: phase 1 0-5.6, phase 2 6.1-11.0, phase 3 11.5-16.4
+\coordinate (c1) at (2.8,0); \coordinate (c2) at (8.55,0); \coordinate (c3) at (13.95,0);
 
-% =============== phase 1 ==========================================================================
-\node[per, text width=4.6cm, minimum height=2.55cm, anchor=north west] (r1) at (0.2,-0.95)
-  {\textbf{Regime A: canonical, $N=500$}\\[1pt]\scriptsize eight buyer archetypes: Skeptic, LowBaller, Urgent, Ghoster, Comparator, DeliveryObsessed, TrustSeeker, BulkBuyer\\ three merchant personas, four product catalogs};
-\node[dec, text width=4.6cm, minimum height=2.7cm, anchor=north west] (r2) at (0.2,-3.7)
-  {\textbf{Regime B: adversarial, $N=200$}\\[1pt]\scriptsize 65 resistance $\to$ agreement\\ 65 commitment $\to$ rejection\\ 70 hard monotonic controls\\ six sentiment states per buyer turn and a \texttt{reversal\_turn\_id}};
-\node[xat, text width=4.6cm, minimum height=1.55cm, anchor=north west] (r3) at (0.2,-6.6)
-  {\textbf{Dialogue-state register}\\[1pt]\scriptsize used in both regimes: tracks fulfilled goals, forbids repeated questions, locks product specifications};
-\node[neu, text width=4.6cm, minimum height=1.6cm, anchor=north west] (r4) at (0.2,-8.35)
-  {\textbf{Output}\\[1pt]\scriptsize draft dialogues from several LLMs, written as fluent but rigid text};
-\draw[flow] (r1.south) -- (r2.north);
-\draw[flow] (r2.south) -- (r3.north);
-\draw[flow] (r3.south) -- (r4.north);
+% ======================= headers ====================================================
+\node[phead=PhA, minimum width=5.6cm] (H1) at (c1) {Phase 1\enspace Persona-driven synthesis};
+\node[phead=PhB, minimum width=4.9cm] (H2) at (c2) {Phase 2\enspace Organic paraphrasing};
+\node[phead=PhC, minimum width=4.9cm] (H3) at (c3) {Phase 3\enspace Labelling and audit};
 
-% =============== phase 2 ==========================================================================
-\node[trj, text width=4.6cm, minimum height=1.6cm, anchor=north west] (p1) at (5.7,-0.95)
-  {\textbf{Voice sampling, once per dialogue}\\[1pt]\scriptsize 5 buyer voices and 4 merchant voices, kept fixed from the first turn to the last};
-\node[trj, text width=4.6cm, minimum height=1.9cm, anchor=north west] (p2) at (5.7,-2.75)
-  {\textbf{Rewrite with hard rules}\\[1pt]\scriptsize Gemini Flash-Lite; same turn count and roles; facts, prices, phone numbers and transaction IDs locked; currency written as ``X taka''};
-\node[amb, text width=4.6cm, minimum height=2.5cm, anchor=north west] (p3) at (5.7,-4.85)
-  {\textbf{Quality gates}\\[1pt]\scriptsize reject a turn whose SequenceMatcher similarity to its source exceeds 0.82\\ entity check: same amounts and numbers before and after\\ currency normalised to one token pattern};
-\node[amb, text width=4.6cm, minimum height=2.0cm, anchor=north west] (p4) at (5.7,-7.55)
-  {\textbf{Controlled micro-jitter}\\[1pt]\scriptsize 25\% lowercased first words, 30\% dropped periods, fillers (ok, hmm, sure), sparse typos that never touch names or digits};
-\draw[flow] (p1) -- (p2); \draw[flow] (p2) -- (p3); \draw[flow] (p3) -- (p4);
+% ======================= phase 1 ====================================================
+% two parallel prompt regimes
+\node[per, text width=2.3cm, minimum height=4.0cm, anchor=north east] (rA) at ($(H1.south)+(-0.06,-0.35)$)
+  {\textbf{Regime A}\\\textbf{canonical, $N{=}500$}\\[2pt]\scriptsize 8 buyer archetypes: Skeptic, LowBaller, Urgent, Ghoster, Comparator, DeliveryObsessed, TrustSeeker, BulkBuyer\\[1pt] 3 merchant personas\\[1pt] 4 product categories};
+\node[dec, text width=2.3cm, minimum height=4.0cm, anchor=north west] (rB) at ($(H1.south)+(0.06,-0.35)$)
+  {\textbf{Regime B}\\\textbf{reversals, $N{=}200$}\\[2pt]\scriptsize 65 resistance $\to$ agreement\\[1pt] 65 commitment $\to$ rejection\\[1pt] 70 hard monotonic controls\\[1pt] 6 buyer sentiment states and a \texttt{reversal\_turn\_id}};
+% both regime boxes share a fixed height; take the lower edge to be safe
+\path let \p1=(rA.south), \p2=(rB.south) in coordinate (regBot) at (0,{min(\y1,\y2)});
+\node[xat, wide, text width=5.0cm, anchor=north] (eng) at ($(c1 |- regBot)+(0,-0.6)$)
+  {\textbf{Generation engine}\\[1pt]\scriptsize several LLMs, including Qwen-2.5; one turn per call, JSON with \texttt{text} and \texttt{intent}\\[1pt] dialogue-state register: goals already met, no repeated questions, product specs in every prompt};
+\draw[flow] (rA.south |- regBot) -- (rA.south |- eng.north);
+\draw[flow] (rB.south |- regBot) -- (rB.south |- eng.north);
 
-% =============== phase 3 ==========================================================================
-\node[xat, text width=4.6cm, minimum height=2.3cm, anchor=north west] (l1) at (11.2,-0.95)
-  {\textbf{Automated semantic parsing}\\[1pt]\scriptsize binary \texttt{buying\_intent}, transactional \texttt{outcome\_category}, a one-sentence \texttt{reason}, and normalised turn-level intent tags};
-\node[fin, text width=4.6cm, minimum height=2.7cm, anchor=north west] (l2) at (11.2,-3.45)
-  {\textbf{Human audit of all 700 dialogues}\\[1pt]\scriptsize line-by-line reading; label against final stance; reason checked against transcript; conditional cases adjudicated together; \texttt{reversal\_turn\_id} and sentiment tags verified};
-\node[trj, text width=4.6cm, minimum height=2.15cm, anchor=north west] (l3) at (11.2,-6.3)
-  {\textbf{Frozen benchmark}\\[1pt]\scriptsize \texttt{ENG\_001} to \texttt{ENG\_500} and \texttt{REV\_001} to \texttt{REV\_200}\\ 6 to 32 turns, 16.2 on average};
-\draw[flow] (l1) -- (l2); \draw[flow] (l2) -- (l3);
-\node[neu, text width=4.6cm, minimum height=1.5cm, anchor=north west] (l4) at (11.2,-8.6)
-  {\scriptsize Data files used in every experiment: canonical 262 no / 238 yes; combined 362 no / 338 yes};
-\draw[flow, dashed] (l3.south) -- (l4.north);
+% ======================= phase 2 ====================================================
+\node[trj, wide, anchor=north, below=0.35cm of H2] (v1)
+  {\textbf{Voice sampling, once per dialogue}\\[1pt]\scriptsize 5 buyer voices and 4 merchant voices, kept fixed for the whole dialogue};
+\node[trj, wide, below=of v1] (v2)
+  {\textbf{Rewrite with hard rules}\\[1pt]\scriptsize Gemini (\texttt{gemini-3.5-flash-lite}); same turn count and roles; facts, prices, phone numbers and TrxIDs preserved; genuine rewording};
+\node[amb, wide, below=of v2] (v3)
+  {\textbf{Quality gates}\\[1pt]\scriptsize reject a turn whose SequenceMatcher similarity to its source exceeds 0.82\\[1pt] same amounts and numbers before and after\\[1pt] currency normalised to ``X taka''};
+\node[amb, wide, below=of v3] (v4)
+  {\textbf{Controlled micro-jitter}\\[1pt]\scriptsize 25\% lowercased first words, 30\% dropped periods, fillers (ok, hmm, well, sure), sparse typos that never touch names or digits};
+\draw[flow] (v1) -- (v2); \draw[flow] (v2) -- (v3); \draw[flow] (v3) -- (v4);
 
-% ---------------- long connectors -------------------------------------------------------------------
-\draw[flow, line width=1.3pt] (r4.east) -- (5.25,-9.15) -- (5.25,-1.75) -- (p1.west);
-\draw[flow, line width=1.3pt] (p4.east) -- (10.75,-8.55) -- (10.75,-2.1) -- (l1.west);
+% ======================= phase 3 ====================================================
+\node[xat, wide, anchor=north, below=0.35cm of H3] (l1)
+  {\textbf{Automated semantic labelling}\\[1pt]\scriptsize separate Gemini Flash pass: binary \texttt{buying\_intent}, \texttt{outcome\_category}, a one-sentence \texttt{reason}, normalised turn-level intent tags};
+\node[neu, draw=Slate, wide, below=of l1] (l2)
+  {\textbf{Human audit of all 700 dialogues}\\[1pt]\scriptsize line-by-line reading; label checked against the buyer's final stance; \texttt{reason} checked for invented facts; borderline cases adjudicated together; \texttt{reversal\_turn\_id} and sentiment tags verified};
+\draw[flow] (l1) -- (l2);
+
+% ======================= bottom row: what each phase hands on ======================
+% placed below the tallest column (phase 2)
+\coordinate (outY) at ($(v4.south)+(0,-0.75)$);
+\node[neu, outbox, draw=PhA, anchor=north] (o1) at (c1 |- outY)
+  {\textbf{700 draft dialogues}\\[1pt]\scriptsize fluent but rigid: over-grammatical, uniform sentence length, no hedging or typos};
+\node[neu, outbox, draw=PhB, anchor=north] (o2) at (c2 |- outY)
+  {\textbf{700 humanised dialogues}\\[1pt]\scriptsize informal chat register; facts, labels and turn structure unchanged};
+\node[fin, outbox, anchor=north] (o3) at (c3 |- outY)
+  {\textbf{Frozen benchmark}\\[1pt]\scriptsize \texttt{ENG\_001}--\texttt{ENG\_500}, \texttt{REV\_001}--\texttt{REV\_200}\\ 6 to 32 turns, 16.2 on average};
+\node[neu, fill=white, text width=4.3cm, anchor=north, below=0.3cm of o3] (o4)
+  {\scriptsize\textbf{Label counts used in every experiment}\\[1pt] canonical: 262 no / 238 yes\\ reversals: 100 no / 100 yes\\ combined: 362 no / 338 yes};
+
+\draw[flow] (eng) -- (o1);
+\draw[flow] (v4) -- (o2);
+\draw[flow] (l2) -- (l2.south |- o3.north);
+\draw[flow, dsh] (o3) -- (o4);
+
+% ======================= phase frames (fitted, behind) ==============================
+\begin{scope}[on background layer]
+  \node[pframe=PhA, fit=(H1)(rA)(rB)(eng)(o1)(o4.south -| H1.west)] (F1) {};
+  \node[pframe=PhB, fit=(H2)(v1)(v4)(o2)(o4.south -| H2.west)] (F2) {};
+  \node[pframe=PhC, fit=(H3)(l1)(l2)(o3)(o4)] (F3) {};
+\end{scope}
+
+% ======================= hand-offs between phases ===================================
+\draw[handoff] (o1.east) -- (o2.west);
+\draw[handoff] (o2.east) -- (o3.west);
+\draw[flow, line width=1.3pt, draw=Slate] (H1.east) -- (H2.west);
+\draw[flow, line width=1.3pt, draw=Slate] (H2.east) -- (H3.west);
 
 \end{tikzpicture}
