@@ -1,0 +1,29 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces End-to-end pipeline, module by module.}}{11}{table.caption.7}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces The 11-category / 41-strategy taxonomy (strategy counts per category).}}{12}{table.caption.8}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Annotation segments, in canonical corpus row order.}}{13}{table.caption.9}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Corpus statistics (all 10{,}600 annotated turns).}}{14}{table.caption.10}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Encoder ensemble members, final iteration (v17). ``Orientation'' marks a member as tuned for the micro or macro objective (Section~\ref {sec:objective-split}).}}{15}{table.caption.12}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Decision rules available to the threshold search (11 total).}}{17}{table.caption.13}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Annotation-reliability ceiling, strategy level (41-way) vs.\ category level (11-way).}}{22}{table.caption.14}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Final system (v17), category task, both operating points, test split. 95\% CIs are cluster bootstrap over dialogues.}}{22}{table.caption.15}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Category-task headline progression across design iterations (test split; all figures reported on the present-label macro-F1 definition for comparability). ``Config'' summarizes the governing design decision of that iteration.}}{23}{table.caption.16}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Per-category precision/recall/F1, final system (v17), macro-optimal point, test split.}}{24}{table.caption.18}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Rare-category (3 rarest) vs.\ common-category (other 8) mean F1 across iterations, macro-optimal point.}}{25}{table.caption.20}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Paired significance tests, cluster bootstrap over dialogues, final system (v17).}}{25}{table.caption.21}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Split-conformal prediction coverage, category task, test split.}}{26}{table.caption.22}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Decision-rule study, category task, held-out validation (repeated grouped cross-fitting). Rules marked \textsuperscript {*} are contributed by this project.}}{27}{table.caption.23}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Donation-outcome logistic models (McFadden pseudo-$R^2$), gold labels.}}{28}{table.caption.24}%
+\contentsline {table}{\numberline {5.10}{\ignorespaces Category odds ratios for donation outcome, M1 (gold labels, significant at $p<0.01$ in bold).}}{29}{table.caption.26}%
+\contentsline {table}{\numberline {5.11}{\ignorespaces Consolidated ablation record. $\Delta $mi / $\Delta $ma are the measured change in micro-F1 / macro-F1 for that specific, isolated intervention.}}{31}{table.caption.27}%
+\contentsline {table}{\numberline {5.12}{\ignorespaces Donation-intent classification (Module A), binary task, test split.}}{33}{table.caption.28}%
+\contentsline {table}{\numberline {5.13}{\ignorespaces Module A's architecture retrained on the generic buyer--seller negotiation domain (500 dialogues, binary outcome), test split.}}{34}{table.caption.29}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Module ownership.}}{35}{table.caption.30}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces Core tools and infrastructure.}}{36}{table.caption.31}%
+\contentsline {table}{\numberline {6.3}{\ignorespaces Key risks and mitigations.}}{37}{table.caption.32}%
+\addvspace {10\p@ }

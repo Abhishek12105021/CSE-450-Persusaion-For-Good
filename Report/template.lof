@@ -1,0 +1,11 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Strategy and category label-prevalence distribution across the annotated corpus.}}{14}{figure.caption.11}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Micro-F1 across baselines and the final ensemble, category task.}}{23}{figure.caption.17}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Per-category F1, sorted by support -- the three rarest categories are the visible outliers.}}{24}{figure.caption.19}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Donation-outcome model diagnostics (Module C).}}{28}{figure.caption.25}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }

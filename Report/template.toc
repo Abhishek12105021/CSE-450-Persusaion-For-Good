@@ -1,0 +1,75 @@
+\contentsline {chapter}{Declaration}{i}{chapter*.1}%
+\contentsline {chapter}{Acknowledgement}{ii}{chapter*.2}%
+\contentsline {chapter}{Abstract}{iii}{chapter*.3}%
+\contentsline {chapter}{\numberline {1}Introduction and Problem Statement}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}The Persuasion-For-Good Corpus and Its Limitation}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Problem Statement}{2}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Scope and Objectives}{3}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Background and Related Work}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Persuasion Theory and Strategy Taxonomies}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}The Persuasion-For-Good Corpus}{4}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Multi-Label Text Classification Under Class Imbalance}{5}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Transformer Encoders for Dialogue Understanding}{6}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Statistical Rigor: Conformal Prediction and Outcome Modeling}{6}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Positioning of This Work}{6}{section.2.6}%
+\contentsline {chapter}{\numberline {3}Requirements Analysis}{8}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Stakeholders}{8}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Functional Requirements}{8}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Non-Functional Requirements}{9}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Data Requirements}{10}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Tooling and Environment Requirements}{10}{section.3.5}%
+\contentsline {chapter}{\numberline {4}System Design and Methodology}{11}{chapter.4}%
+\contentsline {section}{\numberline {4.1}System Overview}{11}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Dataset and Annotation}{12}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Taxonomy}{12}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Annotation Process}{12}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Split}{13}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Exploratory Statistics}{13}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.3}Module A: Donation-Intent Classification}{14}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Module B: Multi-Label Persuasion-Strategy Classifier}{15}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Encoder Architecture}{15}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Loss Function}{15}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Data Augmentation}{16}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Ensemble and Decoding}{16}{subsection.4.4.4}%
+\contentsline {section}{\numberline {4.5}The Category-First Reframing}{17}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Rationale}{17}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Implementation: a Binding Swap}{18}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}The Objective Split}{18}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Module C: Donation-Outcome Analysis}{18}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Module D: Generic Cross-Domain Extension}{19}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Experimental Methodology and Reproducibility Engineering}{20}{section.4.8}%
+\contentsline {chapter}{\numberline {5}Evaluation and Results}{21}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Evaluation Protocol}{21}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Annotation-Reliability Ceiling}{21}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Category-Level Results (Primary Task)}{22}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Headline Results}{22}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Per-Category Breakdown and the Rare-Category Gap}{24}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Statistical Significance}{25}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Conformal Prediction Sets}{26}{subsection.5.3.4}%
+\contentsline {section}{\numberline {5.4}Strategy-Level (41-Way) Results}{26}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Decision-Rule Study}{27}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Donation-Outcome Analysis (Module C)}{27}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Category--Donation Associations}{29}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}A Limitation Stated Explicitly: Temporal Direction}{29}{subsection.5.6.2}%
+\contentsline {section}{\numberline {5.7}Ablation Study}{30}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Selection Noise: a Methodological Caution}{31}{subsection.5.7.1}%
+\contentsline {subsection}{\numberline {5.7.2}Context Width: an Architecture-Dependent Effect}{32}{subsection.5.7.2}%
+\contentsline {subsection}{\numberline {5.7.3}Augmentation and Rebalancing: a Trade, Not a Fix}{32}{subsection.5.7.3}%
+\contentsline {subsection}{\numberline {5.7.4}Equal-Weight Multi-Task Loss: Mechanism Check}{33}{subsection.5.7.4}%
+\contentsline {section}{\numberline {5.8}Module A: Donation-Intent Classification}{33}{section.5.8}%
+\contentsline {section}{\numberline {5.9}Module D: Cross-Domain Generalization}{34}{section.5.9}%
+\contentsline {section}{\numberline {5.10}Summary}{34}{section.5.10}%
+\contentsline {chapter}{\numberline {6}Project Management, Tools, and Impact}{35}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Team Organization}{35}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Development Methodology}{35}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Tools and Infrastructure}{36}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Risk Management}{37}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Ethical Considerations}{37}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Broader Impact}{38}{section.6.6}%
+\contentsline {chapter}{\numberline {7}Conclusion}{39}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Summary of Contributions}{39}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Limitations}{40}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Future Work}{40}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Closing Remark}{41}{section.7.4}%
+\contentsline {chapter}{References}{42}{section.7.4}%
