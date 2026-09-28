@@ -195,7 +195,7 @@ Prior to modeling, we conducted an exhaustive exploratory data analysis (EDA) ac
     \midrule
     \rowcolor{lightbg}
     \textbf{M6 (HiTrans)} & \textbf{Hierarchical Dialogue Transformer} & RoBERTa & 83.7\% & 0.7930 & 0.373 \\
-    \textbf{M6 (HiTrans)} & \textbf{Hierarchical Dialogue Transformer} & DeBERTa & 85.0\% & 0.7970 & 0.452 \\
+    \textbf{M6 (HiTrans)} & \textbf{Hierarchical Dialogue Transformer} & DeBERTa & 85.0\% & 0.7970 & \textbf{0.452} \\
     \rowcolor{lightbg}
     \textbf{M6 (HiTrans)} & \textbf{Hierarchical Dialogue Transformer} & TOD-BERT & 83.7\% & 0.8070 & 0.314 \\
     \midrule
@@ -235,20 +235,43 @@ Prior to modeling, we conducted an exhaustive exploratory data analysis (EDA) ac
 ============================================================= \\ \relax
 \textbf{ANTIPHONY INTENTION BENCHMARK: HELD-OUT TEST SUITE} ($n=153$) \\ \relax
 ============================================================= \\ \relax
+% Column alignment here relies on every label being padded to the same
+% rendered width. Three things can break that: (i) \quad/control-space
+% padding is sized in em's of the current font, not character cells, so it
+% does not track a monospace font's fixed advance width; (ii) math-mode
+% glyphs (e.g. \times) are set in the math font, not \ttfamily, so they don't
+% share that advance width either; (iii) even `~' is unsafe here, since it
+% inserts the font's INTERWORD-SPACE glue (\fontdimen2), and this document's
+% typewriter face does not define that glue to equal its character advance
+% width, so N tildes reproduce a narrower gap than N real characters. Fixed
+% with plain text throughout (32x64, not $32\times64$) and \hphantom{...}
+% padding: it typesets N copies of an actual glyph and then hides the ink,
+% so the reserved space is exactly N real character-cells wide regardless of
+% the font's interword-glue metric.
 \textbf{[STAGE 1: Flat Baselines]} \\ \relax
--- M1: RoBERTa-base (256t Flat) \quad\ \ : Macro-F1 = 0.6502 $\mid$ Acc = 73.86\% \\ \relax
--- M3: TOD-BERT Dual-Loss \quad\quad\ \ \ : Macro-F1 = 0.7812 $\mid$ [METRIC BUG PATCHED] \\ \relax
+- M1: RoBERTa-base (256t Flat)\hphantom{XXXXXXXXXXXXXXXXX}: Macro-F1 = 0.6800 $\mid$ Acc = 75.80\% \\ \relax
+- M3: Dynamic Augmentation (all backbones)\hphantom{XXXXX}: Collapsed, no checkpoint; bugs fixed in M4 \\ \relax
 \textbf{[STAGE 2: Hierarchical Transformers]} \\ \relax
--- M6: HiTrans (16$\times$32t) \quad\quad\ \ : Macro-F1 = 0.8105 $\mid$ Acc = 78.43\% \\ \relax
--- M7: HiTrans Deep CB-Focal \ \ : Macro-F1 = 0.8244 $\mid$ Acc = 80.39\% \\ \relax
-\textbf{[STAGE 3: Asymmetric Routing]} \\ \relax
--- M11: Decider Solo-Stream \quad\ : Macro-F1 = 0.8410 $\mid$ Acc = 82.35\% \\ \relax
+- M6: HiTrans (32x64t), TOD-BERT\hphantom{XXXXXXXXXXXXXXX}: Macro-F1 = 0.8070 $\mid$ Acc = 83.70\% \\ \relax
+- M8: HiTrans + Back-Translation, DeBERTa\hphantom{XXXXXX}: Macro-F1 = 0.8210 $\mid$ Acc = 86.30\% \\ \relax
+\textbf{[STAGE 3: Gated \& Decoupled]} \\ \relax
+- M10: Last-Persuadee-Turn Gate, RoBERTa\hphantom{XXXXXXX}: Macro-F1 = 0.8340 $\mid$ Acc = 86.30\% \\ \relax
+% Table 5.1 is a [p]-placed float queued right after this box, so without a
+% break hint here the box's own breakable split leaves this header stranded
+% alone at the bottom of the first part, separated from its own data rows by
+% the entire intervening float page. tcolorbox's breakable content is cut
+% with its own \vsplit pass, which does not consult ordinary TeX penalties
+% like \pagebreak; \tcbbreak (tcbbreakable.code.tex) is the library's own
+% forced-break command, so it's the one that actually moves the cut point.
+% Forcing the break here keeps the Stage 4 header together with the rows it
+% introduces.
+\tcbbreak
 \textbf{[STAGE 4: Dual-Stream Antiphony]} \\ \relax
--- Decoupled Solo Ablation Baseline \ : Macro-F1 = 0.8491 $\mid$ Acc = 83.01\% \\ \relax
--- Dual-Stream Antiphony (Second-Pass) : Macro-F1 = \textbf{0.8623} $\mid$ Acc = \textbf{84.97\%} [SOTA] \\ \relax
--- Dual-Stream Antiphony (Third-Pass) \ : Macro-F1 = \textbf{0.8446} $\mid$ Acc = \textbf{83.66\%} [STRICT] \\ \relax
+- Decoupled Solo-Stream Baseline (Second-Pass)\hphantom{X}: Macro-F1 = 0.8250 $\mid$ Acc = 86.90\% \\ \relax
+- Dual-Stream Antiphony (Second-Pass)\hphantom{XXXXXXXXXX}: Macro-F1 = \textbf{0.8623} $\mid$ Acc = \textbf{89.50\%} [SOTA] \\ \relax
+- Dual-Stream Antiphony (Third-Pass)\hphantom{XXXXXXXXXXX}: Macro-F1 = \textbf{0.8446} $\mid$ Acc = \textbf{86.90\%} [STRICT] \\ \relax
 ============================================================= \\ \relax
-\textbf{AUDIT RESULT:} Dual-Stream Antiphony outperforms Decoupled Baseline (+0.0132 Macro-F1) \\ \relax
+\textbf{AUDIT RESULT:} Dual-Stream Antiphony outperforms the Decoupled Baseline by $+0.0373$ Macro-F1 (second-pass) \\ \relax
 =============================================================
 \end{terminalbox}
 
@@ -376,7 +399,7 @@ Prior to modeling, we conducted an exhaustive exploratory data analysis (EDA) ac
     \bottomrule
   \end{tabularx}
 \end{table}
-Across both datasets, Antiphony demonstrates a consistent, statistically verified margin over the Decoupled Single-Stream baseline, confirming the architectural efficacy of role-pure cross-attention.
+Across both datasets, Antiphony's best encoder consistently outperforms the Decoupled Single-Stream baseline's best encoder by a positive Macro-F1 margin, supporting the architectural efficacy of role-pure cross-attention.
 
 \section{Strategy and Category Multi-Task Benchmarking}
 \label{sec:strategy-results}

@@ -70,12 +70,12 @@
 \contentsline {subsection}{\numberline {4.7.4}Stage 4: Role-Pure Dual-Stream Antiphony Architecture}{31}{subsection.4.7.4}%
 \contentsline {section}{\numberline {4.8}Design Refinement and Simulation}{31}{section.4.8}%
 \contentsline {subsection}{\numberline {4.8.1}Capacity Calculations and Sequence Length Budgeting}{31}{subsection.4.8.1}%
-\contentsline {subsection}{\numberline {4.8.2}Memory Profiling and Hardware Guards}{31}{subsection.4.8.2}%
+\contentsline {subsection}{\numberline {4.8.2}Memory Profiling and Hardware Guards}{32}{subsection.4.8.2}%
 \contentsline {section}{\numberline {4.9}Application of Tools}{32}{section.4.9}%
 \contentsline {section}{\numberline {4.10}Implementation}{32}{section.4.10}%
 \contentsline {subsection}{\numberline {4.10.1}Version Control and Development History}{32}{subsection.4.10.1}%
-\contentsline {subsection}{\numberline {4.10.2}Deterministic Seeding and Audit Artifacts}{32}{subsection.4.10.2}%
-\contentsline {section}{\numberline {4.11}Deployment}{32}{section.4.11}%
+\contentsline {subsection}{\numberline {4.10.2}Deterministic Seeding and Audit Artifacts}{33}{subsection.4.10.2}%
+\contentsline {section}{\numberline {4.11}Deployment}{33}{section.4.11}%
 \contentsline {subsection}{\numberline {4.11.1}Prototype Execution Pipeline}{33}{subsection.4.11.1}%
 \contentsline {subsection}{\numberline {4.11.2}Resource Consumption}{33}{subsection.4.11.2}%
 \contentsline {subsection}{\numberline {4.11.3}Operational Boundaries and Omissions}{33}{subsection.4.11.3}%

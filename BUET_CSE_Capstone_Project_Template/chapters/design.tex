@@ -375,7 +375,7 @@ The decider query $\mathbf{Q}_{\mathcal{D}}$ selectively attends to the persuade
 \section{Architectural Evolution: The Path to Dual-Stream Antiphony}
 \label{sec:evolution}
 
-The AntiphonyClassifier was not designed in isolation; it emerged from a systematic multi-stage empirical investigation across four distinct evolutionary phases, documented in \Cref{fig:architectural_evolution}.
+The AntiphonyClassifier was not designed in isolation; it emerged from a systematic multi-stage empirical investigation across four distinct evolutionary phases, documented in \Cref{fig:architectural_evolution}. This section refers to the deciding party by its dataset role, \emph{Persuadee}, the same participant termed \emph{Decider} in the architecture description of \Cref{sec:antiphony}.
 
 \begin{figure}[htbp]
   \centering
@@ -386,11 +386,11 @@ The AntiphonyClassifier was not designed in isolation; it emerged from a systema
 
 \subsection{Stage 1: Monolithic Flat Baselines and Forensic Debugging}
 \begin{itemize}
-  \item \textbf{Flat Sequence Base Model (M1):} Concatenated dialogues truncated to 256 tokens with \texttt{[CLS]} pooling and independent binary and modifier heads. Reached $0.68$ Macro-F1 with RoBERTa, but DeBERTa collapsed to the majority class and modifier heads completely failed on rare classes.
-  \item \textbf{Speaker-Aware Flat Encoding (M2):} Added learnable role embeddings ($\text{Persuader}=0, \text{Persuadee}=1$) prior to masked mean-pooling. Slightly improved recall ($0.70$ Macro-F1), but remained bottlenecked by 256-token truncation.
+  \item \textbf{Flat Sequence Base Model (M1):} Concatenated dialogues truncated to 256 tokens with \texttt{[CLS]} pooling and independent binary and modifier heads. Reached $0.68$ Macro-F1 with RoBERTa, but DeBERTa skewed heavily toward the majority class (Macro-F1 $0.53$, only modestly above the $0.42$ majority-baseline) and modifier heads completely failed on rare classes.
+  \item \textbf{Speaker-Aware Flat Encoding (M2):} Added learnable role embeddings ($\text{Persuader}=0, \text{Persuadee}=1$) prior to masked mean-pooling. Binary Macro-F1 rose to $0.70$ (RoBERTa) and recall on the rare \texttt{deferred} modifier class improved, but overall performance remained bottlenecked by 256-token truncation.
   \item \textbf{Dynamic Augmentation Exploration (M3):} Added EDA text augmentation \cite{wei2019eda} and raw inverse-frequency class weighting. Training completely collapsed. Forensic auditing identified two critical bugs: (i) checkpoint selection was mistakenly scored on \texttt{pos\_label="yes"} F1, allowing an all-yes trivial model to score $1.0$ and be saved, and (ii) raw inverse-frequency weights on the 13-example \texttt{conditional} class caused catastrophic gradient spikes.
-  \item \textbf{Metric-Corrected Focal Loss Baseline (M4):} Fixed the evaluation harness to use true unweighted Macro-F1; implemented Class-Balanced Focal Loss ($\beta=0.999$); cascaded the binary prediction into the modifier head; added in-batch Supervised Contrastive Loss. Training stabilized, but performance plateaued at $0.649$ Macro-F1.
-  \item \textbf{Token-Safe Augmentation Audit (M5):} An audit revealed that $57.5\%$ of speaker markers (\texttt{[Persuader]}) in raw transcripts were glued to newlines without spaces. Standard whitespace augmentation tokenizers fragmented these tags, corrupting role markers in $15.9\%$ of augmented instances. Implementing regex-based tokenization and Persuadee-biased mutation weights resolved the corruption, but Macro-F1 remained capped ($0.670$), proving that flat 256-token architectures had reached their theoretical ceiling.
+  \item \textbf{Metric-Corrected Focal Loss Baseline (M4):} Fixed the evaluation harness to use true unweighted Macro-F1; implemented Class-Balanced Focal Loss ($\beta=0.999$); cascaded the binary prediction into the modifier head; added in-batch Supervised Contrastive Loss. Training stabilized, but performance plateaued at $0.649$ Macro-F1 (RoBERTa and TOD-BERT; DeBERTa $0.630$).
+  \item \textbf{Token-Safe Augmentation Audit (M5):} An audit revealed that $57.5\%$ of speaker markers (\texttt{[Persuader]}) in raw transcripts were glued to newlines without spaces. Standard whitespace augmentation tokenizers fragmented these tags, corrupting role markers in $15.9\%$ of augmented instances. Implementing regex-based tokenization and Persuadee-biased mutation weights resolved the corruption, but Macro-F1 for DeBERTa remained capped at $0.670$, still short of M2's $0.70$ RoBERTa result; no backbone in this flat, 256-token family ever exceeded that RoBERTa figure, motivating the architectural change in Stage 2.
 \end{itemize}
 
 \subsection{Stage 2: Hierarchical Discourse Modeling}
@@ -406,11 +406,11 @@ The AntiphonyClassifier was not designed in isolation; it emerged from a systema
   \item \textbf{Last-Persuadee-Turn Gating (M10):} Added a sigmoid gate explicitly anchoring the pooled representation to the final Persuadee hidden state, initialized with a $+3.0$ bias to prevent early deflection. Achieved \textbf{$0.834$} Macro-F1 with RoBERTa, establishing the peak single-model binary score of the two-headed lineage.
   \item \textbf{Multi-Pivot Back-Translation Diversity (M11):} Implemented French and German back-translation under beam search and random sampling; DeBERTa reached \textbf{$0.829$}, but modifier F1 continued to degrade.
   \item \textbf{Specialist Confidence Router (M12):} Decoupled the tasks without retraining: routing binary classification to M10 Gated RoBERTa ($0.834$) and modifier classification to M6 Plain DeBERTa ($0.452$).
-  \item \textbf{Decoupled Single-Stream Baseline:} Deleted the modifier head entirely, dedicating all capacity to a 2-layer binary head. Reached \textbf{$0.825$} on second-pass labels and \textbf{$0.8359$} on third-pass labels.
+  \item \textbf{Decoupled Single-Stream Baseline (M13):} Deleted the modifier head entirely, dedicating all capacity to a 2-layer binary head. Reached \textbf{$0.825$} on second-pass labels (RoBERTa); on third-pass labels, RoBERTa's default-threshold Macro-F1 is \textbf{$0.8359$}, marginally above its own tuned-threshold figure of $0.8290$ used as this model's officially reported result elsewhere in this report.
 \end{itemize}
 
 \subsection{Stage 4: Role-Pure Dual-Stream Antiphony Architecture}
-The Dual-Stream Antiphony architecture implemented speaker-disentangled cross-attention, establishing project-wide peak performance ($0.8623$ on the second-pass benchmark, $0.8446$ on the strict third-pass benchmark), definitively proving the necessity of modeling asymmetric conversational dynamics.
+The Dual-Stream Antiphony architecture (M14) implemented speaker-disentangled cross-attention, establishing project-wide peak performance: $0.8623$ Macro-F1 with DeBERTa at its default decision threshold on the second-pass benchmark ($0.8600$ under the tuned-threshold rule applied consistently to the other backbones on this benchmark), and $0.8446$ with RoBERTa at a tuned threshold on the strict third-pass benchmark, the shipped final model. These results definitively demonstrate the necessity of modeling asymmetric conversational dynamics.
 
 \section{Design Refinement and Simulation}
 \label{sec:detailed-design}
