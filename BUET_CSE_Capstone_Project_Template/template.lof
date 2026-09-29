@@ -20,7 +20,7 @@
 \contentsline {figure}{\numberline {5.7}{\ignorespaces Skew stress analysis of Antiphony under severe class imbalance, showing Macro-F1 resilience across affirmative training proportions from 47.7\% down to 9.8\%.}}{44}{figure.caption.41}%
 \contentsline {figure}{\numberline {5.8}{\ignorespaces Tokenizer truncation forensic: left-truncation retains proximal conversational context, recovering Macro-F1 from 0.8133 to 0.9331 and shrinking the apparent necessity gap from 0.1600 to 0.0402.}}{45}{figure.caption.42}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Project timeline and phase distribution. Calendar dates prior to September 5, 2026 are reconstructed estimates (\textcolor {red}{[PENDING: Confirmed Git history begins September 5, 2026]}).}}{48}{figure.caption.44}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Project timeline from 20 June to 30 September 2026. Technical work ended on 16 September; the project was presented at the departmental showcase on 26 September.}}{48}{figure.caption.44}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

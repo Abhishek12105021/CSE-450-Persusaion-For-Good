@@ -86,9 +86,9 @@ To eliminate subjective drift and enforce consistency across segments, annotator
   \item \textbf{Realistic Label Density Cap:} While multi-label combinations are expected in complex turns, humans rarely deploy more than three distinct rhetorical tactics simultaneously. The pipeline enforces a typical density of 1 to 3 labels, permits an explicit empty set ($\mathbf{y}_t = \emptyset$) for purely conversational or logistical acknowledgments, and enforces a hard ceiling of $|\mathbf{y}_t| \le 6$.
 \end{enumerate}
 
-Annotation was conducted in 200-turn unshuffled batches using an automated frontier LLM agent (Claude 3.5 Sonnet) driven with few-shot calibration examples, operating under human checkpoints. An automated validation harness (\texttt{pipeline.py}) verified taxonomy compliance, recomputed parent categories from strategies, enforced the label count ceiling, and compiled the verified dataset into \texttt{multilabel\_merged.jsonl} ($10{,}600 \times 56$ wide format with 41 strategy and 11 category flags).
+Annotation was conducted in 200-turn unshuffled batches using an automated frontier LLM agent (Claude 5 Sonnet) driven with few-shot calibration examples, operating under human checkpoints. An automated annotation validation script verified taxonomy compliance, recomputed parent categories from strategies, enforced the label count ceiling, and compiled the verified dataset into \texttt{multilabel\_merged.jsonl} ($10{,}600 \times 56$ wide format with 41 strategy and 11 category flags).
 
-\begin{terminalbox}[Execution Trace: Strategy Annotation Schema Validation (\texttt{pipeline.py})]
+\begin{terminalbox}[Execution Trace: Strategy Annotation Schema Validation]
 [+] Ingesting annotated chunks from \texttt{data/raw\_batches/} (10,600 Persuader turns) \\ \relax
 [+] Running 4-tier decision constraint harness: \\ \relax
 \hspace*{1.5em}- Verifying max strategy density cap: $\max(|\mathbf{y}_t|) \le 6$ \dots\ \textbf{PASS} (mean = 1.68) \\ \relax
@@ -453,7 +453,7 @@ The project utilized a cohesive suite of specialized computational tools:
 The development process adhered to modular software engineering practices. All code was organized into self-contained, reproducible Jupyter notebooks paired with comprehensive markdown architectural summaries (\texttt{architecture-v*.md}). 
 
 \subsection{Version Control and Development History}
-The codebase was tracked using Git \cite{git}. The repository logs 14 verified commits spanning September 5 to September 20, 2026, with primary engineering contributions from Abhishek Roy (9 commits), Nawriz Ahmed Turjo (3 commits), and Shams Hossain Simanto (2 commits). Earlier exploratory development was executed in dated local checkpoint notebooks.
+The codebase was tracked using Git \cite{git} in a shared repository. Each model iteration was kept as its own versioned notebook (for example, \texttt{v1} through \texttt{v14} for intention and \texttt{v17}/\texttt{v18} for strategy), so earlier versions remained runnable and comparable after later ones superseded them.
 
 \subsection{Deterministic Seeding and Audit Artifacts}
 To guarantee reproducible outcomes, all scripts execute a centralized seeding utility setting Python \texttt{random}, NumPy, and PyTorch CPU/CUDA RNG states to Seed $= 42$. All trained model weights, out-of-fold validation predictions, and test evaluation matrices were serialized as immutable \texttt{.pt} and \texttt{.jsonl} artifacts.

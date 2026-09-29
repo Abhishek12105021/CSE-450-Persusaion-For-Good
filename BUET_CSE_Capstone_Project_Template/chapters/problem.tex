@@ -138,7 +138,15 @@ To maintain engineering depth and focus computational resources effectively, the
 
 \begin{keypoint}[Operational Scope Boundaries \& Explicit Exclusions]
 \begin{itemize}
-  \item \textbf{In Scope:} Offline discriminative modeling of conversational commitment and rhetorical strategy; multi-label and multi-task loss formulation; hierarchical neural architecture design; synthetic dialogue generation pipelines; comprehensive empirical ablation and forensic post-mortems; compute and energy accounting.
+  \item \textbf{In Scope:}
+    \begin{enumerate}
+      \item \textit{Commitment Prediction:} Offline discriminative modeling of whether the deciding party commits by the end of a dialogue.
+      \item \textit{Strategy Classification:} Multi-label recognition of the persuasion categories and strategies used in each persuader turn.
+      \item \textit{Model Design and Training:} Hierarchical and role-aware neural architectures, with multi-label and multi-task loss formulations.
+      \item \textit{Dataset Construction:} Manual re-annotation of the P4G corpus and a synthetic, manually audited e-commerce negotiation benchmark.
+      \item \textit{Evaluation:} Input ablations, adversarial stress tests, and post-mortem analysis of failure cases.
+      \item \textit{Resource Accounting:} Reporting of compute usage and estimated energy consumption.
+    \end{enumerate}
   \item \textbf{Explicit Exclusions:}
     \begin{enumerate}
       \item \textit{No Live Conversational Chatbot Deployment:} The project develops research-grade discriminative classifiers; it does not deploy an autonomous agent interacting with live human users in production environments.

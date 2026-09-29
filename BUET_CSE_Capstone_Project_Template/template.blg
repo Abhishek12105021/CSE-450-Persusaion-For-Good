@@ -17,45 +17,45 @@ Warning--entry type for "nistairmf" isn't style-file defined
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 
 Done.
-You've used 44 entries,
+You've used 45 entries,
             4087 wiz_defined-function locations,
-            1048 strings with 16962 characters,
-and the built_in function-call counts, 37521 in all, are:
-= -- 2757
-> -- 1132
-< -- 334
-+ -- 620
-- -- 210
-* -- 1772
-:= -- 5137
-add.period$ -- 88
-call.type$ -- 44
-change.case$ -- 44
-chr.to.int$ -- 867
-cite$ -- 44
-duplicate$ -- 2607
-empty$ -- 3116
-format.name$ -- 238
-if$ -- 8869
+            1053 strings with 17269 characters,
+and the built_in function-call counts, 38447 in all, are:
+= -- 2823
+> -- 1163
+< -- 341
++ -- 636
+- -- 216
+* -- 1816
+:= -- 5260
+add.period$ -- 90
+call.type$ -- 45
+change.case$ -- 45
+chr.to.int$ -- 885
+cite$ -- 45
+duplicate$ -- 2671
+empty$ -- 3198
+format.name$ -- 245
+if$ -- 9091
 int.to.chr$ -- 0
-int.to.str$ -- 44
-missing$ -- 482
-newline$ -- 157
-num.names$ -- 44
-pop$ -- 1258
+int.to.str$ -- 45
+missing$ -- 495
+newline$ -- 160
+num.names$ -- 45
+pop$ -- 1293
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 2864
+skip$ -- 2935
 stack$ -- 0
-substring$ -- 1926
-swap$ -- 2148
-text.length$ -- 45
+substring$ -- 1969
+swap$ -- 2199
+text.length$ -- 46
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 44
+type$ -- 45
 warning$ -- 0
-while$ -- 158
-width$ -- 46
-write$ -- 418
+while$ -- 163
+width$ -- 47
+write$ -- 427
 (There was 1 warning)

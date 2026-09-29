@@ -59,10 +59,10 @@ Rigorous academic accountability requires transparent acknowledgment of system l
 
 \subsection{Focused Future Work}
 \begin{itemize}
-  \item \textbf{Asymmetric Persuader-Only Back-Translation:} Data augmentation via back-translation was shown in v8 and v11 to wash away subtle decider hedges (``maybe'', ``if''). Future iterations should explore \textit{asymmetric augmentation}, wherein only the Persuader's rhetorical arguments are paraphrased or back-translated, leaving the Decider's precise linguistic commitments untouched.
+  \item \textbf{Asymmetric Persuader-Only Back-Translation:} Our experiments with back-translation augmentation, first through French and later through multiple pivot languages (French and German) with both beam-search and sampling decoding, showed that translation round-trips wash away subtle decider hedges (``maybe'', ``if''). Future iterations should explore \textit{asymmetric augmentation}, wherein only the Persuader's rhetorical arguments are paraphrased or back-translated, leaving the Decider's precise linguistic commitments untouched.
   \item \textbf{Multilingual and Code-Mixed Adaptation:} Adapting Antiphony to Bengali and Banglish conversational commerce transcripts using multilingual pre-trained encoders (e.g., BanglaBERT, XLM-RoBERTa).
   \item \textbf{Early-Warning Trajectory Monitoring:} In production CRM platforms, the hidden state $\mathbf{h}_t$ of the commitment-trajectory GRU can be evaluated turn-by-turn to provide real-time ``flight risk'' alerts, notifying merchants when buyer commitment begins to decline.
-  \item \textbf{Multi-Seed Significance Testing:} Conducting multi-seed replication runs across cluster hardware to establish formal p-value significance bounds across the 14-version lineage.
+  \item \textbf{Multi-Seed Significance Testing:} Conducting multi-seed replication runs across cluster hardware to establish formal p-value significance bounds across the successive intention architectures, from flat encoders to the hierarchical and dual-stream models.
 \end{itemize}
 
 \section{Continuous Engagement and Self-directed Learning}
@@ -73,7 +73,5 @@ The execution of this capstone project demanded continuous self-directed learnin
   \item \textbf{Advanced Discourse and Attention Mechanics:} Beyond standard classroom NLP, the team independently studied specialized dialogue modeling literature, mastering hierarchical attention mechanisms (HiTrans \cite{li2020hitrans}), recurrent party tracking (DialogueRNN \cite{majumder2019dialoguernn}), and custom cross-attention matrix routing ($Q_{\mathcal{D}}, K_{\mathcal{P}}, V_{\mathcal{P}}$) implemented via PyTorch autograd.
   \item \textbf{Specialized Optimization for Extreme Imbalance:} The team engaged with advanced machine learning literature to understand and implement Class-Balanced Focal Loss \cite{cui2019class}, Asymmetric Loss for multi-label tagging \cite{benbaruch2021asymmetric}, and Supervised Contrastive Loss \cite{khosla2020supervised}, resolving critical gradient explosion bugs through empirical diagnostics.
   \item \textbf{Ensembling and Meta-Learning Architectures:} Developing the 19-member strategy classification pipeline required mastering stacked generalization \cite{wolpert1992stacked}, Platt probability calibration \cite{platt1999probabilistic}, and power-mean blending algorithms.
-  \item \textbf{Hardware-Constrained Deep Learning:} Overcoming the 16\,GB VRAM limitations of NVIDIA T4 GPUs forced the team to master gradient checkpointing, mixed-precision arithmetic, micro-batching, and CUDA memory allocators.
-  \item \textbf{Publication-Grade Typographic and Vector Design:} The team independently mastered advanced \LaTeX, TikZ graphics libraries, and PGFPlots, producing publication-quality vector architecture schematics and empirical data visualizations.
-\end{itemize}
+  \item \textbf{Hardware-Constrained Deep Learning:} Overcoming the 16\,GB VRAM limitations of NVIDIA T4 GPUs forced the team to master gradient checkpointing, mixed-precision arithmetic, micro-batching, and CUDA memory allocators.\end{itemize}
 In summary, this capstone project provided profound professional preparation, instilling a deep appreciation for rigorous engineering methodologies, empirical honesty, and lifelong self-directed technical inquiry.

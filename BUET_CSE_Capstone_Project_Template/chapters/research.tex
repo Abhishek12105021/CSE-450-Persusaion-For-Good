@@ -86,7 +86,11 @@ Qualitative analysis of real marketplace chat patterns reveals key consumer and 
 \end{itemize}
 
 \subsection{Industry Consultations and Field Observations}
-Informal discussions with local social commerce merchants and digital marketing practitioners \pending{Merchant and user interview records} confirm an urgent demand for automated analytical tools. Specifically, merchants express strong interest in automated systems capable of: (i) triaging high-intent leads in real-time, (ii) auditing sales representative dialogue quality against proven persuasive strategies, and (iii) detecting transactional friction before customer disengagement occurs.
+The project's initial scope came out of online meetings with Pathao Ltd., in which the industry partner explained the problem space and the kinds of tools it would find useful. These were informal consultations, and no formal interview records were kept. The main needs raised were automated systems capable of:
+\begin{enumerate}[label=(\roman*)]
+  \item triaging high-intent leads in real time;
+  \item running on a very small model that can be hosted directly on the partner's live servers, without depending on large external LLM services.
+\end{enumerate}
 
 \section{Feasibility Study}
 \label{sec:feasibility}
@@ -94,7 +98,7 @@ Informal discussions with local social commerce merchants and digital marketing 
 We conducted an exhaustive feasibility assessment across four primary dimensions:
 \begin{enumerate}
   \item \textbf{Technical Feasibility:} The proposed approach builds upon proven foundational technologies: PyTorch deep learning frameworks, pre-trained Hugging Face transformer checkpoints, and established optimization libraries. Technical feasibility is substantiated by the comprehensive experimental benchmarks presented in Chapter 5, demonstrating that the developed Antiphony architecture achieves state-of-the-art Macro-F1 ($>0.86$) and trains reliably within 3 to 4 GPU hours.
-  \item \textbf{Economic Feasibility:} The entire empirical development lifecycle was deliberately designed to operate within zero-cost compute constraints. All models were trained, evaluated, and ablated on free-tier cloud GPU accelerators (NVIDIA Tesla T4 with 16\,GB VRAM on Kaggle). The synthetic benchmark generation pipeline leveraged free-tier and low-cost API credits \pending{Exact API spending}, demonstrating that advanced conversational NLP research can be successfully executed without institutional cluster budgets.
+  \item \textbf{Economic Feasibility:} The entire empirical development lifecycle was deliberately designed to operate within zero-cost compute constraints. All models were trained, evaluated, and ablated on free-tier cloud GPU accelerators (NVIDIA Tesla T4 with 16\,GB VRAM on Kaggle). The synthetic benchmark generation pipeline used only the free tier of the Gemini API, so the project incurred no API costs, demonstrating that advanced conversational NLP research can be successfully executed without institutional cluster budgets.
   \item \textbf{Operational Feasibility:} The trained discriminative classifiers are compact ($<500$\,MB model checkpoints for base encoders) and execute inference on standard server GPUs without specialized distributed serving hardware. They integrate cleanly into offline batch-processing analytics pipelines for post-call audits and customer sentiment tracking.
   \item \textbf{Legal and Regulatory Feasibility:} The research strictly respects intellectual property and privacy mandates. The P4G corpus is an established academic benchmark with open research permissions. No proprietary or private user chat logs were harvested; cross-domain commercial transfer was evaluated exclusively on a high-fidelity synthetic benchmark generated under strict ethical guidelines.
 \end{enumerate}

@@ -74,7 +74,7 @@
 \contentsline {section}{\numberline {4.9}Application of Tools}{32}{section.4.9}%
 \contentsline {section}{\numberline {4.10}Implementation}{32}{section.4.10}%
 \contentsline {subsection}{\numberline {4.10.1}Version Control and Development History}{32}{subsection.4.10.1}%
-\contentsline {subsection}{\numberline {4.10.2}Deterministic Seeding and Audit Artifacts}{33}{subsection.4.10.2}%
+\contentsline {subsection}{\numberline {4.10.2}Deterministic Seeding and Audit Artifacts}{32}{subsection.4.10.2}%
 \contentsline {section}{\numberline {4.11}Deployment}{33}{section.4.11}%
 \contentsline {subsection}{\numberline {4.11.1}Prototype Execution Pipeline}{33}{subsection.4.11.1}%
 \contentsline {subsection}{\numberline {4.11.2}Resource Consumption}{33}{subsection.4.11.2}%
@@ -121,8 +121,8 @@
 \contentsline {subsection}{\numberline {6.3.2}Dual-Use Risks: Coercive Manipulation and Dark Patterns}{51}{subsection.6.3.2}%
 \contentsline {section}{\numberline {6.4}Environmental Impact and Life Cycle Sustainability}{51}{section.6.4}%
 \contentsline {subsection}{\numberline {6.4.1}Transparent Computational Energy and Carbon Accounting}{51}{subsection.6.4.1}%
-\contentsline {section}{\numberline {6.5}Ethics}{51}{section.6.5}%
-\contentsline {subsection}{\numberline {6.5.1}Equity and Inclusivity}{51}{subsection.6.5.1}%
+\contentsline {section}{\numberline {6.5}Ethics}{52}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Equity and Inclusivity}{52}{subsection.6.5.1}%
 \contentsline {subsection}{\numberline {6.5.2}Accountability and Personal Responsibility}{52}{subsection.6.5.2}%
 \contentsline {subsection}{\numberline {6.5.3}Proper Use of Intellectual Property}{52}{subsection.6.5.3}%
 \contentsline {subsection}{\numberline {6.5.4}Professionalism and Ethical Codes}{52}{subsection.6.5.4}%

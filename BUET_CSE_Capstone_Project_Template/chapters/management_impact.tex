@@ -7,34 +7,40 @@
 \subsection{Planning and Risk Management}
 \label{sec:plan}
 
-The project followed an agile, iterative research and development lifecycle organized into six primary chronological phases:
+The project ran over the June--September 2026 term (20 June to 30 September 2026). Technical work was completed by 16 September, and the remaining two weeks went to documentation, the poster, and the public demonstration. The work followed an iterative research and development cycle in seven phases, some of which overlapped:
 \begin{enumerate}
-  \item \textbf{Phase 1: Problem Conception and Literature Review} \pending{Reconstructed dates: January--February 2026}. Established conversational asymmetry foundations, reviewed P4G literature, and formulated core problem definitions.
-  \item \textbf{Phase 2: Intention Ground-Truth Curation} \pending{Reconstructed dates: March--April 2026}. Conducted 5-way pilot calibration, manual annotation of 1,017 P4G dialogues (Pass 1), and inter-annotator drift verification.
-  \item \textbf{Phase 3: Intention Model Exploration (Stages 1--3)} \pending{Reconstructed dates: May--July 2026}. Developed flat sequence baselines, diagnosed metric calculation anomalies, implemented hierarchical dialogue transformers, and investigated last-turn gating and specialist routing.
-  \item \textbf{Phase 4: Strategy Taxonomy and Multi-Label Annotation} \pending{Reconstructed dates: July--August 2026}. Defined the 11-category, 41-strategy hierarchy, developed the contextual batching pipeline, and annotated $10{,}600$ Persuader turns under human checkpoints.
-  \item \textbf{Phase 5: Model Consolidation and E-Commerce Benchmarking} (Confirmed Git history: September 5--15, 2026). Deprecated modifier head (Pass 2), developed the Dual-Stream Antiphony architecture, synthesized the 700-dialogue negotiation benchmark, executed multi-task strategy ensemble searches, and conducted adversarial ablations.
-  \item \textbf{Phase 6: Strict Re-annotation and Thesis Finalization} (Confirmed Git history: September 16--20, 2026). Executed strict third-pass intention relabeling (694/323), completed skew stress runs, performed forensic post-mortems, and compiled this report.
+  \item \textbf{Phase 1: Problem Conception and Literature Review} (20 June -- 5 July). Took the initial problem direction from Pathao Ltd., reviewed the persuasion and dialogue-modeling literature and the P4G corpus, and defined the two core tasks: commitment prediction and strategy classification.
+  \item \textbf{Phase 2: Intention Ground-Truth Curation} (6 July -- 19 July). Ran the five-way pilot annotation and the per-annotator drift check, then manually annotated all 1,017 P4G dialogues for the binary decision and the commitment modifier (first pass).
+  \item \textbf{Phase 3: Intention Model Exploration} (20 July -- 16 August). Built and evaluated versions v1 to v12: flat baselines, the metric and augmentation fixes, the hierarchical dialogue transformer, back-translation, ensembling, last-turn gating, and specialist routing.
+  \item \textbf{Phase 4: Strategy Taxonomy and Multi-Label Annotation} (27 July -- 23 August, in parallel with Phase 3). Defined the 11-category, 41-strategy taxonomy and its decision rules, built the contextual batching and validation pipeline, and annotated all $10{,}600$ Persuader turns.
+  \item \textbf{Phase 5: Model Consolidation and E-Commerce Benchmarking} (17 August -- 6 September). Following the supervisor's feedback, dropped the modifier task (second pass) and developed v13-Solo and v14-Antiphony; generated and manually audited the 700-dialogue negotiation benchmark; ran the multi-task strategy ensembles (v17, v18) and the input ablations.
+  \item \textbf{Phase 6: Strict Re-annotation and Final Experiments} (7 September -- 16 September). Produced the stricter third-pass intention labels (694/323), reran v13 and v14 on them, ran the adversarial reversal and skew stress tests, and completed the truncation post-mortems.
+  \item \textbf{Phase 7: Documentation and Demonstration} (17 September -- 30 September). Wrote this report, prepared the poster, leaflet, and live demos, and presented the project at the departmental showcase on 26 September.
 \end{enumerate}
 
 \begin{figure}[htbp]
   \centering
   \begin{ganttchart}[
-      hgrid, vgrid, x unit=0.95cm,
-      time slot format=isodate-yearmonth, time slot unit=month,
+      hgrid, vgrid={*6{draw=none}, dotted},
+      x unit=0.098cm, y unit chart=0.6cm,
+      time slot format=isodate, time slot unit=day,
       title label font=\small\bfseries, bar label font=\footnotesize,
+      milestone label font=\footnotesize\itshape,
       bar/.style={fill=DecMain!40, draw=DecBord},
-      bar incomplete/.style={fill=PerMain!40, draw=PerBord}
-    ]{2026-01}{2026-10}
-    \gantttitlecalendar{year, month=shortname} \\
-    \ganttbar{1. Conception \& Literature \pending{Est.}}{2026-01}{2026-02} \\
-    \ganttbar{2. Intention Curation (Pass 1) \pending{Est.}}{2026-03}{2026-04} \\
-    \ganttbar{3. Hierarchical Exploration \pending{Est.}}{2026-05}{2026-07} \\
-    \ganttbar{4. Strategy Annotation (10.6k) \pending{Est.}}{2026-07}{2026-08} \\
-    \ganttbar{5. Antiphony \& Benchmark Datagen}{2026-09}{2026-09} \\
-    \ganttbar{6. Pass 3 \& Thesis Finalization}{2026-09}{2026-10}
+      milestone/.style={fill=PerMain, draw=PerBord},
+      milestone left shift=-1.5, milestone right shift=2.5
+    ]{2026-06-20}{2026-09-30}
+    \gantttitlecalendar{month=name} \\
+    \ganttbar{1. Conception \& Literature}{2026-06-20}{2026-07-05} \\
+    \ganttbar{2. Intention Curation (Pass 1)}{2026-07-06}{2026-07-19} \\
+    \ganttbar{3. Intention Models (v1--v12)}{2026-07-20}{2026-08-16} \\
+    \ganttbar{4. Strategy Annotation}{2026-07-27}{2026-08-23} \\
+    \ganttbar{5. Antiphony \& Benchmark}{2026-08-17}{2026-09-06} \\
+    \ganttbar{6. Pass 3 \& Final Experiments}{2026-09-07}{2026-09-16} \\
+    \ganttbar{7. Report, Poster \& Demo}{2026-09-17}{2026-09-30} \\
+    \ganttmilestone{Showcase}{2026-09-26}
   \end{ganttchart}
-  \caption{Project timeline and phase distribution. Calendar dates prior to September 5, 2026 are reconstructed estimates (\pending{Confirmed Git history begins September 5, 2026}).}
+  \caption{Project timeline from 20 June to 30 September 2026. Technical work ended on 16 September; the project was presented at the departmental showcase on 26 September.}
   \label{fig:gantt}
 \end{figure}
 
@@ -69,7 +75,7 @@ To demonstrate that publication-grade conversational AI research can be achieved
   \item \textbf{Human Capital:} Five undergraduate student researchers providing domain research, manual dialogue annotation, prompt engineering, model implementation, and empirical evaluation.
   \item \textbf{Compute Hardware:} Exclusively utilized free-tier cloud accelerators: Kaggle Jupyter environments equipped with a single NVIDIA Tesla T4 GPU (16\,GB GDDR6 VRAM), 2 vCPUs, and 13\,GB system RAM. Total zero expenditure on dedicated institutional compute clusters.
   \item \textbf{Software and Checkpoints:} Open-source libraries (PyTorch, Hugging Face, Scikit-learn, XGBoost) and publicly hosted pre-trained checkpoints (RoBERTa, DeBERTa-v3, TOD-BERT, ELECTRA) under permissive research licenses.
-  \item \textbf{API Services for Synthetic Generation:} Paraphrasing and semantic verification leveraged free-tier and promotional credits for the Google Gemini API \pending{Total commercial API expenditure: under \$15, confirm exact billing ledger}.
+  \item \textbf{API Services for Synthetic Generation:} Paraphrasing and semantic verification used the free tier of the Google Gemini API. The project incurred no API costs.
 \end{itemize}
 \end{keypoint}
 
@@ -99,7 +105,7 @@ The capstone project was executed by five undergraduate students in the Departme
 Contributions documented directly in the project repository and research chronicle include:
 \begin{itemize}
   \item \textbf{Dataset Annotation and Ground Truth Curation:} All five team members actively participated in the five-way pilot calibration and independently hand-annotated approximately 200 dialogues each to construct the primary 1,017-dialogue P4G ground-truth corpus. Team members also conducted the independent second-pass agreement study (154 dialogues) and the terminal stance verification of the 81 rechecked dialogues.
-  \item \textbf{Strategy Annotation and Taxonomic Validation:} The multi-label strategy annotation campaign spanning $10{,}600$ Persuader turns was structured across four operational rater segments executed under human checkpoints and distributed audit panels: Segment 1 (Turns 1--2,000; Track A), Segment 2 (Turns 2,001--4,000 and 6,001--7,000; Track B), Segment 3 (Turns 4,001--6,000; Calibration Track), and Segment 4 (Turns 7,001--10,600; Track C). Automated validation harnesses (\texttt{pipeline.py}) continuously cross-verified category hierarchies, enforced single-utterance strategy ceilings, and eliminated label drift.
+  \item \textbf{Strategy Annotation and Taxonomic Validation:} The multi-label strategy annotation campaign spanning $10{,}600$ Persuader turns was structured across four operational rater segments executed under human checkpoints and distributed audit panels: Segment 1 (Turns 1--2,000; Track A), Segment 2 (Turns 2,001--4,000 and 6,001--7,000; Track B), Segment 3 (Turns 4,001--6,000; Calibration Track), and Segment 4 (Turns 7,001--10,600; Track C). An automated annotation validation script continuously cross-verified category hierarchies, enforced single-utterance strategy ceilings, and eliminated label drift.
   \item \textbf{Synthetic E-Commerce Benchmark Audit:} All team members participated in the exhaustive 100\% manual verification of the 700 synthetic negotiation dialogues, verifying conversational consistency, correcting label drift, and validating reversal turn markers.
   \item \textbf{Functional Engineering and Module Allocations:}
     \begin{itemize}
@@ -114,9 +120,9 @@ Contributions documented directly in the project repository and research chronic
 \subsection{Collaboration and Conflict Resolution}
 \label{sec:collaboration}
 
-Collaboration was structured through shared cloud repositories, standardized Jupyter notebook conventions, and bi-weekly synchronization meetings. When empirical conflicts arose—such as the collapse of v3 training or disagreements on boundary intention labels—the team resolved them through objective, data-driven protocols:
+Collaboration was structured through shared cloud repositories, standardized Jupyter notebook conventions, and bi-weekly synchronization meetings. When problems or disagreements arose, such as an early training run that collapsed or disputed labels on borderline dialogues, the team resolved them by checking the evidence rather than by opinion:
 \begin{itemize}
-  \item \textit{Metric Adjudication:} When v3 collapsed, rather than discarding the run or guessing causes, the team systematically audited checkpoint logs, uncovering the metric bug and class weight explosion.
+  \item \textit{Diagnosing the Training Collapse:} When the augmented flat baseline (with EDA augmentation and inverse-frequency class weights) collapsed to predicting \texttt{yes} for every dialogue, the team audited the training logs instead of discarding the run. The audit found two concrete bugs: checkpoints were being selected by the F1 score of the \texttt{yes} class alone, which rewards a model that always answers \texttt{yes}, and the raw inverse-frequency weight on the 13-example \texttt{conditional} class caused unstable gradient spikes. Both were fixed in the next version by selecting on true Macro-F1 and switching to Class-Balanced Focal Loss.
   \item \textit{Consensus Labeling:} Disagreements on ambiguous commitment dialogues were resolved through joint panel re-reads, establishing strict, unambiguous rules (e.g., classifying all temporal deferrals as \texttt{no}).
 \end{itemize}
 
@@ -184,7 +190,7 @@ In accordance with modern sustainable computing mandates \cite{strubell2019energ
   \footnotesize{\newline *Note: Energy computed assuming continuous 70\,W GPU draw; carbon emissions estimated using regional grid carbon intensity factors of $0.50$--$0.70$\,kg CO$_2$e/kWh \cite{lacoste2019quantifying}. Excludes unlogged exploratory runs and CPU data preparation.}
 \end{table}
 
-The total estimated carbon footprint of $\approx 2.5$\,kg CO$_2$e is modest (comparable to driving an average passenger vehicle for less than 10 kilometers). We note that earlier unverified prompts cited an unsubstantiated estimate exceeding eighteen kilograms; our transparent, hardware-grounded derivation demonstrates the true order of magnitude.
+The total estimated carbon footprint of $\approx 2.5$\,kg CO$_2$e is modest (comparable to driving an average passenger vehicle for less than 10 kilometers).
 
 \section{Ethics}
 \label{sec:ethics}
@@ -199,15 +205,15 @@ The project acknowledges significant linguistic and cultural boundaries:
 
 \subsection{Accountability and Personal Responsibility}
 \label{sec:accountability}
-The authors accept full personal and academic responsibility for the integrity, methodology, and reported metrics of this report. All reported failures (e.g., v3 collapse, tokenizer truncation artifacts, and the rejection of the XGBoost stacker) are disclosed transparently to uphold scientific accountability.
+The authors accept full personal and academic responsibility for the integrity, methodology, and reported metrics of this report. All reported failures (e.g., the early training collapse caused by the checkpoint-selection metric, tokenizer truncation artifacts, and the rejection of the XGBoost stacker) are disclosed transparently to uphold scientific accountability.
 
 \subsection{Proper Use of Intellectual Property}
 \label{sec:ip}
 All third-party assets, pre-trained model checkpoints, and open-source packages are used in full compliance with their respective academic and open-source licenses:
 \begin{itemize}
-  \item \textbf{Datasets:} Persuasion for Good (P4G) is utilized under its standard academic research license \pending{Confirm license details}.
+  \item \textbf{Datasets:} The Persuasion for Good (P4G) corpus \cite{wang2019persuasion} is an open-source dataset released under the Apache License 2.0. We obtained it directly from ConvoKit \cite{chang2020convokit} (\texttt{persuasionforgood-corpus}), which redistributes it under the same license, and cite the original authors as the license requires.
   \item \textbf{Pre-Trained Encoders:} RoBERTa, DeBERTa-v3, TOD-BERT, and ELECTRA are distributed under Apache 2.0 and MIT open-source licenses.
-  \item \textbf{Disclosure of Generative AI Assistance:} In accordance with BUET academic integrity standards, we explicitly disclose the use of generative AI technologies: (i) Claude-3.7/Opus agent pipelines were utilized for multi-label persuasion strategy annotation under human checkpoints, (ii) Google Gemini Flash API was employed for organic paraphrasing in synthetic e-commerce dialogue generation, and (iii) an agentic AI assistant was utilized as a typesetting and drafting aid in compiling this LaTeX thesis from the team's underlying research notes.
+  \item \textbf{Disclosure of Generative AI Assistance:} In accordance with BUET academic integrity standards, we explicitly disclose the use of generative AI technologies: (i) Anthropic Claude 5 was used for multi-label persuasion strategy annotation under human checkpoints, (ii) the Google Gemini 3.5 Flash API was used for organic paraphrasing in synthetic e-commerce dialogue generation, and (iii) the project poster and leaflet were designed with the help of Claude AI.
 \end{itemize}
 
 \subsection{Professionalism and Ethical Codes}

@@ -588,11 +588,6 @@ INPUT D:\LaTex\MikTeX\fonts\enc\dvips\newtx\ntx-ot1-tlf.enc
 INPUT D:\LaTex\MikTeX\fonts\vf\public\newtx\ntxmi.vf
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\NewTXMI.tfm
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\stxscr.tfm
-INPUT D:\LaTex\MikTeX\fonts\vf\public\newtx\ntxmia.vf
-INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\txmiaSTbb.tfm
-INPUT D:\LaTex\MikTeX\fonts\vf\public\newtx\ntxsy.vf
-INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\txsys.tfm
-INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\txex-bar.tfm
 INPUT .\template.toc
 INPUT .\template.toc
 INPUT template.toc
@@ -604,10 +599,15 @@ INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\ntx-Bold-tlf-ot1.tfm
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\ntx-Bold-tlf-ot1.tfm
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\ntx-Bold-tlf-ot1.tfm
 OUTPUT template.lof
+INPUT D:\LaTex\MikTeX\fonts\vf\public\newtx\ntxmia.vf
+INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\txmiaSTbb.tfm
 INPUT D:\LaTex\MikTeX\fonts\vf\public\newtx\ntx-Bold-tlf-ot1.vf
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\txbmiaX.tfm
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\ntx-Bold-tlf-ot1r.tfm
 INPUT D:\LaTex\MikTeX\fonts\vf\public\newtx\ntxsy7.vf
+INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\txsys.tfm
+INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\txex-bar.tfm
+INPUT D:\LaTex\MikTeX\fonts\vf\public\newtx\ntxsy.vf
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\txsys.tfm
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\txex-bar.tfm
 INPUT D:\LaTex\MikTeX\fonts\vf\public\newtx\ntxmi7.vf
@@ -702,7 +702,6 @@ INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\ntx-Regular-tlf-ot1r.tfm
 INPUT .\figures\tikz\strategy_annotation_pipeline.tikz
 INPUT .\figures\tikz\strategy_annotation_pipeline.tikz
 INPUT figures\tikz\strategy_annotation_pipeline.tikz
-INPUT D:\LaTex\MikTeX\fonts\tfm\public\txfonts\t1xbtt.tfm
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\txfonts\t1xtt.tfm
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\ntx-Regular-tlf-ot1.tfm
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\ntx-Regular-tlf-ot1.tfm
@@ -859,6 +858,7 @@ INPUT .\figures\eda_strategy_correlation.png
 INPUT .\figures\eda_strategy_correlation.png
 INPUT .\figures\eda_strategy_correlation.png
 INPUT .\figures\eda_strategy_correlation.png
+INPUT D:\LaTex\MikTeX\fonts\tfm\public\txfonts\t1xbtt.tfm
 INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\ntx-Bold-tlf-t1.tfm
 INPUT .\figures\ablation_antiphony.png
 INPUT .\figures\ablation_antiphony.png
@@ -931,6 +931,7 @@ INPUT .\chapters\management_impact.tex
 INPUT .\chapters\management_impact.tex
 INPUT .\chapters\management_impact.tex
 INPUT chapters\management_impact.tex
+INPUT D:\LaTex\MikTeX\fonts\tfm\public\newtx\ntx-Italic-tlf-t1.tfm
 INPUT .\chapters\conclusion.tex
 INPUT .\chapters\conclusion.tex
 INPUT .\chapters\conclusion.tex
