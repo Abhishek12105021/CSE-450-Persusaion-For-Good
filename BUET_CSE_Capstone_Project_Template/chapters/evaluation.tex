@@ -41,7 +41,7 @@ All intention experiments utilize stratified 70\% / 15\% / 15\% train/validation
 \section{Corpus Dynamics and Strategy Exploratory Data Analysis}
 \label{sec:strategy-eda}
 
-Prior to modeling, we conducted an exhaustive exploratory data analysis (EDA) across the $10{,}600$ Persuader turns of the multi-label strategy corpus. \Cref{fig:eda-grid-1,fig:eda-grid-2,fig:eda-grid-3} display the twelve staged empirical distributions.
+Prior to modeling, we conducted an exhaustive exploratory data analysis (EDA) across the $10{,}600$ Persuader turns of the multi-label strategy corpus. \Cref{fig:eda-grid-1,fig:eda-strat-pos,fig:eda-grid-3} display six staged empirical distributions.
 
 \begin{figure}[htbp]
   \centering
@@ -61,52 +61,19 @@ Prior to modeling, we conducted an exhaustive exploratory data analysis (EDA) ac
   \\[6pt]
   \begin{subfigure}[b]{0.48\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{eda_strategy_prevalence.png}
-    \caption{Strategy prevalence (all 41 strategies).}
-    \label{fig:eda-strat-prev}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.48\textwidth}
-    \centering
     \includegraphics[width=\textwidth]{eda_category_cooccurrence.png}
     \caption{Category co-occurrence matrix.}
     \label{fig:eda-cat-cooc}
   \end{subfigure}
-  \caption{Strategy corpus EDA: label density, category/strategy prevalence, and category co-occurrence.}
+  \caption{Strategy corpus EDA: label density, category prevalence, and category co-occurrence.}
   \label{fig:eda-grid-1}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{eda_strategy_cooccurrence.png}
-    \caption{Strategy co-occurrence matrix.}
-    \label{fig:eda-strat-cooc}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{eda_label_density_segment.png}
-    \caption{Label density across annotator segments.}
-    \label{fig:eda-segment-density}
-  \end{subfigure}
-  \\[6pt]
-  \begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{eda_category_by_segment.png}
-    \caption{Category distribution by annotator.}
-    \label{fig:eda-cat-segment}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{eda_strategy_by_position.png}
-    \caption{Strategy deployment by turn position.}
-    \label{fig:eda-strat-pos}
-  \end{subfigure}
-  \caption{Strategy corpus EDA: strategy co-occurrence, segment rater variance, and positional dynamics.}
-  \label{fig:eda-grid-2}
+  \includegraphics[width=0.48\textwidth]{eda_strategy_by_position.png}
+  \caption{Strategy corpus EDA: strategy deployment by turn position.}
+  \label{fig:eda-strat-pos}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -124,21 +91,7 @@ Prior to modeling, we conducted an exhaustive exploratory data analysis (EDA) ac
     \caption{Turn text length distribution (words).}
     \label{fig:eda-text-len}
   \end{subfigure}
-  \\[6pt]
-  \begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{eda_strategy_rank_frequency.png}
-    \caption{Strategy rank-frequency distribution.}
-    \label{fig:eda-rank-freq}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{eda_strategy_correlation.png}
-    \caption{Strategy pairwise correlation matrix.}
-    \label{fig:eda-strat-corr}
-  \end{subfigure}
-  \caption{Strategy corpus EDA: length distributions, rank-frequency skew, and correlation structures.}
+  \caption{Strategy corpus EDA: label density and turn length distributions.}
   \label{fig:eda-grid-3}
 \end{figure}
 
@@ -147,7 +100,6 @@ Prior to modeling, we conducted an exhaustive exploratory data analysis (EDA) ac
   \item \textbf{High Multi-Label Density:} $48.9\%$ of turns carry 2 or more strategy labels (\Cref{fig:eda-labels}), proving that human persuasion utterances pack multiple rhetorical acts into single turns (e.g., small talk greeting + factual charity inquiry).
   \item \textbf{Dominance of Relational Scaffolding:} \texttt{Relational and Interactive} ($46.2\%$) and \texttt{Information Provision} ($36.1\%$) dominate the communicative landscape (\Cref{fig:eda-cat-prev}). Hard pressure tactics (\texttt{Threat and Pressure} at $2.3\%$, \texttt{Urgency and Scarcity} at $1.5\%$) are deployed sparingly.
   \item \textbf{Pronounced Positional Trajectory:} Strategy deployment varies systematically across turn positions (\Cref{fig:eda-strat-pos}): \texttt{rapport\_building} and \texttt{source\_related\_inquiry} peak in turns 1--3; factual statistics and emotional appeals dominate middle turns (turns 4--8); while \texttt{donation\_procedure\_information}, \texttt{gratitude\_and\_appreciation}, and \texttt{incremental\_ask} concentrate in closing turns (turns 9--14).
-  \item \textbf{Extreme Long-Tail Power Law:} Strategy rank-frequency follows an extreme power-law distribution (\Cref{fig:eda-rank-freq}). The top strategy (\texttt{rapport\_building}) appears on $2{,}860$ turns, while the rarest (\texttt{door\_in\_the\_face}) appears on only 2 turns.
 \end{enumerate}
 
 \section{Intention Classification Results Across Three Passes}
