@@ -5,20 +5,20 @@
 \section{Experimental Investigation Setup}
 \label{sec:investigation}
 
-The empirical investigation substantiates the proposed architectural and methodological hypotheses through systematic experimentation across three distinct dialogue datasets.
+We test the proposed architectural and methodological hypotheses through experiments on three separate dialogue datasets.
 
 \subsection{Research Questions and Hypotheses}
-We formulate five core research questions (RQs):
+We formulate five research questions (RQs):
 \begin{itemize}
   \item \textbf{RQ1 (Context Length Bottleneck):} Does hierarchical utterance encoding overcome the performance ceiling imposed by flat sequence transformer truncation in multi-turn dialogues?
-  \item \textbf{RQ2 (Asymmetric Disentanglement):} Does role-pure dual-stream encoding with directional cross-attention (\textit{Antiphony}) achieve superior intention classification compared to symmetric, single-stream hierarchical models?
-  \item \textbf{RQ3 (Task Decoupling):} Does removing the minority modifier prediction task relieve negative gradient interference, boosting binary commitment Macro-F1?
+  \item \textbf{RQ2 (Asymmetric Disentanglement):} Does role-pure dual-stream encoding with directional cross-attention (\textit{Antiphony}) achieve better intention classification compared to symmetric, single-stream hierarchical models?
+  \item \textbf{RQ3 (Task Decoupling):} Does removing the minority modifier prediction task relieve negative gradient interference and raise binary commitment Macro-F1?
   \item \textbf{RQ4 (Decision Layer Efficiency):} Can a tuned gradient-boosted decision tree (XGBoost) stacking layer outperform a calibrated power-mean blend in combining heterogeneous multi-label strategy classifiers?
   \item \textbf{RQ5 (Adversarial Trajectory Robustness):} When closing conversational turns are destabilized by non-monotonic stance reversals, does trajectory tracking maintain a positive sufficiency gap over localized decision baselines?
 \end{itemize}
 
 \subsection{Data Splits and Evaluation Protocols}
-All intention experiments utilize stratified 70\% / 15\% / 15\% train/validation/test splits partitioned at the dialogue level to eliminate cross-turn leakage:
+All intention experiments use stratified 70\% / 15\% / 15\% train/validation/test splits partitioned at the dialogue level to eliminate cross-turn leakage:
 \begin{itemize}
   \item \textbf{P4G Intention Corpus ($N=1{,}017$):} $711$ training, $153$ validation, and $153$ test dialogues. Stratified on the joint commitment-by-modifier stratum.
   \item \textbf{P4G Strategy Corpus ($10{,}600$ turns):} $7{,}592$ training, $1{,}504$ validation, and $1{,}504$ test turns, partitioned by dialogue identity with multi-label stratification.
@@ -32,16 +32,16 @@ All intention experiments utilize stratified 70\% / 15\% / 15\% train/validation
     \begin{equation}
       \text{Macro-F1} = \frac{F_1^{(\text{no})} + F_1^{(\text{yes})}}{2}
     \end{equation}
-    where $F_1^{(c)} = 2 P_c R_c / (P_c + R_c)$. This treats minority refusals with equal weight to majority affirmations.
+    where $F_1^{(c)} = 2 P_c R_c / (P_c + R_c)$. This gives minority refusals the same weight as majority affirmations.
   \item \textbf{Multi-Label Category Metrics:} Micro-F1 (aggregating global true positives, false positives, and false negatives) and Macro-F1 (unweighted average across 11 category F1 scores).
   \item \textbf{Sufficiency Gap ($\Delta_{\text{suff}}$):} Defined in \Cref{eq:sufficiency_gap} as the performance differential between the full dialogue model and a control seeing only the final decision turn.
-  \item \textbf{Decision Threshold Calibration:} For binary intention models, optimal thresholds $\theta^* \in [0.10, 0.90]$ are selected via grid search on the validation split to maximize validation Macro-F1, and evaluated strictly out-of-fold on the test split. Both default ($\theta=0.50$) and tuned thresholds are reported transparently.
+  \item \textbf{Decision Threshold Calibration:} For binary intention models, optimal thresholds $\theta^* \in [0.10, 0.90]$ are selected via grid search on the validation split to maximize validation Macro-F1, and evaluated out-of-fold on the test split. We report both default ($\theta=0.50$) and tuned thresholds.
 \end{itemize}
 
 \section{Corpus Dynamics and Strategy Exploratory Data Analysis}
 \label{sec:strategy-eda}
 
-Prior to modeling, we conducted an exhaustive exploratory data analysis (EDA) across the $10{,}600$ Persuader turns of the multi-label strategy corpus. \Cref{fig:eda-grid-1,fig:eda-strat-pos,fig:eda-grid-3} display six staged empirical distributions.
+Prior to modeling, we ran an exploratory data analysis (EDA) over the $10{,}600$ Persuader turns of the multi-label strategy corpus. \Cref{fig:eda-grid-1,fig:eda-strat-pos,fig:eda-grid-3} show six of the resulting distributions.
 
 \begin{figure}[htbp]
   \centering
@@ -97,8 +97,8 @@ Prior to modeling, we conducted an exhaustive exploratory data analysis (EDA) ac
 
 \subsection{Key Analytical EDA Takeaways}
 \begin{enumerate}
-  \item \textbf{High Multi-Label Density:} $48.9\%$ of turns carry 2 or more strategy labels (\Cref{fig:eda-labels}), proving that human persuasion utterances pack multiple rhetorical acts into single turns (e.g., small talk greeting + factual charity inquiry).
-  \item \textbf{Dominance of Relational Scaffolding:} \texttt{Relational and Interactive} ($46.2\%$) and \texttt{Information Provision} ($36.1\%$) dominate the communicative landscape (\Cref{fig:eda-cat-prev}). Hard pressure tactics (\texttt{Threat and Pressure} at $2.3\%$, \texttt{Urgency and Scarcity} at $1.5\%$) are deployed sparingly.
+  \item \textbf{High Multi-Label Density:} $48.9\%$ of turns carry 2 or more strategy labels (\Cref{fig:eda-labels}), showing that human persuasion utterances pack multiple rhetorical acts into single turns (e.g., small talk greeting + factual charity inquiry).
+  \item \textbf{Dominance of Relational Scaffolding:} \texttt{Relational and Interactive} ($46.2\%$) and \texttt{Information Provision} ($36.1\%$) dominate the category distribution (\Cref{fig:eda-cat-prev}). Hard pressure tactics (\texttt{Threat and Pressure} at $2.3\%$, \texttt{Urgency and Scarcity} at $1.5\%$) are deployed sparingly.
   \item \textbf{Pronounced Positional Trajectory:} Strategy deployment varies systematically across turn positions (\Cref{fig:eda-strat-pos}): \texttt{rapport\_building} and \texttt{source\_related\_inquiry} peak in turns 1--3; factual statistics and emotional appeals dominate middle turns (turns 4--8); while \texttt{donation\_procedure\_information}, \texttt{gratitude\_and\_appreciation}, and \texttt{incremental\_ask} concentrate in closing turns (turns 9--14).
 \end{enumerate}
 
@@ -257,7 +257,7 @@ Prior to modeling, we conducted an exhaustive exploratory data analysis (EDA) ac
   \end{tabularx}
 \end{table}
 
-\textbf{Threshold Consistency Note (Conflict C8):} The headline figure $0.8623$ for DeBERTa in the Second-Pass benchmark uses the default $0.50$ threshold, whereas RoBERTa ($0.8595$) and TOD-BERT ($0.8379$) use tuned thresholds. Applying a strictly consistent tuned threshold rule yields $0.8600$ for DeBERTa. Under either reporting rule, Dual-Stream Antiphony decisively outperforms the Decoupled Single-Stream baseline by over $3.5$ Macro-F1 percentage points.
+\textbf{Threshold Consistency Note (Conflict C8):} The headline figure $0.8623$ for DeBERTa in the Second-Pass benchmark uses the default $0.50$ threshold, whereas RoBERTa ($0.8595$) and TOD-BERT ($0.8379$) use tuned thresholds. Applying the tuned threshold rule consistently gives $0.8600$ for DeBERTa. Under either reporting rule, Dual-Stream Antiphony outperforms the Decoupled Single-Stream baseline by over $3.5$ Macro-F1 percentage points.
 
 \Cref{tab:breakdown-second-pass} provides the detailed class-level precision, recall, and F1 breakdown for Antiphony across backbones.
 
@@ -334,7 +334,7 @@ Prior to modeling, we conducted an exhaustive exploratory data analysis (EDA) ac
 \end{table}
 
 \subsection{Direct Comparison: Decoupled Single-Stream vs. Dual-Stream Antiphony}
-\Cref{tab:v13-vs-v14} synthesizes the direct head-to-head performance of the best encoder between the Decoupled Single-Stream Baseline and Dual-Stream Antiphony across both datasets.
+\Cref{tab:v13-vs-v14} compares the best encoder of the Decoupled Single-Stream Baseline with the best encoder of Dual-Stream Antiphony on both datasets.
 
 \begin{table}[htbp]
   \centering
@@ -351,7 +351,7 @@ Prior to modeling, we conducted an exhaustive exploratory data analysis (EDA) ac
     \bottomrule
   \end{tabularx}
 \end{table}
-Across both datasets, Antiphony's best encoder consistently outperforms the Decoupled Single-Stream baseline's best encoder by a positive Macro-F1 margin, supporting the architectural efficacy of role-pure cross-attention.
+Across both datasets, Antiphony's best encoder consistently outperforms the Decoupled Single-Stream baseline's best encoder by a positive Macro-F1 margin, which supports the effectiveness of role-pure cross-attention.
 
 \section{Strategy and Category Multi-Task Benchmarking}
 \label{sec:strategy-results}
@@ -382,7 +382,7 @@ Across both datasets, Antiphony's best encoder consistently outperforms the Deco
 \end{table}
 
 \subsection{Operating Points and Micro-Optimal Decoding Analyses}
-While the Power-Mean Blend edges the Bagged Candidate Ensemble by $0.0004$ macro-F1 and $0.0031$ micro-F1 at the macro-optimal point, evaluating each model's \textbf{micro-optimal operating point} reveals an important empirical finding (\Cref{tab:operating-points}).
+The Power-Mean Blend edges the Bagged Candidate Ensemble by $0.0004$ macro-F1 and $0.0031$ micro-F1 at the macro-optimal point, but the comparison changes when each model is evaluated at its \textbf{micro-optimal operating point} (\Cref{tab:operating-points}).
 
 \begin{table}[htbp]
   \centering
@@ -404,15 +404,15 @@ While the Power-Mean Blend edges the Bagged Candidate Ensemble by $0.0004$ macro
   \end{tabularx}
 \end{table}
 
-At its micro-optimal point, the Bagged 19-Member Pool achieves \textbf{$0.7062$ micro-F1} and \textbf{$0.5642$ macro-F1}, dominating all Power-Mean operating points on both metrics simultaneously. Three vital caveats must be noted:
+At its micro-optimal point, the Bagged 19-Member Pool achieves \textbf{$0.7062$ micro-F1} and \textbf{$0.5642$ macro-F1}, which beats every Power-Mean operating point on both metrics. Three caveats apply:
 \begin{enumerate}
-  \item \textbf{Statistical Equivalence:} Cluster-bootstrap 95\% confidence intervals for macro-F1 ([0.533, 0.589] for the Bagged Pool; [0.534, 0.581] for the Power-Mean Blend) overlap almost completely, confirming that both ensemble formulations are statistically tied.
+  \item \textbf{Statistical Equivalence:} Cluster-bootstrap 95\% confidence intervals for macro-F1 ([0.533, 0.589] for the Bagged Pool; [0.534, 0.581] for the Power-Mean Blend) overlap almost completely, so the two ensemble formulations are statistically tied.
   \item \textbf{Selection Inversion Noise:} In the Bagged Pool, the micro-selected decode scores higher on macro-F1 ($0.5642$) than its own macro-selected decode ($0.5593$). This inversion indicates validation-to-test selection variance rather than true structural superiority.
   \item \textbf{Ceiling Proximity:} Against the human cross-annotator agreement ceiling ($0.79$), the Power-Mean Blend's $0.6949$ captures $88.0\%$ of possible agreement, while the Bagged Pool's $0.7062$ reaches $89.4\%$.
 \end{enumerate}
 
 \subsection{Evaluated Decision Combiners: Stacker vs. Blend}
-\Cref{tab:combiners} contrasts the evaluated decision layers. The tuned XGBoost stacker ($0.5508$ macro-F1) represents a strong, viable architecture but falls short of the calibrated power-mean blend ($0.5716$).
+\Cref{tab:combiners} contrasts the evaluated decision layers. The tuned XGBoost stacker ($0.5508$ macro-F1) is a strong, viable architecture but falls short of the calibrated power-mean blend ($0.5716$).
 
 \begin{table}[htbp]
   \centering
@@ -439,10 +439,10 @@ At its micro-optimal point, the Bagged 19-Member Pool achieves \textbf{$0.7062$ 
 \section{Cross-Domain Transfer and Adversarial Ablation}
 \label{sec:transfer-ablation}
 
-To determine whether Antiphony genuinely models conversational trajectory or merely exploits superficial lexical shortcuts, we evaluated models across the canonical ($N=500$) and adversarially augmented ($N=700$) e-commerce negotiation benchmarks.
+To determine whether Antiphony models conversational trajectory or only exploits superficial lexical shortcuts, we evaluated models across the canonical ($N=500$) and adversarially augmented ($N=700$) e-commerce negotiation benchmarks.
 
 \subsection{Monolithic Input Ablation Study}
-We subjected a monolithic RoBERTa-base sequence classifier to four input ablations:
+We applied four input ablations to a monolithic RoBERTa-base sequence classifier:
 \begin{enumerate}
   \item $\text{Ablation}_{\text{LTR}}$ (Last-Turn-Removed): excises the final Buyer turn.
   \item $\text{Ablation}_{\text{LTR+M}}$: excises the final Buyer turn and trailing merchant confirmations.
@@ -450,7 +450,7 @@ We subjected a monolithic RoBERTa-base sequence classifier to four input ablatio
   \item $\text{Ablation}_{\text{PRO}}$ (Pre-Reversal-Only): cuts the dialogue immediately prior to the stance shift.
 \end{enumerate}
 
-\Cref{tab:ablation-results} details the empirical results.
+\Cref{tab:ablation-results} reports the results.
 
 \begin{table}[htbp]
   \centering
@@ -468,7 +468,7 @@ We subjected a monolithic RoBERTa-base sequence classifier to four input ablatio
   \end{tabularx}
 \end{table}
 
-\textbf{Arm B Reversal Subset:} On the 200 reversal dialogues alone (test $n=30$), monolithic ablation yields: LTR $1.0000$ accuracy / $1.0000$ Macro-F1; LTR+M $0.9667$ / $0.9666$; FHO $0.8667$ / $0.8661$; and PRO $0.9583$ / $0.9577$. In all reversal evaluations, the stance flip error rate was exactly \textbf{0.0\%} ($0/20$), disproving the hypothesis that models misclassify toward the initial stance.
+\textbf{Arm B Reversal Subset:} On the 200 reversal dialogues alone (test $n=30$), monolithic ablation yields: LTR $1.0000$ accuracy / $1.0000$ Macro-F1; LTR+M $0.9667$ / $0.9666$; FHO $0.8667$ / $0.8661$; and PRO $0.9583$ / $0.9577$. In all reversal evaluations, the stance flip error rate was \textbf{0.0\%} ($0/20$), disproving the hypothesis that models misclassify toward the initial stance.
 
 \subsection{Treatment Evaluation: Antiphony on Augmented Dialogues}
 \Cref{tab:transfer-benchmark} benchmarks Antiphony against the closing-turn control on the augmented corpus ($N=700$, test $n=105$).
@@ -513,7 +513,7 @@ Comparing canonical and augmented evaluations establishes the definitive proof o
     \bottomrule
   \end{tabularx}
 \end{table}
-When dialogues follow clean monotonic paths ($N=500$), the closing turn is sufficient ($\Delta_{\text{suff}} = +0.0001$). But when trajectories are destabilized by adversarial stance reversals ($N=700$), the closing turn baseline degrades by $0.0497$, while Antiphony holds at $0.9619$, widening the sufficiency gap to \textbf{$+0.0384$}. Trajectory tracking directly accounts for this performance lift.
+When dialogues follow clean monotonic paths ($N=500$), the closing turn is sufficient ($\Delta_{\text{suff}} = +0.0001$). When adversarial stance reversals destabilize the trajectories ($N=700$), the closing turn baseline drops by $0.0497$ while Antiphony holds at $0.9619$, which widens the sufficiency gap to \textbf{$+0.0384$}. Trajectory tracking accounts for this lift.
 
 \begin{figure}[htbp]
   \centering
@@ -584,29 +584,29 @@ When dialogues follow clean monotonic paths ($N=500$), the closing turn is suffi
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.75\textwidth]{label_distribution_antiphony.png}
-  \caption{Verified label distribution of the canonical e-commerce benchmark ($N=500$), displaying 262 negative / 238 affirmative instances across the four primary outcome categories.}
+  \caption{Verified label distribution of the canonical e-commerce benchmark ($N=500$), with 262 negative / 238 affirmative instances across the four primary outcome categories.}
   \label{fig:label-dist}
 \end{figure}
 
 \section{Skew Stress Analysis}
 \label{sec:skew-stress}
 
-To test robustness against operational class imbalance, we performed a skew stress analysis on Antiphony (\texttt{skew\_stress\_generic-v14-antiphony.csv}). We systematically depressed the affirmative training ratio from $47.71\%$ ($n_{\text{train}}=350$) down to $9.85\%$ ($n_{\text{train}}=203$) by pruning positive training examples.
+To test robustness against operational class imbalance, we performed a skew stress analysis on Antiphony (\texttt{skew\_stress\_generic-v14-antiphony.csv}). We lowered the affirmative training ratio from $47.71\%$ ($n_{\text{train}}=350$) down to $9.85\%$ ($n_{\text{train}}=203$) by pruning positive training examples.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.75\textwidth]{skew_stress_antiphony.png}
-  \caption{Skew stress analysis of Antiphony under severe class imbalance, showing Macro-F1 resilience across affirmative training proportions from 47.7\% down to 9.8\%.}
+  \caption{Skew stress analysis of Antiphony under severe class imbalance, showing that Macro-F1 holds up across affirmative training proportions from 47.7\% down to 9.8\%.}
   \label{fig:skew-stress}
 \end{figure}
 
-As shown in \Cref{fig:skew-stress}, both the `\texttt{protected'' arm (calibrating decision thresholds between $0.10$ and $0.30$) and the }`unprotected'' arm (fixed $0.50$ threshold) maintained Macro-F1 between \textbf{$0.9333$} and \textbf{$0.9733$} across sample sizes of 350, 261, 215, and 203. The Class-Balanced Focal loss and trajectory representations prevent majority-class collapse even under severe 9:1 negative skew.
+As shown in \Cref{fig:skew-stress}, both the ``protected'' arm (calibrating decision thresholds between $0.10$ and $0.30$) and the ``unprotected'' arm (fixed $0.50$ threshold) maintained Macro-F1 between \textbf{$0.9333$} and \textbf{$0.9733$} across sample sizes of 350, 261, 215, and 203. The Class-Balanced Focal loss and trajectory representations prevent majority-class collapse even under severe 9:1 negative skew.
 
 \section{Forensic Post-Mortems}
 \label{sec:forensics}
 
 \subsection{Tokenizer Truncation Directionality Forensic}
-In our initial ablation benchmarks, default right-truncation (\texttt{truncation\_side='right'}) produced an apparent catastrophic collapse in Macro-F1 to $0.8133$, suggesting an enormous necessity gap of $0.1600$. 
+In our initial ablation benchmarks, default right-truncation (\texttt{truncation\_side='right'}) produced an apparent collapse in Macro-F1 to $0.8133$, suggesting a large necessity gap of $0.1600$. 
 
 \begin{figure}[htbp]
   \centering
@@ -615,19 +615,19 @@ In our initial ablation benchmarks, default right-truncation (\texttt{truncation
   \label{fig:left-trunc}
 \end{figure}
 
-Auditing token lengths revealed that $30.4\%$ ($152$ of $500$) of dialogues exceeded 512 tokens. Under right-truncation, the tokenizer silently discarded the end of the dialogue, excising the decision turn entirely. Switching to left-truncation (\texttt{truncation\_side='left'}) preserved the terminal exchanges, discarding only opening greetings. Macro-F1 recovered immediately to \textbf{$0.9331$} (\Cref{fig:left-trunc}), shrinking the apparent necessity gap from $0.1600$ to $0.0402$.
+Auditing token lengths revealed that $30.4\%$ ($152$ of $500$) of dialogues exceeded 512 tokens. Under right-truncation, the tokenizer silently discarded the end of the dialogue, excising the decision turn entirely. Switching to left-truncation (\texttt{truncation\_side='left'}) preserved the terminal exchanges, discarding only opening greetings. Macro-F1 recovered to \textbf{$0.9331$} (\Cref{fig:left-trunc}), shrinking the apparent necessity gap from $0.1600$ to $0.0402$.
 
 \begin{keypoint}[Forensic Invariant: Tokenizer Truncation Directionality]
-Under standard default right-truncation (\texttt{truncation\_side='right'}), $30.4\%$ of dialogues exceeding 512 tokens lose their terminal decision turns, inducing an artificial necessity gap of $0.1600$. Re-architecting tokenization to left-truncation retains proximal closing exchanges, recovering Macro-F1 from $0.8133$ to \textbf{$0.9331$} ($+0.1198$) and shrinking the true necessity gap to $0.0402$.
+Under default right-truncation (\texttt{truncation\_side='right'}), $30.4\%$ of dialogues exceed 512 tokens and lose their terminal decision turns, which creates an artificial necessity gap of $0.1600$. Switching the tokenizer to left-truncation retains proximal closing exchanges, recovering Macro-F1 from $0.8133$ to \textbf{$0.9331$} ($+0.1198$) and shrinking the true necessity gap to $0.0402$.
 \end{keypoint}
 
 \subsection{Merchant Accommodation Leakage}
-Why did the Pre-Reversal-Only ($\text{Ablation}_{\text{PRO}}$) monolithic model achieve $0.9499$ Macro-F1 without seeing the buyer's stance change? Forensic examination reveals that negotiation is a collaborative dialogue. In positive reversals, the merchant offers tangible accommodations (warranties, free cases, discounts) \textit{before} the buyer accepts. In negative reversals, the merchant introduces friction (non-refundable deposits, delivery delays) \textit{before} the buyer cancels. Monolithic models achieve near-perfect classification simply by detecting merchant accommodation patterns.
+Why did the Pre-Reversal-Only ($\text{Ablation}_{\text{PRO}}$) monolithic model achieve $0.9499$ Macro-F1 without seeing the buyer's stance change? Inspection shows that negotiation is a collaborative dialogue. In positive reversals, the merchant offers tangible accommodations (warranties, free cases, discounts) \textit{before} the buyer accepts. In negative reversals, the merchant introduces friction (non-refundable deposits, delivery delays) \textit{before} the buyer cancels. Monolithic models achieve near-perfect classification simply by detecting merchant accommodation patterns.
 
 \section{Performance Evaluation Against Requirements}
 \label{sec:compliance}
 
-\Cref{tab:requirements-compliance} systematically audits the completed system against the specifications established in Chapter 3.
+\Cref{tab:requirements-compliance} checks the completed system against the specifications set out in Chapter 3.
 
 \begin{table}[htbp]
   \centering
@@ -662,10 +662,10 @@ Why did the Pre-Reversal-Only ($\text{Ablation}_{\text{PRO}}$) monolithic model 
 \section{Deviations and Design Revisions}
 \label{sec:revisions}
 
-Throughout the capstone lifecycle, four major design deviations occurred between early project proposals and the final system:
+Over the course of the capstone, the final system departed from the early project proposals in four major ways:
 \begin{enumerate}
-  \item \textbf{Rejection of the XGBoost Stacking Decision Layer:} Early design specifications proposed an XGBoost stacking decision layer. Thorough empirical tuning (v17/v18) proved that while an XGBoost stacker can be successfully trained ($0.5508$ macro-F1), a calibrated power-mean blend achieves superior cross-validated performance ($0.5716$). The stacker was retained as a documented baseline, and the power-mean blend shipped.
+  \item \textbf{Rejection of the XGBoost Stacking Decision Layer:} Early design specifications proposed an XGBoost stacking decision layer. Tuning experiments (v17/v18) showed that an XGBoost stacker can be trained ($0.5508$ macro-F1), but a calibrated power-mean blend scores higher under cross-validation ($0.5716$). The stacker was retained as a documented baseline, and the power-mean blend shipped.
   \item \textbf{Deprecation of the Minority Modifier Head:} Early proposals treated intention as a joint binary-plus-modifier task. The modifier head suffered from extreme class sparsity (9 training examples for \texttt{conditional}), never broke $0.45$ F1, and degraded binary performance. Following supervisory advice, the modifier task was removed, recovering substantial binary capacity.
-  \item \textbf{Correction of Default Right-Truncation:} Initial benchmark scripts used standard Hugging Face right-truncation, causing an apparent necessity gap of $0.1600$. Forensic investigation identified that $30.4\%$ of dialogues exceeded 512 tokens. Reconfiguring tokenizers to left-truncation restored the proximal closing exchanges ($+0.1198$ Macro-F1 recovery).
+  \item \textbf{Correction of Default Right-Truncation:} Initial benchmark scripts used standard Hugging Face right-truncation, causing an apparent necessity gap of $0.1600$. Investigation found that $30.4\%$ of dialogues exceeded 512 tokens. Reconfiguring tokenizers to left-truncation restored the proximal closing exchanges ($+0.1198$ Macro-F1 recovery).
   \item \textbf{Rollback of Uncalibrated Category Augmentation:} In the category classification pipeline, applying fine-strategy augmentation rules to category training inflated rows from $7{,}562$ to $64{,}082$ ($88.2\%$ synthetic), exhausting GPU compute limits. Augmentation was deactivated for categories, completing a clean 7-model run in 177 minutes with zero data degradation.
 \end{enumerate}

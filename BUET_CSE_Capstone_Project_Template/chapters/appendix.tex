@@ -2,7 +2,7 @@
 \chapter{Hyperparameters and Optimization Specifications}
 \label{app:hyperparameters}
 
-This appendix provides the complete optimization and hyperparameter configurations across all primary models developed in the capstone project, ensuring exact reproducibility.
+This appendix lists the complete optimization and hyperparameter configurations for all primary models developed in the capstone project, so that the runs can be reproduced exactly.
 
 \begin{table}[htbp]
   \centering
@@ -36,7 +36,7 @@ This appendix provides the complete optimization and hyperparameter configuratio
 \end{table}
 
 \section*{XGBoost Decision Stacker Tuning Grid}
-The tuned XGBoost stacking decision layer evaluated across 72 candidate grid configurations:
+The XGBoost stacking decision layer was tuned over 72 candidate grid configurations:
 \begin{itemize}
   \item \textbf{Feature Regimes:} Logits Mode (20 features) and Rich Mode (41 features).
   \item \textbf{Max Depth:} $\in \{3, 4, 6\}$ (winning value: 4).
@@ -146,10 +146,10 @@ Below is an illustrative record from \texttt{final\_plus\_reversal\_v3.json} sho
 \chapter{Conflict Register and Empirical Audit Log}
 \label{app:conflicts}
 
-To ensure complete scientific integrity, this appendix documents the resolution of all fifteen empirical and textual discrepancies identified in the project record:
+For transparency, this appendix records how each of the fifteen empirical and textual discrepancies found in the project record was resolved:
 
 \begin{keypoint}[Audit Rule of Primacy: Ground-Truth Empirical Primacy]
-Whenever prompt narratives, retrospective slides, or draft summaries contradict raw serialized artifacts (\texttt{.jsonl}, \texttt{.csv}, evaluation outputs, or reproducible notebook execution cells), the empirical data artifacts are held strictly authoritative. Speculative claims and draft misstatements are formally audited and corrected.
+Whenever prompt narratives, retrospective slides, or draft summaries contradict raw serialized artifacts (\texttt{.jsonl}, \texttt{.csv}, evaluation outputs, or reproducible notebook execution cells), the empirical data artifacts are treated as authoritative. Speculative claims and draft misstatements are audited and corrected.
 \end{keypoint}
 
 \begin{table}[htbp]
@@ -174,7 +174,7 @@ Whenever prompt narratives, retrospective slides, or draft summaries contradict 
     \textbf{C5} & E-Commerce Dataset Counts & Text prompts claimed 250/250 and 6 outcome classes. & Frozen files contain $262$ no / $238$ yes ($N=500$) and $362$ no / $338$ yes ($N=700$) across 4 outcome classes. \\
     \midrule
     \rowcolor{lightbg}
-    \textbf{C6} & Ablation Terminology & Prompts cited non-existent regimes (`\texttt{Suffix'', }`$+0.1420$''). & Followed report: LTR, LTR+M, FHO, PRO; necessity gap dropped from $0.1600$ to $0.0402$. \\
+    \textbf{C6} & Ablation Terminology & Prompts cited non-existent regimes (``Suffix'', ``$+0.1420$''). & Followed report: LTR, LTR+M, FHO, PRO; necessity gap dropped from $0.1600$ to $0.0402$. \\
     \midrule
     \textbf{C7} & Stage Boundaries & Conflicting epoch definitions across prompts. & Standardized to 4 stages: Stage 1 (Flat Baselines), Stage 2 (Hierarchical Transformers), Stage 3 (Gated \& Decoupled), Stage 4 (Dual-Stream Antiphony). \\
     \midrule

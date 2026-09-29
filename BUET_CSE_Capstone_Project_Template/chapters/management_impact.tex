@@ -44,7 +44,7 @@ The project ran over the June--September 2026 term (20 June to 30 September 2026
   \label{fig:gantt}
 \end{figure}
 
-\Cref{tab:risk-matrix} presents the proactive risk management matrix implemented during system development.
+\Cref{tab:risk-matrix} lists the risks identified during system development and the mitigations we applied.
 
 \begin{table}[htbp]
   \centering
@@ -70,10 +70,10 @@ The project ran over the June--September 2026 term (20 June to 30 September 2026
 \label{sec:budget}
 
 \begin{keypoint}[Zero-Budget Computational Strategy]
-To demonstrate that publication-grade conversational AI research can be achieved responsibly without institutional cluster budgets, the project operated under strict zero-budget constraints:
+The project ran on a zero budget, to show that conversational AI research of publication grade can be done responsibly without institutional cluster budgets. It used the following resources:
 \begin{itemize}
-  \item \textbf{Human Capital:} Five undergraduate student researchers providing domain research, manual dialogue annotation, prompt engineering, model implementation, and empirical evaluation.
-  \item \textbf{Compute Hardware:} Exclusively utilized free-tier cloud accelerators: Kaggle Jupyter environments equipped with a single NVIDIA Tesla T4 GPU (16\,GB GDDR6 VRAM), 2 vCPUs, and 13\,GB system RAM. Total zero expenditure on dedicated institutional compute clusters.
+  \item \textbf{Human Capital:} Five undergraduate student researchers, who carried out domain research, manual dialogue annotation, prompt engineering, model implementation, and empirical evaluation.
+  \item \textbf{Compute Hardware:} Only free-tier cloud accelerators: Kaggle Jupyter environments with a single NVIDIA Tesla T4 GPU (16\,GB GDDR6 VRAM), 2 vCPUs, and 13\,GB system RAM. Nothing was spent on dedicated institutional compute clusters.
   \item \textbf{Software and Checkpoints:} Open-source libraries (PyTorch, Hugging Face, Scikit-learn, XGBoost) and publicly hosted pre-trained checkpoints (RoBERTa, DeBERTa-v3, TOD-BERT, ELECTRA) under permissive research licenses.
   \item \textbf{API Services for Synthetic Generation:} Paraphrasing and semantic verification used the free tier of the Google Gemini API. The project incurred no API costs.
 \end{itemize}
@@ -82,17 +82,17 @@ To demonstrate that publication-grade conversational AI research can be achieved
 \subsection{Economic Analysis and Financial Prospecting}
 \label{sec:economics}
 
-In emerging conversational commerce ecosystems, micro-merchants experience severe operational inefficiency, spending up to 60\% of their daily labor answering non-converting inquiries. The economic value proposition of deploying compact, discriminative intention classifiers includes:
+In emerging conversational commerce markets, micro-merchants operate very inefficiently: they spend up to 60\% of their daily labor answering inquiries that never convert. Deploying compact, discriminative intention classifiers has the following economic value:
 \begin{enumerate}
-  \item \textbf{Lead Triage Automation:} By continuously scoring purchasing probability ($\hat{y}$), customer support systems can automatically route high-intent buyers to senior sales representatives while serving automated informational responses to casual exploratory browsers.
-  \item \textbf{Low Operating Costs:} Because Antiphony runs on standard commodity hardware ($<50$\,ms latency on single GPUs without requiring billion-parameter LLM clusters), operational deployment costs are orders of magnitude lower than querying proprietary commercial LLM APIs (\$0.00002 per turn vs. \$0.02+ per API call).
-  \item \textbf{Sales Coaching and Quality Assurance:} Quantifying persuader strategy distributions across sales teams identifies effective rhetorical patterns, improving staff training in non-profit fundraising and retail commerce.
+  \item \textbf{Lead Triage Automation:} A customer support system that continuously scores purchase probability ($\hat{y}$) can route high-intent buyers to senior sales representatives automatically and send automated informational replies to casual browsers.
+  \item \textbf{Low Operating Costs:} Because Antiphony runs on standard commodity hardware ($<50$\,ms latency on single GPUs, with no need for billion-parameter LLM clusters), its deployment costs are orders of magnitude lower than those of querying proprietary commercial LLM APIs (\$0.00002 per turn vs. \$0.02+ per API call).
+  \item \textbf{Sales Coaching and Quality Assurance:} Measuring how persuader strategies are distributed across sales teams identifies the rhetorical patterns that work, which improves staff training in non-profit fundraising and retail commerce.
 \end{enumerate}
 
 \subsection{Sustainability in Business and Commercialisation}
 \label{sec:commercialisation}
 
-To remain commercially viable post-course, the framework can be adapted as an open-core software library or integrated into social commerce CRM platforms (e.g., Messenger management dashboards). Maintaining operational viability requires: (i) periodic retraining as colloquial slang and product catalogs shift, (ii) establishing data feedback loops where sales reps flag false positives, and (iii) containerizing the inference pipeline into lightweight Docker microservices.
+To remain commercially viable after the course, the framework can be adapted as an open-core software library or integrated into social commerce CRM platforms (e.g., Messenger management dashboards). Maintaining operational viability requires: (i) periodic retraining as colloquial slang and product catalogs shift, (ii) establishing data feedback loops where sales reps flag false positives, and (iii) containerizing the inference pipeline into lightweight Docker microservices.
 
 \section{Individual and Teamwork}
 \label{sec:team}
@@ -102,11 +102,11 @@ To remain commercially viable post-course, the framework can be adapted as an op
 
 The capstone project was executed by five undergraduate students in the Department of Computer Science and Engineering, BUET (Group 10): \textbf{Arnob Biswas, Nawriz Ahmed Turjo, Abhishek Roy, Monjur Hossain Khan, and Shams Hossain Simanto}. 
 
-Contributions documented directly in the project repository and research chronicle include:
+The project repository and research chronicle record the following contributions:
 \begin{itemize}
-  \item \textbf{Dataset Annotation and Ground Truth Curation:} All five team members actively participated in the five-way pilot calibration and independently hand-annotated approximately 200 dialogues each to construct the primary 1,017-dialogue P4G ground-truth corpus. Team members also conducted the independent second-pass agreement study (154 dialogues) and the terminal stance verification of the 81 rechecked dialogues.
-  \item \textbf{Strategy Annotation and Taxonomic Validation:} The multi-label strategy annotation campaign spanning $10{,}600$ Persuader turns was structured across four operational rater segments executed under human checkpoints and distributed audit panels: Segment 1 (Turns 1--2,000; Track A), Segment 2 (Turns 2,001--4,000 and 6,001--7,000; Track B), Segment 3 (Turns 4,001--6,000; Calibration Track), and Segment 4 (Turns 7,001--10,600; Track C). An automated annotation validation script continuously cross-verified category hierarchies, enforced single-utterance strategy ceilings, and eliminated label drift.
-  \item \textbf{Synthetic E-Commerce Benchmark Audit:} All team members participated in the exhaustive 100\% manual verification of the 700 synthetic negotiation dialogues, verifying conversational consistency, correcting label drift, and validating reversal turn markers.
+  \item \textbf{Dataset Annotation and Ground Truth Curation:} All five team members took part in the five-way pilot calibration, and each independently hand-annotated approximately 200 dialogues to build the primary 1,017-dialogue P4G ground-truth corpus. Team members also ran the independent second-pass agreement study (154 dialogues) and the terminal stance verification of the 81 rechecked dialogues.
+  \item \textbf{Strategy Annotation and Taxonomic Validation:} The multi-label strategy annotation of the $10{,}600$ Persuader turns was split into four rater segments, run under human checkpoints and distributed audit panels: Segment 1 (Turns 1--2,000; Track A), Segment 2 (Turns 2,001--4,000 and 6,001--7,000; Track B), Segment 3 (Turns 4,001--6,000; Calibration Track), and Segment 4 (Turns 7,001--10,600; Track C). An automated annotation validation script cross-checked category hierarchies throughout, enforced single-utterance strategy ceilings, and eliminated label drift.
+  \item \textbf{Synthetic E-Commerce Benchmark Audit:} All team members took part in the 100\% manual verification of the 700 synthetic negotiation dialogues, checking conversational consistency, correcting label drift, and validating reversal turn markers.
   \item \textbf{Functional Engineering and Module Allocations:}
     \begin{itemize}
       \item \textbf{Arnob Biswas:} Directed the empirical evaluation harness, baseline benchmarking across sequence-level and hierarchical transformer variants, statistical significance testing, and cross-model performance validation.
@@ -120,52 +120,52 @@ Contributions documented directly in the project repository and research chronic
 \subsection{Collaboration and Conflict Resolution}
 \label{sec:collaboration}
 
-Collaboration was structured through shared cloud repositories, standardized Jupyter notebook conventions, and bi-weekly synchronization meetings. When problems or disagreements arose, such as an early training run that collapsed or disputed labels on borderline dialogues, the team resolved them by checking the evidence rather than by opinion:
+The team collaborated through shared cloud repositories, standard Jupyter notebook conventions, and bi-weekly sync meetings. When problems or disagreements arose, such as an early training run that collapsed or disputed labels on borderline dialogues, the team resolved them by checking the evidence rather than by opinion:
 \begin{itemize}
   \item \textit{Diagnosing the Training Collapse:} When the augmented flat baseline (with EDA augmentation and inverse-frequency class weights) collapsed to predicting \texttt{yes} for every dialogue, the team audited the training logs instead of discarding the run. The audit found two concrete bugs: checkpoints were being selected by the F1 score of the \texttt{yes} class alone, which rewards a model that always answers \texttt{yes}, and the raw inverse-frequency weight on the 13-example \texttt{conditional} class caused unstable gradient spikes. Both were fixed in the next version by selecting on true Macro-F1 and switching to Class-Balanced Focal Loss.
-  \item \textit{Consensus Labeling:} Disagreements on ambiguous commitment dialogues were resolved through joint panel re-reads, establishing strict, unambiguous rules (e.g., classifying all temporal deferrals as \texttt{no}).
+  \item \textit{Consensus Labeling:} Disagreements on ambiguous commitment dialogues were resolved by re-reading them together as a panel and then setting unambiguous rules (e.g., classifying all temporal deferrals as \texttt{no}).
 \end{itemize}
 
 \subsection{Leadership and Direction}
 \label{sec:leadership}
 
-Technical direction was steered through clear task division and proactive recovery planning. Following the supervisor's critical directives—specifically the mandate to drop the modifier head and tighten the commitment definition—the team demonstrated agility by halting unproductive multi-task branches and systematically refactoring the entire evaluation harness within 72 hours.
+The team set technical direction through a clear division of tasks and by planning ahead for recovery. When the supervisor directed us to drop the modifier head and tighten the commitment definition, the team stopped the unproductive multi-task branches and refactored the entire evaluation harness within 72 hours.
 
 \subsection{Multidisciplinary Engagement}
 \label{sec:multidisciplinary}
 
-The project engaged deeply across multiple academic disciplines:
+The project drew on several academic disciplines:
 \begin{itemize}
-  \item \textbf{Behavioral Psychology and Rhetoric:} Translating Cialdini's influence theory \cite{cialdini2001influence} and sequential compliance tactics \cite{freedman1966compliance,cialdini1975reciprocal} into a formalized computational taxonomy.
+  \item \textbf{Behavioral Psychology and Rhetoric:} Translating Cialdini's influence theory \cite{cialdini2001influence} and sequential compliance tactics \cite{freedman1966compliance,cialdini1975reciprocal} into a formal computational taxonomy.
   \item \textbf{Computational Linguistics and Pragmatics:} Analyzing conversational implicature, speech acts, and turn-taking discourse dynamics.
-  \item \textbf{E-Commerce and Emerging Market Economics:} Grounding adversarial benchmark scenarios in the practical realities of mobile social commerce in Bangladesh.
+  \item \textbf{E-Commerce and Emerging Market Economics:} Basing the adversarial benchmark scenarios on how mobile social commerce works in practice in Bangladesh.
 \end{itemize}
 
 \section{Impact on Society}
 \label{sec:society}
 
 \subsection{Positive Societal and Commercial Benefits}
-The developed computational models offer substantial positive social utility:
+The models offer several social and commercial benefits:
 \begin{itemize}
-  \item \textbf{Empowerment of Independent MSMEs:} Providing resource-constrained micro-merchants with automated customer triage tools, allowing them to compete effectively against large commercial retail platforms.
-  \item \textbf{Enhancing Non-Profit Philanthropy:} Providing charitable organizations with empirical insights into which communicative strategies foster genuine empathy and donor engagement, improving fundraising efficiency for humanitarian crises.
-  \item \textbf{Customer Autonomy and Transparency:} Automated strategy classification tools can be inverted to act as consumer protection guards, alerting online shoppers when conversational agents deploy aggressive scarcity pressure, artificial deadlines, or guilt-inducing rhetoric.
+  \item \textbf{Empowerment of Independent MSMEs:} Automated customer triage tools let micro-merchants with limited resources compete effectively with large commercial retail platforms.
+  \item \textbf{Enhancing Non-Profit Philanthropy:} Charitable organizations gain empirical evidence on which communicative strategies produce genuine empathy and donor engagement, which improves fundraising efficiency for humanitarian crises.
+  \item \textbf{Customer Autonomy and Transparency:} Automated strategy classification tools can be turned around to protect consumers by alerting online shoppers when conversational agents deploy aggressive scarcity pressure, artificial deadlines, or guilt-inducing rhetoric.
 \end{itemize}
 
 \subsection{Dual-Use Risks: Coercive Manipulation and Dark Patterns}
-Like all persuasive technologies, computational persuasion models carry inherent dual-use risks:
+Like all persuasive technologies, computational persuasion models carry dual-use risks:
 \begin{itemize}
-  \item \textbf{Automated Exploitative Persuasion:} Malicious actors could leverage strategy optimization models to design predatory chatbots that systematically exploit psychological vulnerabilities (e.g., targeting low-income or elderly users with coercive debt-financing or deceptive gambling products).
-  \item \textbf{Mitigation:} In accordance with IEEE 7000 value-based design, this project explicitly restricted its scope to \textit{discriminative analysis and understanding}, deliberately excluding natural language generation (NLG) engines capable of autonomous persuasive manipulation.
+  \item \textbf{Automated Exploitative Persuasion:} Malicious actors could use strategy optimization models to build predatory chatbots that systematically exploit psychological vulnerabilities (e.g., targeting low-income or elderly users with coercive debt-financing or deceptive gambling products).
+  \item \textbf{Mitigation:} In accordance with IEEE 7000 value-based design, this project limited its scope to \textit{discriminative analysis and understanding} and deliberately left out natural language generation (NLG) engines that could carry out persuasive manipulation autonomously.
 \end{itemize}
 
 \section{Environmental Impact and Life Cycle Sustainability}
 \label{sec:sustainability}
 
 \subsection{Transparent Computational Energy and Carbon Accounting}
-In accordance with modern sustainable computing mandates \cite{strubell2019energy,lacoste2019quantifying}, we transparently account for the environmental footprint of our experimental research. All training runs were conducted on cloud-hosted NVIDIA Tesla T4 GPUs (rated at a maximum thermal design power of 70\,W board draw). 
+Following current guidance on sustainable computing \cite{strubell2019energy,lacoste2019quantifying}, we report the environmental footprint of our experiments. All training runs used cloud-hosted NVIDIA Tesla T4 GPUs (rated at a maximum thermal design power of 70\,W board draw). 
 
-\Cref{tab:carbon-footprint} itemizes the estimated compute hours across the reported experimental lineages.
+\Cref{tab:carbon-footprint} breaks down the estimated compute hours by reported experimental lineage.
 
 \begin{table}[htbp]
   \centering
@@ -197,25 +197,25 @@ The total estimated carbon footprint of $\approx 2.5$\,kg CO$_2$e is modest (com
 
 \subsection{Equity and Inclusivity}
 \label{sec:equity}
-The project acknowledges significant linguistic and cultural boundaries:
+The project has significant linguistic and cultural limitations:
 \begin{itemize}
-  \item \textbf{Linguistic Exclusion:} All investigated datasets and models operate exclusively in English. This excludes non-English speakers and fails to capture the code-mixed dialects (e.g., Banglish) prevalent in South Asian social commerce.
+  \item \textbf{Linguistic Exclusion:} All the datasets and models we studied are English only. This excludes non-English speakers and fails to capture the code-mixed dialects (e.g., Banglish) prevalent in South Asian social commerce.
   \item \textbf{Cultural Specificity:} The P4G corpus reflects Western, North American conversational norms regarding charitable giving. Applying these rhetorical taxonomies to non-Western contexts without cultural adaptation may introduce systematic evaluation bias.
 \end{itemize}
 
 \subsection{Accountability and Personal Responsibility}
 \label{sec:accountability}
-The authors accept full personal and academic responsibility for the integrity, methodology, and reported metrics of this report. All reported failures (e.g., the early training collapse caused by the checkpoint-selection metric, tokenizer truncation artifacts, and the rejection of the XGBoost stacker) are disclosed transparently to uphold scientific accountability.
+The authors take full personal and academic responsibility for the integrity, methodology, and reported metrics of this report. The report discloses its failures openly (e.g., the early training collapse caused by the checkpoint-selection metric, tokenizer truncation artifacts, and the rejection of the XGBoost stacker) for the sake of scientific accountability.
 
 \subsection{Proper Use of Intellectual Property}
 \label{sec:ip}
-All third-party assets, pre-trained model checkpoints, and open-source packages are used in full compliance with their respective academic and open-source licenses:
+All third-party assets, pre-trained model checkpoints, and open-source packages are used in compliance with their respective academic and open-source licenses:
 \begin{itemize}
   \item \textbf{Datasets:} The Persuasion for Good (P4G) corpus \cite{wang2019persuasion} is an open-source dataset released under the Apache License 2.0. We obtained it directly from ConvoKit \cite{chang2020convokit} (\texttt{persuasionforgood-corpus}), which redistributes it under the same license, and cite the original authors as the license requires.
   \item \textbf{Pre-Trained Encoders:} RoBERTa, DeBERTa-v3, TOD-BERT, and ELECTRA are distributed under Apache 2.0 and MIT open-source licenses.
-  \item \textbf{Disclosure of Generative AI Assistance:} In accordance with BUET academic integrity standards, we explicitly disclose the use of generative AI technologies: (i) Anthropic Claude 5 was used for multi-label persuasion strategy annotation under human checkpoints, (ii) the Google Gemini 3.5 Flash API was used for organic paraphrasing in synthetic e-commerce dialogue generation, and (iii) the project poster and leaflet were designed with the help of Claude AI.
+  \item \textbf{Disclosure of Generative AI Assistance:} Following BUET academic integrity standards, we disclose our use of generative AI tools: (i) Anthropic Claude 5 was used for multi-label persuasion strategy annotation under human checkpoints, (ii) the Google Gemini 3.5 Flash API was used for organic paraphrasing in synthetic e-commerce dialogue generation, and (iii) the project poster and leaflet were designed with the help of Claude AI.
 \end{itemize}
 
 \subsection{Professionalism and Ethical Codes}
 \label{sec:codes}
-The project adheres to the highest standards of professional engineering ethics, conforming strictly to the ACM Code of Ethics \cite{acmcode} and the IEEE Code of Ethics \cite{ieeecode}, ensuring that computational capabilities advance human understanding while actively mitigating risks of technological harm.
+The project follows professional engineering ethics as set out in the ACM Code of Ethics \cite{acmcode} and the IEEE Code of Ethics \cite{ieeecode}. We aim for computational capabilities to advance human understanding while actively reducing the risks of technological harm.
