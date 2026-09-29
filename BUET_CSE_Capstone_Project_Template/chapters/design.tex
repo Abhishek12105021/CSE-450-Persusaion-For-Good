@@ -462,7 +462,7 @@ To guarantee reproducible outcomes, all scripts execute a centralized seeding ut
 \label{sec:deployment}
 
 \subsection{Prototype Execution Pipeline}
-In its present form, the system operates as an offline research prototype executed within Kaggle and Python environments. The end-to-end inference execution flow for an unlabelled dialogue proceeds as follows:
+All training, evaluation, and ablation runs were executed offline within Kaggle and Python environments. The trained models are additionally exposed through two demonstration web applications, presented in \Cref{sec:ui}. The end-to-end inference execution flow for an unlabelled dialogue proceeds as follows:
 \begin{equation}
   \text{Transcript } \mathcal{D} \xrightarrow{\text{Tokenize}} [U \times 64] \xrightarrow{\text{Encoder}} \mathbf{U} \xrightarrow{\text{Split \& Cross-Attend}} \mathbf{X} \xrightarrow{\text{GRU + Pool}} \mathbf{z} \xrightarrow{\text{MLP}} \hat{y}
 \end{equation}
@@ -471,4 +471,155 @@ In its present form, the system operates as an offline research prototype execut
 Inference on a complete 20-turn dialogue executes in approximately $45$\,ms on an NVIDIA T4 GPU ($380$\,ms on an 8-core Intel CPU under batch size 1). Measured GPU training runtimes across model variants: Metric-Corrected Baseline ($\approx 20$\,min), Hierarchical Transformer ($\approx 2.5$\,h), Hierarchical Back-Translation ($\approx 5.0$\,h), Last-Turn Gated Model ($\approx 2.5$\,h), Decoupled Single-Stream ($\approx 3.5$\,h), and Antiphony ($\approx 3.0$\,h). The category clean rerun took 177 minutes, and strategy ensemble search required $\approx 4.0$\,hours.
 
 \subsection{Operational Boundaries and Omissions}
-We state plainly that this project is an academic research prototype. \textbf{No commercial production serving microservice, optimized runtime graph export, model quantization, automated deployment pipeline, or live latency SLA benchmarks were constructed.} Deploying the system into production would require implementing streaming turn ingestion, model quantization, and robust fail-soft API infrastructure.
+We state plainly that this project is an academic research prototype. The demonstration applications of \Cref{sec:ui} exist to show the models in use and are not a production service. \textbf{No commercial production serving microservice, optimized runtime graph export, model quantization, or live latency SLA benchmarks were constructed.} Deploying the system into production would require implementing streaming turn ingestion, model quantization, and robust fail-soft API infrastructure.
+
+\section{User Interface}
+\label{sec:ui}
+
+The models are presented to end users through \emph{Havn}, a messaging platform built for this project in two variants that share one interface: a persuasion app, in which donors message fundraisers (\url{https://intentionalysis-persuasion.vercel.app}), and a buyer-seller app, in which buyers message merchants (\url{https://intentionalysis-buyer-seller.vercel.app}). Each variant has two sides. The persuadee side (donor or buyer) is an ordinary chat client with no AI output anywhere. The persuader side (fundraiser or merchant) is a workspace in which every conversation is scored live by the models. The AI is an observer only: it never writes or sends messages. All screenshots in this section were captured from the deployed applications on desktop (1440\,px) and phone (390\,px) viewports; the names of donors and buyers are fictional.
+
+\subsection{Donor and Buyer Side}
+A donor signs in or registers, browses a directory of fundraisers, opens a fundraiser's profile to see its active campaigns, and starts a conversation (\Cref{fig:ui-donor-desktop,fig:ui-donor-mobile}). Forms validate each field inline before submission. The chat itself shows messages and delivery status only; no score, badge, or strategy label is ever shown to the persuadee.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{0.8\textwidth}
+    \centering
+    \uishot{donor_discover_desktop.png}
+    \caption{Discover: a searchable directory of fundraisers with cause, location, and typical reply time.}
+    \label{fig:ui-donor-discover}
+  \end{subfigure}
+  \\[8pt]
+  \begin{subfigure}[b]{0.8\textwidth}
+    \centering
+    \uishot{donor_profile_desktop.png}
+    \caption{Fundraiser profile: headline statistics and active campaigns with funding progress bars.}
+    \label{fig:ui-donor-profile}
+  \end{subfigure}
+  \caption{Donor side of the persuasion app on desktop.}
+  \label{fig:ui-donor-desktop}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[t]{0.235\textwidth}
+    \centering
+    \uishot{donor_signin_mobile.png}
+    \caption{Sign-in with a demo account panel.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.235\textwidth}
+    \centering
+    \uishot{donor_register_mobile.png}
+    \caption{Registration with field-level validation.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.235\textwidth}
+    \centering
+    \uishot{donor_discover_mobile.png}
+    \caption{Discover with search and bottom tab bar.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.235\textwidth}
+    \centering
+    \uishot{donor_chat_mobile.png}
+    \caption{Donor's chat: plain messages, no AI output.}
+  \end{subfigure}
+  \caption{Donor side of the persuasion app on a phone.}
+  \label{fig:ui-donor-mobile}
+\end{figure}
+
+\subsection{Fundraiser Workspace}
+A fundraiser lands on an overview page (\Cref{fig:ui-overview}) with summary cards (active conversations, conversations awaiting a reply, donors scored as likely to donate, median first-reply time), an AI-ranked list of the donors most likely to give, and the distribution of donation intent across open chats. The inbox (\Cref{fig:ui-inbox}) uses a three-pane layout. The left pane lists conversations with an intent badge (\emph{Likely}, \emph{Unclear}, \emph{Unlikely}) and an unread count, and can be searched or filtered to unread or likely conversations. The centre pane is the chat, where each fundraiser message carries the persuasion strategies detected in it. The right pane is the live AI analysis panel: a donation-intent gauge coloured by band (70 and above high, 31 to 69 medium, 30 and below low), the predicted outcome and confidence, the strategies used so far in the conversation, an intent timeline with one point per donor message, and the donor's latest replies.
+
+\begin{figure}[htbp]
+  \centering
+  \uishot[\textwidth]{fundraiser_overview_desktop.png}
+  \caption{Fundraiser overview: summary cards, AI-ranked ``most likely to donate'' list, donation-intent distribution, and recent conversations with intent badges.}
+  \label{fig:ui-overview}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \uishot[\textwidth]{fundraiser_inbox_desktop.png}
+  \caption{Fundraiser inbox. Left: conversation list with intent badges, unread counts, search, and filters. Centre: chat with strategy labels under each fundraiser message. Right: AI analysis panel with the intent gauge, predicted outcome and confidence, strategies used, intent timeline, and latest donor replies.}
+  \label{fig:ui-inbox}
+\end{figure}
+
+\subsection{Responsive Layouts}
+The workspace adapts to the available width. On a compact laptop screen (1100\,px) the AI panel leaves the page and opens as a slide-over drawer from an AI button in the conversation header (\Cref{fig:ui-compact}). On a phone (\Cref{fig:ui-fundraiser-mobile}) the overview and inbox become single-column screens, and the AI analysis opens as a bottom sheet over the chat; when the sheet is closed, the header button keeps showing the current intent score.
+
+\begin{figure}[!htbp]
+  \centering
+  \uishot[0.75\textwidth]{fundraiser_drawer_compact.png}
+  \caption{Compact (1100\,px) layout: the AI analysis panel opens as a slide-over drawer instead of a fixed third pane.}
+  \label{fig:ui-compact}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[t]{0.235\textwidth}
+    \centering
+    \uishot{fundraiser_overview_mobile.png}
+    \caption{Overview as stacked summary cards.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.235\textwidth}
+    \centering
+    \uishot{fundraiser_inbox_mobile.png}
+    \caption{Inbox with intent badges and filters.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.235\textwidth}
+    \centering
+    \uishot{fundraiser_aisheet_mobile.png}
+    \caption{AI analysis as a bottom sheet.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.235\textwidth}
+    \centering
+    \uishot{fundraiser_aichip_mobile.png}
+    \caption{Sheet closed; the header button shows the score.}
+  \end{subfigure}
+  \caption{Fundraiser workspace on a phone.}
+  \label{fig:ui-fundraiser-mobile}
+\end{figure}
+
+\subsection{Merchant Workspace}
+The buyer-seller app reuses the same layout for the commerce domain (\Cref{fig:ui-merchant,fig:ui-merchant-mobile}). Buyers browse merchant storefronts with product listings instead of campaigns. In the merchant workspace the gauge reports purchase intent (70 and above high, 40 to 69 medium, below 40 low), and inbox badges read \emph{High}, \emph{Medium}, or \emph{Low intent}. In place of persuasion strategies, the panel shows a checklist of detected buyer signals (for example, asking about price, delivery, or payment method), which are matched by keyword rules on the buyer's messages rather than by a model, together with buyer messages quoted as evidence.
+
+\begin{figure}[htbp]
+  \centering
+  \uishot[0.78\textwidth]{merchant_inbox_desktop.png}
+  \caption{Merchant inbox: purchase-intent gauge in the medium band, detected buyer-signal checklist, intent timeline, and quoted evidence.}
+  \label{fig:ui-merchant}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[t]{0.235\textwidth}
+    \centering
+    \uishot{buyer_signin_mobile.png}
+    \caption{Buyer sign-in.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.235\textwidth}
+    \centering
+    \uishot{buyer_storefront_mobile.png}
+    \caption{Merchant storefront with products.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.235\textwidth}
+    \centering
+    \uishot{merchant_medium_mobile.png}
+    \caption{Merchant's AI sheet, medium intent.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.235\textwidth}
+    \centering
+    \uishot{merchant_high_mobile.png}
+    \caption{Merchant's AI sheet, high intent.}
+  \end{subfigure}
+  \caption{Buyer-seller app on a phone.}
+  \label{fig:ui-merchant-mobile}
+\end{figure}

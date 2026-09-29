@@ -15,6 +15,9 @@
 \renewcommand{\_}{\textunderscore\penalty0\relax}
 \setlength{\emergencystretch}{2.5em}
 
+% Framed application screenshot: \uishot[width]{file in figures/ui/}
+\newcommand{\uishot}[2][\linewidth]{{\setlength{\fboxsep}{0pt}\setlength{\fboxrule}{0.4pt}\fcolorbox{black!35}{white}{\includegraphics[width=\dimexpr#1-0.8pt\relax]{ui/#2}}}}
+
 
 % Unconfirmed administrative/external information macro (Section 1.C)
 \newcommand{\pending}[1]{\textcolor{red}{[PENDING: #1]}}
