@@ -1,0 +1,237 @@
+{
+  "taxonomy_version": "reconstructed-v1",
+  "source_note": "11 categories / 41 strategies. RECONSTRUCTED to match the shape of Petrova et al. (2026)'s released TAXONOMY dict, which was NOT available on this machine when the file was written. It subsumes all 10 original Wang et al. (2019) strategies. BEFORE the production run, diff this against persuasion-strategies/annotate_qwen.py's TAXONOMY and replace any strategy whose name or definition differs, so results stay comparable with the published single-label numbers. Nothing else in the pipeline hardcodes strategy names - they are all read from this file.",
+  "wang2019_coverage": {
+    "logical appeal": "logical_appeal",
+    "emotion appeal": "emotion_appeal",
+    "credibility appeal": "organizational_credibility",
+    "foot-in-the-door": "foot_in_the_door",
+    "self-modeling": "self_modeling",
+    "personal story": "personal_story",
+    "donation information": "donation_procedure_information",
+    "source-related inquiry": "source_related_inquiry",
+    "task-related inquiry": "task_clarification",
+    "personal-related inquiry": "personal_related_inquiry"
+  },
+  "categories": {
+    "Rational Appeal": {
+      "definition": "Persuasion through reasoning, evidence, or practical calculation.",
+      "strategies": {
+        "logical_appeal": {
+          "definition": "Reasoned argument that donating is the sensible or rational thing to do.",
+          "cues": ["Even a small amount adds up when many people give", "If everyone gave $1 the charity could feed hundreds"]
+        },
+        "evidence_and_statistics": {
+          "definition": "Cites concrete numbers, percentages, rankings, or research findings as support.",
+          "cues": ["86.5% of expenditures support program services", "Hunger kills millions of children every year"]
+        },
+        "cost_benefit_framing": {
+          "definition": "Explicitly weighs what the donation costs the Persuadee against what it achieves.",
+          "cues": ["$2 is less than a coffee but feeds a child for a day"]
+        },
+        "feasibility_and_ease": {
+          "definition": "Stresses that donating is easy, painless, quick, or requires no extra effort.",
+          "cues": ["It comes straight out of the task payment, you do not have to do anything"]
+        }
+      }
+    },
+    "Emotional Appeal": {
+      "definition": "Persuasion by evoking affect in the Persuadee.",
+      "strategies": {
+        "emotion_appeal": {
+          "definition": "Evokes sympathy, sadness, compassion, or distress about the beneficiaries.",
+          "cues": ["These children go to sleep hungry every night"]
+        },
+        "guilt_induction": {
+          "definition": "Makes the Persuadee feel personally at fault, selfish, or morally deficient for not giving.",
+          "cues": ["You would really keep the $2 for yourself while a child starves?"]
+        },
+        "empathy_and_perspective_taking": {
+          "definition": "Invites the Persuadee to imagine themselves or their family in the beneficiaries' position.",
+          "cues": ["Imagine if that were your own child"]
+        },
+        "hope_and_positive_impact": {
+          "definition": "Evokes optimism about the good outcome the donation creates; uplifting rather than distressing framing.",
+          "cues": ["Your donation could be the reason a child gets to go to school"]
+        }
+      }
+    },
+    "Credibility Appeal": {
+      "definition": "Establishes that the charity, the Persuader, or the information is trustworthy.",
+      "strategies": {
+        "organizational_credibility": {
+          "definition": "Asserts the organization's legitimacy, history, size, ratings, or reputation.",
+          "cues": ["Save the Children has been around since 1919 and is top rated by Charity Watch"]
+        },
+        "transparency_and_accountability": {
+          "definition": "Explains where the money goes, oversight, or overhead, in order to defuse distrust.",
+          "cues": ["You can see their audited financials on their website"]
+        },
+        "source_citation": {
+          "definition": "Names an external source, link, or authority for a claim being made.",
+          "cues": ["According to their 2016 annual report", "You can check charitynavigator.org"]
+        },
+        "personal_credibility": {
+          "definition": "Persuader claims their own knowledge, experience, or standing as a reason to be believed.",
+          "cues": ["I have worked with this charity for years, I know how they operate"]
+        }
+      }
+    },
+    "Social Influence": {
+      "definition": "Uses other people's behaviour, identity, or endorsement as leverage.",
+      "strategies": {
+        "social_proof": {
+          "definition": "Points to what other donors or most people do.",
+          "cues": ["Most people in this task donate at least a dollar"]
+        },
+        "self_modeling": {
+          "definition": "Persuader states their own donation or intent to donate as an example to follow.",
+          "cues": ["I am donating my full $2"]
+        },
+        "in_group_appeal": {
+          "definition": "Invokes shared identity, nationality, community, or we-membership.",
+          "cues": ["As Americans we should look after kids like these", "We are all in this together"]
+        },
+        "authority_endorsement": {
+          "definition": "Cites a respected person, celebrity, institution, or government body backing the cause.",
+          "cues": ["The UN partners with them on this program"]
+        }
+      }
+    },
+    "Reciprocity and Exchange": {
+      "definition": "Frames the donation as an exchange, a return of favour, or a source of personal return.",
+      "strategies": {
+        "reciprocity": {
+          "definition": "Invokes an obligation to give back, because the Persuadee received the task payment, help, or good fortune.",
+          "cues": ["You are being paid for this task anyway, why not pass some of it on"]
+        },
+        "donor_benefit": {
+          "definition": "Highlights what the Persuadee personally gains: good feelings, a tax deduction, karma, satisfaction.",
+          "cues": ["You will feel great about it", "It is tax deductible"]
+        },
+        "gratitude_and_appreciation": {
+          "definition": "Thanks, praises, or credits the Persuadee in a way that encourages or consolidates giving.",
+          "cues": ["Thank you so much, you are helping many children"]
+        }
+      }
+    },
+    "Commitment and Consistency": {
+      "definition": "Uses prior or incremental commitments and the Persuadee's own stated values to secure the ask.",
+      "strategies": {
+        "foot_in_the_door": {
+          "definition": "Starts with a small or trivial request and escalates toward the real ask.",
+          "cues": ["Would you consider even a penny? ... Great, could you make it 50 cents?"]
+        },
+        "door_in_the_face": {
+          "definition": "Opens with a large request expected to be refused, then retreats to a smaller one.",
+          "cues": ["Could you donate the whole $2? ... No? Then how about 50 cents"]
+        },
+        "value_consistency_appeal": {
+          "definition": "Ties the ask back to values, beliefs, or statements the Persuadee already expressed.",
+          "cues": ["You just said you care about children's education - this is exactly that"]
+        },
+        "incremental_ask": {
+          "definition": "Repeats the ask at a reduced or adjusted amount to close the gap after hesitation.",
+          "cues": ["What about just 25 cents then?"]
+        }
+      }
+    },
+    "Framing and Presentation": {
+      "definition": "How the ask itself is packaged numerically or comparatively.",
+      "strategies": {
+        "anchoring": {
+          "definition": "Sets a reference amount that shapes the Persuadee's sense of a normal donation.",
+          "cues": ["We accept from $0.01 to $2.00, and our goal is the max of $2.00"]
+        },
+        "minimization_framing": {
+          "definition": "Makes the amount sound trivially small.",
+          "cues": ["It is only two dollars", "Any little bit helps"]
+        },
+        "loss_versus_gain_framing": {
+          "definition": "Frames the decision in terms of what is lost by not giving versus gained by giving.",
+          "cues": ["Without donors these kids lose their only meal of the day"]
+        },
+        "comparison_framing": {
+          "definition": "Compares the donation to an everyday expenditure or to another cause.",
+          "cues": ["That is less than a bag of chips"]
+        }
+      }
+    },
+    "Urgency and Scarcity": {
+      "definition": "Pressure created by time or by limited availability.",
+      "strategies": {
+        "urgency_appeal": {
+          "definition": "Stresses that the need is immediate and help is required now.",
+          "cues": ["Children are dying right now while we talk"]
+        },
+        "scarcity_appeal": {
+          "definition": "Stresses limited funds, limited slots, or a limited opportunity to help.",
+          "cues": ["Their funding for this program is nearly gone"]
+        },
+        "deadline_pressure": {
+          "definition": "Ties the ask to a closing window, including the end of this task or conversation.",
+          "cues": ["This is your only chance to donate, the survey closes after this"]
+        }
+      }
+    },
+    "Threat and Pressure": {
+      "definition": "Coercive or insistent pressure rather than persuasion by appeal.",
+      "strategies": {
+        "negative_consequence_warning": {
+          "definition": "Warns of bad outcomes for the beneficiaries or the Persuadee if no donation is made.",
+          "cues": ["If nobody gives, this program shuts down"]
+        },
+        "persistent_repetition": {
+          "definition": "Re-asks after a refusal or a non-answer, pushing past the Persuadee's stated position.",
+          "cues": ["Are you sure? Not even a penny? Really, nothing at all?"]
+        },
+        "obligation_pressure": {
+          "definition": "Asserts a duty or moral requirement to donate, framing refusal as not a legitimate option.",
+          "cues": ["It is your responsibility as someone who can afford it"]
+        }
+      }
+    },
+    "Information Provision": {
+      "definition": "Neutral delivery of facts about the charity, the donation mechanism, or the task.",
+      "strategies": {
+        "donation_procedure_information": {
+          "definition": "Explains how the donation works: amounts allowed, deduction from payment, confirmation.",
+          "cues": ["The amount will be deducted from your task payment by MTurk"]
+        },
+        "organization_information": {
+          "definition": "Describes what the charity is and what it does, without an explicit trust claim.",
+          "cues": ["Save the Children works on health, education and safety for children"]
+        },
+        "impact_information": {
+          "definition": "States concretely what a given amount accomplishes.",
+          "cues": ["$1 provides a week of school meals for one child"]
+        },
+        "task_clarification": {
+          "definition": "Clarifies the mechanics or requirements of the HIT/task itself, including asking about them.",
+          "cues": ["We need to chat for at least ten turns before the task completes"]
+        }
+      }
+    },
+    "Relational and Interactive": {
+      "definition": "Builds relationship with, or gathers information from, the Persuadee in order to enable persuasion.",
+      "strategies": {
+        "personal_story": {
+          "definition": "Persuader narrates a personal or second-hand anecdote about the cause.",
+          "cues": ["My sister volunteered at one of their camps and told me what she saw"]
+        },
+        "personal_related_inquiry": {
+          "definition": "Asks about the Persuadee's own life, family, values, or giving history.",
+          "cues": ["Do you have children of your own?"]
+        },
+        "source_related_inquiry": {
+          "definition": "Asks whether the Persuadee knows of, or has an opinion about, the charity.",
+          "cues": ["Have you heard of Save the Children before?"]
+        },
+        "rapport_building": {
+          "definition": "Greeting, small talk, agreement, or politeness used to build warmth toward the ask.",
+          "cues": ["Good morning! How is your day going so far?"]
+        }
+      }
+    }
+  }
+}
