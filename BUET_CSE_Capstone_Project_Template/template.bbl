@@ -28,36 +28,6 @@ X.~Wang, W.~Shi, R.~Kim, Y.~Oh, S.~Yang, J.~Zhang, and Z.~Yu, ``Persuasion for
   Computational Linguistics (ACL)}.\hskip 1em plus 0.5em minus 0.4em\relax
   Association for Computational Linguistics, 2019, pp. 5635--5649.
 
-\bibitem{petrova2026revisiting}
-A.~Petrova, M.~Johnson, and E.~Kochkina, ``Revisiting persuasion strategies in
-  dialogue: Hierarchical annotation and multi-label modeling,'' \emph{arXiv
-  preprint arXiv:2604.19783}, 2026.
-
-\bibitem{paszke2019pytorch}
-A.~Paszke, S.~Gross, F.~Massa, A.~Lerer, J.~Bradbury, G.~Chanan, T.~Killeen,
-  Z.~Lin, N.~Gimelshein, L.~Antiga, A.~Desmaison, A.~Kopf, E.~Yang, Z.~DeVito,
-  M.~Raison, A.~Tejani, S.~Chilamkurthy, B.~Steiner, L.~Fang, J.~Bai, and
-  S.~Chintala, ``{PyTorch}: An imperative style, high-performance deep learning
-  library,'' in \emph{Advances in Neural Information Processing Systems
-  (NeurIPS)}, vol.~32, 2019, pp. 8024--8035.
-
-\bibitem{wolf2020transformers}
-T.~Wolf, L.~Debut, V.~Sanh, J.~Chaumond, C.~Delangue, A.~Moi, P.~Cistac, C.~Ma,
-  Y.~Jernite, J.~Plu, C.~Xu, T.~L. Scao, S.~Gugger, M.~Drame, Q.~Lhoest, and
-  A.~M. Rush, ``Transformers: State-of-the-art natural language processing,''
-  in \emph{Proceedings of the 2020 Conference on Empirical Methods in Natural
-  Language Processing: System Demonstrations}, 2020, pp. 38--45.
-
-\bibitem{chen2016xgboost}
-T.~Chen and C.~Guestrin, ``{XGBoost}: A scalable tree boosting system,'' in
-  \emph{Proceedings of the 22nd ACM SIGKDD International Conference on
-  Knowledge Discovery and Data Mining}, 2016, pp. 785--794.
-
-\bibitem{tiedemann2020opusmt}
-J.~Tiedemann and S.~Thottingal, ``{OPUS-MT} -- building open translation
-  services for the world,'' in \emph{Proceedings of the 22nd Annual Conference
-  of the European Association for Machine Translation}, 2020, pp. 479--480.
-
 \bibitem{devlin2019bert}
 J.~Devlin, M.-W. Chang, K.~Lee, and K.~Toutanova, ``{BERT}: Pre-training of
   deep bidirectional transformers for language understanding,'' in
@@ -105,6 +75,11 @@ L.~Chen and D.~Yang, ``Persuasion strategies in conversational systems: A
 H.~Chen and M.~Xiao, ``Disentangling persuasion tactics in multi-party social
   commerce conversations,'' in \emph{Proceedings of the AAAI Conference on
   Human Computation and Crowdsourcing}, 2025.
+
+\bibitem{petrova2026revisiting}
+A.~Petrova, M.~Johnson, and E.~Kochkina, ``Revisiting persuasion strategies in
+  dialogue: Hierarchical annotation and multi-label modeling,'' \emph{arXiv
+  preprint arXiv:2604.19783}, 2026.
 
 \bibitem{he2020deberta}
 P.~He, X.~Liu, J.~Gao, and W.~Chen, ``{DeBERTa}: Decoding-enhanced {BERT} with
@@ -171,6 +146,11 @@ P.~Khosla, P.~Teterwak, C.~Wang, A.~Sarna, Y.~Tian, P.~Isola, A.~Maschinot,
 D.~H. Wolpert, ``Stacked generalization,'' \emph{Neural Networks}, vol.~5,
   no.~2, pp. 241--259, 1992.
 
+\bibitem{chen2016xgboost}
+T.~Chen and C.~Guestrin, ``{XGBoost}: A scalable tree boosting system,'' in
+  \emph{Proceedings of the 22nd ACM SIGKDD International Conference on
+  Knowledge Discovery and Data Mining}, 2016, pp. 785--794.
+
 \bibitem{platt1999probabilistic}
 J.~C. Platt, ``Probabilistic outputs for support vector machines and
   comparisons to regularized likelihood methods,'' in \emph{Advances in Large
@@ -201,6 +181,13 @@ S.~Gururangan, S.~Swayamdipta, O.~Levy, R.~Schwartz, S.~R. Bowman, and N.~A.
   \emph{Proceedings of the 2018 Conference of the North American Chapter of the
   Association for Computational Linguistics: Human Language Technologies
   (NAACL-HLT)}, 2018, pp. 107--113.
+
+\bibitem{wolf2020transformers}
+T.~Wolf, L.~Debut, V.~Sanh, J.~Chaumond, C.~Delangue, A.~Moi, P.~Cistac, C.~Ma,
+  Y.~Jernite, J.~Plu, C.~Xu, T.~L. Scao, S.~Gugger, M.~Drame, Q.~Lhoest, and
+  A.~M. Rush, ``Transformers: State-of-the-art natural language processing,''
+  in \emph{Proceedings of the 2020 Conference on Empirical Methods in Natural
+  Language Processing: System Demonstrations}, 2020, pp. 38--45.
 
 \bibitem{acmcode}
 {Association for Computing Machinery}, ``{ACM Code of Ethics and Professional
@@ -239,6 +226,19 @@ J.~Wei and K.~Zou, ``{EDA}: Easy data augmentation techniques for boosting
   performance on text classification tasks,'' in \emph{Proceedings of the 2019
   Conference on Empirical Methods in Natural Language Processing (EMNLP)},
   2019, pp. 6382--6388.
+
+\bibitem{paszke2019pytorch}
+A.~Paszke, S.~Gross, F.~Massa, A.~Lerer, J.~Bradbury, G.~Chanan, T.~Killeen,
+  Z.~Lin, N.~Gimelshein, L.~Antiga, A.~Desmaison, A.~Kopf, E.~Yang, Z.~DeVito,
+  M.~Raison, A.~Tejani, S.~Chilamkurthy, B.~Steiner, L.~Fang, J.~Bai, and
+  S.~Chintala, ``{PyTorch}: An imperative style, high-performance deep learning
+  library,'' in \emph{Advances in Neural Information Processing Systems
+  (NeurIPS)}, vol.~32, 2019, pp. 8024--8035.
+
+\bibitem{tiedemann2020opusmt}
+J.~Tiedemann and S.~Thottingal, ``{OPUS-MT} -- building open translation
+  services for the world,'' in \emph{Proceedings of the 22nd Annual Conference
+  of the European Association for Machine Translation}, 2020, pp. 479--480.
 
 \bibitem{git}
 \BIBentryALTinterwordspacing

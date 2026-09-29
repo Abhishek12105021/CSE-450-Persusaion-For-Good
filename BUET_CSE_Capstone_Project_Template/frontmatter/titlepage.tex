@@ -1,69 +1,47 @@
 \thispagestyle{empty}
 
-% Top-Right Header Block (design.md Section 5)
-\begin{flushright}
-    {\color{darkslate!75}\large\scshape CAPSTONE PROJECT FINAL REPORT}\\[3pt]
-    {\color{darkslate!85}\normalsize\bfseries CSE 450 -- Capstone Project}
-\end{flushright}
-
-\vspace*{0.6cm}
-
-% Institution Crest & Department
 \begin{center}
-    \includegraphics[width=26mm]{buet_logo.png}\\[6pt]
-    {\large\textsc{\textbf{Department of Computer Science and Engineering}}}\\[2pt]
-    {\large\textbf{Bangladesh University of Engineering and Technology}}\\
+    % Institution crest and department
+    \includegraphics[width=28mm]{buet_logo.png}\\[8pt]
+    {\large\textbf{Department of Computer Science and Engineering}}\\[2pt]
+    {\large\textbf{Bangladesh University of Engineering and Technology}}\\[2pt]
     Dhaka, Bangladesh
+
+    \vspace*{1.6cm}
+
+    {\color{darkslate!85}\normalsize\scshape CSE 450 Capstone Project Final Report}
+
+    \vspace*{0.8cm}
+
+    % Title and subtitle
+    {\color{secondary}\rule{0.55\textwidth}{1pt}}\\[14pt]
+    {\fontsize{36pt}{40pt}\selectfont\bfseries\color{primary} \ProjectTitle}\\[12pt]
+    \parbox{0.72\textwidth}{\centering\Large\color{darkslate} \ProjectSubtitle}\\[10pt]
+    {\color{secondary}\rule{0.55\textwidth}{1pt}}
+
+    \vspace*{1.6cm}
+
+    % Team
+    {\large\bfseries\color{secondary} Submitted by \TeamName}\\[8pt]
+    {\normalsize\renewcommand{\arraystretch}{1.25}
+    \begin{tabular}{@{}l l@{}}
+        Arnob Biswas         & 2105015 \\
+        Nawriz Ahmed Turjo   & 2105032 \\
+        Abhishek Roy         & 2105033 \\
+        Monjur Hossain Khan  & 2105043 \\
+        Shams Hossain Simanto & 2105048 \\
+    \end{tabular}}
+
+    \vspace*{1.2cm}
+
+    % Supervisor
+    {\large\bfseries\color{secondary} Supervised by}\\[8pt]
+    {\normalsize\textbf{\SupervisorName}}\\[2pt]
+    {\normalsize\SupervisorDesignation}
+
+    \vfill
+
+    {\normalsize \Session \quad\textbullet\quad \SubmissionDate}
 \end{center}
-
-\vspace*{0.6cm}
-
-% Hero Title with Left Vertical Accent Bar (design.md Modern Executive Architecture)
-\noindent
-{\color{secondary}\vrule width 5.5pt}%
-\hspace*{16pt}%
-\begin{minipage}{\dimexpr\textwidth-24pt\relax}
-    {\fontsize{20pt}{24pt}\selectfont\bfseries\color{primary} \ProjectTitle}\\[6pt]
-    {\large\bfseries\color{secondary} Dual-Perspective Modeling in Asymmetric Multi-Turn Dialogue}\\[4pt]
-    {\normalsize\itshape\color{darkslate} A Hierarchical Cross-Attention Framework for Strategy Attribution and Commitment Tracking}
-\end{minipage}
-
-\vspace*{0.8cm}
-
-% Metadata Block (Left-Aligned, Bold Secondary Labels)
-\noindent
-{\normalsize\setlength{\tabcolsep}{8pt}\renewcommand{\arraystretch}{1.2}
-\begin{tabularx}{\dimexpr\textwidth-2pt\relax}{@{}l >{\raggedright\arraybackslash}X@{}}
-    \textbf{\color{secondary} Academic Session:} & \Session \\
-    \textbf{\color{secondary} Submission Date:} & \SubmissionDate \\[3pt]
-    \textbf{\color{secondary} Supervised By:} & \textbf{\SupervisorName} \\
-    & \SupervisorDesignation \\[3pt]
-    \textbf{\color{secondary} Submitted By (Group 10):} & \textbf{Arnob Biswas} (2105015) \\
-    & \textbf{Nawriz Ahmed Turjo} (2105032) \\
-    & \textbf{Abhishek Roy} (2105033) \\
-    & \textbf{Monjur Hossain Khan} (2105043) \\
-    & \textbf{Shams Hossain Simanto} (2105048) \\
-\end{tabularx}}
-
-\vfill
-
-% Bottom Summary Highlight Card (design.md Executive Summary Card)
-\noindent
-\begin{tcolorbox}[
-    colback=lightbg,
-    colframe=secondary!55,
-    arc=3pt,
-    boxrule=1.1pt,
-    left=14pt, right=14pt, top=8pt, bottom=8pt
-]
-    \centering
-    {\bfseries\large\color{secondary} Key Architectural Innovations \& Engineering Deliverables}\\[6pt]
-    \small
-    \renewcommand{\arraystretch}{1.25}
-    \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lr@{}}
-        \textbf{AntiphonyClassifier Dual-Stream Architecture} & \textbf{11-Category / 41-Strategy Multi-Task Hierarchy} \\[2pt]
-        Strict 3-Pass Ground Truth (1,017 P4G Dialogues) & 700-Dialogue Reversal E-Commerce Benchmark \\
-    \end{tabular*}
-\end{tcolorbox}
 
 \clearpage

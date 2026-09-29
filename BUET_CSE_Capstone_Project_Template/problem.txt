@@ -1,0 +1,49 @@
+subjected to get deleted upon solving the problems
+
+problem:
+
+fixed :
+1. Need short- meaningful name
+- Antiphony (The cover page does not look good, the box below is not required as well, give a proper title, subtitile and mention the teams name and supervisor names properly)
+
+2. In Candidates declaration instead of writing- "under the supervision of MSIB" written as - "under the supervision named on the title page"
+- fix it
+
+3. In acknowledgement why this -"We acknowledge the maintainers and contributors of the foundational open-source ecosystems that made this
+computational research possible: PyTorch [3], Hugging Face Transformers [4], scikit-learn, XGBoost [5], and the
+OPUS-MT translation services [6]. We also acknowledge Kaggle for providing the free-tier cloud GPU infrastructure
+(NVIDIA Tesla T4 accelerators) upon which all experimental models were trained, evaluated, and ablated"?
+- fix this shit as well, the whole acknowledgement section is like a paragraph, we acknowledge supervisor, we acknowledge Pathao LTD for the initial direction, the p4g curators for te dataset and yes dept of CSE as well
+
+4. Abstract 2nd para cross check again, 3rd para needs concise description and less data-more simplified language
+- fix it
+
+8. 2.3.1 remove emdashes
+- fix it
+
+shimanto sec 4,5 audit done
+Abhishek sec 4,5 audit done
+
+Fix needed :
+
+shovon sec 4,5 audit
+
+5. In list of figures there is a pending (6.1)
+6. 1.3 needs checking
+7. 1.4.2 in scope should be in points
+9. 2.3.3 pending needs to be sorted
+10. 2.4 in 2 there is a pending
+11. 3.2 6: pending: confirm specific sections of relevant bd data protection & cyber security statutes
+12. 6.1 Reconstructed dates 1-4 also confirmed git history should not be written
+13. Figure + figure caption have a lot of pendings
+14. 6.1.2 api expenditure has pending on it
+15. In 6.2.2 what is v3?
+16. This line problematic in 6.4- "We note that earlier unverified prompts cited an unsubstantiated estimate exceeding
+eighteen kilograms; our transparent, hardware-grounded derivation demonstrates the true order of magnitude"
+17. In 6.5.3 p4g license details pending
+18. this line in 6.5.3: "an agentic AI assistant was utilized as a typesetting and drafting aid in compiling this LaTeX thesis from the team’s underlying research notes."
+19. In 7.1.3 v8, v11 specification
+20. 7.2: problematic point- "Publication-Grade Typographic and Vector Design: The team independently mastered advanced LATEX,
+TikZ graphics libraries, and PGFPlots, producing publication-quality vector architecture schematics and
+empirical data visualizations."
+
