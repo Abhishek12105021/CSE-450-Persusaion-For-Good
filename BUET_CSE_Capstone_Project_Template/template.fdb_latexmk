@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex template"] 1790678692.42972 "template.aux" "template.bbl" "template" 1790678704.7746 0
+["bibtex template"] 1790699620.60615 "template.aux" "template.bbl" "template" 1790699631.91476 0
   "./references.bib" 1790678377.80138 16586 1bf95011525bb015abe68dcb9171bb95 ""
   "C:/Users/mkhan/AppData/Local/Programs/MiKTeX/bibtex/bst/ieeetran/IEEEtran.bst" 1440622569 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "template.aux" 1790678703.58718 61339 aae3f75930b6f6c82908879cb8870e56 "pdflatex"
+  "template.aux" 1790699630.48153 61339 ca17fe1ce4de3d3644c69e5e9151298a "pdflatex"
   (generated)
   "template.bbl"
   "template.blg"
   (rewritten before read)
-["pdflatex"] 1790678692.84491 "template.tex" "template.pdf" "template" 1790678704.77553 0
-  "C:/Users/mkhan/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1790678592.01139 303419 65ec4566e331d8a533621ec3ca6ffe42 ""
+["pdflatex"] 1790699621.09673 "template.tex" "template.pdf" "template" 1790699631.91581 0
+  "C:/Users/mkhan/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1790698479.84827 362319 7942025fffdddaab1019caa50410bf76 ""
   "C:/Users/mkhan/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1787737869.00774 13333487 0e8e640b561f27e270c2f38de8c90f07 ""
   "C:/Users/mkhan/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 1194fb36dfcb11d9ae9802f2b00b60a3 ""
   "C:/Users/mkhan/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/newtx/ntx-ec-tlf-pc.enc" 1736607166 3136 bbe665bd0bb471a2da1e8fd326cff9fa ""
@@ -326,7 +326,7 @@
   "chapters/conclusion.tex" 1790678377.78579 9284 1d5d0a5cc9932ee81c388d3b18ea6911 ""
   "chapters/design.tex" 1790678377.78915 53953 99321408ffa8ebf6b4a502c5638c9d94 ""
   "chapters/evaluation.tex" 1790678662.84404 42027 0ab18b1822d51b62aeab02285d677925 ""
-  "chapters/management_impact.tex" 1790678377.78915 20976 8787e8ce223b7930c084c9c928b4d60e ""
+  "chapters/management_impact.tex" 1790699608.51045 21108 ca19bca35e64440bf4d9f2ec25754053 ""
   "chapters/problem.tex" 1790678377.7932 20944 22823d2a5d4777fcb97bfba4a4b09aa2 ""
   "chapters/requirements.tex" 1790678377.79521 14641 78183603e54e472acd9f3b0760373725 ""
   "chapters/research.tex" 1790678377.79521 17829 f7df1c1429943c3a66444c35385662b2 ""
@@ -362,13 +362,13 @@
   "frontmatter/acknowledgement.tex" 1790674888.03785 816 9132d147f3b12ff5e55625335833f921 ""
   "frontmatter/declaration.tex" 1790674888.03836 1261 d45997bb768145f7bb0c78d7e24c2e73 ""
   "frontmatter/titlepage.tex" 1790674888.03836 1495 d9e3906d03f73deb47bb1e7e8b88dc25 ""
-  "template.aux" 1790678703.58718 61339 aae3f75930b6f6c82908879cb8870e56 "pdflatex"
-  "template.bbl" 1790678692.69518 12689 e72045bb04acd4e12ad2db49f039a2c0 "bibtex template"
-  "template.lof" 1790678703.63366 4995 b13021ae604c9917d1d4f1396fe4760b "pdflatex"
-  "template.lot" 1790678703.63467 4038 0a036637989cbffcbb04576a956dd04d "pdflatex"
-  "template.out" 1790678703.61597 34609 ade7f2375d452c21c4d43c0d572bc3ff "pdflatex"
+  "template.aux" 1790699630.48153 61339 ca17fe1ce4de3d3644c69e5e9151298a "pdflatex"
+  "template.bbl" 1790699620.8612 12689 e72045bb04acd4e12ad2db49f039a2c0 "bibtex template"
+  "template.lof" 1790699630.51772 4995 b13021ae604c9917d1d4f1396fe4760b "pdflatex"
+  "template.lot" 1790699630.51772 4038 0a036637989cbffcbb04576a956dd04d "pdflatex"
+  "template.out" 1790699630.50219 34609 ade7f2375d452c21c4d43c0d572bc3ff "pdflatex"
   "template.tex" 1790674888.07203 2140 2c009abb3a8af604b98f79fe9b9228ec ""
-  "template.toc" 1790678703.63366 14351 744faeebe68a0cab6d60c71e5d05a6ef "pdflatex"
+  "template.toc" 1790699630.51721 14351 744faeebe68a0cab6d60c71e5d05a6ef "pdflatex"
   (generated)
   "template.aux"
   "template.lof"
