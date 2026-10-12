@@ -1,5 +1,21 @@
 __pycache__
 *.md
+!README.md
+!**/README.md
 *.pt
 
-BUET_CSE_Capstone_Project_Template/figures/sign
+
+Final-Report/figures/sign
+Generic/report-md
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.lot
+*.out
+*.toc
+*.synctex*
